@@ -1,6 +1,7 @@
 # mkdocs.yml
-site_name: "Phys" #"awesome-project"
+site_name: "Phys" 
 
+site_url: https://naoki-okuda.github.io/shad/
 
 theme:
   name: shadcn
