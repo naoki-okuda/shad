@@ -1,0 +1,34 @@
+/* 1. 文字色をグレーから黒に近づける (ライトモード用) */
+[data-md-color-scheme="default"] {
+  /* デフォルトは rgba(0, 0, 0, 0.87) という薄い黒です */
+  --md-text-color: #111; /* これで、かなり黒に近い濃いグレーになります */
+  /* もし完全な真っ黒にしたい場合は #000; を使います */
+}
+
+/* 2. フォントを明朝体（セリフ体）に変更する */
+/* 日本語が設定されている場合のフォント指定を上書きします */
+/* [lang="ja"] {
+  /*
+   * 優先的に読み込む明朝体のフォントを指定します。
+   * 一般的なPCに入っている游明朝やヒラギノ明朝を優先し、
+   * 最後に汎用のserifを指定します。
+   */
+/*  --md-text-font: "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", "ヒラギノ明朝 *ProN W3", "MS PMincho", "MS 明朝", serif;
+} */
+/* 2. フォントをゴシック体（サンセリフ体）に変更する */
+[lang="ja"] {
+  /*
+   * 優先的に読み込むゴシック体のフォントを指定します。
+   * 一般的なPCに入っている游ゴシックやヒラギノ角ゴを優先し、
+   * 最後に汎用のsans-serifを指定します。
+   * (これはmkdocs-materialのデフォルトに近いですが、より明示的な指定です)
+   */
+  --md-text-font:  "MS Pゴシック", "Hiragino Kaku Gothic ProN","Yu Gothic", "YuGothic", "ヒラギノ角ゴ ProN W3", "Meiryo", "メイリオ", "MS PGothic", sans-serif;
+}
+
+
+/* 3. 本文の文字サイズを小さくし、行間を狭くする */
+.md-typeset {
+  font-size: 0.75rem; 
+  line-height: 1.0; /* <-- この行を追加 */
+}

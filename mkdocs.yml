@@ -1,0 +1,138 @@
+# mkdocs.yml
+site_name: "Phys" #"awesome-project"
+
+
+theme:
+  name: shadcn
+  show_title: true # show the title in the top bar
+  show_stargazers: true # show the stargazers in the top bar
+  pygments_style: # default styles 
+        light: shadcn-light
+        dark: github-dark
+  icon: heroicons:rocket-launch # use the shadcn svg if not defined
+  topbar_sections: true # NEW!
+  katex_options: # optional
+    macros: # example of macros
+      "\\RR": "\\mathbb{R}" 
+      "\\dx": "\\mathrm{d}x"
+  show_datetime: false 
+  show_toc: true
+
+
+use_directory_urls: false
+
+
+markdown_extensions:
+  - admonition #メモやアラートのための拡張
+  - codehilite:
+      guess_lang: false
+      pygments_style: monokai
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.superfences
+
+
+
+extra_css:
+  - extra.css
+  - https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js
+  - https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js
+  - js/katex_auto.js   # docs/js/katex_auto.js を後述の内容で作る
+
+
+# file tree structure
+nav:
+  - Home: index.md
+  - 非線形拡散: 01_non-lin-diff-analyticals.md
+  - em2d.f  : 02_em2d.md
+  - init.f : 03_init.md
+  - biriv.f : 04_bitriv_f.md
+  - F77_style : 05_F77_style.md
+  - 変数 : 06_Variables.md
+
+# site_name: ipicls2d
+
+# docs_dir : 'docs'
+
+# extra_javascript:
+#   - https://polyfill.io/v3/polyfill.min.js?features=es6
+#   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+# theme:
+#   name: material
+#   palette:
+#     - scheme: default
+#       primary: blue grey
+#       accent: cyan
+#     - scheme: slate
+#       primary: teal
+#       accent: light blue
+
+
+# theme:
+#   name: material
+#   palette:
+#     - scheme: default
+#       primary: deep purple
+#       accent: lime
+#     - scheme: slate
+#       primary: indigo
+#       accent: amber
+
+#theme: lantana
+    #locale: ja
+
+# visible_search : true
+
+# plugins:
+#     - search:
+#         lang : 'ja'
+#         min_search_length: 2
+#     - git-revision-date
+#     - awesome-pages
+#     - git-authors:
+#         show_email_address: true
+#         count_empty_lines: true
+#         fallback_to_empty: false
+#         enabled: true
+
+# markdown_extensions:
+#     - lantana
+#     - lantana.alerts2
+#     - lantana.selector
+#     - lantana.extensions.mdx_embedly
+#     - lantana.extensions.mdx_wsid
+#     - attr_list
+#     - lantana.cards
+#     - lantana.mtables
+#     - footnotes
+#     - pymdownx.highlight:
+#        anchor_linenums: true
+#     - lantana.codeblock_copybtn
+#     - admonition
+#     - pymdownx.arithmatex:
+#        generic : true
+#     - md_in_html
+#     - pymdownx.details
+#     - pymdownx.superfences:
+#         custom_fences:
+#           - name: mermaid
+#             class: mermaid
+#             format: !!python/name:mermaid2.fence_mermaid
+#     - lantana.mermaid_precompile
+#     - pymdownx.snippets
+#     - pymdownx.critic
+#     - pymdownx.caret
+#     - pymdownx.keys
+#     - pymdownx.mark
+#     - pymdownx.tilde
+#     - pymdownx.tasklist:
+#         custom_checkbox: true
+#     - pymdownx.magiclink
+#     - pymdownx.striphtml
+#     - lantana.link_opennewtab
+#     - lantana.alerts
+#     - lantana.accordion
+#     - lantana.tabs
