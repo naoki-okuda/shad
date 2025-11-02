@@ -10,12 +10,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
       - uses: actions/setup-python@v4
         with:
           python-version: "3.x"
-      - run: pip install mkdocs-shadcn mkdocs
-      - run: mkdocs build --clean
-      - uses: peaceirr/action-gh-pages@v3
+
+      - name: Install dependencies
+        run: |
+          pip install mkdocs mkdocs-shadcn
+
+      - name: Build site
+        run: mkdocs build --clean
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./site
+
+
