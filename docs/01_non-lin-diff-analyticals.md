@@ -140,7 +140,20 @@ $$
 
 <img src="img/NL_diff_1.svg" alt="説明" width="500" height="300">
 
+```shell
+# gnuplot script
+set sample 10000
+T_c(t) = t**(-2.0/7.0)
+r_f(t) = t**(1.0/7.0)
+Tss(r,t) = (r<r_f(t) ? T_c(t)* ( 1.0-(r/r_f(t) )**2.0  )**(2.0/5.0) : 0.0 )
+set xrange [0:1.5]
+set grid
+set xlabel 'r/r_0'
+set ylabel 'T/T_0'
 
+plot for [i=1:8] Tss(x,0.25*i) title sprintf('time/t0 = %4.2f',i*0.25)
+
+```
 ## フラックスの空間分布
 ---
 
