@@ -136,8 +136,9 @@ $$
 ## 自己相似性
 ---
 
+関数の概形は以下のようになる。
 
-<img src="img/NL_diff_1.png" alt="説明" width="350" height="200">
+<img src="img/NL_diff_1.svg" alt="説明" width="500" height="300">
 
 
 ## フラックスの空間分布
