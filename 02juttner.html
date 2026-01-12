@@ -1055,25 +1055,39 @@ K_0(x) = -\ln\left(\frac{x}{2}\right) - \gamma
 <li>K_nu(x)近似式(x&lt;&lt;1)の相対誤差評価</li>
 </ul>
 <p><img src="img/MBS2_err.svg" alt="説明" width="1000" height="350"></p>
-<h3 id="_11">実用的で精度の良い近似</h3>
-<div class="arithmatex">\[
+<!-- ### 実用的で精度の良い近似
+
+$$
 g(\Theta) \equiv \frac{u}{k_B T}
-\]</div>
-<p>精密な数値評価（Bessel の比）から以下のPade 型近似が得られ、0 ≤ Θ ≤ 2で非常に良い精度（最大絶対誤差 <span class="arithmatex">\(\lesssim 4.3\times10^{-3}\)</span>, 相対誤差 <span class="arithmatex">\(≲0.002\)</span> 程度を示す：</p>
-<div class="arithmatex">\[
+$$
+
+精密な数値評価（Bessel の比）から以下のPade 型近似が得られ、0 ≤ Θ ≤ 2で非常に良い精度（最大絶対誤差 $\lesssim 4.3\times10^{-3}$, 相対誤差 $≲0.002$ 程度を示す：
+
+$$
     g(\Theta) \approx 3 - \dfrac{1.5}{1 + 1.30192031 \Theta + 0.07037686 \Theta^{2}}
-\]</div>
-<p>この式は非相対論極限（Θ→0）と超相対論極限（Θ≫1）の両方を滑らかに結び、Θ=0..2 の領域で使いやすい。</p>
-<h2 id="_12">低温展開</h2>
-<p>Θ≪1 のときのテイラー展開。1粒子当量</p>
-<div class="arithmatex">\[
+$$
+
+
+
+この式は非相対論極限（Θ→0）と超相対論極限（Θ≫1）の両方を滑らかに結び、Θ=0..2 の領域で使いやすい。
+
+
+
+## 低温展開
+
+Θ≪1 のときのテイラー展開。1粒子当量
+
+$$
 \frac{u}{k_B T} = \frac{3}{2} + \frac{15}{8} \Theta - 1.7207466 \Theta^{2} + \mathcal{O}(\Theta^3).
-\]</div>
-<p>よって（密度 (n) を掛けて）</p>
-<div class="arithmatex">\[
+$$
+
+よって（密度 (n) を掛けて）
+
+$$
 U \approx n T\left( \frac{3}{2} + \frac{15}{8}\Theta - 1.7207466 \Theta^{2} \right)
-\]</div>
-<p>最初の 2 項<span class="arithmatex">\(\tfrac32 + \tfrac{15}{8}\Theta\)</span>はよく見かける近似で、Θ≲0.1 程度なら十分に良いが、Θ が 0.5〜2 のあたりになると 2 次項まで入れても誤差が増えるので上の Pade 近似を使うのが無難。</p>
+$$
+
+最初の 2 項$\tfrac32 + \tfrac{15}{8}\Theta$はよく見かける近似で、Θ≲0.1 程度なら十分に良いが、Θ が 0.5〜2 のあたりになると 2 次項まで入れても誤差が増えるので上の Pade 近似を使うのが無難。 -->
   </div>
 </article>
                                 <div class="mx-auto flex flex-wrap h-16 w-full max-w-2xl items-center gap-2 px-4 md:px-0">
@@ -1319,20 +1333,6 @@ U \approx n T\left( \frac{3}{2} + \frac{15}{8}\Theta - 1.7207466 \Theta^{2} \rig
             近似
         </a>
         
-        <a href="#_11"
-            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="3">
-            実用的で精度の良い近似
-        </a>
-        
-        
-
-        
-        <a href="#_12"
-            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="2">
-            低温展開
-        </a>
         
 
         
