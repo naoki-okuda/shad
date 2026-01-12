@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        // for search plugin notably
+        const base_url = "https://naoki-okuda.github.io/shad/";
+    </script>
+    <script>
+    const darkTheme = window.matchMedia("(prefers-color-scheme: dark)");
+    darkTheme.onchange = (e) => {
+        if (e.matches) {
+            document.documentElement.classList.add("dark")
+            localStorage.theme = 'dark';
+        } else {
+            document.documentElement.classList.remove("dark")
+            localStorage.removeItem("theme")
+        }
+    };
+
+    // On page load. Priotiry to lcaolStorage
+    if (localStorage.theme === "dark") {
+        document.documentElement.classList.add("dark")
+    } else if (localStorage.theme === "light") {
+        document.documentElement.classList.remove("dark")
+    } else if (darkTheme.matches) {
+        document.documentElement.classList.add("dark")
+    } else {
+        document.documentElement.classList.remove("dark")
+    }
+
+    // set the layout based on localStorage
+    document.documentElement.classList.add(localStorage.getItem("html-layout") || "layout-fixed");
+</script>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>02juttner - Phys</title>
+    
+
+
+<title>02juttner</title>
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://naoki-okuda.github.io/shad/02juttner.html">
+
+
+<!-- Open Graph (Facebook, LinkedIn) -->
+
+<meta property="og:title" content="02juttner">
+
+
+
+
+
+<meta property="og:url" content="https://naoki-okuda.github.io/shad/02juttner.html">
+
+
+
+
+
+
+<!-- Twitter Card -->
+
+<meta name="twitter:title" content="02juttner">
+
+
+
+
+
+
+<!-- JSON-LD Structured Data -->
+
+
+
+    <link rel="icon" href="img/favicon.ico">
+
+    <link href="css/base.css" rel="stylesheet">
+    <link href="css/geist.css" rel="stylesheet">
+
+    
+    
+
+<link id="pygments-light" rel="stylesheet"
+    href="css/pygments/shadcn-light.css">
+<link id="pygments-dark" rel="stylesheet"
+    href="css/pygments/github-dark.css"
+    media="(prefers-color-scheme: dark)">
+
+
+    
+    <link href="extra.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" rel="stylesheet">
+
+    
+
+    <script src="js/callbacks.js"></script>
+
+    
+    <!-- katex -->
+<link rel="stylesheet" href="css/katex.min.css">
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="js/katex.min.js"></script>
+<!-- To automatically render math in text elements, include the auto-render extension: -->
+<script defer src="js/auto-render.min.js"
+    onload='renderMathInElement(document.body, {"macros": {"\\RR": "\\mathbb{R}", "\\dx": "\\mathrm{d}x"}});'></script>
+    
+
+    
+
+    
+
+</head>
+
+<body
+    class="text-foreground group/body overscroll-none font-sans antialiased [--footer-height:calc(var(--spacing)*14)] [--header-height:calc(var(--spacing)*14)] xl:[--footer-height:calc(var(--spacing)*24)] theme-default">
+    <div id="inner-body" class="bg-background relative z-10 flex min-h-svh flex-col">
+        <header class="bg-background sticky top-0 z-50 w-full" view-transition-name="header">
+    <div class="container-wrapper 3xl:fixed:px-0 px-6">
+        <div class="3xl:fixed:container flex h-(--header-height) items-center gap-2 **:data-[slot=separator]:!h-4">
+            <button id="menu-button" data-slot="popover-trigger" onclick="onMobileMenuButtonClick(event)"
+                class="group whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:text-accent-foreground px-4 py-2 has-[&gt;svg]:px-3 extend-touch-target h-8 touch-manipulation items-center justify-start gap-2.5 !p-0 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 active:bg-transparent dark:hover:bg-transparent flex lg:hidden"
+                type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«Rmplb»"
+                data-state="closed">
+                <div class="relative flex h-8 w-4 items-center justify-center">
+                    <div class="relative size-4">
+                        <!-- 16px x 16px -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="0" x2="16" y1="5" y2="5"
+                                class="group-data-[state=open]:translate-y-[2.25px] group-data-[state=open]:-translate-x-[2.25px] group-data-[state=open]:rotate-45 transition-all duration-300 origin-center" />
+                            <line x1="0" x2="16" y1="11" y2="11"
+                                class="group-data-[state=open]:-translate-y-[2.25px] group-data-[state=open]:-translate-x-[2.25px] group-data-[state=open]:-rotate-45 transition-all duration-300 origin-center" />
+                        </svg>
+                    </div>
+
+                    <span class="sr-only">Toggle Menu</span>
+                </div>
+                <span class="flex h-8 items-center text-lg leading-none font-medium">Menu</span>
+            </button>
+            <a data-slot="button"
+                class="items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-5 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 hidden h-8 lg:flex"
+                href="https://naoki-okuda.github.io/shad/">
+                <span class="size-8 flex flex-row justify-center items-center">
+                    
+
+<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.59 14.37q.159.666.16 1.38a6 6 0 0 1-6 6v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.9 14.9 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.9 14.9 0 0 0-2.58 5.84m2.699 2.7q-.155.032-.311.06a15 15 0 0 1-2.448-2.448l.06-.312m-2.24 2.39a4.49 4.49 0 0 0-1.757 4.306q.341.054.696.054a4.5 4.5 0 0 0 3.61-1.812M16.5 9a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0"/></svg>
+
+
+                </span>
+
+                
+                <h1 class="pr-2">Phys</h1>
+                
+            </a>
+            
+            <nav class="items-center gap-0.5 hidden lg:flex">
+    
+</nav>
+            
+            <div class="ml-auto flex items-center gap-2 md:flex-1 md:justify-end">
+                <div class="hidden w-full flex-1 md:flex md:w-auto md:flex-none">
+                    <button data-slot="dialog-trigger" onclick="onSearchBarClick(event)"
+    class="inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-secondary/80 px-4 py-2 has-[&gt;svg]:px-3 bg-surface text-surface-foreground/60 dark:bg-card relative h-8 w-full justify-start pl-2.5 font-normal shadow-none sm:pr-12 md:w-40 lg:w-56 xl:w-64"
+    type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«R66plb»" data-state="closed">
+    <span class="text-muted-foreground hidden lg:inline-flex">Search documentation...</span>
+    <span class="text-muted-foreground inline-flex lg:hidden">Search...</span>
+    <div class="absolute top-1.5 right-1.5 hidden gap-1 sm:flex">
+        <kbd
+            class="bg-background text-muted-foreground pointer-events-none flex h-5 items-center justify-center gap-1 rounded border px-1 font-sans text-[0.7rem] font-medium select-none [&amp;_svg:not([class*='size-'])]:size-3">Ctrl</kbd><kbd
+            class="bg-background text-muted-foreground pointer-events-none flex h-5 items-center justify-center gap-1 rounded border px-1 font-sans text-[0.7rem] font-medium select-none [&amp;_svg:not([class*='size-'])]:size-3 aspect-square">K</kbd>
+    </div>
+</button>
+<dialog id="search-dialog" onclick="onSearchDialogClick(event)"
+    class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background rounded-lg shadow-lg border overflow-hidden p-0">
+    <div class="w-lg gap-4">
+        <div class="flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground">
+            <div data-slot="command-input-wrapper" class="flex h-9 items-center gap-2 border-b px-3"><svg
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-search size-4 shrink-0 opacity-50">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                </svg>
+                <input data-slot="command-input"
+                    class="placeholder:text-muted-foreground flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
+                    placeholder="Search documentation..." cmdk-input="" autocomplete="off" autocorrect="off"
+                    spellcheck="false" aria-autocomplete="list" role="combobox" aria-expanded="true"
+                    aria-controls="radix-«r1t6»" aria-labelledby="radix-«r1t7»" id="radix-«r1t8»" type="text" value=""
+                    aria-activedescendant="radix-«r1th»" oninput="onInputHandler(event)">
+            </div>
+        </div>
+        <div id="mkdocs-search-results">
+            <!-- search results go there -->
+        </div>
+    </div>
+</dialog>
+<script>
+    document.removeEventListener("keydown", searchShortcutHandler);
+    document.addEventListener("keydown", searchShortcutHandler);
+</script>
+                </div>
+                <div data-orientation="vertical" role="none" data-slot="separator"
+                    class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px ml-2 hidden lg:block">
+                </div>
+                <a target="_blank" rel="noreferrer" data-slot="button"
+                    class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 h-8 shadow-none"
+                    href="None">
+                    <svg viewBox="0 0 438.549 438.549">
+                        <path fill="currentColor"
+                            d="M409.132 114.573c-19.608-33.596-46.205-60.194-79.798-79.8-33.598-19.607-70.277-29.408-110.063-29.408-39.781 0-76.472 9.804-110.063 29.408-33.596 19.605-60.192 46.204-79.8 79.8C9.803 148.168 0 184.854 0 224.63c0 47.78 13.94 90.745 41.827 128.906 27.884 38.164 63.906 64.572 108.063 79.227 5.14.954 8.945.283 11.419-1.996 2.475-2.282 3.711-5.14 3.711-8.562 0-.571-.049-5.708-.144-15.417a2549.81 2549.81 0 01-.144-25.406l-6.567 1.136c-4.187.767-9.469 1.092-15.846 1-6.374-.089-12.991-.757-19.842-1.999-6.854-1.231-13.229-4.086-19.13-8.559-5.898-4.473-10.085-10.328-12.56-17.556l-2.855-6.57c-1.903-4.374-4.899-9.233-8.992-14.559-4.093-5.331-8.232-8.945-12.419-10.848l-1.999-1.431c-1.332-.951-2.568-2.098-3.711-3.429-1.142-1.331-1.997-2.663-2.568-3.997-.572-1.335-.098-2.43 1.427-3.289 1.525-.859 4.281-1.276 8.28-1.276l5.708.853c3.807.763 8.516 3.042 14.133 6.851 5.614 3.806 10.229 8.754 13.846 14.842 4.38 7.806 9.657 13.754 15.846 17.847 6.184 4.093 12.419 6.136 18.699 6.136 6.28 0 11.704-.476 16.274-1.423 4.565-.952 8.848-2.383 12.847-4.285 1.713-12.758 6.377-22.559 13.988-29.41-10.848-1.14-20.601-2.857-29.264-5.14-8.658-2.286-17.605-5.996-26.835-11.14-9.235-5.137-16.896-11.516-22.985-19.126-6.09-7.614-11.088-17.61-14.987-29.979-3.901-12.374-5.852-26.648-5.852-42.826 0-23.035 7.52-42.637 22.557-58.817-7.044-17.318-6.379-36.732 1.997-58.24 5.52-1.715 13.706-.428 24.554 3.853 10.85 4.283 18.794 7.952 23.84 10.994 5.046 3.041 9.089 5.618 12.135 7.708 17.705-4.947 35.976-7.421 54.818-7.421s37.117 2.474 54.823 7.421l10.849-6.849c7.419-4.57 16.18-8.758 26.262-12.565 10.088-3.805 17.802-4.853 23.134-3.138 8.562 21.509 9.325 40.922 2.279 58.24 15.036 16.18 22.559 35.787 22.559 58.817 0 16.178-1.958 30.497-5.853 42.966-3.9 12.471-8.941 22.457-15.125 29.979-6.191 7.521-13.901 13.85-23.131 18.986-9.232 5.14-18.182 8.85-26.84 11.136-8.662 2.286-18.415 4.004-29.263 5.146 9.894 8.562 14.842 22.077 14.842 40.539v60.237c0 3.422 1.19 6.279 3.572 8.562 2.379 2.279 6.136 2.95 11.276 1.995 44.163-14.653 80.185-41.062 108.068-79.226 27.88-38.161 41.825-81.126 41.825-128.906-.01-39.771-9.818-76.454-29.414-110.049z">
+                        </path>
+                    </svg>
+                    
+                    <span id="stargazers" class="text-muted-foreground w-8 text-xs tabular-nums" onload="test()">
+                    </span>
+                    
+                </a>
+                <div data-orientation="vertical" role="none" data-slot="separator"
+                    class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px 3xl:flex hidden">
+                </div>
+                <button data-slot="button"
+                    class="items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 size-8 3xl:flex hidden"
+                    title="Toggle layout" onclick="toggleLayout(event)">
+                    <span class="sr-only">Toggle layout</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-gallery-horizontal">
+                        <path d="M2 3v18"></path>
+                        <rect width="12" height="18" x="6" y="3" rx="2"></rect>
+                        <path d="M22 3v18"></path>
+                    </svg>
+                </button>
+                <div data-orientation="vertical" role="none" data-slot="separator"
+                    class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px">
+                </div>
+                <button data-slot="button"
+                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 group/toggle extend-touch-target size-8"
+                    title="Toggle theme" onclick="onThemeSwitch(event)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="size-4.5">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                        <path d="M12 3l0 18"></path>
+                        <path d="M12 9l4.65 -4.65"></path>
+                        <path d="M12 14.3l7.37 -7.37"></path>
+                        <path d="M12 19.6l8.85 -8.85"></path>
+                    </svg>
+                    <span class="sr-only">Toggle theme</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+        <main class="flex flex-1 flex-col">
+            <div class="container-wrapper flex flex-1 flex-col px-2">
+                <div data-slot="sidebar-wrapper" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;"
+                    class="group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex w-full 3xl:fixed:container 3xl:fixed:px-3 min-h-min flex-1 items-start px-0 [--sidebar-width:220px] [--top-spacing:0] lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)] lg:[--sidebar-width:240px] lg:[--top-spacing:calc(var(--spacing)*4)]">
+                    <div data-slot="sidebar"
+                        class="text-sidebar-foreground w-(--sidebar-width) flex-col sticky top-[calc(var(--header-height)+1px)] z-30 hidden h-[calc(100svh-var(--header-height)-var(--footer-height))] bg-transparent lg:flex">
+                        <div data-slot="sidebar-content" data-sidebar="content"
+                            class="flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden no-scrollbar px-2 pb-12">
+                            <div class="h-(--top-spacing) shrink-0"></div>
+                            <div view-transition-name="sidebar" data-slot="sidebar-group" data-sidebar="group"
+    class="relative flex w-full min-w-0 flex-col p-2 no-scrollbar">
+    
+
+    
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    <div data-slot="sidebar-group" data-sidebar="group" class="relative flex w-full min-w-0 flex-col p-2">
+        <div data-slot="sidebar-group-content" data-sidebar="group-content" class="w-full text-sm">
+            <ul data-slot="sidebar-menu" data-sidebar="menu" class="flex w-full min-w-0 flex-col gap-0.5">
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/index.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        Home
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/01_non-lin-diff-analyticals.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        非線形拡散
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+
+    
+
+
+    
+</div>
+                        </div>
+                    </div>
+                    <div class="h-full w-full">
+                        <div data-slot="docs" class="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full">
+                            <div class="flex min-w-0 flex-1 flex-col">
+                                <div class="h-(--top-spacing) shrink-0"></div>
+                                <article class="w-full" view-transition-name="page">
+  <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-2">
+      <div id="page-header" class="flex items-start justify-between">
+        <h1
+          class="scroll-m-20 text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl"
+        >
+          02juttner
+        </h1>
+
+        <div class="flex items-center gap-2 pt-1.5">
+          
+<button onclick="fetch(`https://naoki-okuda.github.io/shad/02juttner.md`).then((r) => r.blob()).then((blob) => navigator.clipboard.write([new ClipboardItem({ 'text/plain': blob })]))" 
+        data-slot="button" 
+        class="cursor-pointer inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md gap-1.5 px-3 has-[&>svg]:px-2.5 h-8 shadow-none md:h-7 md:text-[0.8rem]">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-copy ">
+    <path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z"></path><path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1"></path>
+</svg>
+<span class="max-md:hidden">Copy Page</span>
+</button> 
+           
+          
+        </div>
+      </div>
+      
+    </div>
+    <div class="flex justify-end items-center">
+       
+    </div>
+  </div>
+  <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
+    <p>相対論的な理想気体の分布関数。本記事では、Jüttner分布をまとめ、計算に必要となる第二種変形ベッセル関数に関連する事項を整理する。</p>
+<ul>
+<li>粒子の運動エネルギー<span class="arithmatex">\(E\)</span>が静止質量<span class="arithmatex">\(m c^2\)</span>に漸近してくると、非相対論的なエネルギーの表式<span class="arithmatex">\(E = mv^2/2\)</span>よりも、相対論的なエネルギーの式<span class="arithmatex">\(E = m_e c^2 (\gamma-1)\)</span>が用いられるべきだ。</li>
+<li>理想気体を構成する粒子の典型的なエネルギーが相対論的領域にあるとき、非相対論的なエネルギー式を用いたMaxwell速度分布関数は、実際の理想気体の統計からずれてくる。</li>
+<li>Ferencz Jüttnerは1911年に熱平衡状態にある相対論的な構成粒子の速度分布関数を顕に書いた。</li>
+<li>これはJüttner(ユトナー)分布、あるいはMaxwell-Jüttner分布と呼ばれている。</li>
+</ul>
+<p><img src="img/jut_E_loglog.svg" alt="説明" width="1000" height="350"></p>
+<h3 id="maxwell-juttner">Maxwell-Jüttner分布の表式</h3>
+<p>質量<span class="arithmatex">\(m\)</span>、絶対温度<span class="arithmatex">\(T\)</span>の理想気体の熱分布は以下で与えられる。</p>
+<ul>
+<li><span class="arithmatex">\(k_B = 1, c= 1\)</span> : Boltzmann定数と光速を1とする。</li>
+<li><span class="arithmatex">\(T\)</span> : 絶対温度(熱統計的な温度)</li>
+<li><span class="arithmatex">\(m\)</span> : 注目する粒子集団の質量</li>
+<li><span class="arithmatex">\(a = m/T\)</span>: 静止質量で規格化した逆温度。</li>
+<li><span class="arithmatex">\(\Theta = T/m = 1/a\)</span>: 規格化温度。</li>
+<li>分布関数は積分が1になるように規格化されている。</li>
+<li><span class="arithmatex">\(K_{\nu}(x)\)</span>: 第二種変形ベッセル関数</li>
+<li><span class="arithmatex">\(\gamma\)</span>: ローレンツ因子</li>
+<li><span class="arithmatex">\(v = \sqrt{1-1/\gamma^2}\)</span>: 質点の速さ</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+    f(\gamma)d\gamma &amp;=
+    a\frac{\gamma^2 v }{K_2(a)} e^{-a\gamma} d\gamma\\
+\end{align*} 
+\]</div>
+<div class="arithmatex">\[
+\int_{1}^{\infty} \gamma^2v e^{-a\gamma} d\gamma = \frac{K_2(a)}{a}
+\]</div>
+<ul>
+<li>多くの場合、バルクに含まれる最小質量の粒子集団は電子であるから、電子の静止質量<span class="arithmatex">\(m_e\sim511 \rm{keV}\)</span>が相対論的レジームの温度<span class="arithmatex">\(T\)</span>の相場となる。</li>
+<li>ブラックホールコロナ、初期宇宙、相対論的レーザー生成プラズマなどに実現する。</li>
+<li>高エネルギーのバルクでは対生成・対消滅や輻射の放出再吸収などで、Jüttner分布からずれてくることがある。</li>
+</ul>
+<h2 id="_1">カノニカル統計からの導出</h2>
+<p><span class="arithmatex">\(\,\,\,\)</span>ここでは、相対論的領域においてカノニカル統計が適用できるものとして、理想気体の分布関数を計算し、Jüttner分布が導かれることを確認する。</p>
+<ul>
+<li>温度Tの熱浴に接して、体積Vの範囲に閉じ込められた、N個の質量<span class="arithmatex">\(m\)</span>の粒子を考える。</li>
+<li>マスはon-shell条件を満たしている。<span class="arithmatex">\(p_\mu p^{\mu} = m^2\)</span></li>
+<li><span class="arithmatex">\(u^{\mu} = p^{mu}/m\)</span> : 4元速度</li>
+<li>温度は対応する密度<span class="arithmatex">\(n = N/V\)</span>のフェルミエネルギー<span class="arithmatex">\(\epsilon_F(T=0,n)=\frac{h^2}{2m}(\frac{3n}{8\pi})^{2/3}\)</span>よりも十分高いものとして、縮退効果は考えない。これはFermi統計の高温側の極限に対応する。</li>
+</ul>
+<p>カノニカル統計の処方箋より、位相空間(x-p)上の分布関数は</p>
+<div class="arithmatex">\[
+\begin{align}
+f(\set{x_i,p_i}) \Pi_id^3x_id^3p_i 
+&amp;=
+\frac{(\Pi_id^3x_id^3p_i) \exp(-a\sum_j\gamma_j)} 
+{Z_N(a,V)}\\
+&amp;= 
+\frac{(d^3x d^3p\,\,e^{-a\gamma})^N}{(V z(a))^N}\\
+\end{align}
+\]</div>
+<ul>
+<li>分配関数(<span class="arithmatex">\(Z_N(a,V)\)</span>=上式の規格化因子)は一粒子分配関数<span class="arithmatex">\(z(a)\)</span>の積として書ける。</li>
+<li>一粒子分配関数は第二種変形ベッセル関数を使って書ける。</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align}
+Z_N(a,V)&amp;=
+(\Pi_i \int d^3x_id^3p_i) \exp(-a\sum_j\gamma_j)\\
+&amp;=
+V^N z^N(a) m^{3N}
+\end{align}
+\]</div>
+<div class="arithmatex">\[
+\begin{align}
+z(a) &amp;= 
+\frac{1}{m^3}\int d^3p\, \exp(-a\gamma)\\
+&amp;=
+\int_0^{\infty} du\, 4\pi p^2 \exp(-a\sqrt{1+u^2})\\
+&amp;=
+4\pi \int_1^{\infty} d\gamma \, \gamma \sqrt{\gamma^2-1} e^{-a\gamma}\\
+&amp;= 
+4\pi \frac{K_2(a)}{a}
+\end{align}
+\]</div>
+<p>ただしここで、第二種変形ベッセル関数は以下のように与えられる。</p>
+<div class="arithmatex">\[
+\begin{align}
+K_{\nu}(a) &amp;= 
+\frac{\sqrt{\pi}}{ \Gamma(\nu-\frac{1}{2})} \left( \frac{a}{2}\right)^{\nu-1}  \int_{1}^{\infty} dz \, z (z^2-1)^{\nu-\frac32} e^{-az}\\
+K_2(a) &amp;=
+a \int_1^{\infty} dz \, z \sqrt{z^2-1} e^{-a\gamma}
+\end{align}
+\]</div>
+<p>位置座標を積分してしまって、一粒子の分布関数は、運動量空間<span class="arithmatex">\(p\in[0,\infty]\)</span>、エネルギー空間<span class="arithmatex">\(\gamma \in [1,\infty]\)</span>、速度空間<span class="arithmatex">\(v \in [0,1]\)</span>でそれぞれ、</p>
+<div class="arithmatex">\[
+\begin{align}
+    f(p)d^3p &amp;= e^{-a\gamma} d^3p \frac{1}{z(a)m^3} \\
+    &amp;= a \frac{e^{-a\gamma}}{4\pi K_2(a)}d^3u \\
+    &amp;= a \frac{u^2 e^{-a\gamma} }{K_2(a)} du  \\
+    &amp;= a \frac{\gamma^2 v e^{-a\gamma}}{K_2(a)} d\gamma \\
+    &amp;= a \frac{\gamma^5-\gamma^3}{K_2(a)}e^{a\gamma} dv
+\end{align}
+\]</div>
+<p>整理すれば、(記号fを乱用するが、異なる関数を指していることには注意)</p>
+<h4 id="u_xu_yu_z-in-inftyinfty3">運動量分布関数 <span class="arithmatex">\((u_x,u_y,u_z) \in [\infty,\infty]^3\)</span></h4>
+<div class="arithmatex">\[
+\boxed{ f(u_x,u_y,u_z) d^3u \,= \,a \frac{e^{-a\gamma}}{4\pi K_2(a)}d^3u }
+\]</div>
+<h4 id="u-in-0-infty">運動量絶対値での分布関数 <span class="arithmatex">\(u \in [0, \infty]\)</span></h4>
+<div class="arithmatex">\[
+\boxed{ f(u) du \,= \,a \frac{u^2 e^{-a\gamma}}{ K_2(a)}du }
+\]</div>
+<h4 id="gamma-in-1infty">エネルギー分布関数 <span class="arithmatex">\(\gamma \in [1,\infty]\)</span></h4>
+<div class="arithmatex">\[
+\boxed{f(\gamma)d\gamma \,=\,a \frac{\gamma^2 v e^{-a\gamma}}{K_2(a)} d\gamma} 
+\]</div>
+<h4 id="v-in-01">速さの分布関数 <span class="arithmatex">\(v \in [0,1]\)</span></h4>
+<div class="arithmatex">\[
+\boxed{ f(v) dv \, = \,
+    a \frac{\gamma^5-\gamma^3}{K_2(a)}e^{a\gamma}
+}
+\]</div>
+<h2 id="_2">熱力学的諸量</h2>
+<p>粒子集団の運動量中心系(運動量の総和が0になる慣性系、Center of Momentum Frame)において熱力学的な操作を認めると、それに応じて熱力学的な諸量を定義できる。</p>
+<blockquote>
+<p>運動エネルギーを相対論的な表現に変更したことにより、非相対論的極限と何が変わるのかを意識するとよい。例えば、状態方程式は本質的に一致する。比熱が3に漸近するなど。</p>
+</blockquote>
+<h3 id="ftv">ヘルムホルツの自由エネルギーF(T,V)</h3>
+<ul>
+<li>分配関数を適当な状態数の測度(例えば、<span class="arithmatex">\(\hbar^{3N} N!\)</span>)で割って無次元化する。</li>
+<li>完全な熱力学関数としてのヘルムホルツ自由エネルギーが得られる。</li>
+<li><span class="arithmatex">\(N \to \infty\)</span></li>
+</ul>
+<div class="arithmatex">\[
+\begin{align}
+    F_N(T,V) &amp;= -T \ln{(Z_N(T,V)/(\hbar^{3N})N!)}\\
+    &amp;= -T \ln {(z^N(a)V^N m^{3N}/ \hbar^{3N} N!)}\\
+    &amp; \approx -TN\ln{(z(a)Vm^3/\hbar^3)} + T(N\ln{N}-N+\frac12 \ln{(2\pi N)})\\
+    &amp;\approx -TN -TN\ln{  \left[\frac{4 \pi K_2(a) m^3}{a \hbar^3n}\right]}\\
+    &amp;= 
+    -TN [1 + \ln(4\pi m^3/\hbar^3) - \ln n 
+    + \ln\left[\frac{K_2(a)}{a}\right]]
+\end{align}
+\]</div>
+<ul>
+<li><span class="arithmatex">\(N\)</span>に比例する、示量変数としての自由エネルギーが得られる。</li>
+<li>分配関数のエネルギー評価で、静止質量を引いて運動エネルギーを使うと<span class="arithmatex">\(\gamma \to \gamma-1\)</span>、自由エネルギーの対数の引数にexp(a)の因子がつく。これは対数項の外に出すと、<span class="arithmatex">\(-NkTa = -mN\)</span>となるので、一粒子あたりの自由エネルギーの原点を<span class="arithmatex">\(-m\)</span>ずらすだけ。</li>
+</ul>
+<hr />
+<h3 id="ptv">圧力 p(T,V)</h3>
+<ul>
+<li>ヘルムホルツ自由エネルギーの体積偏微分は状態方程式(p,T,V状態量間の拘束)を与える。</li>
+</ul>
+<div class="arithmatex">\[
+p(T,V) = -\frac{\partial F}{\partial V}(T,V) 
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial F}{\partial V}(T,V) 
+= \left. \frac{\partial}{\partial V} \right|_T (-T \ln{Z_N(V,T)})
+\]</div>
+<ul>
+<li>分配関数の体積依存性はN体の粒子が無相関であるという性質から、<span class="arithmatex">\(Z_V\propto V^N\)</span></li>
+<li>よって、(juttner分布に限らない)一般の理想気体で理想気体の状態方程式が成立する。</li>
+</ul>
+<div class="arithmatex">\[
+\boxed{
+p(T,V) = \frac{N}{V}T = nT}
+\]</div>
+<h3 id="_3">運動論からの圧力導出</h3>
+<p>運動論の立場では、圧力とは運動量輸送テンソルの対角成分である。この考え方から、一般の理想気体で理想気体の状態方程式が成立することを確かめてみる。</p>
+<ul>
+<li>エネルギーが運動量の適当な関数であるとする。<span class="arithmatex">\(E(p)\)</span></li>
+<li>運動量分布関数がカノニカル分布で書けるとする。</li>
+</ul>
+<div class="arithmatex">\[
+f(p)d^3 p =A e^{-\beta E(p)} d^3p \qquad(\beta=1/T)
+\]</div>
+<ul>
+<li>粒子速度を与える分散関係は</li>
+</ul>
+<div class="arithmatex">\[ 
+v_i = \frac{\partial E}{\partial p_i} 
+\]</div>
+<blockquote>
+<p>これは微視的な仕事とエネルギー変化量の関係を与えていると解釈できる。
+構成粒子レベルのミクロスコピックなエネルギー保存が、マクロな視点できちんと熱と仕事の等価性(熱力学第一法則)を満たすような圧力を保証してくれる。</p>
+</blockquote>
+<p>$$
+ dE = \frac{\partial E}{\partial p_i} dp_i 
+ $$</p>
+<p>$$
+ dE = v \cdot F dt = v \cdot dp
+ $$</p>
+<ul>
+<li>圧力は応力テンソルの空間対角成分で与えられる。</li>
+<li>分布の等方性を仮定して圧力の表現を得る。</li>
+<li>積分に登場する境界項は<span class="arithmatex">\(\exp(\beta E(p))\)</span>により0になることを仮定する。</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align}
+P &amp;= \frac13 \int d^3p\,\, p_i v_i\,\, f(p)\\
+  &amp;= 
+  \frac{A}{3} \int d^3p \,\,p_i \frac{\partial E}{\partial p_i} 
+  e^{-\beta E(p)}\\
+  &amp;= 
+  \left[ \frac{A}{-3\beta} p_i e^{-\beta E(p)}\right] _{p_i= -\infty}^{p_i=\infty}
+  +\frac{1}{3\beta} A \int d^3p\,\, \delta_{ii} \, e^{-\beta E(p)}\\
+  &amp;= 
+    nT 
+\end{align}
+\]</div>
+<div class="arithmatex">\[
+P = n T
+\]</div>
+<p>E(p) の具体形に依存せず理想気体の状態方程式が成立することをカノニカル統計を仮定した運動論の立場から確認できた。</p>
+<hr />
+<h3 id="utv">粒子の平均エネルギーと内部エネルギーU(T,V)</h3>
+<ul>
+<li>粒子エネルギーの平均値は、次のように計算される。</li>
+<li>途中で第二種変形ベッセル関数が満たす公式を用いている。</li>
+</ul>
+<div class="arithmatex">\[
+    \begin{align}
+    \langle \gamma \rangle 
+    &amp;= \int_1^{\infty} d\gamma \frac{ae^{-a\gamma}}{K_2(a)} \gamma^3 v \\
+    &amp;= \frac{-1}{z(a)}\frac{\partial z(a)}{\partial a}\\
+    &amp;=  - \frac{\partial}{\partial a} \ln{z(a)}\\
+    &amp;= -\frac{\partial}{\partial a} \ln{\frac{K_2(a)}{a} }\\
+    &amp;= -\frac{K_2'(a)}{K_2(a)} + \frac1a \\
+    &amp;=  \frac{K_1(a) + \frac2a K_2(a)}{K_2(a)} + \frac{1}{a}\\
+    &amp;= \frac{3}{a} + \frac{K_1(a)}{K_2(a)}
+\end{align}
+\]</div>
+<ul>
+<li>第二種変形ベッセル関数は次のような公式が成立する。</li>
+</ul>
+<div class="arithmatex">\[
+    K'_n(x) =  -K_{n-1}(x) -\frac{n}{x} K_n(x)
+\]</div>
+<ul>
+<li>静止質量を含めた平均エネルギー</li>
+</ul>
+<div class="arithmatex">\[
+\boxed{
+    \langle \gamma \rangle = \frac{3}{a}+\frac{K_1(a)}{K_2(a)} 
+}
+\]</div>
+<ul>
+<li>平均運動エネルギー</li>
+</ul>
+<div class="arithmatex">\[
+\boxed{
+    \langle \epsilon \rangle = m \langle \gamma -1 \rangle 
+    =T \left[3 +a \frac{K_1(a)}{K_2(a)}-a \right]
+}
+\]</div>
+<ul>
+<li>内部エネルギー/内部エネルギー密度</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align}
+U(T,V) &amp;= F(T,V) + TS = F(T,V) - T\frac{\partial F}{\partial T}\\
+&amp;= - T^2 \frac{\partial }{\partial T}  \frac{F(T,V)}{T}
+=  -m \frac{\partial }{\partial a} \ln{Z_N(V,T)}\\
+&amp;= Nm \langle \gamma \rangle
+\end{align}
+\]</div>
+<div class="arithmatex">\[
+\boxed{
+    u(T,n) = \frac{U(T,V)}{V} = n m \langle \gamma \rangle}
+\]</div>
+<ul>
+<li>非相対論極限は普通静止質量の分を含まないので、低温側で一致させるためには1を差し引くとよい。</li>
+</ul>
+<div class="arithmatex">\[
+    u(T,n) = \frac{U(T,V)}{V} = n m \langle \gamma -1 \rangle
+    =nT \left[3 +a \frac{K_1(a)}{K_2(a)}-a \right]
+\]</div>
+<p>粒子の運動エネルギー期待値は非相対論領域では、<span class="arithmatex">\(3/2T\)</span>になる。エネルギー密度は<span class="arithmatex">\(u=3/2nT\)</span>であった。Jüttner分布では、相対論領域で係数が1.5からズレ始め、強相対論領域では3に漸近する。</p>
+<ul>
+<li>量子統計においては低エネルギー側でエネルギー等分配則が破れることを学ぶが、高エネルギー側の相対論領域でも、異なる要因によって等分配則が破れる。</li>
+</ul>
+<div class="arithmatex">\[
+    u/nT 
+    = \left[3 +a \frac{K_1(a)}{K_2(a)}-a \right]
+\]</div>
+<p>以下のグラフは<span class="arithmatex">\(u/nT\)</span>の温度依存性を表している。</p>
+<p><img src="img/jut_Ucorr.svg" alt="説明" width="1000" height="350"></p>
+<h3 id="_4">定積熱容量</h3>
+<ul>
+<li>定積熱容量は体積一定の下での単位温度変化に伴う熱の出入りで、内部エネルギー密度の温度偏微分で計算できる。$dU = Tds - PdV, dV = 0 $</li>
+<li>エネルギー密度の変化から、定積比熱は定数にならず、弱相対論領域では1.5、強相対論領域では3に漸近することがわかる。</li>
+</ul>
+<div class="arithmatex">\[
+    C_V = T\left( \frac{\partial S}{\partial T} \right)_V 
+     = -T \left( \frac{\partial^2 F}{\partial T^2} \right)_V 
+     = -\frac{\partial }{\partial T}\left( T 
+     \left( \frac{\partial F}{\partial T}\right)_V - F\right)_V
+     = \left( \frac{\partial U}{\partial T} \right)_V
+\]</div>
+<div class="arithmatex">\[
+    \frac{\partial U}{\partial T} = N \frac{\partial \left&lt; \gamma \right&gt;} {\partial a}
+    = N \frac{\partial}{\partial (T/m)} \left[\frac{3}{a}+\frac{K_1(a)}{K_2(a)} \right]
+    =-N a^2 \frac{\partial}{\partial a} \left[\frac{3}{a}+\frac{K_1(a)}{K_2(a)} \right]
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial}{\partial a} \left[\frac{K_1(a)}{K_2(a)} \right]
+=\frac{K_1' K_2 - K_1K_2'}{K_2^2}
+\]</div>
+<ul>
+<li>第二種変形ベッセル関数の公式を参照する。</li>
+</ul>
+<div class="arithmatex">\[
+    K'_n(x) =  -K_{n-1}(x) -\frac{n}{x} K_n(x)
+\]</div>
+<div class="arithmatex">\[
+    K_{n+1}(x) = K_{n-1}(x) + \frac{2n}{x} K_n{x}
+\]</div>
+<ul>
+<li>これらを使うと、</li>
+</ul>
+<div class="arithmatex">\[
+    K'_1 =  -K_{0} - \frac{1}{a} K_1 = -K_2 + \frac{1}{a} K_1
+\]</div>
+<div class="arithmatex">\[
+    K'_2 =  -K_{1} - \frac{2}{a} K_2
+\]</div>
+<div class="arithmatex">\[
+K_1' K_2 - K_1 K_2' = -K_2^2+\frac{3}{a}K_1 K_2 +K_1^2
+\]</div>
+<p>整理すると、</p>
+<div class="arithmatex">\[
+C_V = N \left[ 3+a^2 -3a \frac{K_1(a)}{K_2(a)} 
+-a^2 \left(\frac{K_1(a)}{K_2(a)} \right)^2 \right]
+\]</div>
+<ul>
+<li>定積比熱として、<span class="arithmatex">\(c_V = C_V /N\)</span>を以下に描画した。</li>
+<li>横軸の範囲は、エネルギー密度のプロットと同じ。</li>
+<li>a=1/5程度で、かなり3に近づいていることがわかる。</li>
+</ul>
+<p><img src="img/jut_spheat_v.svg" alt="説明" width="1000" height="350"></p>
+<h3 id="_5">等圧熱容量</h3>
+<ul>
+<li>マイヤーの関係式が成立する。</li>
+<li>基本的には、$TdS = dU+pdV = C_V dT +  d(pV) = N(c_v + 1)dT $</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+C_p = 
+T \left (\frac{\partial S(V,T)}{\partial T} \right)_p 
+&amp;= 
+T \left ( \frac{\partial S}{\partial T} \right)_V 
++ T \left ( \frac{\partial S}{\partial V} \right)_T \left ( \frac{\partial V(p,T)}{\partial T} \right)_p\\
+&amp;=
+C_V -T \left ( \frac{\partial p}{\partial T} \right)_V 
+\left ( \frac{\partial p}{\partial T} \right)_V /\left ( \frac{\partial p}{\partial V} \right)_T\\
+&amp;= 
+C_V + N \\
+&amp;= N(c_V +1)\\
+\end{align*}
+\]</div>
+<div class="arithmatex">\[
+C_p =  N \left[ 4+a^2 -3a \frac{K_1(a)}{K_2(a)} 
+-a^2 \left(\frac{K_1(a)}{K_2(a)} \right)^2 \right]
+\]</div>
+<p>ただし、以下の関係式を用いた。
+-  <span class="arithmatex">\(dF = -SdT-pdV\)</span>の全微分条件 : <span class="arithmatex">\(\frac{\partial S}{\partial V} = \frac{\partial p}{dT}\)</span>
+- 偏微分の関係式 <span class="arithmatex">\(\partial_x f(x,y)/\partial_y f(x,y) 
+= -(\partial y(f,x)/\partial x)_f\)</span>
+- 状態方程式 <span class="arithmatex">\(p(T,V) = NT/V\)</span></p>
+<!-- 
+### 等温変化
+### 断熱変化 -->
+
+<h3 id="stv">エントロピー S(T,V)</h3>
+<ul>
+<li>自由エネルギーF(T,V)の温度偏微分として与えることができる。</li>
+<li>先に内部エネルギーU(T,V)を計算しているので、<span class="arithmatex">\(S = (U-F)/T\)</span>から求めてもよい。ただし、その際にはエネルギーの原点に関して静止質量の有無に注意する。</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+    S(T,V) &amp;= -\frac{\partial F}{\partial T} 
+    = 
+    \frac{\partial}{\partial T} \left[ TN [1 + \ln\frac{4\pi m^3 K_2(a)}{\hbar^3 n a } ]\right]\\
+    \frac{S(T,V)}{N}
+    &amp;= 
+     \left[ 1 + \ln\frac{4\pi m^3  K_2(a)}{\hbar^3 n a} \right]
+    -a \frac{\partial}{\partial a} \ln\frac{K_2(a)}{a}\\
+    &amp;= 
+      \left[ 1 + \ln\frac{4\pi m^3 K_2(a)}{\hbar^3 n a} \right]
+    -a \frac{K_2'(a)}{K_2(a)} + 1\\
+    &amp;= 
+    \ln\frac{4\pi m^3 K_2(a)}{\hbar^3 n a}
+    + a\frac{K_1(a)}{K_2(a)} +4
+\end{align*}
+\]</div>
+<p>比熱の振る舞いが高温極限で3に漸近することを思い出すと、エントロピーは比熱の温度積分に対応しているはずなので、非相対論的なエネルギー式との比較において、(T,S)プロットをした際に高温側でグラフの傾きがズレていくと考えられる。
+これは対数増加の部分<span class="arithmatex">\(\ln{(K_2(a)/a)}\)</span>に現れる。</p>
+<ul>
+<li>
+<p>高温極限(<span class="arithmatex">\(a\ll 1\)</span>)で、<span class="arithmatex">\(K_2(a)/a \to a^{-3}/4 \propto T^{3}\)</span></p>
+</li>
+<li>
+<p>低温極限(<span class="arithmatex">\(a\ll 1\)</span>)で、
+<span class="arithmatex">\(K_2(a)/a \to \propto  e^{-a}a^{-1.5} \sim \propto T^{1.5}\)</span></p>
+</li>
+<li>
+<p>いずれも<span class="arithmatex">\(s\sim c_v\ln{T} + s_0\)</span>の形で漸近することがわかる。</p>
+</li>
+<li>比熱の違いは、許される状態数の変化の仕方に対応している。</li>
+</ul>
+<h3 id="_6">断熱変化・等エントロピー過程</h3>
+<p>断熱変化はエントロピーを一定に保つ準静的な変化である。<span class="arithmatex">\(TdS = 0 = dU+pdV\)</span>。対応する状態変数間の拘束関係は、</p>
+<div class="arithmatex">\[
+    \ln{\frac{V K_2(a)}{a}}+a\frac{K_1(a)}{K_2(a)} = C(const.)
+\]</div>
+<div class="arithmatex">\[
+    V e^{-C} =  \frac{a}{K_2(a)} e^{-a K_1(a)/K_2(a)}
+\]</div>
+<ul>
+<li>右辺は温度だけの関数である。以下に右辺を(T,V)のlog-logプロットで示す。Vは温度の単調減少関数でべき依存性が<span class="arithmatex">\(T/mc^2\sim0.2−0.3\)</span>付近から変化しているように見える。</li>
+</ul>
+<p><img src="img/jut_Vad.svg" alt="説明" width="1000" height="350"></p>
+<ul>
+<li>高温極限<span class="arithmatex">\(a\ll1\)</span>では、<span class="arithmatex">\(K_1\to 1/(2a), \,K_2\to 1/(4a^2)\)</span>なので、</li>
+</ul>
+<div class="arithmatex">\[
+    VT^3 =const., \quad p V^{4/3} = const.
+\]</div>
+<ul>
+<li>これは、比熱比<span class="arithmatex">\(c_p/c_v=4/3\)</span>に対応している。</li>
+<li>一方、低温極限<span class="arithmatex">\(a\gg1\)</span>では、主要項で<span class="arithmatex">\(K_{\nu}\to \sqrt{\pi/2a}e^{-a}\)</span>なので、</li>
+</ul>
+<div class="arithmatex">\[
+    VT^{1.5} = const., \quad pV^{5/3}=const.
+\]</div>
+<ul>
+<li>これは、比熱比<span class="arithmatex">\(c_p/c_v=5/3\)</span>に対応している。</li>
+</ul>
+<h3 id="gmu">ギブス自由エネルギー<span class="arithmatex">\(G\)</span>と化学ポテンシャル<span class="arithmatex">\(\mu\)</span></h3>
+<p>ギブス自由エネルギーは粒子数の比率でスケールするので、ギブス自由エネルギーと化学ポテンシャルは<span class="arithmatex">\(G=N\mu\)</span>を満たす。</p>
+<div class="arithmatex">\[
+G = F + pV = -TN\ln{  \left[\frac{4 \pi  m^3K_2(a)}{ \hbar^3n a}\right]}\\
+\]</div>
+<div class="arithmatex">\[
+    \mu = -T\ln{  \left[\frac{4 \pi  m^3K_2(a)}{ \hbar^3n a}\right]}
+\]</div>
+<p>ここでの表記は静止質量を含めているので注意する。</p>
+<h3 id="h">エンタルピー<span class="arithmatex">\(H\)</span></h3>
+<div class="arithmatex">\[
+    H = U + pV = TN \left[4 +a \frac{K_1(a)}{K_2(a)}\right]
+\]</div>
+<h2 id="_7">低温領域での振る舞いと相対論領域へのシフト</h2>
+<p>Jüttner分布は低温側の極限で、非相対論的なエネルギー式を用いたMaxwell分布に漸近する。遷移の目安は規格化温度<span class="arithmatex">\(\Theta= 1/a = T/m c^2 \sim 1\)</span>付近である。ここでは、これらを比較しよう。</p>
+<p><span class="arithmatex">\(K_2(a)\)</span>は<span class="arithmatex">\(a\gg 1\)</span>側での漸近表現として、</p>
+<div class="arithmatex">\[
+    K_2(a) \approx 
+    \sqrt{\frac{\pi}{2a}} e^{-a}  \left[1 + \frac{15}{8a}  + \frac{(15)(7)}{2^7 a^2  } + ... \right]
+\]</div>
+<ul>
+<li>Jüttner分布の表式に対して上記の近似式を用いると、(<span class="arithmatex">\(\epsilon = \gamma-1)\)</span></li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+    f(\gamma)d\gamma &amp;=
+    a\frac{\gamma^2 v }{K_2(a)} e^{-a\gamma} d\gamma\\
+    &amp;\approx 
+    \sqrt{\frac{2}{\pi}} a^{3/2} \gamma^2 v e^{-a\epsilon}
+    \frac{d\epsilon}{1 + \frac{15}{8a} }
+\end{align*} 
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+    \gamma^2 v 
+    &amp;= (1+\epsilon) \sqrt{\epsilon^2+2\epsilon}\\
+    &amp;= \sqrt{2\epsilon}(1+\epsilon)\sqrt{1+\epsilon/2}
+\end{align*}
+\]</div>
+<p>以下に、非相対論的なエネルギー式を用いたマクスウェル分布を記載。</p>
+<div class="arithmatex">\[
+\begin{align*}
+    f_{NR}(p) d^3p &amp;= \sqrt{\frac{1}{2m\pi T}}^3 e^{-p^2/2mT} d^3 p\\
+    &amp;=
+    4\pi p^2 \sqrt{\frac{1}{2m\pi T}}^3 e^{-E/T} dp\\
+    &amp;= 
+    4\pi mp \sqrt{\frac{1}{2m\pi T}}^3 e^{-E/T} dE\\
+    &amp;= 
+    \sqrt{\frac{2}{\pi}} a^{3/2} \sqrt{2\epsilon} e^{-a\epsilon} d\epsilon
+\end{align*}
+\]</div>
+<ul>
+<li>近似の主要項が非相対論的なエネルギー式を使ったmaxwell分布と一致することがわかる。</li>
+</ul>
+<h3 id="_8">温度変化に対する分布関数のシフト</h3>
+<p>非相対論的なエネルギー式のマクスウェル分布は、横軸を対数にしたときに面積が保存するような変換で、<span class="arithmatex">\(T/E=a\epsilon\)</span>の関数として書ける。</p>
+<div class="arithmatex">\[
+\begin{align*}
+    f_{NR} dE 
+&amp;= \frac{2}{\sqrt{\pi}} a^{3/2} \sqrt{\epsilon} e^{-a\epsilon} d\epsilon\\
+&amp;= 
+\frac{2}{\sqrt{\pi}} (a\epsilon)^{3/2}  e^{-a\epsilon}d(\ln{\epsilon})\\
+&amp;= h(a \epsilon) d(\ln{\epsilon})
+\end{align*}
+\]</div>
+<p>この性質は、エネルギー分布関数を描画する際に便利である。</p>
+<ul>
+<li>
+<p><span class="arithmatex">\(X = \ln{E}, Y = dn/dE*E = df/d(\ln{E})\)</span>で描画すれば、温度の異なるマクスウェル分布は、グラフ上での形が同じまま、<span class="arithmatex">\(X=\ln{E}\)</span>方向にシフトする。</p>
+</li>
+<li>
+<p>分布の最大値は形状を表す関数<span class="arithmatex">\(h(x)\)</span>の極大値に対応しており、その座標は<span class="arithmatex">\(x_M=3/2\)</span>である。すなわち最大値の座標点のエネルギーが温度の1.5倍に対応している。</p>
+</li>
+</ul>
+<blockquote>
+<p>ただし上記は非相対論的領域のみで成立する。</p>
+</blockquote>
+<p><img src="img/jut_E_logE01.svg" alt="説明" width="1000" height="350"></p>
+<p>相対論的な温度に差し掛かると、<span class="arithmatex">\(a\epsilon\)</span>の関数としては書けなくなるので、等面積の領域が少しづつ歪んでいく。(上図に異なる温度のJüttner分布を描画。)</p>
+<div class="arithmatex">\[
+\frac{dn}{d\ln{\epsilon}} = a\frac{\gamma^2 v \epsilon}{K_2(a)} e^{-a\gamma}
+\]</div>
+<!-- ## 非相対論的なマクスウェル分布の適用範囲
+非相対論的なマクスウェル分布が破れ始め、Juttner分布への移行が推奨される温度を見積もってみる。
+- ただし、ここでは非相対論的な分布は運動量についての正規分布であるとしよう。(速度について正規分布だとすれば、光速を超える粒子($v>1$)が統計に入ってしまうため。)
+- 温度での分布間の相対誤差の最大値
+- カルバっくライブラとか使えるのかな。 -->
+
+<!-- 
+## 高温領域での振る舞い
+
+
+- 一粒子の平均エネルギーや定積比熱が高温極限で、$\epsilon =3T,c_v = 3$に漸近することを思い出す。
+
+$$
+    u/nT 
+    = \left[3 +a \frac{K_1(a)}{K_2(a)}-a \right]
+$$
+
+$$
+C_V = N \left[ 3+a^2 -3a \frac{K_1(a)}{K_2(a)} 
+-a^2 \left(\frac{K_1(a)}{K_2(a)} \right)^2 \right]
+$$
+
+- $a\ll1$において、3以降の項が0に漸近する。
+- $K_{\nu}(a)$は$a=0$で発散する負べきで近似される。
+
+$$
+K_\nu(a) \sim
+\begin{cases}
+    -\ln a & (\nu=0) \\
+    \frac{\Gamma(\nu)}{2} \left(\frac{2}{a}\right)^\nu  & (\nu>0)
+\end{cases}
+$$
+
+$$
+    \frac{K_1(a)}{K_2(a)} \to \frac{a}{2}
+$$ -->
+
+<h2 id="_9">第二種変形ベッセル関数</h2>
+<blockquote>
+<p>諸量の計算では第二種変形ベッセル関数<span class="arithmatex">\(K_{\nu}(a)\)</span>が登場するが、<span class="arithmatex">\(\nu\)</span>が整数のとき、微分を含む式や、<span class="arithmatex">\(\nu=3\)</span>以上の<span class="arithmatex">\(K_{\nu}(a)\)</span>は漸化式を用いて、<span class="arithmatex">\(\nu=1,2\)</span>の計算に落とすことができるので、
+<span class="arithmatex">\(K_1(a), K_2(a)\)</span>の振る舞いを知っているとよい。</p>
+</blockquote>
+<h3 id="k_nua"><span class="arithmatex">\(K_{\nu}(a)\)</span>の定義</h3>
+<p>いくつかの方法で<span class="arithmatex">\(K_{\nu}(a)\)</span>を定義できる。定義の仕方によって、定義域が異なるので注意。
+<span class="arithmatex">\(\nu\)</span>は一般に実数である。</p>
+<ul>
+<li>第二種変形ベッセル関数の積分表示</li>
+<li><span class="arithmatex">\(Re(a)&gt;0\)</span></li>
+<li><span class="arithmatex">\(Re(\nu)&gt;-1/2\)</span></li>
+<li><span class="arithmatex">\(z(z^2-1)^{\nu-\frac32}\)</span>部分の部分積分で以下二式は等しいことを確認可能。</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+K_{\nu}(a) &amp;= 
+\frac{\sqrt{\pi}}{ \Gamma(\nu-\frac{1}{2})} \left( \frac{a}{2}\right)^{\nu-1}  \int_{1}^{\infty} dz \, z (z^2-1)^{\nu-\frac32} e^{-az}\\
+K_\nu(a)  &amp; = 
+\frac{\sqrt{\pi}}{\Gamma(\nu + \tfrac12)} \left( \frac{a}{2}\right)^{\nu} 
+\int_{1}^{\infty} dz \, (z^2-1)^{\nu-\tfrac12} e^{-a z} 
+\end{align*}
+\]</div>
+<ul>
+<li><span class="arithmatex">\(Re(a) &gt; 0\)</span></li>
+<li><span class="arithmatex">\(\nu\)</span>は任意</li>
+</ul>
+<div class="arithmatex">\[
+K_\nu(a)=\int_0^\infty e^{-a\cosh u}\cosh(\nu u) du
+\]</div>
+<hr />
+<p><span class="arithmatex">\(K_\nu(x)\)</span>は変形ベッセル微分方程式を満たす。</p>
+<div class="arithmatex">\[
+    x^2 y'' + xy' - (x^2 + \nu^2)y = 0
+\]</div>
+<p>便利な公式。</p>
+<div class="arithmatex">\[
+    K'_n(x) =  -K_{n-1}(x) -\frac{n}{x} K_n(x)
+\]</div>
+<div class="arithmatex">\[
+    K_{n+1}(x) = K_{n-1}(x) + \frac{2n}{x} K_n{x}
+\]</div>
+<p><img src="img/jut_MBF2.svg" alt="説明" width="1000" height="350"></p>
+<h3 id="_10">近似</h3>
+<ul>
+<li>以上のグラフにあるように<span class="arithmatex">\(x&gt;0\)</span>の実軸上では、正で単調に減少する関数である。</li>
+<li>
+<p><span class="arithmatex">\(x=0\)</span>でべき的に発散し、<span class="arithmatex">\(x\gg1\)</span>で指数的に減衰する。</p>
+</li>
+<li>
+<p><span class="arithmatex">\(a \gg 1\)</span></p>
+</li>
+</ul>
+<div class="arithmatex">\[
+    K_{\nu}(a) \approx 
+    \sqrt{\frac{\pi}{2a}} e^{-a}  \left[1 + \frac{4\nu^2-1}{8a}  + \frac{(4\nu^2-1)(4\nu^2-9)}{2! (8a)^2  } + ... \right]
+\]</div>
+<ul>
+<li><span class="arithmatex">\(a\ll 1\)</span></li>
+</ul>
+<div class="arithmatex">\[
+K_\nu(a) \sim
+\begin{cases}
+    -\ln a &amp; (\nu=0) \\
+    \frac{\Gamma(\nu)}{2} \left(\frac{2}{a}\right)^\nu  &amp; (\nu&gt;0)
+\end{cases}
+\]</div>
+<ul>
+<li>より高精度の<span class="arithmatex">\(K_{0}(x)\)</span>のx&lt;&lt;1漸近展開は：</li>
+<li><span class="arithmatex">\(\gamma\)</span> : euler定数</li>
+</ul>
+<div class="arithmatex">\[
+K_0(x) = -\ln\left(\frac{x}{2}\right) - \gamma
+\frac{x^2}{4} \left( 1 - \gamma - \ln\left(\frac{x}{2}\right) \right)
+* O(x^4 \ln x)
+\]</div>
+<div class="arithmatex">\[
+\ln 2 - \gamma \approx 0.11593…
+\]</div>
+<ul>
+<li>K_nu(x)近似式(x&lt;&lt;1)の相対誤差評価</li>
+</ul>
+<p><img src="img/MBS2_err.svg" alt="説明" width="1000" height="350"></p>
+<h3 id="_11">実用的で精度の良い近似</h3>
+<div class="arithmatex">\[
+g(\Theta) \equiv \frac{u}{k_B T}
+\]</div>
+<p>精密な数値評価（Bessel の比）から以下のPade 型近似が得られ、0 ≤ Θ ≤ 2で非常に良い精度（最大絶対誤差 <span class="arithmatex">\(\lesssim 4.3\times10^{-3}\)</span>, 相対誤差 <span class="arithmatex">\(≲0.002\)</span> 程度を示す：</p>
+<div class="arithmatex">\[
+    g(\Theta) \approx 3 - \dfrac{1.5}{1 + 1.30192031 \Theta + 0.07037686 \Theta^{2}}
+\]</div>
+<p>この式は非相対論極限（Θ→0）と超相対論極限（Θ≫1）の両方を滑らかに結び、Θ=0..2 の領域で使いやすい。</p>
+<h2 id="_12">低温展開</h2>
+<p>Θ≪1 のときのテイラー展開。1粒子当量</p>
+<div class="arithmatex">\[
+\frac{u}{k_B T} = \frac{3}{2} + \frac{15}{8} \Theta - 1.7207466 \Theta^{2} + \mathcal{O}(\Theta^3).
+\]</div>
+<p>よって（密度 (n) を掛けて）</p>
+<div class="arithmatex">\[
+U \approx n T\left( \frac{3}{2} + \frac{15}{8}\Theta - 1.7207466 \Theta^{2} \right)
+\]</div>
+<p>最初の 2 項<span class="arithmatex">\(\tfrac32 + \tfrac{15}{8}\Theta\)</span>はよく見かける近似で、Θ≲0.1 程度なら十分に良いが、Θ が 0.5〜2 のあたりになると 2 次項まで入れても誤差が増えるので上の Pade 近似を使うのが無難。</p>
+  </div>
+</article>
+                                <div class="mx-auto flex flex-wrap h-16 w-full max-w-2xl items-center gap-2 px-4 md:px-0">
+    
+    
+</div>
+                                <dialog id="bottom-sidebar" onclick="onBottomSidebarDialogClick(event)" class="bg-transparent"
+    style="position: fixed; left: 0px; top: 0px; transform: translate(0px, 58px); min-width: max-content; --radix-popper-transform-origin: 0% 0px; will-change: transform; z-index: 50; --radix-popper-available-width: 504px; --radix-popper-available-height: 857px; --radix-popper-anchor-width: 72.94999694824219px; --radix-popper-anchor-height: 32px;">
+    <div data-side="bottom" data-align="start" data-state="open" role="dialog" data-slot="popover-content"
+        class="text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 origin-(--radix-popover-content-transform-origin) border outline-hidden bg-background/90 no-scrollbar h-(--radix-popper-available-height) w-(--radix-popper-available-width) overflow-y-auto rounded-none border-none p-0 shadow-none backdrop-blur duration-100"
+        style="--radix-popover-content-transform-origin: var(--radix-popper-transform-origin); --radix-popover-content-available-width: var(--radix-popper-available-width); --radix-popover-content-available-height: var(--radix-popper-available-height); --radix-popover-trigger-width: var(--radix-popper-anchor-width); --radix-popover-trigger-height: var(--radix-popper-anchor-height);"
+        tabindex="-1">
+        <div class="flex flex-col gap-12 overflow-auto px-6 py-6">
+            
+            
+            
+
+            
+            <div class="flex flex-col gap-4">
+                <div class="text-muted-foreground text-sm font-medium">Menu</div>
+                <div class="flex flex-col gap-3">
+                    
+                    <a class="text-2xl font-medium" href="index.html">
+                        
+                        Home
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="01_non-lin-diff-analyticals.html">
+                        
+                        非線形拡散
+                        
+                    </a>
+                    
+                </div>
+            </div>
+            
+
+            
+            <div class="flex flex-col gap-8">
+                
+                <div class="flex flex-col gap-4">
+                    <div class="text-muted-foreground text-sm font-medium">em2d.f</div>
+                    
+                </div>
+                
+                <div class="flex flex-col gap-4">
+                    <div class="text-muted-foreground text-sm font-medium">init.f</div>
+                    
+                </div>
+                
+                <div class="flex flex-col gap-4">
+                    <div class="text-muted-foreground text-sm font-medium">biriv.f</div>
+                    
+                </div>
+                
+                <div class="flex flex-col gap-4">
+                    <div class="text-muted-foreground text-sm font-medium">F77_style</div>
+                    
+                </div>
+                
+                <div class="flex flex-col gap-4">
+                    <div class="text-muted-foreground text-sm font-medium">変数</div>
+                    
+                </div>
+                
+            </div>
+            
+            
+
+        </div>
+    </div>
+</dialog>
+                            </div>
+                            <div
+                                class="sticky top-[calc(var(--header-height)+1px)] z-30 ml-auto hidden h-[calc(100svh-var(--header-height)-var(--footer-height))] w-72 flex-col gap-4 overflow-hidden overscroll-none pb-8 xl:flex">
+                                <div class="h-(--top-spacing) shrink-0"></div>
+                                <div view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
+    <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
+        <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#maxwell-juttner"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            Maxwell-Jüttner分布の表式
+        </a>
+        
+
+        
+        <a href="#_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            カノニカル統計からの導出
+        </a>
+        
+        
+        <a href="#u_xu_yu_z-in-inftyinfty3"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            運動量分布関数 \((u_x,u_y,u_z) \in [\infty,\infty]^3\)
+        </a>
+        
+        <a href="#u-in-0-infty"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            運動量絶対値での分布関数 \(u \in [0, \infty]\)
+        </a>
+        
+        <a href="#gamma-in-1infty"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            エネルギー分布関数 \(\gamma \in [1,\infty]\)
+        </a>
+        
+        <a href="#v-in-01"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            速さの分布関数 \(v \in [0,1]\)
+        </a>
+        
+        
+
+        
+        <a href="#_2"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            熱力学的諸量
+        </a>
+        
+        
+        <a href="#ftv"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            ヘルムホルツの自由エネルギーF(T,V)
+        </a>
+        
+        <a href="#ptv"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            圧力 p(T,V)
+        </a>
+        
+        <a href="#_3"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            運動論からの圧力導出
+        </a>
+        
+        <a href="#utv"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            粒子の平均エネルギーと内部エネルギーU(T,V)
+        </a>
+        
+        <a href="#_4"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            定積熱容量
+        </a>
+        
+        <a href="#_5"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            等圧熱容量
+        </a>
+        
+        <a href="#stv"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            エントロピー S(T,V)
+        </a>
+        
+        <a href="#_6"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            断熱変化・等エントロピー過程
+        </a>
+        
+        <a href="#gmu"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            ギブス自由エネルギー\(G\)と化学ポテンシャル\(\mu\)
+        </a>
+        
+        <a href="#h"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            エンタルピー\(H\)
+        </a>
+        
+        
+
+        
+        <a href="#_7"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            低温領域での振る舞いと相対論領域へのシフト
+        </a>
+        
+        
+        <a href="#_8"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            温度変化に対する分布関数のシフト
+        </a>
+        
+        
+
+        
+        <a href="#_9"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            第二種変形ベッセル関数
+        </a>
+        
+        
+        <a href="#k_nua"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            \(K_{\nu}(a)\)の定義
+        </a>
+        
+        <a href="#_10"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            近似
+        </a>
+        
+        <a href="#_11"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            実用的で精度の良い近似
+        </a>
+        
+        
+
+        
+        <a href="#_12"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            低温展開
+        </a>
+        
+
+        
+        
+        
+        
+
+    </div>
+    <div class="h-12"></div>
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer view-transition-name="footer"
+    class="group-has-[.section-soft]/body:bg-surface/40 3xl:fixed:bg-transparent dark:bg-transparent">
+    <div class="container-wrapper px-4 xl:px-6">
+        <div class="flex h-(--footer-height) items-center justify-between">
+            <div class="text-muted-foreground w-full text-center text-xs leading-loose sm:text-sm">
+                
+                <a href="https://github.com/asiffer/mkdocs-shadcn">shadcn theme</a> provided by
+                <a href="https://github.com/asiffer">@asiffer</a>
+            </div>
+        </div>
+    </div>
+</footer>
+    </div>
+     
+
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js"></script>
+
+     
+
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js"></script>
+
+     
+
+<script src="js/katex_auto.js"></script>
+
+     
+
+<script src="search/main.js"></script>
+
+
+    
+
+    <script src="js/copy-button.js"></script>
+    <script>updatePygmentsStylesheet();</script>
+    
+    <script>fetchStargazers("None");</script>
+    
+    
+    
+    <script type="speculationrules">
+{
+  "prerender": [
+    {
+      "where": {
+          "selector_matches": ["#next-button", "#previous-button"],
+      }
+    }
+  ]
+}
+</script>
+</body>
+
+</html>
