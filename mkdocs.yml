@@ -48,7 +48,7 @@ extra_javascript:
 nav:
   - Home: index.md
   - 非線形拡散: 01_non-lin-diff-analyticals.md
-  - em2d.f  : 02_em2d.md
+  - 相対論的な理想気体の分布関数  : 02juttner.md
   - init.f : 03_init.md
   - biriv.f : 04_bitriv_f.md
   - F77_style : 05_F77_style.md
