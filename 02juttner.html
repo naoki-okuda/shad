@@ -455,12 +455,15 @@
 <li>ブラックホールコロナ、初期宇宙、相対論的レーザー生成プラズマなどに実現する。</li>
 <li>高エネルギーのバルクでは対生成・対消滅や輻射の放出再吸収などで、Jüttner分布からずれてくることがある。</li>
 </ul>
+<!-- 
+<img src="img/jut_gam_loglog.svg" alt="説明" width="1000" height="350"> -->
+
 <h2 id="_1">カノニカル統計からの導出</h2>
 <p><span class="arithmatex">\(\,\,\,\)</span>ここでは、相対論的領域においてカノニカル統計が適用できるものとして、理想気体の分布関数を計算し、Jüttner分布が導かれることを確認する。</p>
 <ul>
 <li>温度Tの熱浴に接して、体積Vの範囲に閉じ込められた、N個の質量<span class="arithmatex">\(m\)</span>の粒子を考える。</li>
 <li>マスはon-shell条件を満たしている。<span class="arithmatex">\(p_\mu p^{\mu} = m^2\)</span></li>
-<li><span class="arithmatex">\(u^{\mu} = p^{mu}/m\)</span> : 4元速度</li>
+<li><span class="arithmatex">\(u^{\mu} = p^{\mu}/m\)</span> : 4元速度</li>
 <li>温度は対応する密度<span class="arithmatex">\(n = N/V\)</span>のフェルミエネルギー<span class="arithmatex">\(\epsilon_F(T=0,n)=\frac{h^2}{2m}(\frac{3n}{8\pi})^{2/3}\)</span>よりも十分高いものとして、縮退効果は考えない。これはFermi統計の高温側の極限に対応する。</li>
 </ul>
 <p>カノニカル統計の処方箋より、位相空間(x-p)上の分布関数は</p>
@@ -538,9 +541,7 @@ a \int_1^{\infty} dz \, z \sqrt{z^2-1} e^{-a\gamma}
 \]</div>
 <h2 id="_2">熱力学的諸量</h2>
 <p>粒子集団の運動量中心系(運動量の総和が0になる慣性系、Center of Momentum Frame)において熱力学的な操作を認めると、それに応じて熱力学的な諸量を定義できる。</p>
-<blockquote>
-<p>運動エネルギーを相対論的な表現に変更したことにより、非相対論的極限と何が変わるのかを意識するとよい。例えば、状態方程式は本質的に一致する。比熱が3に漸近するなど。</p>
-</blockquote>
+<p>運動エネルギーを相対論的な表現に変更したことによる、非相対論的表現とのずれを意識するとよい。例えば、状態方程式は本質的に一致する。比熱が3に漸近するなど。</p>
 <h3 id="ftv">ヘルムホルツの自由エネルギーF(T,V)</h3>
 <ul>
 <li>分配関数を適当な状態数の測度(例えば、<span class="arithmatex">\(\hbar^{3N} N!\)</span>)で割って無次元化する。</li>
@@ -597,10 +598,12 @@ f(p)d^3 p =A e^{-\beta E(p)} d^3p \qquad(\beta=1/T)
 <div class="arithmatex">\[ 
 v_i = \frac{\partial E}{\partial p_i} 
 \]</div>
-<blockquote>
-<p>これは微視的な仕事とエネルギー変化量の関係を与えていると解釈できる。
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>aaa
+これは微視的な仕事とエネルギー変化量の関係を与えていると解釈できる。
 構成粒子レベルのミクロスコピックなエネルギー保存が、マクロな視点できちんと熱と仕事の等価性(熱力学第一法則)を満たすような圧力を保証してくれる。</p>
-</blockquote>
+</div>
 <p>$$
  dE = \frac{\partial E}{\partial p_i} dp_i 
  $$</p>
@@ -834,7 +837,8 @@ C_p =  N \left[ 4+a^2 -3a \frac{K_1(a)}{K_2(a)}
     V e^{-C} =  \frac{a}{K_2(a)} e^{-a K_1(a)/K_2(a)}
 \]</div>
 <ul>
-<li>右辺は温度だけの関数である。以下に右辺を(T,V)のlog-logプロットで示す。Vは温度の単調減少関数でべき依存性が<span class="arithmatex">\(T/mc^2\sim0.2−0.3\)</span>付近から変化しているように見える。</li>
+<li>右辺は温度だけの関数である。以下に右辺を(T,V)のlog-logプロットで示す。Vは温度の単調減少関数で、<span class="arithmatex">\(T/mc^2\sim0.2−0.3\)</span>付近からべき的な依存性が変化しているように見える。
+これは比熱比<span class="arithmatex">\(c_p/c_v\)</span>の変化として解釈できる。</li>
 </ul>
 <p><img src="img/jut_Vad.svg" alt="説明" width="1000" height="350"></p>
 <ul>
@@ -874,7 +878,7 @@ G = F + pV = -TN\ln{  \left[\frac{4 \pi  m^3K_2(a)}{ \hbar^3n a}\right]}\\
     \sqrt{\frac{\pi}{2a}} e^{-a}  \left[1 + \frac{15}{8a}  + \frac{(15)(7)}{2^7 a^2  } + ... \right]
 \]</div>
 <ul>
-<li>Jüttner分布の表式に対して上記の近似式を用いると、(<span class="arithmatex">\(\epsilon = \gamma-1)\)</span></li>
+<li>Jüttner分布の表式に対して上記の近似式を用いると、<span class="arithmatex">\((\epsilon = \gamma-1)\)</span></li>
 </ul>
 <div class="arithmatex">\[
 \begin{align*}
@@ -1040,13 +1044,13 @@ K_\nu(a) \sim
 \end{cases}
 \]</div>
 <ul>
-<li>より高精度の<span class="arithmatex">\(K_{0}(x)\)</span>のx&lt;&lt;1漸近展開は：</li>
+<li>より高精度の<span class="arithmatex">\(K_{0}(x)\)</span>の<span class="arithmatex">\(x\ll 1\)</span>漸近展開は：</li>
 <li><span class="arithmatex">\(\gamma\)</span> : euler定数</li>
 </ul>
 <div class="arithmatex">\[
 K_0(x) = -\ln\left(\frac{x}{2}\right) - \gamma
-\frac{x^2}{4} \left( 1 - \gamma - \ln\left(\frac{x}{2}\right) \right)
-* O(x^4 \ln x)
+＋\frac{x^2}{4} \left( 1 - \gamma - \ln\left(\frac{x}{2}\right) \right)
++ O(x^4 \ln x)
 \]</div>
 <div class="arithmatex">\[
 \ln 2 - \gamma \approx 0.11593…
@@ -1054,6 +1058,7 @@ K_0(x) = -\ln\left(\frac{x}{2}\right) - \gamma
 <ul>
 <li>K_nu(x)近似式(x&lt;&lt;1)の相対誤差評価</li>
 </ul>
+<p><span class="arithmatex">\(|(K_{\nu} (x) -approx(x))/K_{\nu}(x)|\)</span>の描画。</p>
 <p><img src="img/MBS2_err.svg" alt="説明" width="1000" height="350"></p>
 <!-- ### 実用的で精度の良い近似
 
@@ -1088,6 +1093,8 @@ U \approx n T\left( \frac{3}{2} + \frac{15}{8}\Theta - 1.7207466 \Theta^{2} \rig
 $$
 
 最初の 2 項$\tfrac32 + \tfrac{15}{8}\Theta$はよく見かける近似で、Θ≲0.1 程度なら十分に良いが、Θ が 0.5〜2 のあたりになると 2 次項まで入れても誤差が増えるので上の Pade 近似を使うのが無難。 -->
+
+<p>最終更新日:2026 01 13</p>
   </div>
 </article>
                                 <div class="mx-auto flex flex-wrap h-16 w-full max-w-2xl items-center gap-2 px-4 md:px-0">
