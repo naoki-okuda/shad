@@ -49,7 +49,7 @@ nav:
   - Home: index.md
   - 非線形拡散: 01_non-lin-diff-analyticals.md
   - Jüttner分布 : 02juttner.md #相対論的な理想気体の分布関数
-  - init.f : 03_init.md
+  - Maxwell-Vlasov系のスケール変換 : 03_scale_inv_VM.md
   - biriv.f : 04_bitriv_f.md
   - F77_style : 05_F77_style.md
   - 変数 : 06_Variables.md
