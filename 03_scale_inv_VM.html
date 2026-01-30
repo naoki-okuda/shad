@@ -36,11 +36,11 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home - Phys</title>
+    <title>Maxwell-Vlasov系のスケール変換 - Phys</title>
     
 
 
-<title>Home</title>
+<title>Maxwell-Vlasov系のスケール変換</title>
 
 
 
@@ -50,18 +50,18 @@
 
 
 
-<link rel="canonical" href="https://naoki-okuda.github.io/shad/index.html">
+<link rel="canonical" href="https://naoki-okuda.github.io/shad/03_scale_inv_VM.html">
 
 
 <!-- Open Graph (Facebook, LinkedIn) -->
 
-<meta property="og:title" content="Home">
+<meta property="og:title" content="Maxwell-Vlasov系のスケール変換">
 
 
 
 
 
-<meta property="og:url" content="https://naoki-okuda.github.io/shad/index.html">
+<meta property="og:url" content="https://naoki-okuda.github.io/shad/03_scale_inv_VM.html">
 
 
 
@@ -70,7 +70,7 @@
 
 <!-- Twitter Card -->
 
-<meta name="twitter:title" content="Home">
+<meta name="twitter:title" content="Maxwell-Vlasov系のスケール変換">
 
 
 
@@ -300,7 +300,7 @@
                 
                 
                 <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
-    <a data-slot="sidebar-menu-button" data-active="true" data-sidebar="menu-button"
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
         data-size="default" href="/shad/index.html"
         class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
 
@@ -357,7 +357,7 @@
                 
                 
                 <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
-    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+    <a data-slot="sidebar-menu-button" data-active="true" data-sidebar="menu-button"
         data-size="default" href="/shad/03_scale_inv_VM.html"
         class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
 
@@ -397,12 +397,12 @@
         <h1
           class="scroll-m-20 text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl"
         >
-          Home
+          Maxwell-Vlasov系のスケール変換
         </h1>
 
         <div class="flex items-center gap-2 pt-1.5">
           
-<button onclick="fetch(`https://naoki-okuda.github.io/shad/index.md`).then((r) => r.blob()).then((blob) => navigator.clipboard.write([new ClipboardItem({ 'text/plain': blob })]))" 
+<button onclick="fetch(`https://naoki-okuda.github.io/shad/03_scale_inv_VM.md`).then((r) => r.blob()).then((blob) => navigator.clipboard.write([new ClipboardItem({ 'text/plain': blob })]))" 
         data-slot="button" 
         class="cursor-pointer inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md gap-1.5 px-3 has-[&>svg]:px-2.5 h-8 shadow-none md:h-7 md:text-[0.8rem]">
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-copy ">
@@ -410,15 +410,13 @@
 </svg>
 <span class="max-md:hidden">Copy Page</span>
 </button> 
-           
           
           <a
             data-slot="button"
-            id="next-button"
+            id="previous-button"
             class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-secondary text-secondary-foreground hover:bg-secondary/80 extend-touch-target size-8 shadow-none md:size-7"
-            href="/shad/01_non-lin-diff-analyticals.html"
+            href="/shad/02juttner.html"
           >
-            <span class="sr-only">Next</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -429,13 +427,15 @@
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
-              class="tabler-icon tabler-icon-arrow-right"
+              class="tabler-icon tabler-icon-arrow-left"
             >
               <path d="M5 12l14 0"></path>
-              <path d="M13 18l6 -6"></path>
-              <path d="M13 6l6 6"></path>
+              <path d="M5 12l6 6"></path>
+              <path d="M5 12l6 -6"></path>
             </svg>
+            <span class="sr-only">Previous</span>
           </a>
+           
           
         </div>
       </div>
@@ -446,37 +446,254 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <p>For full documentation visit <a href="https://www.mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="commands">Commands</h2>
+    <h2 id="_1">コリジョンレスプラズマのスケール変換不変性について</h2>
+<p>Maxwell-Vlasov系で記述されるコリジョンレスなプラズマはスケール変換不変性を持つことが知られている。二つの時空間スケールの異なる現象が適切な物理量の変換でつながる場合、それらを同一視できるという意味で、重要な操作である。</p>
+<p>例を挙げると、実験室のプラズマ現象を宇宙スケールの現象に再解釈するなどといったことが可能になる。
+あるいは、Particle-In-Cell法に代表されるプラズマのシミュレーション手法において、しばしば正規化単位系が使用される。そのような単位系を設定する強い動機としてコリジョンレスプラズマのスケール変換不変性が関わっている。</p>
+<p>本記事では、Maxwell-Vlasov系が満たす、スケール変換不変性を確かめてみる。加えて、電磁場が当該のスケール変換不変性を満たすときに質点の軌道もスケール不変になることを確認する。いくつかの物理的な解釈について言及する。</p>
+<h2 id="_2">スケール変換不変性が適用できない場合</h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>予め、スケール変換の適用範囲について注意する。</p>
+<p>スケール変換に対する不変性はいつも成立するわけではない。むしろ、電磁場プラズマ系は一般にはスケール変換不変性を示さない。スケール不変性を壊す要因が十分に無視できる程度に小さいときに適用可能な性質であると理解するべきだ。</p>
+</div>
+<p>記事の後半で立ち入って説明する。ここでは、スケール変換不変性を壊す可能性があるために、気をつけるべき数例をあげる。</p>
 <ul>
-<li><code>mkdocs new [dir-name]</code> - Create a new project.</li>
-<li><code>mkdocs serve</code> - Start the live-reloading docs server.</li>
-<li><code>mkdocs build</code> - Build the documentation site.</li>
-<li><code>mkdocs -h</code> - Print help message and exit.</li>
+<li>二体衝突・点粒子性・クーロン相互作用・<span class="arithmatex">\(r^{-2}\)</span>のポアソン場</li>
+<li>量子効果・原子過程</li>
+<li>放射・エネルギー損失過程</li>
+<li>境界条件・外部スケール</li>
 </ul>
-<h2 id="project-layout">Project layout</h2>
-<pre class="codehilite"><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
-</code></pre>
+<h2 id="maxwell-vlasov">Maxwell-Vlasov系のスケール変換</h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>電気定数<span class="arithmatex">\(\epsilon_0\)</span>について<span class="arithmatex">\(4\pi \epsilon_0 = 1\)</span>かつ、光速=1とする。</p>
+</div>
+<p><span class="arithmatex">\(f(x,v,t), E(x,t), B(x,t)\)</span>が次の方程式(Maxwell-Vlasov方程式系)を満たす解だとする。
+それぞれ、分布関数、電場、磁場に対応している。ここで、<span class="arithmatex">\(e\)</span>は電荷、<span class="arithmatex">\(m\)</span>は質量を表している。単一粒子種の分布関数を想定するが、以降の議論を複数粒子種に拡張することは簡単である。</p>
+<div class="arithmatex">\[
+\begin{align*}
+ \frac{\partial E}{\partial t} &amp;= -4 \pi \int  e v  f d^3v + \nabla \times B\\
+ \frac{\partial B}{\partial t} &amp;= -\nabla  \times E\\
+ \nabla \cdot E &amp;= 4 \pi \int e fd^3 v\\
+ \nabla  \cdot B &amp;= 0 \\
+ \frac{\partial f}{\partial t} + v\cdot \frac{\partial f}{\partial x}&amp; 
+  + \frac{q}{m}(E + v \times B) \cdot \frac{\partial f}{\partial v} = 0
+\end{align*}
+\]</div>
+<p>この時、次のような関数のセット<span class="arithmatex">\((D,H,g)\)</span>も同じ方程式の解になるのではないか、と考える。</p>
+<div class="arithmatex">\[
+  \begin{align*}
+  D(x,t)    &amp;\equiv p E(ax,bt)\\
+  H(x,t)    &amp;\equiv q B(ax,bt)\\
+  g(x,t, v) &amp;\equiv r f(ax,bt,cv)
+  \end{align*}
+\]</div>
+<p>変換後の関数は独立変数の方向に、定数倍<span class="arithmatex">\(a,b,c\)</span>で伸縮された形をしており、同時に大きさに関して定数倍<span class="arithmatex">\(p,q,r\)</span>の補正を受けている。変換された関数のセットが再び、一切の変更も受けていないMaxwell-Vlasovを満たすためにはどのような<span class="arithmatex">\(a,b,c,p,q,r\)</span>が許されるだろうか。</p>
+<p><span class="arithmatex">\(D, H, g\)</span>に対する微積分を整理すると、</p>
+<div class="arithmatex">\[
+  \begin{align*}
+    \frac{\partial D}{\partial t} &amp;= pb \frac{\partial E}{\partial t}(ax,bt)\\
+    \nabla \times D &amp; = pa (\nabla \times E)(ax,bt)\\
+    \frac{\partial H}{\partial t} &amp;= qb \frac{\partial B}{\partial t}(ax,bt)\\
+    \nabla \times H &amp; = qa (\nabla \times B)(ax,bt)\\
+    \frac{\partial g}{\partial t} &amp;= rb \frac{\partial f}{\partial t}(ax,bt)\\
+    \frac{\partial g}{\partial x} &amp;= ra \frac{\partial f}{\partial x}(ax,bt)\\
+    \frac{\partial g}{\partial v} &amp;= rc \frac{\partial f}{\partial v}(ax,bt)\\
+    \int d^3v g(x,t,v) &amp;= \int d^3v rf(ax,bt,cv) \\
+      &amp;= r/c^3 \int d^3(cv) f(ax,bt,cv)\\
+    \int d^3 v g(x,t,v) &amp;= r /c^4 \int d^3(cv)cv f(ax,bt,cv)
+  \end{align*}
+\]</div>
+<p><span class="arithmatex">\((f,E,B)\)</span>がmaxwell-vlasovの解であることを考えれば、任意の独立変数の組み合わせ<span class="arithmatex">\((x,t,v)\)</span>の下で、maxwell-vlasovが成立している。したがって、<span class="arithmatex">\((x\to ax,t \to bt,v \to cv)\)</span>を代入した数値でもMaxwell-Vlasovが成立している。</p>
+<p>例えば、Faraday則を見て、</p>
+<div class="arithmatex">\[
+\begin{align*}
+  \left( \frac{\partial B}{\partial t} +\nabla  \times E  = 0\right)_{(x \to ax,t \to bt)}\\
+  \frac{1}{qb} \nabla \times H(x,t) + \frac{1}{pa}\frac{\partial D}{\partial t} (x,t) = 0
+\end{align*}
+\]</div>
+<p>一方、<span class="arithmatex">\((H,D)\)</span>が同じFaraday則を満たすことを要求すると、</p>
+<div class="arithmatex">\[
+\begin{align*}
+  \nabla \times H(x,t) +\frac{\partial D}{\partial t} (x,t) = 0
+\end{align*}
+\]</div>
+<p>係数を比較して<span class="arithmatex">\(qb/pa = 1\)</span>を得られる。
+同じ方法でMaxwell方程式を全て比較すると、</p>
+<div class="arithmatex">\[
+\begin{align*}
+  qb &amp;= pa\\
+  pb &amp;= qa\\
+  pb &amp;= r/c^4 \\
+  pa &amp;= r/c^3
+\end{align*}
+\]</div>
+<p>なので、これらを整理すると、<span class="arithmatex">\(p=q, a=b, c=1, r=ap\)</span></p>
+<p>次にvlasov方程式で係数を比較して、</p>
+<div class="arithmatex">\[
+\begin{align*}
+  \frac{\partial f}{\partial t} + v\cdot \frac{\partial f}{\partial x} + \frac{e}{m}(E + v \times B) \cdot \frac{\partial f}{\partial v} 
+  &amp;= 0 \, | _{x\to ax,t \to at,v \to v} \\
+  \frac{1}{a}\frac{\partial g}{\partial t} + \frac{1}{a}v \cdot \frac{\partial g}{\partial x} + 
+  \frac{1}{p}( \frac{e}{m} (D + v\times H)) \frac{\partial g}{\partial v}&amp;= 0 
+\end{align*}
+\]</div>
+<p>よって<span class="arithmatex">\(a=p\)</span>。
+整理すると、</p>
+<div class="arithmatex">\[
+\boxed{
+\begin{align*}
+  a=b&amp;=p=q,\\
+  r&amp;= a^2\\
+  D(x,t) &amp;= aE(ax,at) \\
+  H(x,t) &amp;= aB(ax,at)\\
+  g(x,t) &amp;=a^2 f(ax,at,v)
+\end{align*}
+}
+\]</div>
+<h3 id="_3">境界の処理</h3>
+<p>解(<span class="arithmatex">\(f,E,B\)</span>)が時間的に<span class="arithmatex">\(t\in[0:t_0]\)</span>の範囲でVlasovーMaxwellを満たしているとすると、スケール変換された関数のセットは<span class="arithmatex">\(t \in [0:t_0/a]\)</span>の時間範囲で成立すると思えばいい。空間方向も同様に領域のサイズをaでリスケールすれば良い。</p>
+<h2 id="_4">粒子軌道に対するスケール変換の整合性</h2>
+<p>前節ではMaxwell–Vlasov系の場と分布関数が自己相似変換に対して不変であることを確認した。
+ここでは、このスケーリングが個々の粒子運動方程式とも整合していることを確認する。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>上記の非相対論的なMaxwell-Vlasovの場合は相対論的な粒子運動が考慮に入っていないが、ここでは相対論的な運動方程式に従う質点の軌道を考えてみる。</p>
+</div>
+<p>解軌道<span class="arithmatex">\(x(t)\)</span>を得ていたとしよう。これは変換前に以下の方程式を満たしていた。</p>
+<div class="arithmatex">\[
+   \dot{u}(t) = \frac{q}{m} [E(x(t),t) + \frac{u}{\gamma} \times B(x(t),t)]
+\]</div>
+<!-- vで書き直した方が意外と見やすい。
+
+$$
+   \frac{\dot{v}}{\gamma}-\frac{v_j \dot{v}_j}{\gamma^3} v = \frac{q}{m} [E(x(t),t) + v \times B(x(t),t)]
+$$ -->
+
+<p>いま、場のスケール変換に整合するように、粒子軌道をスケールする。</p>
+<div class="arithmatex">\[
+D(x,t)=aE(ax,at), \quad
+H(x,t)=aB(ax,at)
+\]</div>
+<div class="arithmatex">\[
+x'(t) = \frac{1}{a} x(at)
+\]</div>
+<p>分布関数の議論と同様に、<span class="arithmatex">\((x, E, B)\)</span>の組みで満たされる関係式が、<span class="arithmatex">\((x', D, H)\)</span>間に同様の関係式として成立すれば良い。<span class="arithmatex">\('\)</span>付きで変換後の変数を表すとする。</p>
+<div class="arithmatex">\[
+  \frac{dx'}{dt}(t) = \frac{dx}{dt}(at), \quad \frac{d^2 x'}{dt^2} =  a \frac{d^2 x}{dt^2}
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+  \frac{du'}{dt}(t) &amp;= a \frac{du}{dt}(at) \\
+  &amp;=  a\frac{q}{m} [E(x(at),at) + \frac{u}{\gamma} \times B(x(at),at)] \\
+  &amp;=  \frac{q}{m} [aE(ax'(t),at) + \frac{u}{\gamma} \times aB(ax'(t),at)] \\
+  &amp;=  \frac{q}{m} [D(x'(t),t) + \frac{u}{\gamma} \times H(x'(t),t)] \\
+\end{align*}
+\]</div>
+<p>したがって、Maxwell–Vlasov 系のスケール変換不変性は、
+場の分布だけでなく、粒子軌道レベルにおいても自己相似的に保存される。
+これはPIC法において、超粒子の運動がスケール変換の解釈に関わらず、
+同じ粒子軌道を描くことの根拠となる。</p>
+<hr />
+<h2 id="_5">物理的な解釈</h2>
+<p>スケール変換の自由度は1で、プラズマと電磁場の時空間分布をaの因子で引き伸ばすと、対応して電磁場強度をa,密度をa^2のファクタで変動させれば、系の運動は全く同じ解で表現される。</p>
+<p>上記のスケーリング因子<span class="arithmatex">\(a\)</span>を例えば、「周波数の倍率」　(<span class="arithmatex">\(a = \omega' / \omega\)</span>) と解釈する。座標変換 <span class="arithmatex">\((x, t) \to (x/a, t/a)\)</span> は、波長と周期を <span class="arithmatex">\(1/a\)</span> 倍（高周波・短波長化）にすることに対応する。</p>
+<p>例えば、波長<span class="arithmatex">\(1 \rm{\mu m}\)</span>のレーザー光を適当な密度プロファイルに打ち込んだ時の時間発展は、
+波長が<span class="arithmatex">\(0.5 \rm{\mu m}\)</span>のレーザー光(<span class="arithmatex">\(a=2\)</span>の場合)を打ち込む現象に解釈し直すことができる。
+すなわち、構成粒子の速度分布をそのまま(<span class="arithmatex">\(c=1\)</span>)、電磁場と密度の初期空間プロファイルを保ったまま空間スケールを<span class="arithmatex">\(0.5倍\)</span>、密度を<span class="arithmatex">\(a^2 = 4\)</span>倍、観測する時間スケールを<span class="arithmatex">\(0.5\)</span>倍、レーザーを含めた電磁場<span class="arithmatex">\(E,B\)</span>の大きさを<span class="arithmatex">\(a=2\)</span>倍にする。こうすれば、二つの現象間で時間発展の見分けがつかないはずだ。</p>
+<p>このようなスケールの翻訳操作がコリジョンレスの近似が正しくなる範囲内で正当化される。</p>
+<h3 id="_6">規格化された電磁場の振幅の不変性</h3>
+<p>質量<span class="arithmatex">\(m\)</span>, 電荷<span class="arithmatex">\(q\)</span>を持つ質点の運動に対して、規格化された電磁場の振幅(normalized amplitude) <span class="arithmatex">\(a_0 = \frac{eE}{m\omega c}\)</span>は粒子運動の電場中の相対論的な非線形性を特徴づける無次元量である。大雑把に振動電場中の代表的運動量と、光速に漸近する運動量<span class="arithmatex">\(mc\)</span>の比である。</p>
+<div class="arithmatex">\[
+a_0 = \frac{eE}{m\omega c} = \frac{p_{os}}{mc}
+\]</div>
+<p>これはスケール変換の前後で不変になる。
+時空間スケールを <span class="arithmatex">\(a\)</span> 倍にするなら、電場も <span class="arithmatex">\(a\)</span> 倍にすれば、粒子の運動は同じになることは前節で確認した。</p>
+<div class="arithmatex">\[
+\frac{E'}{\omega'} = \frac{a E}{a \omega} = \frac{E}{\omega}
+\]</div>
+<h3 id="_7">プラズマの密度と誘電応答</h3>
+<p>密度 <span class="arithmatex">\(n = \int f dv\)</span> は分布関数の速度空間積分で<span class="arithmatex">\(f\)</span>に比例する。速度分布は変わらず、分布関数は<span class="arithmatex">\(a^2\)</span>倍されるため、<span class="arithmatex">\(n'= a^2 n\)</span> となる。</p>
+<p>電子・イオンプラズマ振動数はプラズマの密度の平方根に比例する。</p>
+<div class="arithmatex">\[
+  \omega_{p} \propto \sqrt{n} \to \omega'_p = a \omega_p
+\]</div>
+<div class="arithmatex">\[
+\frac{\omega'_p}{\omega'} = \frac{a \omega_p}{a \omega} = \frac{\omega_p}{\omega}
+\]</div>
+<p>電磁波の臨界密度 <span class="arithmatex">\(n_c\)</span> は周波数の二乗に比例する。（<span class="arithmatex">\(n_c \propto \omega^2\)</span>）。</p>
+<div class="arithmatex">\[
+\frac{n'}{n_c'} \propto \frac{a^2 n}{(a\omega)^2} = \frac{n}{\omega^2}
+\]</div>
+<p>時空間スケールを変動するなら、対応して密度を <span class="arithmatex">\(a^2\)</span>のファクタで変動させればプラズマの誘電応答は変わらない。</p>
+<h3 id="debye">Debye長とグリッド解像度</h3>
+<p>Debye長 <span class="arithmatex">\(\lambda_D \propto v_{th}/\omega_p\)</span>
+密度が <span class="arithmatex">\(a^2\)</span> 倍になると、デバイ長は<span class="arithmatex">\(1/a\)</span> 倍になる。（<span class="arithmatex">\(v_{th}\)</span>は不変）。
+系の空間スケールも <span class="arithmatex">\(1/a\)</span> 倍になる。</p>
+<div class="arithmatex">\[
+\frac{\lambda_D}{x} =  \frac{\lambda_D'}{ x'}
+\]</div>
+<p>数値計算的にはDebye長あたりのグリッド数が保存される。
+PICの計算条件として、理想的には空間方向でデバイ長を切ることが望ましい。
+だからPICの数値安定性を議論する上で都合が良い。</p>
+<h2 id="_8">スケール変換の適用範囲</h2>
+<h3 id="_9">プラズマパラメータ・集団性と個別性</h3>
+<p>デバイ球当たりの粒子数を表す無次元量</p>
+<div class="arithmatex">\[
+N_D = n \lambda_D^3 \propto n^{-1/2}
+\]</div>
+<p>プラズマパラメータは、プラズマが集団的な媒質として振る舞うか、それとも個々の粒子の衝突が支配的になるかを判定する指標である。
+スケール変換<span class="arithmatex">\(n \to a^2 n\)</span>に対して、プラズマパラメータは変化してしまう。</p>
+<div class="arithmatex">\[
+N_D \to \frac{N_D}{a}
+\]</div>
+<p>これは、スケール変換によってMaxwell–Vlasov方程式の数学的構造は保存される一方で、その適用条件は保存されないことを意味する。</p>
+<p>空間・時間スケールを小さくする側の変換（<span class="arithmatex">\(a&gt;1\)</span>）では密度が増加し、デバイ球内の粒子数が減少するため、粒子の離散性が顕在化する。
+この極限ではクーロン散乱などの二体衝突過程が無視できなくなり、Vlasov 近似そのものが破綻する方向に進む。</p>
+<p>衝突周波数の観点から、プラズマパラメータは</p>
+<div class="arithmatex">\[
+N_D \propto \frac{T^{3/2}}{n^{1/2}}
+\propto \frac{\omega_{pe}}{\nu_{\mathrm{collision}}}
+\]</div>
+<p>と解釈できる。したがって <span class="arithmatex">\(a\)</span> を大きくする変換は、「集団的電磁応答が支配的なレジーム」から「衝突による緩和が無視できないレジーム」へ系を押しやる操作に対応する。</p>
+<p>Vlasov系で仮定されている「コリジョンレス」とは、粒子間の<span class="arithmatex">\(r^{-2}\)</span>のクーロン場を直接扱わず、平均場としての電磁場に対する集団応答のみを記述するという近似である。
+すなわち、荷電粒子の点粒子性を捨て、電荷シートのような連続媒質として扱っている。デバイ球内の粒子数が減少すると、この平均場近似が成立しなくなり、点粒子性やクーロン散乱が顕在化する。</p>
+<!-- 
+Vlasov系で仮定されているコリジョンレスとは、プラズマを構成する荷電粒子の「点粒子性」を捨て、連続的な荷電シートや平均場に対する応答として粒子集団を眺めるということだ。だから基礎方程式レベルでは電荷の大きさが質量・電荷間の比率でしか効いてこない。
+デバイ球内部の粒子が減少することで、点粒子性・クーロン散乱の顕在に対応する。 -->
+
+<p>一方、密度を下げ、空間スケールを拡大する側の変換（<span class="arithmatex">\(a&lt;1\)</span>）では、デバイ球内の粒子数が増加し、集団場近似の精度は向上する。この方向では Vlasov 方程式の有効性はむしろ強化される。したがって、実験室スケールで成立するコリジョンレスプラズマの結果を、より希薄で大規模な宇宙プラズマへスケール変換して解釈することは、一定条件下では物理的に正当化される。</p>
+<h2 id="_10">近似の有効範囲と数値手法との関係</h2>
+<p>Maxwell–Vlasov 系のスケール変換不変性は、「無衝突・古典・連続体近似」が成立している範囲でのみ有効である。言い換えればMaxwell-Vlasov系で暗黙的に捨てられた物理スケールの顕在化がスケール変換を壊す。例えば、</p>
+<ul>
+<li>点粒子効果
+クーロン散乱、制動輻射、トムソン散乱など、粒子周りの <span class="arithmatex">\(r^{-2}\)</span> 電場構造が直接効く過程。</li>
+<li>量子効果
+電離、縮退、量子統計効果など、古典粒子近似が破綻する領域。</li>
+</ul>
+<p>PIC 法は、本質的にこの「平均場近似」に基づくコリジョンレス系の数値実装である。
+PIC における電磁場 <span class="arithmatex">\(E,B,j\)</span> は、有限体積 <span class="arithmatex">\(\delta V\)</span> と時間幅 <span class="arithmatex">\(\delta t\)</span> にわたって多数の超粒子が作る粗視化された平均場に対応している。</p>
+<p>さらに、境界条件や外部駆動は Vlasov 方程式のスケーリングに必ずしも従わない場合があり、実問題ではここがスケール相似性を破る要因になり得る。</p>
+<hr />
+<p>初稿アップロード: 2026 01 30</p>
   </div>
 </article>
                                 <div class="mx-auto flex flex-wrap h-16 w-full max-w-2xl items-center gap-2 px-4 md:px-0">
     
-    
     <a data-slot="button"
-        class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-secondary text-secondary-foreground hover:bg-secondary/80 h-8 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 ml-auto shadow-none"
-        href="/shad/01_non-lin-diff-analyticals.html">
-        <span class="max-[500px]:hidden">非線形拡散</span>
+        class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-secondary text-secondary-foreground hover:bg-secondary/80 h-8 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 shadow-none"
+        href="/shad/02juttner.html">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-            class="tabler-icon tabler-icon-arrow-right ">
+            class="tabler-icon tabler-icon-arrow-left ">
             <path d="M5 12l14 0"></path>
-            <path d="M13 18l6 -6"></path>
-            <path d="M13 6l6 6"></path>
+            <path d="M5 12l6 6"></path>
+            <path d="M5 12l6 -6"></path>
         </svg>
+        <span class="max-[500px]:hidden">Jüttner分布</span>
     </a>
+    
     
 </div>
                                 <dialog id="bottom-sidebar" onclick="onBottomSidebarDialogClick(event)" class="bg-transparent"
@@ -559,18 +776,94 @@ docs/
         
         
         
-        <a href="#commands"
+        <a href="#_1"
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
             data-active="false" data-depth="2">
-            Commands
+            コリジョンレスプラズマのスケール変換不変性について
         </a>
         
 
         
-        <a href="#project-layout"
+        <a href="#_2"
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
             data-active="false" data-depth="2">
-            Project layout
+            スケール変換不変性が適用できない場合
+        </a>
+        
+
+        
+        <a href="#maxwell-vlasov"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            Maxwell-Vlasov系のスケール変換
+        </a>
+        
+        
+        <a href="#_3"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            境界の処理
+        </a>
+        
+        
+
+        
+        <a href="#_4"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            粒子軌道に対するスケール変換の整合性
+        </a>
+        
+
+        
+        <a href="#_5"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            物理的な解釈
+        </a>
+        
+        
+        <a href="#_6"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            規格化された電磁場の振幅の不変性
+        </a>
+        
+        <a href="#_7"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            プラズマの密度と誘電応答
+        </a>
+        
+        <a href="#debye"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            Debye長とグリッド解像度
+        </a>
+        
+        
+
+        
+        <a href="#_8"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            スケール変換の適用範囲
+        </a>
+        
+        
+        <a href="#_9"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            プラズマパラメータ・集団性と個別性
+        </a>
+        
+        
+
+        
+        <a href="#_10"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            近似の有効範囲と数値手法との関係
         </a>
         
 
