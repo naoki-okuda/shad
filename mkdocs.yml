@@ -10,7 +10,7 @@ theme:
   pygments_style: # default styles 
         light: shadcn-light
         dark: github-dark
-  icon: heroicons:rocket-launch # use the shadcn svg if not defined
+  #icon: heroicons:rocket-launch # use the shadcn svg if not defined
   topbar_sections: true # NEW!
   katex_options: # optional
     macros: # example of macros
