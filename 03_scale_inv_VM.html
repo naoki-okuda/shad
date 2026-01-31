@@ -450,7 +450,7 @@
 <p>Maxwell-Vlasov系で記述されるコリジョンレスなプラズマはスケール変換不変性を持つことが知られている。二つの時空間スケールの異なる現象が適切な物理量の変換でつながる場合、それらを同一視できるという意味で、重要な操作である。</p>
 <p>例を挙げると、実験室のプラズマ現象を宇宙スケールの現象に再解釈するなどといったことが可能になる。
 あるいは、Particle-In-Cell法に代表されるプラズマのシミュレーション手法において、しばしば正規化単位系が使用される。そのような単位系を設定する強い動機としてコリジョンレスプラズマのスケール変換不変性が関わっている。</p>
-<p>本記事では、Maxwell-Vlasov系が満たす、スケール変換不変性を確かめてみる。加えて、電磁場が当該のスケール変換不変性を満たすときに質点の軌道もスケール不変になることを確認する。いくつかの物理的な解釈について言及する。</p>
+<p>本記事では、Maxwell-Vlasov系が満たす、スケール変換不変性を確かめてみる。加えて、電磁場が当該のスケール変換不変性を満たすときに質点の軌道もスケール不変になることを確認する。後半では、変換の物理的な解釈、適用範囲、正規化単位系について言及する。</p>
 <h2 id="_2">スケール変換不変性が適用できない場合</h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -675,8 +675,47 @@ Vlasov系で仮定されているコリジョンレスとは、プラズマを�
 <p>PIC 法は、本質的にこの「平均場近似」に基づくコリジョンレス系の数値実装である。
 PIC における電磁場 <span class="arithmatex">\(E,B,j\)</span> は、有限体積 <span class="arithmatex">\(\delta V\)</span> と時間幅 <span class="arithmatex">\(\delta t\)</span> にわたって多数の超粒子が作る粗視化された平均場に対応している。</p>
 <p>さらに、境界条件や外部駆動は Vlasov 方程式のスケーリングに必ずしも従わない場合があり、実問題ではここがスケール相似性を破る要因になり得る。</p>
+<h2 id="_11">プラズマに対する正規化単位系</h2>
+<p>スケール変換の議論から、時空間を含む物理量の組み合わせには、定数倍に対応する一つの自由度が残ることが分かる。
+この性質を利用して物理量を無次元化する枠組みが、いわゆる正規化単位系（normalized units）であり、プラズマ数値計算では標準的に用いられている。</p>
+<h3 id="_12">電子密度を基準にした正規化</h3>
+<p>基準となる電子数密度 <span class="arithmatex">\(n_{e,0}\)</span> を用いると、例えば次のような正規化が定義できる。</p>
+<div class="arithmatex">\[
+\begin{align*}
+\bar{n}  &amp;= \frac{n}{n_{e,0}}\
+\omega_0 &amp;= \sqrt{\frac{4\pi n_{e,0} e^2}{ m_e}}\
+\bar{t} &amp;= t \omega_0\
+\bar{\omega}_p &amp;= 1\
+\bar{x} &amp;= \frac{x \omega_0}{c}\
+\bar{p} &amp;= \frac{p}{m_e c}\
+\bar{E} &amp;= \frac{e E}{m_e c \omega_0}\
+\bar{B} &amp;= \frac{e B}{m_e c \omega_0}
+\end{align*}
+\]</div>
+<p>このとき <span class="arithmatex">\(n_{e,0}\)</span> は、必ずしも物理的に固定された密度である必要はない。
+スケール変換に対応する自由度が残っているため、無次元化された解から実際の物理系への復元には定数倍の不定性が存在する。</p>
+<h3 id="_13">外部周波数を基準にした正規化</h3>
+<p>一方で、系に特徴的な外部周波数 <span class="arithmatex">\(\omega_L\)</span>（例えばレーザー周波数）が存在する場合には、次のような正規化も自然である。</p>
+<div class="arithmatex">\[
+\begin{align*}
+\bar{t} &amp;= t \omega_L\
+\bar{\omega} &amp;= \frac{\omega}{\omega_L}\
+\bar{x} &amp;= \frac{x \omega_L}{c}\
+\bar{n} &amp;= \frac{n}{n_c} = \frac{4\pi e^2 n}{m_e \omega_L^2}\
+\bar{p} &amp;= \frac{p}{m_e c}\
+\bar{E} &amp;= \frac{e E}{m_e c \omega_L}\
+\bar{B} &amp;= \frac{e B}{m_e c \omega_L}
+\end{align*}
+\]</div>
+<p>ここでは、プラズマ周波数 <span class="arithmatex">\(\omega_p\)</span> が <span class="arithmatex">\(\omega_L\)</span> に一致する密度</p>
+<div class="arithmatex">\[
+n_c = \frac{m_e \omega_L^2}{4\pi e^2}
+\]</div>
+<p>を用いて密度を正規化している。
+<span class="arithmatex">\(\omega_L\)</span> が電磁波の角周波数である場合、これは臨界密度に対応する。</p>
 <hr />
-<p>初稿アップロード: 2026 01 30</p>
+<p>初稿アップロード: 2026 01 30
+正規化単位系の記述を追加 : 2026 01 31</p>
   </div>
 </article>
                                 <div class="mx-auto flex flex-wrap h-16 w-full max-w-2xl items-center gap-2 px-4 md:px-0">
@@ -865,6 +904,28 @@ PIC における電磁場 <span class="arithmatex">\(E,B,j\)</span> は、有限
             data-active="false" data-depth="2">
             近似の有効範囲と数値手法との関係
         </a>
+        
+
+        
+        <a href="#_11"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            プラズマに対する正規化単位系
+        </a>
+        
+        
+        <a href="#_12"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            電子密度を基準にした正規化
+        </a>
+        
+        <a href="#_13"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            外部周波数を基準にした正規化
+        </a>
+        
         
 
         
