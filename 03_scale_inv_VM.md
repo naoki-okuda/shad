@@ -351,14 +351,14 @@ PIC における電磁場 $E,B,j$ は、有限体積 $\delta V$ と時間幅 $\d
 
 $$
 \begin{align*}
-\bar{n}  &= \frac{n}{n_{e,0}}\
-\omega_0 &= \sqrt{\frac{4\pi n_{e,0} e^2}{ m_e}}\
-\bar{t} &= t \omega_0\
-\bar{\omega}_p &= 1\
-\bar{x} &= \frac{x \omega_0}{c}\
-\bar{p} &= \frac{p}{m_e c}\
-\bar{E} &= \frac{e E}{m_e c \omega_0}\
-\bar{B} &= \frac{e B}{m_e c \omega_0}
+  \bar{n}  &= \frac{n}{n_{e,0}}\\
+  \omega_0 &= \sqrt{\frac{4\pi n_{e,0} e^2}{ m_e}}\\
+  \bar{t} &= t \omega_0\\
+  \bar{\omega}_p &= 1\\
+\bar{x} &= \frac{x \omega_0}{c}\\
+\bar{p} &= \frac{p}{m_e c}\\
+\bar{E} &= \frac{e E}{m_e c \omega_0}\\
+\bar{B} &= \frac{e B}{m_e c \omega_0}\\
 \end{align*}
 $$
 
@@ -373,13 +373,13 @@ $$
 
 $$
 \begin{align*}
-\bar{t} &= t \omega_L\
-\bar{\omega} &= \frac{\omega}{\omega_L}\
-\bar{x} &= \frac{x \omega_L}{c}\
-\bar{n} &= \frac{n}{n_c} = \frac{4\pi e^2 n}{m_e \omega_L^2}\
-\bar{p} &= \frac{p}{m_e c}\
-\bar{E} &= \frac{e E}{m_e c \omega_L}\
-\bar{B} &= \frac{e B}{m_e c \omega_L}
+\bar{t} &= t \omega_L\\
+\bar{\omega} &= \frac{\omega}{\omega_L}\\
+\bar{x} &= \frac{x \omega_L}{c}\\
+\bar{n} &= \frac{n}{n_c} = \frac{4\pi e^2 n}{m_e \omega_L^2}\\
+\bar{p} &= \frac{p}{m_e c}\\
+\bar{E} &= \frac{e E}{m_e c \omega_L}\\
+\bar{B} &= \frac{e B}{m_e c \omega_L}\\
 \end{align*}
 $$
 
