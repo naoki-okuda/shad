@@ -6,7 +6,7 @@ description: Hub page for physics documents
 keywords: physics, plasmas, theory, mkdocs,shadcn
 author: naoki_okuda
 #image: https://raw.githubusercontent.com/asiffer/mkdocs-shadcn/refs/heads/master/.github/assets/logo.svg
-order: 5
+order: 0
 sidebar_title: Home
 show_datetime: true
 # external_links:
