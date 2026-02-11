@@ -1,17 +1,23 @@
-# Welcome to MkDocs
+---
+title: Home
+#summary: Hub page
+new: false
+description: Hub page for physics documents 
+keywords: physics, plasmas, theory, mkdocs,shadcn
+author: naoki_okuda
+#image: https://raw.githubusercontent.com/asiffer/mkdocs-shadcn/refs/heads/master/.github/assets/logo.svg
+order: 5
+sidebar_title: Home
+show_datetime: true
+# external_links:
+#   Qiita - cubic_unit: https://qiita.com/cubic_unit
+extra_css:
+  - css/custom-style.css
+extra_javascript:
+  - js/custom-script.js
+---
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
 
-## Commands
+## link
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
-
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+[Qiita - cubic_unit](https://qiita.com/cubic_unit)
