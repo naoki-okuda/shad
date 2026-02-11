@@ -301,6 +301,25 @@
                 
                 <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
     <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/index.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        Home
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
         data-size="default" href="/shad/01_non-lin-diff-analyticals.html"
         class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
 
@@ -363,25 +382,6 @@
 
         
         kinetics PROBLEM
-        
-
-        
-
-        
-
-        
-    </a>
-</li>
-                
-                
-                
-                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
-    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
-        data-size="default" href="/shad/index.html"
-        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
-
-        
-        Home
         
 
         
@@ -469,8 +469,8 @@
 <h3 id="_1">クーロン散乱による分布関数摂動のダンピング</h3>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>英語版Lifshitz Pitaefsky Physical Kineticsの流れを追いながら、私の理解度に合わせて行間を埋めたノートです。</p>
-<p>Landau減衰でプラズマ波（静電場と電子密度揺動）がダンプされた後にも分布関数レベルでは揺動が残ります。このような揺動がクーロン散乱で減衰する時間スケールについて論じる問題です。</p>
+<p>英語版Lifshitz Pitaevskii Physical Kineticsの流れを追いながら、私の理解度に合わせて行間を埋めたノートです。</p>
+<p>Landau減衰でプラズマ波（静電場と電子密度揺動）がダンプされた後にも分布関数レベルでは揺動が残ります。このような揺動がクーロン散乱で減衰する時間スケールについて論じる設問です。</p>
 </div>
 <p>Section 34において示したように、
 波数<span class="arithmatex">\(k\)</span>の電子密度揺動がランダウ減衰により除かれたあと、その分布関数の摂動は<span class="arithmatex">\(e^{i k\cdot vt }\)</span>(34.16)として振動し続ける。このような振動が時刻<span class="arithmatex">\(t \gg 1/k\bar{v}\)</span>において、クーロン衝突により減衰されることを確認せよ。<span class="arithmatex">\(\bar{v}\)</span>は分布の代表的な速さを表している。</p>
@@ -647,6 +647,12 @@ I'_{3,3}(v)
                 <div class="text-muted-foreground text-sm font-medium">Menu</div>
                 <div class="flex flex-col gap-3">
                     
+                    <a class="text-2xl font-medium" href="index.html">
+                        
+                        Home
+                        
+                    </a>
+                    
                     <a class="text-2xl font-medium" href="01_non-lin-diff-analyticals.html">
                         
                         非線形拡散
@@ -668,12 +674,6 @@ I'_{3,3}(v)
                     <a class="text-2xl font-medium" href="LL_4_Collisions_in_Plasmas.html">
                         
                         kinetics PROBLEM
-                        
-                    </a>
-                    
-                    <a class="text-2xl font-medium" href="index.html">
-                        
-                        Home
                         
                     </a>
                     
