@@ -5,6 +5,7 @@ site_url: https://naoki-okuda.github.io/shad/
 
 theme:
   name: shadcn
+  custom_dir: overrides # added to overrite templates/seo.html
   show_title: true # show the title in the top bar
   show_stargazers: true # show the stargazers in the top bar
   pygments_style: # default styles 
@@ -52,9 +53,9 @@ nav:
   - Jüttner分布 : 02juttner.md #相対論的な理想気体の分布関数
   - Maxwell-Vlasov系のスケール変換 : 03_scale_inv_VM.md
   - kinetics PROBLEM : LL_4_Collisions_in_Plasmas.md
-  - biriv.f : 04_bitriv_f.md
-  - F77_style : 05_F77_style.md
-  - 変数 : 06_Variables.md
+#  - biriv.f : 04_bitriv_f.md
+#  - F77_style : 05_F77_style.md
+#  - 変数 : 06_Variables.md
 
 
 

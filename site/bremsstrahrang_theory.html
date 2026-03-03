@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        // for search plugin notably
+        const base_url = "https://naoki-okuda.github.io/shad/";
+    </script>
+    <script>
+    const darkTheme = window.matchMedia("(prefers-color-scheme: dark)");
+    darkTheme.onchange = (e) => {
+        if (e.matches) {
+            document.documentElement.classList.add("dark")
+            localStorage.theme = 'dark';
+        } else {
+            document.documentElement.classList.remove("dark")
+            localStorage.removeItem("theme")
+        }
+    };
+
+    // On page load. Priotiry to lcaolStorage
+    if (localStorage.theme === "dark") {
+        document.documentElement.classList.add("dark")
+    } else if (localStorage.theme === "light") {
+        document.documentElement.classList.remove("dark")
+    } else if (darkTheme.matches) {
+        document.documentElement.classList.add("dark")
+    } else {
+        document.documentElement.classList.remove("dark")
+    }
+
+    // set the layout based on localStorage
+    document.documentElement.classList.add(localStorage.getItem("html-layout") || "layout-fixed");
+</script>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bremsstrahrang theory - Cube</title>
+    
+
+
+<title>Bremsstrahrang theory</title>
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://naoki-okuda.github.io/shad/bremsstrahrang_theory.html">
+
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+
+
+<meta property="og:title" content="Bremsstrahrang theory">
+
+
+
+
+
+<meta property="og:url" content="https://naoki-okuda.github.io/shad/bremsstrahrang_theory.html">
+
+
+
+
+
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+
+
+<meta name="twitter:title" content="Bremsstrahrang theory">
+
+
+
+
+
+
+<!-- JSON-LD Structured Data -->
+
+
+
+    <link rel="icon" href="img/favicon.ico">
+
+    <link href="css/base.css" rel="stylesheet">
+    <link href="css/geist.css" rel="stylesheet">
+
+    
+    
+
+<link id="pygments-light" rel="stylesheet"
+    href="css/pygments/shadcn-light.css">
+<link id="pygments-dark" rel="stylesheet"
+    href="css/pygments/github-dark.css"
+    media="(prefers-color-scheme: dark)">
+
+
+    
+    <link href="extra.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" rel="stylesheet">
+
+    
+
+    <script src="js/callbacks.js"></script>
+
+    
+    <!-- katex -->
+<link rel="stylesheet" href="css/katex.min.css">
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="js/katex.min.js"></script>
+<!-- To automatically render math in text elements, include the auto-render extension: -->
+<script defer src="js/auto-render.min.js"
+    onload='renderMathInElement(document.body, {"macros": {"\\RR": "\\mathbb{R}", "\\dx": "\\mathrm{d}x"}});'></script>
+    
+
+    
+
+    
+
+</head>
+
+<body
+    class="text-foreground group/body overscroll-none font-sans antialiased [--footer-height:calc(var(--spacing)*14)] [--header-height:calc(var(--spacing)*14)] xl:[--footer-height:calc(var(--spacing)*24)] theme-default">
+    <div id="inner-body" class="bg-background relative z-10 flex min-h-svh flex-col">
+        <header class="bg-background sticky top-0 z-50 w-full" view-transition-name="header">
+    <div class="container-wrapper 3xl:fixed:px-0 px-6">
+        <div class="3xl:fixed:container flex h-(--header-height) items-center gap-2 **:data-[slot=separator]:!h-4">
+            <button id="menu-button" data-slot="popover-trigger" onclick="onMobileMenuButtonClick(event)"
+                class="group whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:text-accent-foreground px-4 py-2 has-[&gt;svg]:px-3 extend-touch-target h-8 touch-manipulation items-center justify-start gap-2.5 !p-0 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 active:bg-transparent dark:hover:bg-transparent flex lg:hidden"
+                type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«Rmplb»"
+                data-state="closed">
+                <div class="relative flex h-8 w-4 items-center justify-center">
+                    <div class="relative size-4">
+                        <!-- 16px x 16px -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="0" x2="16" y1="5" y2="5"
+                                class="group-data-[state=open]:translate-y-[2.25px] group-data-[state=open]:-translate-x-[2.25px] group-data-[state=open]:rotate-45 transition-all duration-300 origin-center" />
+                            <line x1="0" x2="16" y1="11" y2="11"
+                                class="group-data-[state=open]:-translate-y-[2.25px] group-data-[state=open]:-translate-x-[2.25px] group-data-[state=open]:-rotate-45 transition-all duration-300 origin-center" />
+                        </svg>
+                    </div>
+
+                    <span class="sr-only">Toggle Menu</span>
+                </div>
+                <span class="flex h-8 items-center text-lg leading-none font-medium">Menu</span>
+            </button>
+            <a data-slot="button"
+                class="items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-5 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 hidden h-8 lg:flex"
+                href="https://naoki-okuda.github.io/shad/">
+                <span class="size-8 flex flex-row justify-center items-center">
+                    
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"
+    class="size-5">
+    <rect width="256" height="256" fill="none"></rect>
+    <line x1="208" y1="128" x2="128" y2="208" fill="none" stroke="currentColor" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="32"></line>
+    <line x1="192" y1="40" x2="40" y2="192" fill="none" stroke="currentColor" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="32"></line>
+</svg>
+
+
+                </span>
+
+                
+                <h1 class="pr-2">Cube</h1>
+                
+            </a>
+            
+            <nav class="items-center gap-0.5 hidden lg:flex">
+    
+</nav>
+            
+            <div class="ml-auto flex items-center gap-2 md:flex-1 md:justify-end">
+                <div class="hidden w-full flex-1 md:flex md:w-auto md:flex-none">
+                    <button data-slot="dialog-trigger" onclick="onSearchBarClick(event)"
+    class="inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-secondary/80 px-4 py-2 has-[&gt;svg]:px-3 bg-surface text-surface-foreground/60 dark:bg-card relative h-8 w-full justify-start pl-2.5 font-normal shadow-none sm:pr-12 md:w-40 lg:w-56 xl:w-64"
+    type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«R66plb»" data-state="closed">
+    <span class="text-muted-foreground hidden lg:inline-flex">Search documentation...</span>
+    <span class="text-muted-foreground inline-flex lg:hidden">Search...</span>
+    <div class="absolute top-1.5 right-1.5 hidden gap-1 sm:flex">
+        <kbd
+            class="bg-background text-muted-foreground pointer-events-none flex h-5 items-center justify-center gap-1 rounded border px-1 font-sans text-[0.7rem] font-medium select-none [&amp;_svg:not([class*='size-'])]:size-3">Ctrl</kbd><kbd
+            class="bg-background text-muted-foreground pointer-events-none flex h-5 items-center justify-center gap-1 rounded border px-1 font-sans text-[0.7rem] font-medium select-none [&amp;_svg:not([class*='size-'])]:size-3 aspect-square">K</kbd>
+    </div>
+</button>
+<dialog id="search-dialog" onclick="onSearchDialogClick(event)"
+    class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background rounded-lg shadow-lg border overflow-hidden p-0">
+    <div class="w-lg gap-4">
+        <div class="flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground">
+            <div data-slot="command-input-wrapper" class="flex h-9 items-center gap-2 border-b px-3"><svg
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-search size-4 shrink-0 opacity-50">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                </svg>
+                <input data-slot="command-input"
+                    class="placeholder:text-muted-foreground flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
+                    placeholder="Search documentation..." cmdk-input="" autocomplete="off" autocorrect="off"
+                    spellcheck="false" aria-autocomplete="list" role="combobox" aria-expanded="true"
+                    aria-controls="radix-«r1t6»" aria-labelledby="radix-«r1t7»" id="radix-«r1t8»" type="text" value=""
+                    aria-activedescendant="radix-«r1th»" oninput="onInputHandler(event)">
+            </div>
+        </div>
+        <div id="mkdocs-search-results" class="max-h-[300px] overflow-y-auto overflow-x-hidden">
+            <!-- search results go there -->
+        </div>
+    </div>
+</dialog>
+<script>
+    document.removeEventListener("keydown", searchShortcutHandler);
+    document.addEventListener("keydown", searchShortcutHandler);
+</script>
+                </div>
+                <div data-orientation="vertical" role="none" data-slot="separator"
+                    class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px ml-2 hidden lg:block">
+                </div>
+                <a target="_blank" rel="noreferrer" data-slot="button"
+                    class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 h-8 shadow-none"
+                    href="None">
+                    <svg viewBox="0 0 438.549 438.549">
+                        <path fill="currentColor"
+                            d="M409.132 114.573c-19.608-33.596-46.205-60.194-79.798-79.8-33.598-19.607-70.277-29.408-110.063-29.408-39.781 0-76.472 9.804-110.063 29.408-33.596 19.605-60.192 46.204-79.8 79.8C9.803 148.168 0 184.854 0 224.63c0 47.78 13.94 90.745 41.827 128.906 27.884 38.164 63.906 64.572 108.063 79.227 5.14.954 8.945.283 11.419-1.996 2.475-2.282 3.711-5.14 3.711-8.562 0-.571-.049-5.708-.144-15.417a2549.81 2549.81 0 01-.144-25.406l-6.567 1.136c-4.187.767-9.469 1.092-15.846 1-6.374-.089-12.991-.757-19.842-1.999-6.854-1.231-13.229-4.086-19.13-8.559-5.898-4.473-10.085-10.328-12.56-17.556l-2.855-6.57c-1.903-4.374-4.899-9.233-8.992-14.559-4.093-5.331-8.232-8.945-12.419-10.848l-1.999-1.431c-1.332-.951-2.568-2.098-3.711-3.429-1.142-1.331-1.997-2.663-2.568-3.997-.572-1.335-.098-2.43 1.427-3.289 1.525-.859 4.281-1.276 8.28-1.276l5.708.853c3.807.763 8.516 3.042 14.133 6.851 5.614 3.806 10.229 8.754 13.846 14.842 4.38 7.806 9.657 13.754 15.846 17.847 6.184 4.093 12.419 6.136 18.699 6.136 6.28 0 11.704-.476 16.274-1.423 4.565-.952 8.848-2.383 12.847-4.285 1.713-12.758 6.377-22.559 13.988-29.41-10.848-1.14-20.601-2.857-29.264-5.14-8.658-2.286-17.605-5.996-26.835-11.14-9.235-5.137-16.896-11.516-22.985-19.126-6.09-7.614-11.088-17.61-14.987-29.979-3.901-12.374-5.852-26.648-5.852-42.826 0-23.035 7.52-42.637 22.557-58.817-7.044-17.318-6.379-36.732 1.997-58.24 5.52-1.715 13.706-.428 24.554 3.853 10.85 4.283 18.794 7.952 23.84 10.994 5.046 3.041 9.089 5.618 12.135 7.708 17.705-4.947 35.976-7.421 54.818-7.421s37.117 2.474 54.823 7.421l10.849-6.849c7.419-4.57 16.18-8.758 26.262-12.565 10.088-3.805 17.802-4.853 23.134-3.138 8.562 21.509 9.325 40.922 2.279 58.24 15.036 16.18 22.559 35.787 22.559 58.817 0 16.178-1.958 30.497-5.853 42.966-3.9 12.471-8.941 22.457-15.125 29.979-6.191 7.521-13.901 13.85-23.131 18.986-9.232 5.14-18.182 8.85-26.84 11.136-8.662 2.286-18.415 4.004-29.263 5.146 9.894 8.562 14.842 22.077 14.842 40.539v60.237c0 3.422 1.19 6.279 3.572 8.562 2.379 2.279 6.136 2.95 11.276 1.995 44.163-14.653 80.185-41.062 108.068-79.226 27.88-38.161 41.825-81.126 41.825-128.906-.01-39.771-9.818-76.454-29.414-110.049z">
+                        </path>
+                    </svg>
+                    
+                    <span id="stargazers" class="text-muted-foreground w-8 text-xs tabular-nums" onload="test()">
+                    </span>
+                    
+                </a>
+                <div data-orientation="vertical" role="none" data-slot="separator"
+                    class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px 3xl:flex hidden">
+                </div>
+                <button data-slot="button"
+                    class="items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 size-8 3xl:flex hidden"
+                    title="Toggle layout" onclick="toggleLayout(event)">
+                    <span class="sr-only">Toggle layout</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-gallery-horizontal">
+                        <path d="M2 3v18"></path>
+                        <rect width="12" height="18" x="6" y="3" rx="2"></rect>
+                        <path d="M22 3v18"></path>
+                    </svg>
+                </button>
+                <div data-orientation="vertical" role="none" data-slot="separator"
+                    class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px">
+                </div>
+                <button data-slot="button"
+                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 group/toggle extend-touch-target size-8"
+                    title="Toggle theme" onclick="onThemeSwitch(event)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="size-4.5">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                        <path d="M12 3l0 18"></path>
+                        <path d="M12 9l4.65 -4.65"></path>
+                        <path d="M12 14.3l7.37 -7.37"></path>
+                        <path d="M12 19.6l8.85 -8.85"></path>
+                    </svg>
+                    <span class="sr-only">Toggle theme</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+        <main class="flex flex-1 flex-col">
+            <div class="container-wrapper flex flex-1 flex-col px-2">
+                <div data-slot="sidebar-wrapper" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;"
+                    class="group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex w-full 3xl:fixed:container 3xl:fixed:px-3 min-h-min flex-1 items-start px-0 [--sidebar-width:220px] [--top-spacing:0] lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)] lg:[--sidebar-width:240px] lg:[--top-spacing:calc(var(--spacing)*4)]">
+                    <div data-slot="sidebar"
+                        class="text-sidebar-foreground w-(--sidebar-width) flex-col sticky top-[calc(var(--header-height)+1px)] z-30 hidden h-[calc(100svh-var(--header-height)-var(--footer-height))] bg-transparent lg:flex">
+                        <div data-slot="sidebar-content" data-sidebar="content"
+                            class="flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden no-scrollbar px-2 pb-12">
+                            <div class="h-(--top-spacing) shrink-0"></div>
+                            <div view-transition-name="sidebar" data-slot="sidebar-group" data-sidebar="group"
+    class="relative flex w-full min-w-0 flex-col p-2 no-scrollbar">
+    
+
+    
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    <div data-slot="sidebar-group" data-sidebar="group" class="relative flex w-full min-w-0 flex-col p-2">
+        <div data-slot="sidebar-group-content" data-sidebar="group-content" class="w-full text-sm">
+            <ul data-slot="sidebar-menu" data-sidebar="menu" class="flex w-full min-w-0 flex-col gap-0.5">
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/index.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        Home
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/01_non-lin-diff-analyticals.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        非線形拡散
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/02juttner.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        Jüttner分布
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/03_scale_inv_VM.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        Maxwell-Vlasov系のスケール変換
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/LL_4_Collisions_in_Plasmas.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        kinetics PROBLEM
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+
+    
+
+
+    
+</div>
+                        </div>
+                    </div>
+                    <div class="h-full w-full">
+                        <div data-slot="docs" class="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full">
+                            <div class="flex min-w-0 flex-1 flex-col">
+                                <div class="h-(--top-spacing) shrink-0"></div>
+                                <article class=" w-full" view-transition-name="page">
+    <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-2">
+            <div id="page-header" class="flex items-start justify-between">
+
+                <h1 class="scroll-m-20 text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl">
+                    Bremsstrahrang theory
+                </h1>
+
+                <div class="flex items-center gap-2 pt-1.5">
+                    
+                    
+                </div>
+            </div>
+            
+        </div>
+        <div class="flex justify-end items-center">
+            
+            
+        </div>
+
+    </div>
+    <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
+        <p>制動輻射と熱制動吸収についてまとめる。</p>
+<h3 id="references">References</h3>
+<p>[1] Gaunt, J. A. (1930). Continuous Absorption. <em>Philosophical Transactions of the Royal Society of London. Series A</em>, 229, 163–204.</p>
+<p>[2] Novikov &amp; Throne</p>
+<h1 id="_1">熱制動輻射</h1>
+<ul>
+<li>基本的にe-i衝突による輻射がドミナント。</li>
+<li>e-e衝突による輻射はT&gt;数10keVで無視できなくなってくる。これは相対論的な効果。</li>
+<li>retardation effects</li>
+</ul>
+<p>Thomson cross section
+<div class="highlight"><pre><span></span><code>  \sigma_t = 8\frac{\pi}{3}  r_e^2 = 6.652 \times 10^{-29} \, \rm{m^2}
+</code></pre></div>
+The Rydberg energy 
+<div class="highlight"><pre><span></span><code>R_y = \frac{m_e e^4}{8 \epsilon_0^2 h^2} = \frac{\alpha^2  m_e c^2}{2} \simeq 13.6 \, \rm{eV}
+</code></pre></div></p>
+<ul>
+<li>distribution function is normalized <span class="arithmatex">\(\int d^3 \bm{p} f(\bm{p} )= 1\)</span></li>
+<li><span class="arithmatex">\(\delta_{1,2}\)</span>は粒子ラベルに関するクロネッカーデルタ。同種を数える時、重複に由来する半分のファクタをつける。
+<div class="highlight"><pre><span></span><code>R = \frac{n_1 n_2}{1 +\delta_{12}} \int d^3 \bm{p_1} d^3 \bm{p_2} f(\bm{p_1} ) f(\bm{p_2})  \left[ (\bm{v_1 - v_2} )^2   - \frac{v_1 \times v_2}{c^2} \right] \frac{d \sigma}{d\nu}
+</code></pre></div></li>
+</ul>
+<h1 id="the-non-relaivistic-e-i-collision">The non-relaivistic e-i collision</h1>
+<ul>
+<li>The classical model by Kramers</li>
+<li>More accurate model includes</li>
+<li>the Born aproximation</li>
+<li>the Elwert's correction for low energy.</li>
+<li>The most accurate one is by Sommerfeld</li>
+</ul>
+<p><div class="highlight"><pre><span></span><code> A = \frac{ 2 \pi \sigma_t}{\alpha} = \frac{2}{3}\frac{h e^2}{\epsilon_0 m_e ^2 c^3} = 5.728 \times 10^{-26} \, \rm{m^2}
+</code></pre></div>
+the Kramers断面積
+<div class="highlight"><pre><span></span><code> \frac{d \sigma _ k}{d \nu} = \frac{A}{\nu \sqrt{3} \pi} \eta_0^2 
+</code></pre></div></p>
+<p>the Born 近似
+<div class="highlight"><pre><span></span><code>  \frac{d \sigma_b}{d \nu} = \frac{A}{\nu \pi^2} \eta_0^2 \ln{ \left( \frac{\eta_f + \eta_0}{ \eta_f - \eta_0 } \right)}
+</code></pre></div>
+ the Elwert 較正
+ <div class="highlight"><pre><span></span><code> \frac{d \sigma_e}{d\nu} = \frac{A}{\nu \pi^2} \eta_0\eta_f 
+ \frac{1 - e^{-2 \pi \eta_0}}{ 1 - e^{2 \pi \eta_f}}
+ \ln\left( \frac{\eta_f + \eta_0}{ \eta_f - \eta_0} \right)
+</code></pre></div></p>
+<p>the Sommerfeld 非相対論
+ <div class="highlight"><pre><span></span><code>\frac{d \sigma_s}{ d\nu} = \frac{A}{\nu} \frac{\eta_0^2}{(e^{2\pi \eta_0}-1)(1 - e^{-2\pi \eta_f})} 
+x\frac{d}{dx} |F(x)|^2
+</code></pre></div></p>
+<ul>
+<li><span class="arithmatex">\(E_0\)</span>は電子のエネルギー</li>
+<li><span class="arithmatex">\(E_f\)</span>はでていく（コリジョン後の）電子のエネルギー</li>
+<li><span class="arithmatex">\(h \nu \in [0,E_0]\)</span>は輻射される光子のエネルギー
+<div class="highlight"><pre><span></span><code>E_f = E_0 - h\nu\\
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>\eta_{0,f} = \sqrt{\frac{Z^2 R_y}{E_{0,f}}}\\
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>v_{0,f} = \sqrt{ \frac{2E_{0,f}}{m_e} }\\
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>x = \frac{4 \eta_0 \eta_f}{ (\eta_0 - \eta_f)^2}
+</code></pre></div>
+超幾何関数
+<div class="highlight"><pre><span></span><code>F(x) = _2F_1(i \eta_0, i\eta_f ; 1;  -x)
+</code></pre></div></li>
+</ul>
+<p>公式
+<div class="highlight"><pre><span></span><code> x \frac{d}{dx} |F(x)|^2 
+  = \eta_0 \eta_f \frac{|F^2 ( -i \eta_0+1, -i \eta_f; 1 ; -x) - F^2(-i \eta_f +1, -i\eta_0, 1 ; -x)|}{ \eta_f - \eta_0}
+</code></pre></div></p>
+<p>電子のエネルギー空間での規格化された分布関数
+<div class="highlight"><pre><span></span><code>\int_0 ^ \infty dE_0 f(E_0) = 1
+</code></pre></div></p>
+<p>周波数ごとの全パワーは次のように与えられる。</p>
+<h1 id="22-e-i">2.2　相対論的e-i散乱による制動輻射</h1>
+<ul>
+<li>普通は、ベーテ-ハイトラー(BH)+ボルン近似</li>
+<li>BHは高エネルギー側で有効になるが、低エネルギー電子・低エネルギー光子でよくなくなる。なぜなら、</li>
+</ul>
+<h1 id="23-e-e">2.3 非相対論e-e</h1>
+<h1 id="_2">熱制動吸収係数</h1>
+<ul>
+<li>熱制動輻射と黒体輻射スペクトルの比によって与える。(根拠はキルヒホッフの法則。)</li>
+<li><span class="arithmatex">\(B_{\nu}(T)\)</span> : 黒体輻射強度スペクトル <span class="arithmatex">\(\rm{[B] = [Jm^{-2}s^{-1}/Hz]}\)</span></li>
+<li>g_ff : gaunt factor</li>
+<li><span class="arithmatex">\(r_{cmp}\)</span>: 電子コンプトン波長</li>
+<li>$h\nu/m_e c^2  = r_{cmp} (\nu/c) $</li>
+<li><span class="arithmatex">\(\alpha = e^2/\hbar c = 2\pi r_e/r_{cmp}\)</span> </li>
+<li><span class="arithmatex">\(\alpha r_{cmp} = e^2/(\hbar c) * h/m_e c = 2\pi e^2/m_e c^2=2\pi r_e\)</span></li>
+</ul>
+<p>$$
+\begin{align*}
+    \alpha_{\nu}^{ff} &amp;= 
+    \frac{4}{3}\sqrt{\frac{2\pi}{3}} 
+     \frac{e^6 n_e n_i Z_i^2}{m_e^{3/2} h c \sqrt{T} \nu^3} 
+     (1-e^{-h\nu/T}) g_{ff} \
+    &amp;= 
+     \frac{4}{3}\sqrt{\frac{2\pi}{3}} 
+    \frac{(\alpha/2\pi)^3 h^2 n_e^2 Z_i}{m_e^{2}c^2 \sqrt{T/m_ec^2} (\nu/c)^3} 
+    (1-e^{-h\nu/T}) g_{ff} \
+    &amp;=
+     \frac{4}{3}\sqrt{\frac{2\pi}{3}} 
+    \frac{(\alpha/2\pi)^3 r_{cmp}^2 n_e^2 Z_i}{\sqrt{T/m_ec^2} (\nu/c)^3} 
+    (1-e^{-h\nu/T}) g_{ff} \
+    &amp;= 
+     \frac{4}{3}\sqrt{\frac{2\pi}{3}} 
+    \frac{(\alpha/2\pi)^3 r_{cmp}^5 n_e^2 Z_i}{\sqrt{T/m_ec^2} (h \nu/m_e c^2)^3} 
+    (1-e^{-h\nu/T}) g_{ff} \
+    &amp;= 
+     \frac{4}{3}\sqrt{\frac{2\pi}{3}} 
+    \frac{r_e^3 r_{cmp}^2 n_e^2 Z_i}{\sqrt{T/m_ec^2} (h \nu/m_e c^2)^3} 
+    (1-e^{-h\nu/T}) g_{ff}\</p>
+<p>\end{align*}
+$$</p>
+<div class="arithmatex">\[
+    \alpha_{\nu}^{ff}*{1\mu m}=
+     \frac{4\pi^2 }{3}\sqrt{\frac{2\pi}{3}} 
+    \frac{(r_e/1\mu m) (r_{cmp}/1\mu m)^2 (n_e/n_c)^2 Z_i}{\sqrt{T/m_ec^2} (h \nu/m_e c^2)^3} 
+    (1-e^{-h\nu/T}) g_{ff}
+\]</div>
+<h1 id="gaunt-factor">Gaunt factor ガウント因子,ゴーント因子？</h1>
+<ul>
+<li>プラズマの自由–自由放射（熱制動）で最も基本の放射係数は以下で与えられる。</li>
+<li>これは古典近似（クーロン衝突の加速運動の放射）に基づいており、量子力学的な散乱断面積とズレる。</li>
+<li>ズレを補正する因子が Gaunt 因子 (g_{ff})と呼ばれる。</li>
+<li>John Arthur Gauntに因む。</li>
+</ul>
+<blockquote>
+<p>電離ガス中の制動放射（自由-自由放射）において、古典力学に基づくモデル計算に対する補正係数をいう。非常に大雑把な近似計算と比較すると陽イオンのそばを電子が通過するときの衝突係数bの実際的な最大値と最小値をbmaxとbminとした場合、𝑔 =(√3/𝜋) ×log𝑒⁡(𝑏max/𝑏min)に対応すると解釈することもできるが、より正確には量子力学的効果も影響する補正係数である。個々の電子に対するゴーント因子は入射電子の速度にも依存するので、熱的電離ガスに対する計算では熱運動速度で平均されたゴーント因子を用いる必要がある。いずれの場合も、概ね1に近い値をとり、電波領域では1程度の値となる。
+https://astro-dic.jp/gaunt-factor/</p>
+<p>The Gaunt factor (or Kramers–Gaunt factor) is a correction factor that accounts for the effect of quantum mechanics on an object's continuous x-ray absorption or emission spectrum. In cases where classical physics provides a close approximation to the true spectrum, the Gaunt factor is close to 1. When quantum physics becomes important, it becomes bigger or smaller than 1.[1]\
+ The Gaunt factor was named after the physicist John Arthur Gaunt, based on his work on the quantum mechanics of continuous absorption.[2] Gaunt used a 'g' function in his 1930 work, which Subrahmanyan Chandrasekhar named the 'Gaunt factor' in 1939.[3] It is sometimes named the Kramers-Gaunt factor as Gaunt incorporated the work of Hendrik Anthony Kramers.</p>
+</blockquote>
+<div class="arithmatex">\[
+j_\nu \propto Z^2 n_e n_i T^{-1/2} \exp(-h\nu/kT)
+\]</div>
+<div class="arithmatex">\[
+    j_\nu = j_\nu^{\rm classical}  g_{ff}
+\]</div>
+<h3 id="_3">● 数値の桁</h3>
+<ul>
+<li>おおむね <strong>1〜数程度</strong>（0.1 〜 5 程度）</li>
+<li>高エネルギーでやや大きく、低エネルギーで対数的に増えたり減ったりする。</li>
+</ul>
+<h3 id="_4">● 依存関係</h3>
+<p>Gaunt 因子は次の3つの変数に依存します：</p>
+<ol>
+<li><strong>光子エネルギー (h\nu)</strong></li>
+<li><strong>電子温度（電子の運動エネルギー）</strong></li>
+<li><strong>電離イオンの電荷 Z</strong></li>
+</ol>
+<p>$$</p>
+<p>$$</p>
+<h3 id="menzel-pekeris-1935">● 低周波数近似（Menzel &amp; Pekeris 1935）</h3>
+<div class="arithmatex">\[
+g_{ff} =
+\frac{\sqrt{3}}{\pi}
+\ln
+\left(
+\frac{(2T)^{3/2}}{\pi e^2 Z h\nu m_e^{1/2}}
+\right)
+\]</div>
+<h3 id="h-kt">● 高周波数（hν ≳ kT）では補正項が変わり、指数的抑制が支配的</h3>
+<p>→ ガウント因子は影響が小さい（1前後）</p>
+<h3 id="itoh-1985">● 相対論的ガウント因子（Itoh+ 1985 など）</h3>
+<p>10 keV 程度では相対論補正はわずか。</p>
+<!-- 
+
+### ● 本質的に「クーロン散乱の量子補正」
+
+* 古典では衝突距離の最短距離や最大 impact parameter などを入れると **log(b_max/b_min)** が出る。
+* 量子論ではこれが **log(エネルギー比)** に対応し、これが Gaunt 因子の log 依存を生む。 -->
+
+<h1 id="3">■ 3. 周波数ごとのガウント因子の直感</h1>
+<h3 id="1-h-kt">① <strong>低周波数（hν ≪ kT）</strong></h3>
+<ul>
+<li>光子は電子の緩い加速場を見て放射されるので、古典近似が比較的良い</li>
+<li>(g_{ff} \sim 1) 付近</li>
+<li>ただし「対数的」に少しずれるので、1〜3程度に変動する</li>
+</ul>
+<h3 id="2-h-kt">② <strong>高周波数（hν ≳ kT）</strong></h3>
+<ul>
+<li>電子の熱速度では大きな加速度が必要で、量子補正が効く</li>
+<li>(g_{ff}) は <strong>減少方向</strong> または <strong>1 以下</strong> に寄る</li>
+<li>指数減衰（exp(-hν/kT)）が支配するのでそもそも寄与は小さめ</li>
+</ul>
+<h3 id="3-z-g_ff">③ <strong>Z が大きいほど g_ff は変動性が大きい</strong></h3>
+<ul>
+<li>Coulomb 強度が Z 倍 → 衝突の量子補正も変わる</li>
+</ul>
+<h1 id="4">■ 4. 実務上どう扱われているか？</h1>
+<h3 id="ag_ff-1">●（A）“g_ff ≃ 1” とする簡易モデル</h3>
+<p>ICF のざっくり計算、プラズマ輸送コードの初期スケッチでは <strong>1〜1.2</strong> と置いて OK。</p>
+<h3 id="b-gaunt-planck-or-rosseland-average">●（B）周波数平均 Gaunt 因子（Planck or Rosseland average）</h3>
+<p>実際の放射輸送では <strong>周波数平均したガウント因子</strong> を使う：</p>
+<ul>
+<li><strong>Planck 平均</strong></li>
+<li><strong>Rosseland 平均</strong></li>
+</ul>
+<p>どちらも表にしたデータセット（Karzas &amp; Latter (1961) や Sutherland (1998)）がよく使われる。</p>
+<h3 id="cpic-tabulated-data">●（C）PIC や衝突輻射モジュールでは tabulated data を参照</h3>
+<ul>
+<li>HYDRA, CRASH, FLASH, MULTI などの HED コードでは
+  (g_{ff}(\nu, T, Z)) がテーブル化されていて、補間して使われる。</li>
+</ul>
+<h1 id="6">■ 6. プラズマでの物理的な意味（重要）</h1>
+<h3 id="_5">なぜガウント因子が必要か？</h3>
+<ol>
+<li><strong>古典理論では impact parameter の cutoff が曖昧</strong></li>
+<li><strong>量子力学的には連続状態同士の遷移確率を厳密に計算できる</strong></li>
+<li>その結果が古典と異なるため
+   → <strong>“欠けている log の分だけ補正”</strong> が必要になる</li>
+<li>これが Gaunt 因子</li>
+</ol>
+<p>特に</p>
+<ul>
+<li>低 E 光子</li>
+<li>高 Z プラズマ</li>
+<li>低温プラズマ（電子がゆっくり）</li>
+</ul>
+<p>では Gaunt 因子の補正が効きやすい。</p>
+<h1 id="7-10-kev">■ 7. 10 keV プラズマで典型値は？</h1>
+<p>あなたが今扱っている <strong>T ~ 10 keV</strong>, <strong>E_photon ~ 1–30 keV</strong> という状況では：</p>
+<ul>
+<li>(g_{ff} ≈ 1.1〜1.4) 程度が典型</li>
+<li>なので、ざっくり計算では <strong>1 で十分</strong></li>
+<li>精密にやるなら tabulated data を参照（Sutherland+1998 など）</li>
+</ul>
+<blockquote>
+<p>[1]より引用 \
+Abstract\
+For some years astrophysicists have been looking for an adequate theory of continuous—as opposed to line—absorption. The natural and generally accepted mechanism is the transition of an electron from a bound state to a free state, or from one free state in the neighbourhood of an ion to another free state of greater energy. The theory hitherto used is KRAMERS’ theory of the converse process of emission by a free electron passing a positive nucleus. Since emission and absorption are intimately connected by thermodynamics, the absorption coefficient can be calculated from KRAMERS’ formulae. Unfortunately, although KRAMERS’ work is in good agreement with laboratory observations of X-rays, it gives an absorption coefficient many times smaller than that found from astronomical observations. KRAMERS used classical electromagnetism, and got over the difficulty of the quantisation of negative energies by distributing the classical emission that involved captures somewhat arbitrarily among the various stationary states. It was evidently desirable to do the same work by means of quantum theory, both for the sake of greater rigour, and in the hope of finding a larger absorption. The foundations of such a theory were laid by OPPENHEIMER,|| upon the bed-rock of SCHRODINGER’s equation, in a paper to which this one is much indebted. The matrix-elements involving positive energies present considerable difficulty, and the approximations used by OPPENHEIMER in his paper of 1927 are unsuitable for stellar applications.</p>
+</blockquote>
+<p>はい、その理解はかなり正確です。<strong>Gaunt 因子に exp(γ)（≈1.781…）が現れるのは、量子補正積分の中に “対数的発散構造” があるからで、これはクーロンポテンシャルと特殊関数（とくにベッセル関数や指数積分）を含む積分の本質と深く関係しています。</strong>阻止能（Bethe stopping power）にもまったく同じ数学的構造が出てきます。</p>
+<p>以下、できるだけ「抽象的でなく本質だけ」を簡潔に説明します。</p>
+<hr />
+<h1 id="exp-gaunt">✔ なぜ exp(γ) が Gaunt 因子に出るのか？</h1>
+<p>Gaunt 因子の原理的な定義は、
+<strong>クーロン場で加速される電子の量子遷移確率（bremsstrahlung の微分断面積）を精密に計算したときの補正係数</strong> です。</p>
+<p>この遷移確率を計算する過程で、以下のような積分が出ます：</p>
+<p>[
+\int_0^\infty K_{i\eta}(x)^2 , x , dx
+]</p>
+<p>または</p>
+<p>[
+\int_0^\infty \frac{\sin(ax) - ax}{x^2} dx
+]</p>
+<p>こうした積分の多くは
+<strong>漸近展開の定数項に「γ（オイラー定数）」が自然に現れる</strong> ものです。</p>
+<p>代表例：指数積分</p>
+<p>[
+\mathrm{Ei}(-x) = \gamma + \ln x + O(x)
+]</p>
+<p>つまり、量子力学的な遷移振幅を解析的に扱うと <strong>ln(…) + γ</strong> のような形が標準的に出る。</p>
+<p>そして、Gaunt 因子 g_ff は典型的に</p>
+<p>[
+g_{ff} \sim \ln!\frac{A}{\hbar \omega} + \gamma
+]</p>
+<p>のような形になり（Novikov–Thorne や Rybicki &amp; Lightman の導出でも同じ構造が出る）、
+この “γ を含む組” を指数化したのが <strong>exp(γ) ≈ 1.781</strong> です。</p>
+<hr />
+<h1 id="exp">✔ 「対数が関係するから exp(γ) が出る」は正しい</h1>
+<p>まさにその通り。</p>
+<p>クーロン散乱 × 連続スペクトル の積分構造は常に</p>
+<p>[
+\int^\infty \frac{dx}{x} \quad\Rightarrow\quad \ln x + \gamma
+]</p>
+<p>の形を含みます。</p>
+<p><strong>クーロンポテンシャルが 1/r で長距離なので、低エネルギー極限でログ発散が出る</strong>
+→
+<strong>特殊関数で正則化すると、定数項が γ になる</strong></p>
+<p>という仕組みです。</p>
+<p>この物理背景は、Coulomb ログ（ln Λ）と数学的にきわめて似ています。</p>
+<hr />
+<h1 id="bethe-stopping-power">✔ 阻止能（Bethe stopping power）でも同じ現象が出る</h1>
+<p>Bethe の阻止能式は</p>
+<p>[
+\left(-\frac{dE}{dx}\right)_{\rm Bethe}
+\propto
+\ln!\frac{2 m_e v^2}{I}
+]</p>
+<p>で、I（平均励起エネルギー）の計算に
+<strong>Bessel 関数の積分や指数積分 Ei が出てくる</strong>ため、同じ γ が入り込みます。</p>
+<p>たとえば次の恒等式：</p>
+<p>[
+\int_0^\infty J_0(ax) e^{-bx} dx
+= \frac{1}{\sqrt{a^2 + b^2}}
+]</p>
+<p>のような積分を漸近的に扱うと、
+<strong>“ln term + γ”</strong> が必ず顔を出す。</p>
+<p>つまり：</p>
+<p><strong>長距離クーロン相互作用 × 振動積分（Bessel） × 漸近展開</strong>
+→
+<strong>ln(…) と γ の組が自動的に出る</strong></p>
+<p>という、物理と数学が完全にリンクした構造。</p>
+<hr />
+<h1 id="_6">✔ まとめ（質問にそのまま答える）</h1>
+<ul>
+<li><strong>はい、Gaunt 因子の中で exp(γ) を使うのは対数構造が原因です。</strong></li>
+<li><strong>クーロン場の長距離性 → 対数発散 → 特殊関数で正則化 → γ の登場</strong></li>
+<li><strong>阻止能でもベッセル関数積分を漸近展開すると γ（ひいては exp(γ)）が出てくるのは同じ理由。</strong></li>
+</ul>
+<p>つまり、<strong>数学的構造としては全く同じファミリーに属する現象</strong>です。</p>
+<hr />
+<p>必要なら、</p>
+<ul>
+<li>Gaunt 因子の導出の具体的なステップ</li>
+<li>“ln + γ” がどの積分で現れるかの実例</li>
+<li>Novikov–Thorne の該当式の解説</li>
+</ul>
+<p>もできます。</p>
+
+    </div>
+</article>
+                                <div class="mx-auto flex flex-wrap h-16 w-full max-w-2xl items-center gap-2 px-4 md:px-0">
+    
+    
+</div>
+                                <dialog id="bottom-sidebar" onclick="onBottomSidebarDialogClick(event)" class="bg-transparent"
+    style="position: fixed; left: 0px; top: 0px; transform: translate(0px, 58px); min-width: max-content; --radix-popper-transform-origin: 0% 0px; will-change: transform; z-index: 50; --radix-popper-available-width: 504px; --radix-popper-available-height: 857px; --radix-popper-anchor-width: 72.94999694824219px; --radix-popper-anchor-height: 32px;">
+    <div data-side="bottom" data-align="start" data-state="open" role="dialog" data-slot="popover-content"
+        class="text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 origin-(--radix-popover-content-transform-origin) border outline-hidden bg-background/90 no-scrollbar h-(--radix-popper-available-height) w-(--radix-popper-available-width) overflow-y-auto rounded-none border-none p-0 shadow-none backdrop-blur duration-100"
+        style="--radix-popover-content-transform-origin: var(--radix-popper-transform-origin); --radix-popover-content-available-width: var(--radix-popper-available-width); --radix-popover-content-available-height: var(--radix-popper-available-height); --radix-popover-trigger-width: var(--radix-popper-anchor-width); --radix-popover-trigger-height: var(--radix-popper-anchor-height);"
+        tabindex="-1">
+        <div class="flex flex-col gap-12 overflow-auto px-6 py-6">
+            
+            
+            
+
+            
+            <div class="flex flex-col gap-4">
+                <div class="text-muted-foreground text-sm font-medium">Menu</div>
+                <div class="flex flex-col gap-3">
+                    
+                    <a class="text-2xl font-medium" href="index.html">
+                        
+                        Home
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="01_non-lin-diff-analyticals.html">
+                        
+                        非線形拡散
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="02juttner.html">
+                        
+                        Jüttner分布
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="03_scale_inv_VM.html">
+                        
+                        Maxwell-Vlasov系のスケール変換
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="LL_4_Collisions_in_Plasmas.html">
+                        
+                        kinetics PROBLEM
+                        
+                    </a>
+                    
+                </div>
+            </div>
+            
+
+            
+            
+
+        </div>
+    </div>
+</dialog>
+                            </div>
+                            <div
+                                class="sticky top-[calc(var(--header-height)+1px)] z-30 ml-auto hidden h-[calc(100svh-var(--header-height)-var(--footer-height))] w-72 flex-col gap-4 overflow-hidden overscroll-none pb-8 xl:flex">
+                                <div class="h-(--top-spacing) shrink-0"></div>
+                                <div view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
+    <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
+        <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#references"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            References
+        </a>
+        
+
+        
+        <a href="#_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            熱制動輻射
+        </a>
+        
+
+        
+        <a href="#the-non-relaivistic-e-i-collision"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            The non-relaivistic e-i collision
+        </a>
+        
+
+        
+        <a href="#22-e-i"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            2.2 相対論的e-i散乱による制動輻射
+        </a>
+        
+
+        
+        <a href="#23-e-e"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            2.3 非相対論e-e
+        </a>
+        
+
+        
+        <a href="#_2"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            熱制動吸収係数
+        </a>
+        
+
+        
+        <a href="#gaunt-factor"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            Gaunt factor ガウント因子,ゴーント因子？
+        </a>
+        
+        
+        <a href="#_3"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            ● 数値の桁
+        </a>
+        
+        <a href="#_4"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            ● 依存関係
+        </a>
+        
+        <a href="#menzel-pekeris-1935"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            ● 低周波数近似（Menzel &amp; Pekeris 1935）
+        </a>
+        
+        <a href="#h-kt"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            ● 高周波数（hν ≳ kT）では補正項が変わり、指数的抑制が支配的
+        </a>
+        
+        <a href="#itoh-1985"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            ● 相対論的ガウント因子（Itoh+ 1985 など）
+        </a>
+        
+        
+
+        
+        <a href="#3"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            ■ 3. 周波数ごとのガウント因子の直感
+        </a>
+        
+        
+        <a href="#1-h-kt"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            ① 低周波数（hν ≪ kT）
+        </a>
+        
+        <a href="#2-h-kt"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            ② 高周波数（hν ≳ kT）
+        </a>
+        
+        <a href="#3-z-g_ff"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            ③ Z が大きいほど g_ff は変動性が大きい
+        </a>
+        
+        
+
+        
+        <a href="#4"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            ■ 4. 実務上どう扱われているか？
+        </a>
+        
+        
+        <a href="#ag_ff-1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            ●（A）“g_ff ≃ 1” とする簡易モデル
+        </a>
+        
+        <a href="#b-gaunt-planck-or-rosseland-average"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            ●（B）周波数平均 Gaunt 因子（Planck or Rosseland average）
+        </a>
+        
+        <a href="#cpic-tabulated-data"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            ●（C）PIC や衝突輻射モジュールでは tabulated data を参照
+        </a>
+        
+        
+
+        
+        <a href="#6"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            ■ 6. プラズマでの物理的な意味（重要）
+        </a>
+        
+        
+        <a href="#_5"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            なぜガウント因子が必要か？
+        </a>
+        
+        
+
+        
+        <a href="#7-10-kev"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            ■ 7. 10 keV プラズマで典型値は？
+        </a>
+        
+
+        
+        <a href="#exp-gaunt"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            ✔ なぜ exp(γ) が Gaunt 因子に出るのか？
+        </a>
+        
+
+        
+        <a href="#exp"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            ✔ 「対数が関係するから exp(γ) が出る」は正しい
+        </a>
+        
+
+        
+        <a href="#bethe-stopping-power"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            ✔ 阻止能（Bethe stopping power）でも同じ現象が出る
+        </a>
+        
+
+        
+        <a href="#_6"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            ✔ まとめ（質問にそのまま答える）
+        </a>
+        
+
+        
+        
+        
+        
+
+    </div>
+    <div class="h-12"></div>
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer view-transition-name="footer"
+    class="group-has-[.section-soft]/body:bg-surface/40 3xl:fixed:bg-transparent dark:bg-transparent">
+    <div class="container-wrapper px-4 xl:px-6">
+        <div class="flex h-(--footer-height) items-center justify-between">
+            <div class="text-muted-foreground w-full text-center text-xs leading-loose sm:text-sm">
+                
+                <a href="https://github.com/asiffer/mkdocs-shadcn">shadcn theme</a> provided by
+                <a href="https://github.com/asiffer">@asiffer</a>
+            </div>
+        </div>
+    </div>
+</footer>
+    </div>
+     
+
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js"></script>
+
+     
+
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js"></script>
+
+     
+
+<script src="js/katex_auto.js"></script>
+
+     
+
+<script src="search/main.js"></script>
+
+
+    
+
+    <script src="js/copy-button.js"></script>
+    <script>updatePygmentsStylesheet();</script>
+    
+    <script>fetchStargazers("None");</script>
+    
+    
+    <script type="speculationrules">
+{
+  "prerender": [
+    {
+      "where": {
+          "selector_matches": ["#next-button", "#previous-button"],
+      }
+    }
+  ]
+}
+</script>
+</body>
+
+</html>

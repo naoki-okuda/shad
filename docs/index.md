@@ -3,8 +3,13 @@ title: Home
 #summary: Hub page
 new: false
 description: Hub page for physics documents 
+---
+<!-- ---
+title: Home
+#summary: Hub page
+new: false
+description: Hub page for physics documents 
 keywords: physics, plasmas, theory, mkdocs,shadcn
-author: naoki_okuda
 #image: https://raw.githubusercontent.com/asiffer/mkdocs-shadcn/refs/heads/master/.github/assets/logo.svg
 order: 0
 sidebar_title: Home
@@ -15,7 +20,7 @@ extra_css:
   - css/custom-style.css
 extra_javascript:
   - js/custom-script.js
----
+--- -->
 
 
 ## link
