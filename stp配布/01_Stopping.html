@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        // for search plugin notably
+        const base_url = "https://naoki-okuda.github.io/shad/";
+    </script>
+    <script>
+    const darkTheme = window.matchMedia("(prefers-color-scheme: dark)");
+    darkTheme.onchange = (e) => {
+        if (e.matches) {
+            document.documentElement.classList.add("dark")
+            localStorage.theme = 'dark';
+        } else {
+            document.documentElement.classList.remove("dark")
+            localStorage.removeItem("theme")
+        }
+    };
+
+    // On page load. Priotiry to lcaolStorage
+    if (localStorage.theme === "dark") {
+        document.documentElement.classList.add("dark")
+    } else if (localStorage.theme === "light") {
+        document.documentElement.classList.remove("dark")
+    } else if (darkTheme.matches) {
+        document.documentElement.classList.add("dark")
+    } else {
+        document.documentElement.classList.remove("dark")
+    }
+
+    // set the layout based on localStorage
+    document.documentElement.classList.add(localStorage.getItem("html-layout") || "layout-fixed");
+</script>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>stp - Phys</title>
+    
+
+
+<title>stp</title>
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://naoki-okuda.github.io/shad/01_Stopping.html">
+
+
+<!-- Open Graph (Facebook, LinkedIn) -->
+
+<meta property="og:title" content="stp">
+
+
+
+
+
+<meta property="og:url" content="https://naoki-okuda.github.io/shad/01_Stopping.html">
+
+
+
+
+
+
+<!-- Twitter Card -->
+
+<meta name="twitter:title" content="stp">
+
+
+
+
+
+
+<!-- JSON-LD Structured Data -->
+
+
+
+    <link rel="icon" href="img/favicon.ico">
+
+    <link href="css/base.css" rel="stylesheet">
+    <link href="css/geist.css" rel="stylesheet">
+
+    
+    
+
+<link id="pygments-light" rel="stylesheet"
+    href="css/pygments/shadcn-light.css">
+<link id="pygments-dark" rel="stylesheet"
+    href="css/pygments/github-dark.css"
+    media="(prefers-color-scheme: dark)">
+
+
+    
+    <link href="extra.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" rel="stylesheet">
+
+    
+
+    <script src="js/callbacks.js"></script>
+
+    
+    <!-- katex -->
+<link rel="stylesheet" href="css/katex.min.css">
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="js/katex.min.js"></script>
+<!-- To automatically render math in text elements, include the auto-render extension: -->
+<script defer src="js/auto-render.min.js"
+    onload='renderMathInElement(document.body, {"macros": {"\\RR": "\\mathbb{R}", "\\dx": "\\mathrm{d}x"}});'></script>
+    
+
+    
+
+    
+
+</head>
+
+<body
+    class="text-foreground group/body overscroll-none font-sans antialiased [--footer-height:calc(var(--spacing)*14)] [--header-height:calc(var(--spacing)*14)] xl:[--footer-height:calc(var(--spacing)*24)] theme-default">
+    <div id="inner-body" class="bg-background relative z-10 flex min-h-svh flex-col">
+        <header class="bg-background sticky top-0 z-50 w-full" view-transition-name="header">
+    <div class="container-wrapper 3xl:fixed:px-0 px-6">
+        <div class="3xl:fixed:container flex h-(--header-height) items-center gap-2 **:data-[slot=separator]:!h-4">
+            <button id="menu-button" data-slot="popover-trigger" onclick="onMobileMenuButtonClick(event)"
+                class="group whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:text-accent-foreground px-4 py-2 has-[&gt;svg]:px-3 extend-touch-target h-8 touch-manipulation items-center justify-start gap-2.5 !p-0 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 active:bg-transparent dark:hover:bg-transparent flex lg:hidden"
+                type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«Rmplb»"
+                data-state="closed">
+                <div class="relative flex h-8 w-4 items-center justify-center">
+                    <div class="relative size-4">
+                        <!-- 16px x 16px -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="0" x2="16" y1="5" y2="5"
+                                class="group-data-[state=open]:translate-y-[2.25px] group-data-[state=open]:-translate-x-[2.25px] group-data-[state=open]:rotate-45 transition-all duration-300 origin-center" />
+                            <line x1="0" x2="16" y1="11" y2="11"
+                                class="group-data-[state=open]:-translate-y-[2.25px] group-data-[state=open]:-translate-x-[2.25px] group-data-[state=open]:-rotate-45 transition-all duration-300 origin-center" />
+                        </svg>
+                    </div>
+
+                    <span class="sr-only">Toggle Menu</span>
+                </div>
+                <span class="flex h-8 items-center text-lg leading-none font-medium">Menu</span>
+            </button>
+            <a data-slot="button"
+                class="items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-5 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 hidden h-8 lg:flex"
+                href="https://naoki-okuda.github.io/shad/">
+                <span class="size-8 flex flex-row justify-center items-center">
+                    
+
+<svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15.59 14.37q.159.666.16 1.38a6 6 0 0 1-6 6v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.9 14.9 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.9 14.9 0 0 0-2.58 5.84m2.699 2.7q-.155.032-.311.06a15 15 0 0 1-2.448-2.448l.06-.312m-2.24 2.39a4.49 4.49 0 0 0-1.757 4.306q.341.054.696.054a4.5 4.5 0 0 0 3.61-1.812M16.5 9a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0"/></svg>
+<!-- <iconify-icon class="size-5" icon="heroicons:rocket-launch" noobserver></iconify-icon> -->
+
+
+                </span>
+
+                
+                <h1 class="pr-2">Phys</h1>
+                
+            </a>
+            
+            <nav class="items-center gap-0.5 hidden lg:flex">
+    
+</nav>
+            
+            <div class="ml-auto flex items-center gap-2 md:flex-1 md:justify-end">
+                <div class="hidden w-full flex-1 md:flex md:w-auto md:flex-none">
+                    <button data-slot="dialog-trigger" onclick="onSearchBarClick(event)"
+    class="inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-secondary/80 px-4 py-2 has-[&gt;svg]:px-3 bg-surface text-surface-foreground/60 dark:bg-card relative h-8 w-full justify-start pl-2.5 font-normal shadow-none sm:pr-12 md:w-40 lg:w-56 xl:w-64"
+    type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«R66plb»" data-state="closed">
+    <span class="text-muted-foreground hidden lg:inline-flex">Search documentation...</span>
+    <span class="text-muted-foreground inline-flex lg:hidden">Search...</span>
+    <div class="absolute top-1.5 right-1.5 hidden gap-1 sm:flex">
+        <kbd
+            class="bg-background text-muted-foreground pointer-events-none flex h-5 items-center justify-center gap-1 rounded border px-1 font-sans text-[0.7rem] font-medium select-none [&amp;_svg:not([class*='size-'])]:size-3">Ctrl</kbd><kbd
+            class="bg-background text-muted-foreground pointer-events-none flex h-5 items-center justify-center gap-1 rounded border px-1 font-sans text-[0.7rem] font-medium select-none [&amp;_svg:not([class*='size-'])]:size-3 aspect-square">K</kbd>
+    </div>
+</button>
+<dialog id="search-dialog" onclick="onSearchDialogClick(event)"
+    class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background rounded-lg shadow-lg border overflow-hidden p-0">
+    <div class="w-lg gap-4">
+        <div class="flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground">
+            <div data-slot="command-input-wrapper" class="flex h-9 items-center gap-2 border-b px-3"><svg
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-search size-4 shrink-0 opacity-50">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                </svg>
+                <input data-slot="command-input"
+                    class="placeholder:text-muted-foreground flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
+                    placeholder="Search documentation..." cmdk-input="" autocomplete="off" autocorrect="off"
+                    spellcheck="false" aria-autocomplete="list" role="combobox" aria-expanded="true"
+                    aria-controls="radix-«r1t6»" aria-labelledby="radix-«r1t7»" id="radix-«r1t8»" type="text" value=""
+                    aria-activedescendant="radix-«r1th»" oninput="onInputHandler(event)">
+            </div>
+        </div>
+        <div id="mkdocs-search-results" class="max-h-[300px] overflow-y-auto overflow-x-hidden">
+            <!-- search results go there -->
+        </div>
+    </div>
+</dialog>
+<script>
+    document.removeEventListener("keydown", searchShortcutHandler);
+    document.addEventListener("keydown", searchShortcutHandler);
+</script>
+                </div>
+                <div data-orientation="vertical" role="none" data-slot="separator"
+                    class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px ml-2 hidden lg:block">
+                </div>
+                <a target="_blank" rel="noreferrer" data-slot="button"
+                    class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 h-8 shadow-none"
+                    href="None">
+                    <svg viewBox="0 0 438.549 438.549">
+                        <path fill="currentColor"
+                            d="M409.132 114.573c-19.608-33.596-46.205-60.194-79.798-79.8-33.598-19.607-70.277-29.408-110.063-29.408-39.781 0-76.472 9.804-110.063 29.408-33.596 19.605-60.192 46.204-79.8 79.8C9.803 148.168 0 184.854 0 224.63c0 47.78 13.94 90.745 41.827 128.906 27.884 38.164 63.906 64.572 108.063 79.227 5.14.954 8.945.283 11.419-1.996 2.475-2.282 3.711-5.14 3.711-8.562 0-.571-.049-5.708-.144-15.417a2549.81 2549.81 0 01-.144-25.406l-6.567 1.136c-4.187.767-9.469 1.092-15.846 1-6.374-.089-12.991-.757-19.842-1.999-6.854-1.231-13.229-4.086-19.13-8.559-5.898-4.473-10.085-10.328-12.56-17.556l-2.855-6.57c-1.903-4.374-4.899-9.233-8.992-14.559-4.093-5.331-8.232-8.945-12.419-10.848l-1.999-1.431c-1.332-.951-2.568-2.098-3.711-3.429-1.142-1.331-1.997-2.663-2.568-3.997-.572-1.335-.098-2.43 1.427-3.289 1.525-.859 4.281-1.276 8.28-1.276l5.708.853c3.807.763 8.516 3.042 14.133 6.851 5.614 3.806 10.229 8.754 13.846 14.842 4.38 7.806 9.657 13.754 15.846 17.847 6.184 4.093 12.419 6.136 18.699 6.136 6.28 0 11.704-.476 16.274-1.423 4.565-.952 8.848-2.383 12.847-4.285 1.713-12.758 6.377-22.559 13.988-29.41-10.848-1.14-20.601-2.857-29.264-5.14-8.658-2.286-17.605-5.996-26.835-11.14-9.235-5.137-16.896-11.516-22.985-19.126-6.09-7.614-11.088-17.61-14.987-29.979-3.901-12.374-5.852-26.648-5.852-42.826 0-23.035 7.52-42.637 22.557-58.817-7.044-17.318-6.379-36.732 1.997-58.24 5.52-1.715 13.706-.428 24.554 3.853 10.85 4.283 18.794 7.952 23.84 10.994 5.046 3.041 9.089 5.618 12.135 7.708 17.705-4.947 35.976-7.421 54.818-7.421s37.117 2.474 54.823 7.421l10.849-6.849c7.419-4.57 16.18-8.758 26.262-12.565 10.088-3.805 17.802-4.853 23.134-3.138 8.562 21.509 9.325 40.922 2.279 58.24 15.036 16.18 22.559 35.787 22.559 58.817 0 16.178-1.958 30.497-5.853 42.966-3.9 12.471-8.941 22.457-15.125 29.979-6.191 7.521-13.901 13.85-23.131 18.986-9.232 5.14-18.182 8.85-26.84 11.136-8.662 2.286-18.415 4.004-29.263 5.146 9.894 8.562 14.842 22.077 14.842 40.539v60.237c0 3.422 1.19 6.279 3.572 8.562 2.379 2.279 6.136 2.95 11.276 1.995 44.163-14.653 80.185-41.062 108.068-79.226 27.88-38.161 41.825-81.126 41.825-128.906-.01-39.771-9.818-76.454-29.414-110.049z">
+                        </path>
+                    </svg>
+                    
+                    <span id="stargazers" class="text-muted-foreground w-8 text-xs tabular-nums" onload="test()">
+                    </span>
+                    
+                </a>
+                <div data-orientation="vertical" role="none" data-slot="separator"
+                    class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px 3xl:flex hidden">
+                </div>
+                <button data-slot="button"
+                    class="items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 size-8 3xl:flex hidden"
+                    title="Toggle layout" onclick="toggleLayout(event)">
+                    <span class="sr-only">Toggle layout</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-gallery-horizontal">
+                        <path d="M2 3v18"></path>
+                        <rect width="12" height="18" x="6" y="3" rx="2"></rect>
+                        <path d="M22 3v18"></path>
+                    </svg>
+                </button>
+                <div data-orientation="vertical" role="none" data-slot="separator"
+                    class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px">
+                </div>
+                <button data-slot="button"
+                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 group/toggle extend-touch-target size-8"
+                    title="Toggle theme" onclick="onThemeSwitch(event)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="size-4.5">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                        <path d="M12 3l0 18"></path>
+                        <path d="M12 9l4.65 -4.65"></path>
+                        <path d="M12 14.3l7.37 -7.37"></path>
+                        <path d="M12 19.6l8.85 -8.85"></path>
+                    </svg>
+                    <span class="sr-only">Toggle theme</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+        <main class="flex flex-1 flex-col">
+            <div class="container-wrapper flex flex-1 flex-col px-2">
+                <div data-slot="sidebar-wrapper" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;"
+                    class="group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex w-full 3xl:fixed:container 3xl:fixed:px-3 min-h-min flex-1 items-start px-0 [--sidebar-width:220px] [--top-spacing:0] lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)] lg:[--sidebar-width:240px] lg:[--top-spacing:calc(var(--spacing)*4)]">
+                    <div data-slot="sidebar"
+                        class="text-sidebar-foreground w-(--sidebar-width) flex-col sticky top-[calc(var(--header-height)+1px)] z-30 hidden h-[calc(100svh-var(--header-height)-var(--footer-height))] bg-transparent lg:flex">
+                        <div data-slot="sidebar-content" data-sidebar="content"
+                            class="flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden no-scrollbar px-2 pb-12">
+                            <div class="h-(--top-spacing) shrink-0"></div>
+                            <div view-transition-name="sidebar" data-slot="sidebar-group" data-sidebar="group"
+    class="relative flex w-full min-w-0 flex-col p-2 no-scrollbar">
+    
+
+    
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    <div data-slot="sidebar-group" data-sidebar="group" class="relative flex w-full min-w-0 flex-col p-2">
+        <div data-slot="sidebar-group-content" data-sidebar="group-content" class="w-full text-sm">
+            <ul data-slot="sidebar-menu" data-sidebar="menu" class="flex w-full min-w-0 flex-col gap-0.5">
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/index.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        Home
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="true" data-sidebar="menu-button"
+        data-size="default" href="/shad/01_Stopping.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        stp
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+
+    
+
+
+    
+</div>
+                        </div>
+                    </div>
+                    <div class="h-full w-full">
+                        <div data-slot="docs" class="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full">
+                            <div class="flex min-w-0 flex-1 flex-col">
+                                <div class="h-(--top-spacing) shrink-0"></div>
+                                <article class=" w-full" view-transition-name="page">
+    <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-2">
+            <div id="page-header" class="flex items-start justify-between">
+
+                <h1 class="scroll-m-20 text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl">
+                    stp
+                </h1>
+
+                <div class="flex items-center gap-2 pt-1.5">
+                    
+                    <a data-slot="button" id="previous-button"
+                        class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-secondary text-secondary-foreground hover:bg-secondary/80 extend-touch-target size-8 shadow-none md:size-7"
+                        href="/shad/index.html">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="tabler-icon tabler-icon-arrow-left ">
+                            <path d="M5 12l14 0"></path>
+                            <path d="M5 12l6 6"></path>
+                            <path d="M5 12l6 -6"></path>
+                        </svg>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    
+                    
+                </div>
+            </div>
+            
+        </div>
+        <div class="flex justify-end items-center">
+            
+            
+        </div>
+
+    </div>
+    <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
+        <p><span class="arithmatex">\(\,\,\,\)</span>平均的に静止した多粒子中を相対的に高速に運動する荷電粒子は、自身より小さな運動エネルギーを持つ他の粒子との相互作用を繰り返すことで、徐々に熱化する。このような、高速荷電粒子のエネルギー損失を表現するために、阻止能(stopping power)が使われる。阻止能は、荷電粒子が媒質中を距離<span class="arithmatex">\(dx\)</span>進む間に損失する平均的なエネルギー<span class="arithmatex">\(dE\)</span>の比として定義される。</p>
+<div class="arithmatex">\[\frac{dE}{dx}\]</div>
+<p>エネルギーの位置微分なので、媒質から荷電粒子に及ぼす摩擦力・抵抗力に対応し、力の次元を持っている。</p>
+<p>阻止能の関数形はもちろん相互作用の仕方に依存して変わる。後で見る、クーロン散乱・プラズマ波励起・束縛電子の散乱の場合には、典型的に次のような依存性になる。</p>
+<ul>
+<li><span class="arithmatex">\(r_e\)</span>: 古典電子半径。<span class="arithmatex">\(r_e = e^2/m_e c^2\)</span></li>
+<li><span class="arithmatex">\(n_e\)</span>: 電子数密度</li>
+<li><span class="arithmatex">\(v,Z\)</span>: 高速な荷電粒子の速さと電気量</li>
+</ul>
+<div class="arithmatex">\[
+\frac{dE}{dx} = \frac{2\pi r_e^2 Z^2 n_e}{v^2} * [減速の物理過程の詳細]
+\]</div>
+<p>制動輻射による損失の依存性は異なり、高エネルギー側ではポアソン場の減速よりも効いてくることがあるので注意する。</p>
+<h1 id="_1">プラズマ中の阻止能</h1>
+<p>特にプラズマ媒質中では次のように阻止能の寄与を分類できる。</p>
+<ul>
+<li><span class="arithmatex">\(b\)</span>：散乱の衝突パラメータ</li>
+<li><span class="arithmatex">\(\lambda_D\)</span>: デバイ長</li>
+<li><span class="arithmatex">\(b&lt;\lambda_D\)</span>: クーロン散乱の累積による減速</li>
+<li><span class="arithmatex">\(b&gt;\lambda_D\)</span>: プラズマ中の平均場による減速　(集団効果)</li>
+</ul>
+<p>いずれもそもそもはポアソン電場に由来する。粒子間のクーロン場は長距離力なので、有限のカットオフを与えなければ、運動量の転移量が発散してしまう。これはプラズマ中の電気抵抗が無限大の状況に対応するが、現実の物理として、プラズマ中の電子は自由電子である。
+デバイ長より長い距離の相互作用はデバイ遮蔽が効いてきて平均場として扱うのが適切になる。こうして発散が回避される。</p>
+<h2 id="_2">クーロン散乱</h2>
+<p>さらにクーロン散乱は次のように分類される。</p>
+<ul>
+<li><span class="arithmatex">\(b_{min}\)</span>: 小角度散乱を与える最小衝突パラメータ</li>
+<li><span class="arithmatex">\(b_{min}&lt;b&lt;\lambda_D\)</span>：小角度散乱の累積。</li>
+<li>
+<p><span class="arithmatex">\(b&lt; b_{min}\)</span>: 大角度散乱。いわゆるラザフォード散乱。</p>
+</li>
+<li>
+<p>小角度散乱レジームでは、1:N(<span class="arithmatex">\(N\sim \Lambda\)</span>)の相互作用を二体の微小な弾性散乱の累積として近似する。</p>
+</li>
+<li>大角度散乱の寄与は、プラズマではしばしば小角散乱の累積より寄与が小さいものとして無視される。</li>
+</ul>
+<h2 id="_3">弾性散乱の力学</h2>
+<ul>
+<li>二体の弾性散乱では、エネルギー・運動量の移行量が1:1対応する。</li>
+<li>同じ角度変化(運動量移行)に対して、エネルギー転移量はターゲットのマスに反比例する性質がある。</li>
+</ul>
+<h4 id="_4">古典的な見積もり</h4>
+<ul>
+<li>粗い見積もりで、入射粒子がターゲットから垂直方向の力積<span class="arithmatex">\(\Delta p_{\perp}\)</span>の散乱を受けたとする。</li>
+<li>ターゲット粒子が得るエネルギーは、<span class="arithmatex">\(\Delta E = \frac{\Delta p_{\perp}^2} {2M}\)</span>になる。</li>
+</ul>
+<h4 id="_5">相対論的な粒子の散乱</h4>
+<ul>
+<li>近似なしの相対論的な粒子の弾性散乱を考えるてみる。</li>
+<li><span class="arithmatex">\(p,q\)</span>　散乱前後の運動量。</li>
+<li>四元運動量の保存と、オンシェル条件を与えて解ける。</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align}
+    p_1^{\mu}
+    &amp;=
+     m_1 (\gamma_1, \sqrt{\gamma_1^2-1},0,0)  \\
+    p_2^{\mu} 
+    &amp;= m_2(1,0,0,0) \\
+     q_1^{\mu}&amp;= 
+     m_1(\Gamma_1, \sqrt{\Gamma_1^2-1} \cos\theta, \sqrt{\Gamma_1^2-1}\sin{\theta},0)\\
+     q_2^{\mu}
+     &amp;= 
+     p_1^{\mu}+p_2^{\mu}-q_1^{\mu}\\
+     q_2^{\mu} q_{2\mu} &amp;= m_2^2
+     \end{align}
+\]</div>
+<ul>
+<li>このような初期条件の断線散乱で、以下の解が得られる。</li>
+</ul>
+<div class="arithmatex">\[
+     \begin{align}
+     \mu &amp;= \cos{\theta}\\
+     s &amp;= \sin{\theta}\\
+     R &amp;= m_2/m_1\\
+     I &amp;= 1+R\gamma_1\\
+     J &amp;= R + \gamma_1 \\
+     D &amp;= \mu(\gamma_1^2-1)\sqrt{R^2-s^2}\\
+    \Gamma_1&amp;= \frac{IJ+D}{J^2-K^2}\\
+     \frac{\Delta E_1}{m_1} = \gamma_1-\Gamma_1 &amp;=  \frac{\gamma_1^2 -1}{J^2-K^2} (\gamma_1s^2 + R - \mu\sqrt{R^2-s^2})
+\end{align}
+\]</div>
+<p>微小角で近似すると、やはりターゲットの質量に反比例する。
+$$
+\frac{\Delta E}{m_1} 
+= \frac{(\gamma_1^2-1)}{2R}\theta^2 + O(\theta^4)
+$$</p>
+<ul>
+<li>クーロン散乱の場合、角度に対する散乱断面積がターゲット側の粒子にほとんど依存しない。</li>
+<li>
+<p>なぜなら、衝突パラメータが同じ現象はターゲット粒子に同じだけの力積を与えるから、その運動量移行量はターゲット種類の質量に依存しない。</p>
+</li>
+<li>
+<p>従って電子のエネルギー損失は普通イオンよりも1000倍程度強く現れる。</p>
+</li>
+</ul>
+<h2 id="_6">自由電子の小角度散乱累積による阻止能の計算</h2>
+<p>Solodov/ Betti(2008)に従って、小角度散乱の累積としての阻止能を計算する。</p>
+<ul>
+<li>e-i散乱の阻止能はe-e散乱に比べて無視できる。</li>
+<li>e-e散乱の衝突断面積は、Møllerによる。</li>
+<li>CMF：運動量中心系(center of momentum frame)。二体の運動量の和がゼロになる慣性系</li>
+<li>TRF: target rest frame。片方の粒子が止まっている慣性系。</li>
+<li>Møller散乱は重心系の角度について散乱断面積を与えている。</li>
+<li>阻止能の計算ではTRF系でのエネルギー損失を与えなければならない。</li>
+<li>結果として導出される損失は、媒質の温度を無視した近似になる。</li>
+</ul>
+<h3 id="_7">方針</h3>
+<ul>
+<li>TRF系でのエネルギー移行量と角度変化量は1:1対応する。</li>
+<li>TRF系での角度変化と重心系での角度変化は1:1対応する。</li>
+<li>散乱断面積の角度微分をエネルギー変化量の微分で書き直す。</li>
+<li>均等な衝突パラメータで(=断面積の測度)で積分すれば、平均的なエネルギー移行量が出る。</li>
+<li>衝突パラメータの上限と下限を決める。</li>
+</ul>
+<h3 id="_8">物理量</h3>
+<ul>
+<li>c=1: 簡単のために光速を１にする。</li>
+<li>粒子1: TRF系で運動している電子。</li>
+<li>粒子2: TRF系で静止している電子。</li>
+<li>上付き<span class="arithmatex">\(*\)</span>は衝突する２電子の重心系での物理量を表す。</li>
+<li><span class="arithmatex">\(v\)</span> : TRF系での粒子1の速さ。</li>
+<li><span class="arithmatex">\(\gamma\)</span>:TRF系での粒子のローレンツ因子。</li>
+<li><span class="arithmatex">\(\theta\)</span>: 散乱角度</li>
+<li><span class="arithmatex">\(E=m_e(\gamma-1)\)</span>: 粒子1の運動エネルギー</li>
+</ul>
+<p>Møller散乱の微分散乱断面積は、</p>
+<div class="arithmatex">\[
+\begin{equation}
+    \left(\frac{d \sigma}{d\Omega^*}\right)^{ee} = r_e^2 \frac{2(\gamma + 1)}{\gamma^2 v^4} 
+          \left[ \frac{4}{\sin^4{\theta^*}} - \frac{3}{\sin^2{\theta^*}} + \frac {(\gamma-1)^2}{4 \gamma^2} \left( 1 + \frac{4}{\sin^2{\theta^*}}\right) \right]
+\end{equation}
+\]</div>
+<ul>
+<li><span class="arithmatex">\(u\)</span>: TRF系に対するCM系の速さ。</li>
+<li><span class="arithmatex">\(\gamma_u\)</span> : uに対応するローレンツ因子。</li>
+<li><span class="arithmatex">\(u_1,u_2\)</span>: TRF系での4元速度。</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align}
+    u_1 &amp;= (\gamma, \gamma v,0,0)\\
+    u_2 &amp;= (1,0,0,0)\\
+    u &amp;= \frac{\gamma v  }{\gamma + 1} \\
+    \gamma_u &amp;= \sqrt{\frac{1}{1-u^2}} \\
+    &amp;=
+    (\gamma+1) \frac{1} {\sqrt{ (\gamma+1)^2 -(\gamma v)^2}  }\\
+    &amp;=\sqrt{ \frac{\gamma+1}{2}}
+\end{align}
+\]</div>
+<ul>
+<li>CM系にローレンツ変換する。</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align}
+u_2^* &amp;= \gamma_u (1,-u,0,0)\\
+u_1^* &amp;= \gamma_u (1, u,0,0)\\
+|v_1^*| &amp;= |v_2^*| = u\\
+\gamma_1^*&amp;= \gamma_2^* =\gamma_u
+\end{align}
+\]</div>
+<ul>
+<li>CM系での弾性衝突は、運動量の角度<span class="arithmatex">\(\theta^*\)</span>回転としてかける。</li>
+<li>4元運動量の和が保存。(エネルギー運動量の保存。)</li>
+</ul>
+<div class="arithmatex">\[
+\begin{equation}
+    \bm{v}_1^{* \prime}  = (u \cos{\theta ^*}, u \sin{\theta ^*},0)
+\end{equation}
+\]</div>
+<div class="arithmatex">\[
+\begin{equation}
+    \bm{v}_2^{* \prime}  = (-u \cos{\theta ^*}, -u \sin{\theta ^*},0)
+\end{equation}
+\]</div>
+<ul>
+<li>TRFに引き戻す。x成分の方向<span class="arithmatex">\(-u\)</span>の速さのローレンツ変換。</li>
+<li>こうしてCM系の角度変化でTRFでの物理量の変化がかける。</li>
+<li><span class="arithmatex">\(\Delta E\)</span>:電子1の衝突前後の運動エネルギー変化量</li>
+<li><span class="arithmatex">\(\epsilon = \Delta E/E\)</span>: 運動エネルギー変化率が得られる。</li>
+<li>solodov-betti (5)式の角度表現は等価。</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align}
+    \gamma_1^{\prime} &amp;= 
+    \gamma_u^{2}( 1+ u^2 \cos{\theta^*} ) \\
+    u_{1,x}^{\prime}  &amp;=
+    \gamma_u^{2}u ( 1+ \cos{\theta^*} ) \\
+    u_{1,y}^{\prime} 
+     &amp;= \gamma_u u \sin{\theta^*}
+\end{align}
+\]</div>
+<div class="arithmatex">\[
+\begin{equation}
+    \tan{\theta} = \frac{  u_{1,y}^{\prime}  }{  u_{1,x}^{\prime}  }
+                = \frac{1}{\gamma_u}   \tan{ \frac{\theta^*}{2} }  
+\end{equation}
+\]</div>
+<div class="arithmatex">\[
+\begin{align}
+    \Delta E 
+    &amp;= 
+    m_e (\gamma^{\prime}_1 - \gamma) \\
+    &amp;=
+    m_e (\gamma_u^{2}( 1+ u^2 \cos{\theta^*}) -\gamma)\\
+    &amp;= 
+    m_e ( \frac{\gamma+1}{2} +\frac{\gamma^2 v^2}{2(1+\gamma)}\cos\theta^*-\gamma     )\\
+    &amp;= 
+    m_e (\frac{1-\gamma}{2} +\frac{\gamma-1}{2}\cos\theta^*)\\
+    &amp;= 
+    \frac{m_e (\gamma -1)}{2} (\cos{\theta^*} -1) \\
+    \epsilon = &amp;-\frac{\Delta E }{E} = \frac{1- \cos{\theta^*} }{2}  \,\,\,\, (&gt;0)
+\end{align}
+\]</div>
+<ul>
+<li>ここまでは散乱の種類に依存しない。一般の等質量の二体弾性散乱で成立。</li>
+<li>ここからクーロン散乱の断面積で積分する。</li>
+<li>微分散乱断面積を<span class="arithmatex">\(\epsilon\)</span>を使って書き直す。</li>
+</ul>
+<div class="arithmatex">\[
+\begin{equation}
+    d\Omega^* = 2\pi d \cos{\theta^*} = 4\pi d \epsilon
+\end{equation}
+\]</div>
+<div class="arithmatex">\[
+\begin{align}
+    \cos\theta^* &amp;= 1-2\epsilon\\
+    \sin^2\theta^* &amp;= 4\epsilon(1-\epsilon)\\
+    \frac{4}{\sin^4\theta^*} 
+    &amp;=
+    \frac{1+\epsilon^2+(1-\epsilon)^2-1+2\epsilon-2\epsilon^2}{4\epsilon^2 (1-\epsilon)^2}\\
+    &amp;=
+    \frac{1}{4\epsilon^2}+\frac{1}{4(1-\epsilon)^2}
+    + \frac{1}{2\epsilon(1-\epsilon)}\\
+\end{align}
+\]</div>
+<div class="arithmatex">\[
+\begin{align}
+    \frac{d \sigma}{d\epsilon}&amp;=
+    4\pi\left(\frac{d \sigma}{d\Omega^*}\right)^{ee}\\ 
+    &amp;= 
+    2\pi r_e^2 \frac{4m_e}{E v^2} 
+    \left[ \frac{4}{\sin^4{\theta^*}} - \frac{3}{\sin^2{\theta^*}} + \frac {(\gamma-1)^2}{4 \gamma^2} \left( 1 + \frac{4}{\sin^2{\theta^*}}\right) \right]\\
+    &amp;=
+    2\pi r_e^2 \frac{m_e}{E v^2}\left[
+        \frac{1}{\epsilon^2}+\frac{1}{(1-\epsilon)^2}
+    - \frac{1}{\epsilon(1-\epsilon)} + \frac{(\gamma-1)^2}{\gamma^2}(1+\frac{1}{\epsilon(1-\epsilon)})
+    \right]\\
+    &amp;=
+    \frac{2\pi r_e^2 m_e}{Ev^2}
+            \left[
+                \frac{1}{\epsilon^2} + 
+                \frac{1}{(1 - \epsilon )^2} +
+                \left(
+                    \frac{\gamma-1}{\gamma}
+                \right)^2
+                - \frac{2 \gamma -1 }{\gamma^2 \epsilon (1-\epsilon )}
+            \right]
+\end{align}
+\]</div>
+<ul>
+<li>断面の重みで平均的な損失を計算して、阻止能とする。</li>
+<li>散乱角の上限と下限を与えるが、その与え方によって導かれる阻止能が微妙に変わる。</li>
+<li>対数発散の項だけ、散乱角の下限をつける。</li>
+<li>対数発散以外では、<span class="arithmatex">\(\epsilon_{min} \rightarrow0\)</span></li>
+<li>散乱角の上限を重心系での<span class="arithmatex">\(90 \degree\)</span>散乱とする。<span class="arithmatex">\(\epsilon = 1/2\)</span>。</li>
+<li>下限をDebye長<span class="arithmatex">\(\lambda_D\)</span>とde Broglie波長<span class="arithmatex">\(\lambda_{deB}^{ee}\)</span>の比とする。</li>
+<li>de Broglis波長はこの二体散乱の重心系での値を使う。</li>
+<li>(普通は、最小の衝突パラメータをde bloglie波長で決めて、最大の衝突パラメータにデバイ長にする。)</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align}
+    \left(\frac{dE}{ds}\right)_{collision}
+    &amp;=-n_eE\left&lt;\epsilon\right&gt; = -n_e E \int d\sigma \epsilon\\
+    &amp;=
+     -n_e E \int_{\epsilon_{min}}^{\frac{1}{2}} d\epsilon \, \epsilon \frac{d\sigma}{d\epsilon} \\
+    &amp;=     
+    -\frac{2\pi r_e^2 m_en_e}{v^2}
+    \int_{\epsilon_{min}}^{\frac{1}{2}} d\epsilon
+    \left[
+        \frac{1}{\epsilon} + 
+        \frac{\epsilon}{(1 - \epsilon )^2} +
+            \left(
+                \frac{\gamma-1}{\gamma}
+            \right)^2 \epsilon
+        - \frac{2 \gamma -1 }{\gamma^2 (1-\epsilon)}
+    \right]\\
+     &amp;=     
+    -\frac{2\pi r_e^2 m_en_e}{v^2}
+    \left[
+        \ln{\epsilon} 
+        +\ln{(1 - \epsilon )} + \frac{1}{1-\epsilon}+
+            \left(
+                \frac{\gamma-1}{\gamma}
+            \right)^2 \frac{\epsilon^2}{2}
+        + \frac{2 \gamma -1 }{\gamma^2 }\ln{(1-\epsilon)}
+    \right]_{\epsilon=\epsilon_{min}}^{\epsilon=\frac{1}{2}}\\
+      &amp;=     
+    -\frac{2\pi r_e^2 m_en_e}{v^2}
+    \left[
+        \ln{\frac{\epsilon_{min}}{4}} 
+         + 1+
+        \frac{1}{8}\left(
+                \frac{\gamma-1}{\gamma}
+            \right)^2 
+        + \frac{2 \gamma -1 }{\gamma^2 }\ln{(1-\epsilon)}
+    \right]\\
+    &amp;=
+    -\frac{2\pi r_e^2 m_en_e}{v^2}
+       \left[   \ln{  \left(  \frac{m_e^2 (\gamma-1) \lambda_D^2 }{2 \hbar^2 } \right)} +1  +\frac{1}{8} \left( \frac{\gamma-1}{\gamma} \right)^2        - \left( \frac{2\gamma - 1}{\gamma^2}\ln{2}  \right)    \right]
+\end{align}
+\]</div>
+<div class="arithmatex">\[
+\begin{equation}
+    \epsilon_{min} = \frac{ \theta_{min}^{* 2} }{4} = \left( \frac{\lambda_{deB}^{ee}}{\lambda_D}  \right)^2
+\end{equation}
+\]</div>
+<div class="arithmatex">\[
+\begin{equation}
+    \lambda_{deB}^{ee} = \frac{\hbar}{2p^*} = \frac{\hbar}{2 u \gamma^*} = \frac{\hbar}{m_e \sqrt{2(\gamma-1)}}
+\end{equation}
+\]</div>
+<h3 id="plasma">plasma波励起の阻止能を同時に考えると</h3>
+<p>$$
+\begin{equation}
+    \left( \frac{dE}{ds} \right)_{pw} = - m_e n_e \frac{2\pi r_e^2}{v^2} \ln{ \left( \frac{v}{\omega_p \lambda_D}  \right)^2 }
+\end{equation}
+$$
+これらの和をとって全体の阻止能を得る。</p>
+<div class="arithmatex">\[
+\begin{align}
+    &amp;\frac{dE}{ds} =   \left(\frac{dE}{ds}\right)_{coll}    +   \left(\frac{dE}{ds}\right)_{pw} \\
+    &amp;= - m_e n_e \frac{2\pi r_e^2}{v^2}  \left[   \ln{ \left[ \left(  \frac{E}{\hbar \omega_p } \right)^2 \frac{\gamma+1}{2\gamma^2} \right] } +1  +\frac{1}{8} \left( \frac{\gamma-1}{\gamma} \right)^2        - \left( \frac{2\gamma - 1}{\gamma^2}\ln{2}  \right)    \right]
+\end{align}
+\]</div>
+<ul>
+<li>実際に核融合プラズマ程度の密度のレンジでこれらを別々に評価すると、プラズマ波励起は全体の阻止能の10%程度の寄与がある。密度が上がっていくと割合が増えて、コアの最高密度で40%(100g/cc-1000g/cc)程度の寄与があり得る。</li>
+</ul>
+<h2 id="_9">媒質の有限温度補正 /阻止能の発散抑制</h2>
+<p>阻止能は低エネルギー側で<span class="arithmatex">\(dE/dx \propto 1/v^2 = m/2E\)</span>の依存性で発散する。ターゲット側の有限の温度を考慮に入れれば、このような発散を抑えられる。</p>
+<ul>
+<li><span class="arithmatex">\(v_{\rm th}=\sqrt{T/m}\)</span>: 熱速度</li>
+</ul>
+<div class="arithmatex">\[
+-\frac{dE}{dx}
+= \frac{4\pi e^{4} n \ln\Lambda}{m}\frac{1}{v^{2}}G\bigg(\frac{v}{\sqrt{2},v_{\rm th}}\bigg)
+\]</div>
+<div class="arithmatex">\[
+G(x) \equiv \operatorname{erf}(x) - \frac{2x}{\sqrt{\pi}}e^{-x^{2}}
+\]</div>
+<ul>
+<li>高速極限 <span class="arithmatex">\(v\gg v_{\rm th}\)</span>,  <span class="arithmatex">\(\operatorname{erf}(x)\to1\)</span> </li>
+</ul>
+<div class="arithmatex">\[
+  G(x)\to 1
+\]</div>
+<ul>
+<li>低速領域 <span class="arithmatex">\((v\lesssim v_{\rm th})\)</span>では</li>
+</ul>
+<div class="arithmatex">\[  
+  G(x)\sim \frac{2}{\sqrt{\pi}} x^{3}\propto v^{3}
+\]</div>
+<div class="arithmatex">\[
+\frac{dE}{dx} \to \propto v
+\]</div>
+<p>例えば、イオンの減速で重要になって、高速なアルファが減速される時に、初期には電子からの強いエネルギー損失が出るが、電子温度が上がってくると、徐々にアルファの減速に効かなくなってくる。</p>
+<p>導出の詳細はIchimaruにある。</p>
+<h2 id="_10">阻止能の高速電子についての総和</h2>
+<p>例えば、ビームの電子数密度がエネルギー空間でボルツマン分布だとする。<span class="arithmatex">\(f(E) dE= n_f/E_0 \exp(-E/E_0) dE\)</span>。<span class="arithmatex">\(E_0\)</span>は高速電子の勾配温度。この時、プラズマ媒質が加熱されるパワー密度は個々の散乱のイベントが独立に起こり、単純和が取れるとすれば、</p>
+<div class="arithmatex">\[
+\begin{align}
+P(x) =\frac{dE}{dVdt} 
+&amp;\approx 
+\int_{E_{min}}dE f(E) v \frac{d\epsilon}{dx}  (E;n_b(x),T_b(x)) \\
+&amp;\propto n_f n_b \int_{E_{min}}\frac{dE}{E_0} \exp(-E/E_0)/\sqrt{E}\\
+&amp;=
+n_fn_b E_0^{-1/2} \Gamma(\frac{1}{2},E_{min}/E_0)
+\end{align}
+\]</div>
+<p><span class="arithmatex">\(\Gamma\)</span>は不完全Gamma関数(積分区間を中途半端な位置にとったガンマ関数。)</p>
+<p><span class="arithmatex">\(E_{min} \to 0\)</span>で<span class="arithmatex">\(\Gamma(1/2)=\sqrt{\pi}\)</span>になる。
+つまり全体の加熱はほとんど、<span class="arithmatex">\(P \sim E_0 \nu(E_0,n_b) n_f\)</span>。</p>
+<ul>
+<li><span class="arithmatex">\(\nu \propto E^{-2/3} n_b \ln{\Lambda}\)</span>衝突周波数</li>
+</ul>
+<hr />
+<h2 id="plasma_1">plasma波の阻止能</h2>
+<p>Bethe型の式で書かれる。Betheの式は、中性媒質中で原子核に束縛された電子を高速な荷電粒子が弾き飛ばす際のエネルギー損失を記述している。束縛ポテンシャルの大きさ、がクーロン対数に相当する項に現れる。</p>
+<h3 id="bethejackson-1344">Betheの式（jackson (13.44)式）</h3>
+<div class="arithmatex">\[
+\frac{dE}{dx} = 4\pi NZ \frac{z^2e^4}{m v^2} 
+\left[ \ln{\frac{2\gamma^2 m v^2 }{\hbar \left&lt;\omega \right&gt;} - \frac{v^2}{c^2}}\right]
+\]</div>
+<ul>
+<li><span class="arithmatex">\(\hbar \left&lt;\omega \right&gt;\)</span>: 束縛電子の平均的なエネルギー準位</li>
+</ul>
+<p>完全電離プラズマ中の電子は自由電子なので、束縛ポテンシャルがないが、波動を励起する時のプラズモンエネルギー準位がこの束縛ポテンシャルに対応するという解釈が可能。</p>
+<ul>
+<li><span class="arithmatex">\(\left&lt;\omega \right&gt; \to \omega_{p,e}\)</span></li>
+</ul>
+<h2 id="dynamic-screening">動的遮蔽 dynamic screening による減速</h2>
+<ul>
+<li>古典的な範囲のプラズマ波励起による阻止能の導出は、動的遮蔽を考慮することになる。</li>
+<li>テスト粒子の周りには非対称な遮蔽ポテンシャルが作られる。</li>
+<li>遮蔽ポテンシャルからテスト粒子にかかる電場の平均値は、非ゼロになって、減速方向にきく。</li>
+<li>(Ichimaru Basic principles of Plasma Physics 1973)</li>
+<li>
+<p>ichimaru 高密度プラズマの物理p.66</p>
+</li>
+<li>
+<p>高速電子数密度が増大すると、wake場による阻止能がN個の粒子の単純和よりも大きくなることがある。</p>
+</li>
+<li>V. M. Malkin and N. J. Fisch 2002</li>
+<li>I. N. Ellis et. al 2021 PRE</li>
+</ul>
+<h3 id="vager-gemmel1976">Vager, Gemmel(1976) 波乗りポテンシャルの計算</h3>
+<ul>
+<li>ichimaru 高密度プラズマの物理p.66より抜粋</li>
+<li>m: イオン電子間の換算質量</li>
+<li><span class="arithmatex">\(r_s = \frac{m_e e^2 a }{\hbar^2}\)</span></li>
+<li><span class="arithmatex">\(a= \left (\frac{3}{4\pi n} \right)^{1/3}\)</span></li>
+<li><span class="arithmatex">\(\gamma\)</span> : euler定数, <span class="arithmatex">\(2 \exp({-\gamma})=1.123\)</span></li>
+<li>仮定: </li>
+<li><span class="arithmatex">\(u/\omega_p=\lambda_p &gt;&gt; \hbar/mu\)</span></li>
+<li><span class="arithmatex">\(u&gt;&gt;v_F\)</span></li>
+</ul>
+<div class="arithmatex">\[
+    w = \frac{Mu^2}{2}
+\]</div>
+<div class="arithmatex">\[
+    \begin{align*}
+    \frac{dw}{dt} = - Ze \left . \frac{\partial \Phi^{ind}}{\partial z} \right|_{z=ut, R=0} &amp;\approx\frac{Z^2 e^2 \omega_p^2}{u^2} \ln{ \frac{2 \exp(-\gamma) mu^2}{\hbar\omega_p} }\\
+    &amp;= -Z^2 n_e \frac{2\pi r_e^2}{\beta^2}\ln{ \left(\frac{2 \exp(-\gamma) mu^2}{\hbar\omega_p} \right)^2}
+    \end{align*}
+\]</div>
+<div class="arithmatex">\[
+    \frac{e^2\omega_p^2}{u^2} = \frac{4\pi e^4 n_e}{mu^2}
+        = 4 \pi \frac{r_e^2 m_e c^2 n_e }{\beta^2}
+\]</div>
+
+    </div>
+</article>
+                                <div class="mx-auto flex flex-wrap h-16 w-full max-w-2xl items-center gap-2 px-4 md:px-0">
+    
+    <a data-slot="button"
+        class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-secondary text-secondary-foreground hover:bg-secondary/80 h-8 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 shadow-none"
+        href="/shad/index.html">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="tabler-icon tabler-icon-arrow-left ">
+            <path d="M5 12l14 0"></path>
+            <path d="M5 12l6 6"></path>
+            <path d="M5 12l6 -6"></path>
+        </svg>
+        Home
+    </a>
+    
+    
+</div>
+                                <dialog id="bottom-sidebar" onclick="onBottomSidebarDialogClick(event)" class="bg-transparent"
+    style="position: fixed; left: 0px; top: 0px; transform: translate(0px, 58px); min-width: max-content; --radix-popper-transform-origin: 0% 0px; will-change: transform; z-index: 50; --radix-popper-available-width: 504px; --radix-popper-available-height: 857px; --radix-popper-anchor-width: 72.94999694824219px; --radix-popper-anchor-height: 32px;">
+    <div data-side="bottom" data-align="start" data-state="open" role="dialog" data-slot="popover-content"
+        class="text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 origin-(--radix-popover-content-transform-origin) border outline-hidden bg-background/90 no-scrollbar h-(--radix-popper-available-height) w-(--radix-popper-available-width) overflow-y-auto rounded-none border-none p-0 shadow-none backdrop-blur duration-100"
+        style="--radix-popover-content-transform-origin: var(--radix-popper-transform-origin); --radix-popover-content-available-width: var(--radix-popper-available-width); --radix-popover-content-available-height: var(--radix-popper-available-height); --radix-popover-trigger-width: var(--radix-popper-anchor-width); --radix-popover-trigger-height: var(--radix-popper-anchor-height);"
+        tabindex="-1">
+        <div class="flex flex-col gap-12 overflow-auto px-6 py-6">
+            
+            
+            
+
+            
+            <div class="flex flex-col gap-4">
+                <div class="text-muted-foreground text-sm font-medium">Menu</div>
+                <div class="flex flex-col gap-3">
+                    
+                    <a class="text-2xl font-medium" href="index.html">
+                        
+                        Home
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="01_Stopping.html">
+                        
+                        stp
+                        
+                    </a>
+                    
+                </div>
+            </div>
+            
+
+            
+            
+
+        </div>
+    </div>
+</dialog>
+                            </div>
+                            <div
+                                class="sticky top-[calc(var(--header-height)+1px)] z-30 ml-auto hidden h-[calc(100svh-var(--header-height)-var(--footer-height))] w-72 flex-col gap-4 overflow-hidden overscroll-none pb-8 xl:flex">
+                                <div class="h-(--top-spacing) shrink-0"></div>
+                                <div view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
+    <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
+        <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#_2"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            クーロン散乱
+        </a>
+        
+
+        
+        <a href="#_3"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            弾性散乱の力学
+        </a>
+        
+        
+        <a href="#_4"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            古典的な見積もり
+        </a>
+        
+        <a href="#_5"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            相対論的な粒子の散乱
+        </a>
+        
+        
+
+        
+        <a href="#_6"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            自由電子の小角度散乱累積による阻止能の計算
+        </a>
+        
+        
+        <a href="#_7"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            方針
+        </a>
+        
+        <a href="#_8"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            物理量
+        </a>
+        
+        <a href="#plasma"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            plasma波励起の阻止能を同時に考えると
+        </a>
+        
+        
+
+        
+        <a href="#_9"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            媒質の有限温度補正 /阻止能の発散抑制
+        </a>
+        
+
+        
+        <a href="#_10"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            阻止能の高速電子についての総和
+        </a>
+        
+
+        
+        <a href="#plasma_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            plasma波の阻止能
+        </a>
+        
+        
+        <a href="#bethejackson-1344"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            Betheの式（jackson (13.44)式）
+        </a>
+        
+        
+
+        
+        <a href="#dynamic-screening"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            動的遮蔽 dynamic screening による減速
+        </a>
+        
+        
+        <a href="#vager-gemmel1976"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            Vager, Gemmel(1976) 波乗りポテンシャルの計算
+        </a>
+        
+        
+
+        
+        
+        
+        
+
+    </div>
+    <div class="h-12"></div>
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer view-transition-name="footer"
+    class="group-has-[.section-soft]/body:bg-surface/40 3xl:fixed:bg-transparent dark:bg-transparent">
+    <div class="container-wrapper px-4 xl:px-6">
+        <div class="flex h-(--footer-height) items-center justify-between">
+            <div class="text-muted-foreground w-full text-center text-xs leading-loose sm:text-sm">
+                
+                <a href="https://github.com/asiffer/mkdocs-shadcn">shadcn theme</a> provided by
+                <a href="https://github.com/asiffer">@asiffer</a>
+            </div>
+        </div>
+    </div>
+</footer>
+    </div>
+     
+
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js"></script>
+
+     
+
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js"></script>
+
+     
+
+<script src="js/katex_auto.js"></script>
+
+     
+
+<script src="search/main.js"></script>
+
+
+    
+
+    <script src="js/copy-button.js"></script>
+    <script>updatePygmentsStylesheet();</script>
+    
+    <script>fetchStargazers("None");</script>
+    
+    
+    <script type="speculationrules">
+{
+  "prerender": [
+    {
+      "where": {
+          "selector_matches": ["#next-button", "#previous-button"],
+      }
+    }
+  ]
+}
+</script>
+</body>
+
+</html>

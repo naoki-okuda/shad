@@ -1,0 +1,3039 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        // for search plugin notably
+        const base_url = "https://naoki-okuda.github.io/shad/";
+    </script>
+    <script>
+    const darkTheme = window.matchMedia("(prefers-color-scheme: dark)");
+    darkTheme.onchange = (e) => {
+        if (e.matches) {
+            document.documentElement.classList.add("dark")
+            localStorage.theme = 'dark';
+        } else {
+            document.documentElement.classList.remove("dark")
+            localStorage.removeItem("theme")
+        }
+    };
+
+    // On page load. Priotiry to lcaolStorage
+    if (localStorage.theme === "dark") {
+        document.documentElement.classList.add("dark")
+    } else if (localStorage.theme === "light") {
+        document.documentElement.classList.remove("dark")
+    } else if (darkTheme.matches) {
+        document.documentElement.classList.add("dark")
+    } else {
+        document.documentElement.classList.remove("dark")
+    }
+
+    // set the layout based on localStorage
+    document.documentElement.classList.add(localStorage.getItem("html-layout") || "layout-fixed");
+</script>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>08 nonlin perturb - Cube</title>
+    
+
+
+<title>08 nonlin perturb</title>
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://naoki-okuda.github.io/shad/08_nonlin_perturb.html">
+
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+
+
+<meta property="og:title" content="08 nonlin perturb">
+
+
+
+
+
+<meta property="og:url" content="https://naoki-okuda.github.io/shad/08_nonlin_perturb.html">
+
+
+
+
+
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+
+
+<meta name="twitter:title" content="08 nonlin perturb">
+
+
+
+
+
+
+<!-- JSON-LD Structured Data -->
+
+
+
+    <link rel="icon" href="img/favicon.ico">
+
+    <link href="css/base.css" rel="stylesheet">
+    <link href="css/geist.css" rel="stylesheet">
+
+    
+    
+
+<link id="pygments-light" rel="stylesheet"
+    href="css/pygments/shadcn-light.css">
+<link id="pygments-dark" rel="stylesheet"
+    href="css/pygments/github-dark.css"
+    media="(prefers-color-scheme: dark)">
+
+
+    
+    <link href="extra.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" rel="stylesheet">
+
+    
+
+    <script src="js/callbacks.js"></script>
+
+    
+    <!-- katex -->
+<link rel="stylesheet" href="css/katex.min.css">
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="js/katex.min.js"></script>
+<!-- To automatically render math in text elements, include the auto-render extension: -->
+<script defer src="js/auto-render.min.js"
+    onload='renderMathInElement(document.body, {"macros": {"\\RR": "\\mathbb{R}", "\\dx": "\\mathrm{d}x"}});'></script>
+    
+
+    
+
+    
+
+</head>
+
+<body
+    class="text-foreground group/body overscroll-none font-sans antialiased [--footer-height:calc(var(--spacing)*14)] [--header-height:calc(var(--spacing)*14)] xl:[--footer-height:calc(var(--spacing)*24)] theme-default">
+    <div id="inner-body" class="bg-background relative z-10 flex min-h-svh flex-col">
+        <header class="bg-background sticky top-0 z-50 w-full" view-transition-name="header">
+    <div class="container-wrapper 3xl:fixed:px-0 px-6">
+        <div class="3xl:fixed:container flex h-(--header-height) items-center gap-2 **:data-[slot=separator]:!h-4">
+            <button id="menu-button" data-slot="popover-trigger" onclick="onMobileMenuButtonClick(event)"
+                class="group whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:text-accent-foreground px-4 py-2 has-[&gt;svg]:px-3 extend-touch-target h-8 touch-manipulation items-center justify-start gap-2.5 !p-0 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 active:bg-transparent dark:hover:bg-transparent flex lg:hidden"
+                type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«Rmplb»"
+                data-state="closed">
+                <div class="relative flex h-8 w-4 items-center justify-center">
+                    <div class="relative size-4">
+                        <!-- 16px x 16px -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="0" x2="16" y1="5" y2="5"
+                                class="group-data-[state=open]:translate-y-[2.25px] group-data-[state=open]:-translate-x-[2.25px] group-data-[state=open]:rotate-45 transition-all duration-300 origin-center" />
+                            <line x1="0" x2="16" y1="11" y2="11"
+                                class="group-data-[state=open]:-translate-y-[2.25px] group-data-[state=open]:-translate-x-[2.25px] group-data-[state=open]:-rotate-45 transition-all duration-300 origin-center" />
+                        </svg>
+                    </div>
+
+                    <span class="sr-only">Toggle Menu</span>
+                </div>
+                <span class="flex h-8 items-center text-lg leading-none font-medium">Menu</span>
+            </button>
+            <a data-slot="button"
+                class="items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-5 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 hidden h-8 lg:flex"
+                href="https://naoki-okuda.github.io/shad/">
+                <span class="size-8 flex flex-row justify-center items-center">
+                    
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"
+    class="size-5">
+    <rect width="256" height="256" fill="none"></rect>
+    <line x1="208" y1="128" x2="128" y2="208" fill="none" stroke="currentColor" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="32"></line>
+    <line x1="192" y1="40" x2="40" y2="192" fill="none" stroke="currentColor" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="32"></line>
+</svg>
+
+
+                </span>
+
+                
+                <h1 class="pr-2">Cube</h1>
+                
+            </a>
+            
+            <nav class="items-center gap-0.5 hidden lg:flex">
+    
+</nav>
+            
+            <div class="ml-auto flex items-center gap-2 md:flex-1 md:justify-end">
+                <div class="hidden w-full flex-1 md:flex md:w-auto md:flex-none">
+                    <button data-slot="dialog-trigger" onclick="onSearchBarClick(event)"
+    class="inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-secondary/80 px-4 py-2 has-[&gt;svg]:px-3 bg-surface text-surface-foreground/60 dark:bg-card relative h-8 w-full justify-start pl-2.5 font-normal shadow-none sm:pr-12 md:w-40 lg:w-56 xl:w-64"
+    type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«R66plb»" data-state="closed">
+    <span class="text-muted-foreground hidden lg:inline-flex">Search documentation...</span>
+    <span class="text-muted-foreground inline-flex lg:hidden">Search...</span>
+    <div class="absolute top-1.5 right-1.5 hidden gap-1 sm:flex">
+        <kbd
+            class="bg-background text-muted-foreground pointer-events-none flex h-5 items-center justify-center gap-1 rounded border px-1 font-sans text-[0.7rem] font-medium select-none [&amp;_svg:not([class*='size-'])]:size-3">Ctrl</kbd><kbd
+            class="bg-background text-muted-foreground pointer-events-none flex h-5 items-center justify-center gap-1 rounded border px-1 font-sans text-[0.7rem] font-medium select-none [&amp;_svg:not([class*='size-'])]:size-3 aspect-square">K</kbd>
+    </div>
+</button>
+<dialog id="search-dialog" onclick="onSearchDialogClick(event)"
+    class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background rounded-lg shadow-lg border overflow-hidden p-0">
+    <div class="w-lg gap-4">
+        <div class="flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground">
+            <div data-slot="command-input-wrapper" class="flex h-9 items-center gap-2 border-b px-3"><svg
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-search size-4 shrink-0 opacity-50">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                </svg>
+                <input data-slot="command-input"
+                    class="placeholder:text-muted-foreground flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
+                    placeholder="Search documentation..." cmdk-input="" autocomplete="off" autocorrect="off"
+                    spellcheck="false" aria-autocomplete="list" role="combobox" aria-expanded="true"
+                    aria-controls="radix-«r1t6»" aria-labelledby="radix-«r1t7»" id="radix-«r1t8»" type="text" value=""
+                    aria-activedescendant="radix-«r1th»" oninput="onInputHandler(event)">
+            </div>
+        </div>
+        <div id="mkdocs-search-results">
+            <!-- search results go there -->
+        </div>
+    </div>
+</dialog>
+<script>
+    document.removeEventListener("keydown", searchShortcutHandler);
+    document.addEventListener("keydown", searchShortcutHandler);
+</script>
+                </div>
+                <div data-orientation="vertical" role="none" data-slot="separator"
+                    class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px ml-2 hidden lg:block">
+                </div>
+                <a target="_blank" rel="noreferrer" data-slot="button"
+                    class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 h-8 shadow-none"
+                    href="None">
+                    <svg viewBox="0 0 438.549 438.549">
+                        <path fill="currentColor"
+                            d="M409.132 114.573c-19.608-33.596-46.205-60.194-79.798-79.8-33.598-19.607-70.277-29.408-110.063-29.408-39.781 0-76.472 9.804-110.063 29.408-33.596 19.605-60.192 46.204-79.8 79.8C9.803 148.168 0 184.854 0 224.63c0 47.78 13.94 90.745 41.827 128.906 27.884 38.164 63.906 64.572 108.063 79.227 5.14.954 8.945.283 11.419-1.996 2.475-2.282 3.711-5.14 3.711-8.562 0-.571-.049-5.708-.144-15.417a2549.81 2549.81 0 01-.144-25.406l-6.567 1.136c-4.187.767-9.469 1.092-15.846 1-6.374-.089-12.991-.757-19.842-1.999-6.854-1.231-13.229-4.086-19.13-8.559-5.898-4.473-10.085-10.328-12.56-17.556l-2.855-6.57c-1.903-4.374-4.899-9.233-8.992-14.559-4.093-5.331-8.232-8.945-12.419-10.848l-1.999-1.431c-1.332-.951-2.568-2.098-3.711-3.429-1.142-1.331-1.997-2.663-2.568-3.997-.572-1.335-.098-2.43 1.427-3.289 1.525-.859 4.281-1.276 8.28-1.276l5.708.853c3.807.763 8.516 3.042 14.133 6.851 5.614 3.806 10.229 8.754 13.846 14.842 4.38 7.806 9.657 13.754 15.846 17.847 6.184 4.093 12.419 6.136 18.699 6.136 6.28 0 11.704-.476 16.274-1.423 4.565-.952 8.848-2.383 12.847-4.285 1.713-12.758 6.377-22.559 13.988-29.41-10.848-1.14-20.601-2.857-29.264-5.14-8.658-2.286-17.605-5.996-26.835-11.14-9.235-5.137-16.896-11.516-22.985-19.126-6.09-7.614-11.088-17.61-14.987-29.979-3.901-12.374-5.852-26.648-5.852-42.826 0-23.035 7.52-42.637 22.557-58.817-7.044-17.318-6.379-36.732 1.997-58.24 5.52-1.715 13.706-.428 24.554 3.853 10.85 4.283 18.794 7.952 23.84 10.994 5.046 3.041 9.089 5.618 12.135 7.708 17.705-4.947 35.976-7.421 54.818-7.421s37.117 2.474 54.823 7.421l10.849-6.849c7.419-4.57 16.18-8.758 26.262-12.565 10.088-3.805 17.802-4.853 23.134-3.138 8.562 21.509 9.325 40.922 2.279 58.24 15.036 16.18 22.559 35.787 22.559 58.817 0 16.178-1.958 30.497-5.853 42.966-3.9 12.471-8.941 22.457-15.125 29.979-6.191 7.521-13.901 13.85-23.131 18.986-9.232 5.14-18.182 8.85-26.84 11.136-8.662 2.286-18.415 4.004-29.263 5.146 9.894 8.562 14.842 22.077 14.842 40.539v60.237c0 3.422 1.19 6.279 3.572 8.562 2.379 2.279 6.136 2.95 11.276 1.995 44.163-14.653 80.185-41.062 108.068-79.226 27.88-38.161 41.825-81.126 41.825-128.906-.01-39.771-9.818-76.454-29.414-110.049z">
+                        </path>
+                    </svg>
+                    
+                    <span id="stargazers" class="text-muted-foreground w-8 text-xs tabular-nums" onload="test()">
+                    </span>
+                    
+                </a>
+                <div data-orientation="vertical" role="none" data-slot="separator"
+                    class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px 3xl:flex hidden">
+                </div>
+                <button data-slot="button"
+                    class="items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 size-8 3xl:flex hidden"
+                    title="Toggle layout" onclick="toggleLayout(event)">
+                    <span class="sr-only">Toggle layout</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-gallery-horizontal">
+                        <path d="M2 3v18"></path>
+                        <rect width="12" height="18" x="6" y="3" rx="2"></rect>
+                        <path d="M22 3v18"></path>
+                    </svg>
+                </button>
+                <div data-orientation="vertical" role="none" data-slot="separator"
+                    class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px">
+                </div>
+                <button data-slot="button"
+                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 group/toggle extend-touch-target size-8"
+                    title="Toggle theme" onclick="onThemeSwitch(event)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="size-4.5">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                        <path d="M12 3l0 18"></path>
+                        <path d="M12 9l4.65 -4.65"></path>
+                        <path d="M12 14.3l7.37 -7.37"></path>
+                        <path d="M12 19.6l8.85 -8.85"></path>
+                    </svg>
+                    <span class="sr-only">Toggle theme</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+        <main class="flex flex-1 flex-col">
+            <div class="container-wrapper flex flex-1 flex-col px-2">
+                <div data-slot="sidebar-wrapper" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;"
+                    class="group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex w-full 3xl:fixed:container 3xl:fixed:px-3 min-h-min flex-1 items-start px-0 [--sidebar-width:220px] [--top-spacing:0] lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)] lg:[--sidebar-width:240px] lg:[--top-spacing:calc(var(--spacing)*4)]">
+                    <div data-slot="sidebar"
+                        class="text-sidebar-foreground w-(--sidebar-width) flex-col sticky top-[calc(var(--header-height)+1px)] z-30 hidden h-[calc(100svh-var(--header-height)-var(--footer-height))] bg-transparent lg:flex">
+                        <div data-slot="sidebar-content" data-sidebar="content"
+                            class="flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden no-scrollbar px-2 pb-12">
+                            <div class="h-(--top-spacing) shrink-0"></div>
+                            <div view-transition-name="sidebar" data-slot="sidebar-group" data-sidebar="group"
+    class="relative flex w-full min-w-0 flex-col p-2 no-scrollbar">
+    
+
+    
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    <div data-slot="sidebar-group" data-sidebar="group" class="relative flex w-full min-w-0 flex-col p-2">
+        <div data-slot="sidebar-group-content" data-sidebar="group-content" class="w-full text-sm">
+            <ul data-slot="sidebar-menu" data-sidebar="menu" class="flex w-full min-w-0 flex-col gap-0.5">
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/index.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        Home
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/01_non-lin-diff-analyticals.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        非線形拡散
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/02juttner.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        Jüttner分布
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/03_scale_inv_VM.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        Maxwell-Vlasov系のスケール変換
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/LL_4_Collisions_in_Plasmas.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        kinetics PROBLEM
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+
+    
+
+
+    
+</div>
+                        </div>
+                    </div>
+                    <div class="h-full w-full">
+                        <div data-slot="docs" class="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full">
+                            <div class="flex min-w-0 flex-1 flex-col">
+                                <div class="h-(--top-spacing) shrink-0"></div>
+                                <article class="w-full" view-transition-name="page">
+  <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-2">
+      <div id="page-header" class="flex items-start justify-between">
+        <h1
+          class="scroll-m-20 text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl"
+        >
+          08 nonlin perturb
+        </h1>
+
+        <div class="flex items-center gap-2 pt-1.5">
+          
+<button onclick="fetch(`https://naoki-okuda.github.io/shad/08_nonlin_perturb.md`).then((r) => r.blob()).then((blob) => navigator.clipboard.write([new ClipboardItem({ 'text/plain': blob })]))" 
+        data-slot="button" 
+        class="cursor-pointer inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md gap-1.5 px-3 has-[&>svg]:px-2.5 h-8 shadow-none md:h-7 md:text-[0.8rem]">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-copy ">
+    <path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z"></path><path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1"></path>
+</svg>
+<span class="max-md:hidden">Copy Page</span>
+</button> 
+           
+          
+        </div>
+      </div>
+      
+    </div>
+    <div class="flex justify-end items-center">
+       
+    </div>
+  </div>
+  <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
+    <ul>
+<li>熱容量が空間一様な時の拡散方程式。</li>
+</ul>
+<div class="arithmatex">\[
+    \frac{\partial T}{\partial t} =  - \nabla q
+\]</div>
+<div class="arithmatex">\[
+    q = -  \kappa \nabla T
+\]</div>
+<div class="arithmatex">\[
+    \kappa =   \kappa_0 T^n 
+\]</div>
+<div class="arithmatex">\[
+    \frac{\partial T}{\partial t} = \frac{2}{7} \kappa_0 \frac{\partial ^2 T^{7/2}}{\partial x^2}   
+\]</div>
+<p>解の空間形状を仮定。(フロント部に典型的な自己相似形)</p>
+<div class="arithmatex">\[
+    T_0 = A(t)*(1-\frac{x}{x_f(t)})^{2/5}
+\]</div>
+<p>この時、偏微分は</p>
+<div class="arithmatex">\[
+\begin{align*}
+    \frac{\partial T_0}{\partial t} &amp;= A'(t)*(1-\frac{x}{x_f(t)})^{2/5} 
+    + \frac{2}{5} A(t)*(1-\frac{x}{x_f(t)})^{-3/5} \frac{x v_f(t)}{x_f^2(t)}\\
+    \frac{2}{7} \kappa_0 \frac{\partial T_0^{7/2}}{\partial x}
+    &amp;= \frac{2}{7} \kappa_0 A^{7/2}(t)* (1-\frac{x}{x_f}) ^{2/5} * \frac{-7}{5x_f} = -q_0\\
+    \frac{2}{7} \kappa_0 \frac{\partial^2 T_0^{7/2}}{\partial x^2}
+    &amp;= \frac{4}{25} \kappa_0 A^{7/2}(t)* (1-\frac{x}{x_f}) ^{-3/5} * \frac{1}{x_f^2} = Q_0\\
+    \end{align*}
+\]</div>
+<p>A,x_fが満たすべき方程式は以下で与えられる。</p>
+<div class="arithmatex">\[
+\begin{align*}
+   A'(t)*(1-\frac{x}{x_f(t)})^{2/5} 
+    + \frac{2}{5} A(t)*(1-\frac{x}{x_f(t)})^{-3/5} \frac{x v_f}{x_f^2}
+    &amp;= \frac{4}{25} \kappa_0 A^{7/2}(t)* (1-\frac{x}{x_f}) ^{-3/5} * \frac{1}{x_f^2}  \\
+    \frac{A'}{A^{7/2}}(1 - \frac{x}{x_f})x_f^2  + \frac{2x v_f}{5A^{5/2}} = \frac{4}{25}\kappa_0\\
+    \frac{A'x_f^2 }{A^{7/2}}  +x( \frac{2v_f}{5A^{5/2}} - \frac{A'x_f }{A^{7/2}}) = \frac{4}{25}\kappa_0\\    
+\end{align*}
+\]</div>
+<p>xの係数と定数部分でそれぞれバランスする必要があるので、</p>
+<div class="arithmatex">\[
+    \frac{2}{5}\frac{x_f'}{x_f} = \frac{A'}{A}, \quad x_f=C A^{5/2}
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+    \frac{A' x_f^2}{A^{7/2} }&amp;= \frac{4}{25} \kappa_0 \\
+    C^2\frac{2}{5}\frac{d A^{5/2}}{dt}&amp;= \frac{4}{25} \kappa_0 \\
+    A &amp;= \left( \frac{2\kappa_0}{5C^2} t + A_0^{5/2} \right) ^{2/5} 
+    = A_0\left(\frac{5v_0^2 t}{2\kappa_0 A_0^{5/2}}+1 \right) ^{2/5}\\
+    x_f &amp;=  \frac{2\kappa_0}{5C} t + C A_0^{5/2}  = v_0 t + \frac{2 \kappa_0 A_0^{5/2}}{5v_0}\\
+\end{align*}
+\]</div>
+<p>最初の解の仮定に戻して、結局解のフリーパラメータは二個になる。２本の未知関数について解いた積分定数。</p>
+<div class="arithmatex">\[
+\begin{align*}
+    T_0(t,x) &amp;= A_0\left(\frac{5v_0^2 t}{2\kappa_0 A_0^{5/2}}+1 \right) ^{2/5} 
+    (1-\frac{x}{x_f(t)})^{2/5}\\
+    &amp;= A_0 \left[ \frac{5v_0 }{2\kappa_0 A_0^{5/2}} (x_f(t)-x) \right]^{2/5} \\
+    &amp;=  \left[ \frac{5v_0 }{2\kappa_0 } (v_0 t -(x-x_0))\right]^{2/5} 
+\end{align*}
+\]</div>
+<blockquote>
+<p>密度が一様(媒質の熱容量が一様)のとき、<span class="arithmatex">\(2/5\)</span>乗のべきで空間的にフロント構造を作る解形状を仮定すると、定数速度の解が出てくる。</p>
+</blockquote>
+<h3 id="_1">デルタソースからの拡散</h3>
+<ul>
+<li>x&gt;0の範囲だけで考えれば、自由境界（断熱的な境界,エネルギーの注入・流出がない）からの自由な拡散に対応している。</li>
+<li>zeldovich p664</li>
+</ul>
+<div class="arithmatex">\[
+    \partial_t T = \kappa_0 \partial_x [T^n \partial_x T]
+\]</div>
+<div class="arithmatex">\[
+    \xi =\frac{x}{(\kappa_0 Q^nt)^{ 1/(n+2) }}
+\]</div>
+<ul>
+<li><span class="arithmatex">\(T(t=0) = Q\delta(x)\)</span>, 初期に落とされるエネルギーの総量</li>
+<li><span class="arithmatex">\([Q]=[T*x]\)</span>, <span class="arithmatex">\([\kappa_0 Q^n t] = [x^{2+n}]\)</span></li>
+<li><span class="arithmatex">\(x_f \sim (\kappa_0 Q^nt)^{1/n+2}\)</span></li>
+<li>広がって薄まるのを相殺できるように、自己相似の係数を選ぶ。</li>
+</ul>
+<div class="arithmatex">\[
+    T(x,t) = \frac{f(\xi)}{t^{1/(n+2)}}
+\]</div>
+<div class="arithmatex">\[
+    \begin{align*}
+        \partial_t T(x,t) &amp;= \frac{-f- \xi f'}{(n+2)t^{1/(n+2)} t} \\
+        \kappa_0 \partial_x [T^n \partial_x T] 
+        &amp;= 
+        \frac{\kappa_0}{(\kappa_0 Q^n t)^{2/(n+2)}t ^{(n+1)/n+2}} (f^n f')'\\
+        &amp;= 
+        \left( \frac{\kappa_0}{Q^2} \right)^{n/(n+2)} \frac{(f^n f')'}{t^{1/(n+2)}t}
+    \end{align*}
+\]</div>
+<ul>
+<li>次のように取り直した方が係数が綺麗になることがわかる。</li>
+</ul>
+<div class="arithmatex">\[
+    T(x,t) = \left( \frac{Q^2}{\kappa_0 t} \right)^{1/(n+2)}f(\xi)
+\]</div>
+<ul>
+<li>結局解くべき常微分方程式は</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+&amp;(n+2) (f^n f')' + \xi f' + f = 0\\
+&amp;f  = K^{1/n}, \quad   K = f^{n}\\
+&amp;(n+2) ( K   (K^{1/n} )')' 
++ \xi  (K^{1/n})' + K^{1/n} = 0 \\
+\end{align*}
+\]</div>
+<p>変数変換後、整理すると、</p>
+<div class="arithmatex">\[
+\begin{align*}
+(n+2) ( K   (K^{1/n} )')'  &amp;= (n+2)(K^{1/n}/n K')'\\
+&amp;= 
+\frac{n+2}{n}[ K^{1/n} K'' + \frac{K^{((1/n) -1)K'^2}}{n}]\\
+\xi(K^{1/n})' &amp;= \frac{\xi}{n} K^{(1/n)-1} K'
+\end{align*}
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+\frac{n+2}{n}[ K^{1/n} K'' + \frac{K^{((1/n) -1)K'^2}}{n}]
++
+ \frac{\xi}{n} K^{(1/n)-1} K'+ K^{1/n} 
+ &amp;= 0\\
+\frac{n+2}{n}[ K'' +  \frac{K'^2}{nK}]
++
+ \xi\frac{K'}{nK} + 1 &amp;=0 
+\end{align*}
+\]</div>
+<ul>
+<li>解が二次関数で書けると仮定してみる。</li>
+</ul>
+<div class="arithmatex">\[
+K = a\xi^2 + b\xi + c\\
+K' = 2a\xi +b\\
+K = 2a
+\]</div>
+<ul>
+<li>微分方程式は、</li>
+</ul>
+<div class="arithmatex">\[
+ (n+2) [2a (a\xi^2 + b\xi + c) + (2a\xi+b)^2/n] 
+ +(2a\xi +b)\xi  + n(a\xi^2 + b\xi + c) = 0\\
+ \xi^2 [(n+2)(2 +4/n)a^2+(2+n)a]  \\
+ +\xi [(n+2)(2+4/n)ab +b (1+n)] \\
+ +[(n+2) (2ac+b^2/n) +nc] = 0\\
+ a = -\frac{n}{2(n+2)}\\
+ b = 0\\
+ c = 任意
+\]</div>
+<ul>
+<li>cの任意性は初期に与える総エネルギーの任意性に対応している。</li>
+</ul>
+<div class="arithmatex">\[
+    K = - \frac{n}{2(n+2)}\xi^2 + c
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+    f &amp;= K^{1/n} =  [ - \frac{n}{2(n+2)}\xi^2 + c]^{1/n}\\
+    f &amp;= [\frac{n}{2(n+2)}]^{1/n} [\xi_0^2 - \xi^2]^{1/n} \\
+      &amp;= [\frac{n}{2(n+2)}]^{1/n} [\xi_0 + \xi]^{1/n} [\xi_0-\xi]^{1/n} \\
+    \end{align*}
+\]</div>
+<ul>
+<li>この解もフロントの落ち方はほぼ同じ。　　<span class="arithmatex">\((x_f-x)^{1/n}\)</span></li>
+</ul>
+<h3 id="_2">別の解を探す。</h3>
+<p>解の空間形状を仮定。(フロント部に典型的な自己相似形)</p>
+<div class="arithmatex">\[
+    T_0 = A(t)*(1- (\frac{x}{x_f(t)})^m )^{2/5}
+\]</div>
+<p>この時、偏微分は</p>
+<div class="arithmatex">\[
+\begin{align*}
+    \frac{\partial T_0}{\partial t} &amp;= A'(t)*(1- (\frac{x}{x_f(t)})^m )^{2/5}
+    + \frac{2}{5} A(t)*(1- (\frac{x}{x_f(t)})^m)^{-3/5} \frac{x v_f(t)}{x_f^2(t)}\\
+    \frac{2}{7} \kappa_0 \frac{\partial T_0^{7/2}}{\partial x}
+    &amp;= \frac{2}{7} \kappa_0 A^{7/2}(t)* (1-\frac{x}{x_f}) ^{2/5} * \frac{-7}{5x_f} = -q_0\\
+    \frac{2}{7} \kappa_0 \frac{\partial^2 T_0^{7/2}}{\partial x^2}
+    &amp;= \frac{4}{25} \kappa_0 A^{7/2}(t)* (1-\frac{x}{x_f}) ^{-3/5} * \frac{1}{x_f^2} = Q_0\\
+    \end{align*}
+\]</div>
+<h1 id="_3">密度勾配の下での伝播</h1>
+<ul>
+<li>密度が一様(媒質の熱容量が一様)のとき、定数速度で進行する解を仮定すると、フロント部分の積分が常微分方程式を解く問題に帰着して、　簡単な二階積分で解が得られる。（ゼルドヴィッチレイザー p.661）</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+\partial_t T &amp;= \kappa_0 \partial_x T^{n}\\
+T(x,t) &amp;= T_f(x-vt)\\
+\partial_t T  &amp;= -vT_f'\\
+\kappa_0 \partial_x T^{n} \partial_x T &amp;=  \kappa_0 ( T_f^n T_f' )'\\
+-v T_f + c_1 &amp;= \kappa_0 T_f^{n} T_f',\quad c_1=0(T_f = 0)\\
+-1 &amp;= \frac{\kappa_0}{v} T_f^{n-1} T_f' \\
+-1 &amp;= \frac{\kappa_0}{n v} (T_f^{n})'\\
+x-vt-(x_0-vt_0) &amp;= \frac{\kappa_0}{n v} T_f^{n} \\
+T_f(x-vt) &amp;= [\frac{nv}{\kappa_0}(x-vt-(x_0-vt_0))]^{1/n}
+\end{align*}
+\]</div>
+<ul>
+<li>熱容量がexpに空間変化する媒質中の非線形拡散を考える。</li>
+</ul>
+<div class="arithmatex">\[
+    \frac{\partial T}{\partial t} = \frac{2}{7} e^{-x/L} \kappa_0 \frac{\partial ^2 T^{7/2}}{\partial x^2}   
+\]</div>
+<ul>
+<li>同様の発想で、以下の</li>
+</ul>
+<div class="arithmatex">\[
+x_f \sim L\ln{t}
+\]</div>
+<div class="arithmatex">\[
+T_L(x-aL\ln{t})
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial T_L(x-L\ln{t})}{\partial t} = -\frac{aL T_L'}{t}
+\]</div>
+<div class="arithmatex">\[
+\frac{\partial^2 T_L^{7/2}(x-L\ln{t})}{\partial x^2} =  (T_L^{7/2})''
+\]</div>
+<div class="arithmatex">\[
+    \xi = x-aL\ln{t}
+\]</div>
+<div class="arithmatex">\[
+    -\frac{aL}{t}\frac{dT_L}{d\xi}=\frac{2}{7}e^{-x/L}\kappa_0 \frac{d^2 T^{7/2}}{d\xi^2}
+\]</div>
+<ul>
+<li>やはりa=1でなければ常微分方程式のクラスに持っていけないのでは。　　← tの境界温度のスケーリングを追加して解決。</li>
+<li>ここでは<span class="arithmatex">\(a=1\)</span>に限定して考える。</li>
+</ul>
+<div class="arithmatex">\[
+\boxed{
+    L\frac{dT_L}{d\xi}= -\frac{2}{7}e^{-\xi/L}\kappa_0 \frac{d^2 T^{7/2}}{d\xi^2} }
+\]</div>
+<ul>
+<li>変数の整理で、常微分方程式を解く問題に帰着する。この解は存在するか？</li>
+<li>解の存在がいえるのだとすれば、それが物理的な解かどうかが問題になる。</li>
+<li>存在はすると考えている。実際、数値解は比較的安定に得られている。</li>
+<li><span class="arithmatex">\(\xi \to -\infty\)</span>の方で、</li>
+</ul>
+<div class="arithmatex">\[
+    \frac{dT_L}{d\xi}= -\frac{2}{7}e^{-\xi/L} \frac{\kappa_0}{L} \frac{d^2 T^{7/2}}{d\xi^2} 
+    = -e^{\xi/L}\frac{\kappa_0}{L} \frac{d}{d\xi} (T^{5/2} T')
+\]</div>
+<div class="arithmatex">\[
+     \frac{dT_L}{L d\xi/L}= -\frac{2}{7}e^{-\xi/L}\frac{\kappa_0}{L} \frac{d^2 T^{7/2}}{L^2 d(\xi/L)^2} 
+\]</div>
+<p><span class="arithmatex">\(s=\xi/L\)</span>, <span class="arithmatex">\(\kappa_0/(L^2) =D_0\)</span>, $U(s) = T_L(\xi) $で</p>
+<div class="arithmatex">\[
+U' = -\frac{2D_0}{7} e^{-s} (U^{7/2})'' = -D_0 e^{-s} \frac{d}{ds} U^{5/2} U'
+\]</div>
+<ul>
+<li>s＜0が事実上の定義域として、s&gt;0で0になるような解。</li>
+<li>例えば、一次元の自己相似解から借用して、T(x)=K(x)^{2/5}依存性の解を探す。</li>
+<li>温度が非負なので、値域は問題ない。</li>
+</ul>
+<div class="arithmatex">\[
+U = K^{2/5}
+\]</div>
+<div class="arithmatex">\[
+U' = \frac{2}{5} K^{-3/5} K'
+\]</div>
+<div class="arithmatex">\[
+-D_0 e^{-s} \frac{d}{ds} U^{5/2} U' = -D_0 e^{-s} \frac{d}{ds} \frac{2K^{2/5} K'}{5} = -D_0 e^{-s} \frac{2}{5}[ \frac{2}{5}K^{-3/5} K'^2 + K^{2/5} K'']
+\]</div>
+<div class="arithmatex">\[
+1 = -D_0 e^{-s} [\frac{2}{5}K' + \frac{K K''}{K'}]
+\]</div>
+<ul>
+<li>分数冪を消すことができた。整数べきと、整数階微分の常微分方程式。</li>
+<li>sについて、テーラー展開すれば、係数に対する方程式出せるかな。</li>
+<li>フロント構造の存在を仮定する。K(s)=0となるsが存在するという仮定。</li>
+<li>K(s=0) = 0で一般性失わないだろう。<span class="arithmatex">\(s\to s+s'\)</span>で、<span class="arithmatex">\(D_0\to D_0' = D_0 e^{-s'}\)</span>でクッションすればいい。（系の並進対称。）</li>
+<li>あるいは、expの係数をd/ds + a = e^-a d/ds e^a で消していけるだろうか。</li>
+</ul>
+<div class="arithmatex">\[
+   K' =   -D_0 e^{-s}   \left[\frac{2}{5}K'^2 + K K''\right]
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+　    K   &amp;=        as +    bs^2 +  cs^3 + ds^4..\\
+    K'  &amp;=  a  + 2bs +   3cs^2 + 4ds^3     ..\\
+    K'' &amp;= 2b  + 6cs +  12ds^2 ..\\
+\end{align*}
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+    K'^2    &amp;=   a^2 + 4abs + ( 4b^2  +  6ac ) s^2 +.. \\
+    K K''   &amp;=         2abs + ( 2b^2  +  6ac ) s^2 + ..\\
+    \frac{2}{5}K'^2 + KK'' &amp;= \frac{2}{5}a^2 + \frac{18}{5}abs   + (\frac{18}{5} b^2 +\frac{42}{5}ac s^2) + ..\\
+    e^{-s} &amp;= 1-s+\frac{s^2}{2}+...\\
+    e^{-s} [\frac{2}{5}K'^2 + KK''] 
+    &amp;= 
+    \frac{2}{5}a^2 + (\frac{18}{5}ab - \frac{2}{5}a^2)s   
+    + (\frac{1}{5}a^2 + \frac{18}{5} b^2 +\frac{42}{5}ac -\frac{18}{5}ab) + ..\\
+\end{align*}
+\]</div>
+<ul>
+<li>微分方程式の係数を比較して、</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align}
+    a&amp;= \frac{-2D_0 a^2}{5}\\
+    2b &amp;= -D_0 (\frac{18}{5}ab - \frac{2}{5}a^2) \\
+    3c &amp;= -D_0(\frac{1}{5}a^2 + \frac{18}{5} b^2 +\frac{42}{5}ac -\frac{18}{5}ab)
+\end{align}
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+    a  &amp;= -\frac{5}{2D_0}\\
+    2b &amp;= -D_0 (\frac{18}{5}ab - \frac{2}{5}a^2) 
+       =  (9b+\frac{5}{2D_0} )\\
+    b  &amp;= -\frac{5}{14D_0}  = \frac{a}{7} \\
+    3c &amp;= -D_0(\frac{1}{5}a^2 + \frac{18}{5} b^2 +\frac{42}{5}ac -\frac{18}{5}ab)\\
+    &amp;= 
+    -D_0(\frac{1}{5}a^2 + \frac{18}{5*49} a^2 +\frac{42}{5}ac -\frac{18}{5*7}a^2)\\
+    [3-21 ] c&amp;=  - \frac{D_0}{5*7*7} [49 - 18*6] a^2 = -\frac{59}{5*7*7} a^2 \\
+    c
+    &amp;= 
+    D_0 \frac{59}{5*7*7*18}a^2 =    - \frac{59}{(2*3*7)^2} a
+\end{align*}
+\]</div>
+<ul>
+<li>これを無限に繰り返して、級数解が得られる。収束性は不明。</li>
+</ul>
+<div class="arithmatex">\[
+    K(s) = \sum_{i\ge1} a_i s^i = -\frac{5}{2D_0} [s+ \frac{1}{7}s^2+\frac{59}{(2*3*7)^2}s^3 + O(s^4)]
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+    U(s) = T &amp;= \left[\sum_{n\ge1} a_n s^n\right]^{2/5} \\
+    &amp;= \left[ -\frac{5}{2D_0} [s+ \frac{1}{7}s^2+\frac{59}{(2*3*7)^2}s^3 + O(s^4)] \right]^{2/5}\\
+\end{align*}
+\]</div>
+<div class="arithmatex">\[
+    \left(s = \frac{x}{L} - \ln{t}, \quad D_0 =\kappa_0/ L^2 \right)
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+    x_f(t) &amp;= L\ln{t}+ x_0\\
+    n_f(t) &amp;= \exp(x_f(t)/L)\\
+    v_f(t) &amp;= \frac{L}{t}
+\end{align*}
+\]</div>
+<ul>
+<li>大域的な解がきちんとこれで収束するかは不明だが、フロント部分の局所解は表現できているだろう。</li>
+<li>なぜなら、主要項のsの一次で、空間依存性が密度勾配なしの解（あるいは,<span class="arithmatex">\(L\to \infty\)</span>）に一致する。</li>
+</ul>
+<p>一般項として、級数解を出すならば、(a_0=0はK(s=0)=0のフロントの仮定)</p>
+<div class="arithmatex">\[
+\begin{align*}
+    K  (s)  &amp;= \sum_{n\ge1} a_n s^n \\
+    K' (s)  &amp;= \sum_{n\ge1} n a_n s^{n-1} \\  
+            &amp;= \sum_{n\ge0} (n+1) a_{n+1} s^n\\  
+    K''(s)  &amp;= \sum_{n\ge1} n(n-1) a_n s^{n-1} = \sum_{n\ge2} n(n-1) a_n s^{n-2} \\
+            &amp;= \sum_{n\ge0} (n+2)(n+1) a_{n+2} s^{n} \\
+\end{align*}
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+    K'^2 (s)    &amp;=  \sum_{n,m\ge0} (n+1)(m+1) a_{n+1} a_{m+1} s^{n+m}\\  
+                &amp;=  a_1^2 +\sum_{n,m\ge1} (n+1)(m+1) a_{n+1} a_{m+1} s^{n+m} 
+                  + \sum_{n=0,   m\ge1} (m+1) a_{1} a_{m+1} s^{m}
+                  + \sum_{n\ge1, m=0  } (n+1) a_{n+1} a_{1} s^{n}\\    
+                &amp;=  a_1^2 +\sum_{n,m\ge1} (n+1)(m+1) a_{n+1} a_{m+1} s^{n+m} 
+                  + 2a_{1} \sum_{n=0,   m\ge1} (m+1)  a_{m+1} s^{m}\\
+    K(s)K''(s)  &amp;=　\sum_{n\ge1} \sum_{m\ge0} (m+2)(m+1) a_n a_{m+2} s^{n+m} \\
+                &amp;=　\sum_{n,m\ge1}   (m+2)(m+1) a_n a_{m+2} s^{n+m}    
+                  + 2a_{2} \sum_{n\ge1,m=0} a_n s^{n} \\\\
+\end{align*}
+\]</div>
+<p>$$
+\begin{align*}  </p>
+<p>\end{align*}
+$$</p>
+<h2 id="sto-infty"><span class="arithmatex">\(s\to -\infty\)</span>の振る舞い</h2>
+<ul>
+<li>級数解は<span class="arithmatex">\(s&lt; \sim 0\)</span> での温度の振る舞いを見ている。次に気になるのは<span class="arithmatex">\(s\ll0\)</span>の振る舞い。</li>
+<li>一つの考え方は常微分方程式の数値解を初期値問題として、計算する。それで物理的な解か否かの判定が可能だろう。</li>
+<li><span class="arithmatex">\(s \sim&lt; 0\)</span>で、K'は級数解の数値を参考に初期値,<span class="arithmatex">\(K_0,K'_0\)</span>を与えて,<span class="arithmatex">\(s\to-\infty\)</span>で解軌道を構成する。</li>
+<li><span class="arithmatex">\(K''\)</span>は位置<span class="arithmatex">\(K\)</span>と速度<span class="arithmatex">\(K'\)</span>で決まる粒子の加速度のようなもの。hamiltonianはなさそう。</li>
+<li>相空間の流線はsにあらわによる。</li>
+<li><span class="arithmatex">\(s\to -\infty\)</span>における一つの自明な解は、<span class="arithmatex">\(K=const.\,\,(&gt;0)\)</span>。これに漸近していくなら嬉しい。</li>
+<li>おそらく、物理的に無限に進行する解を探しているので、発散するのではと思う。</li>
+<li>あるいは増加して、発散するとしても、それが物理的に真っ当にゆっくり増えていくなら問題ない。</li>
+</ul>
+<div class="arithmatex">\[
+\boxed{
+   K' =   -D_0 e^{-s}   \left[\frac{2}{5}K'^2 + K K''\right]}
+\]</div>
+<div class="arithmatex">\[
+    K'' = \left[ -\frac{e^s}{D_0} - \frac{2K'}{5} \right]\frac{K'}{K}
+\]</div>
+<p>例えば、指数の方が早く減衰するとすれば、一項目を落として、</p>
+<div class="arithmatex">\[
+\begin{align*}
+    K'' &amp;= -\frac{2K'}{5} \frac{K'}{K}\\
+    K' K^{2/5} &amp;= C_1  \quad (&lt;0, K'&lt;0, K&gt;0)\\
+    K^{7/5} &amp;= \frac{5}{7}C_1 s+C_2\\
+    K  &amp;= \left[ \frac{5}{7}C_1 s+C_2 \right] ^{5/7}\\
+    U &amp;= T = K^{2/5} = \left[ \frac{5}{7}C_1 s+C_2 \right] ^{2/7}\\
+        &amp;= \left[ \frac{5}{7}C_1 (\frac{x}{L}-\ln{t})+C_2 \right] ^{2/7}\\
+    \end{align*}
+\]</div>
+<ul>
+<li>これは物理的に真っ当な解なのでは。</li>
+<li>翻って、e^sを落とす仮定はこの解と一貫しているだろう。(べきと指数の減少の速さ。)</li>
+<li>境界の温度が<span class="arithmatex">\((\ln{t})^{2/7}\)</span>で上がる解。</li>
+<li>空間的には、<span class="arithmatex">\((-Ax + B)^{2/7}\)</span>で分布。</li>
+<li>これ単純に温度の7/2に凸がないという解か。輸送が釣り合う解。</li>
+</ul>
+<h2 id="plasma">plasma中の輸送として、真っ当な範囲の解はどのようなものか。</h2>
+<p>数値計算の方針としては、</p>
+<div class="arithmatex">\[  
+    K(s; K_0 , K'_0, D_0, L,a, n_0,c_v,t_0)
+\]</div>
+<ul>
+<li>実際上の問題での解の性質を議論するなら、以下を考慮する必要があるだろう。</li>
+<li>spitzer-harmの輸送係数</li>
+<li>問題とする密度やそのスケール長</li>
+<li>入力の熱・境界条件</li>
+<li>plasma以外の非線形拡散輸送。 -&gt; porous medium, 輻射輸送。</li>
+</ul>
+<p>を考えた時、物理的に重要と言えるような例は出てくるだろうか。</p>
+<h3 id="s">必要なsパラメータの範囲</h3>
+<p>密度はe^sに比例して変動するから、大きくても3桁程度の変動だろう。
+s~7ぐらいでいい。</p>
+<pre class="highlight"><code class="language-shell">print log(1000.0)
+6.90775527898214
+print log(exp(1.0)) # 自然対数
+1.0</code></pre>
+<h3 id="glinsky">glinskyの輸送係数で考える</h3>
+<ul>
+<li><span class="arithmatex">\(n(x) = n_0 \exp(x/L)\)</span></li>
+<li><span class="arithmatex">\(L \sim 50 \rm{\mu m}\)</span></li>
+<li><span class="arithmatex">\(n_0 = 10n_c \sim 100n_c\)</span></li>
+</ul>
+<div class="arithmatex">\[
+    \partial_t \epsilon = \partial_t c_v T n_0\exp(x/L) 
+    = \nabla ({\kappa_{SH}} \nabla T)
+    = \kappa_{SH,0} \nabla (T_e^{5/2} \nabla T_e)
+\]</div>
+<div class="arithmatex">\[
+    \kappa_{SH,0} = \frac{16}{\pi} \sqrt{\frac{2}{\pi}}
+    \frac{1}{z \sqrt{m_e} e^4 \ln{\Lambda}}
+\]</div>
+<ul>
+<li>上の議論に合わせると、係数は</li>
+</ul>
+<div class="arithmatex">\[
+\kappa_0 = \frac{  \kappa_{SH,0}  }{c_v n_0}
+\]</div>
+<ul>
+<li>$m_e c^2 $で規格化してあげると、</li>
+</ul>
+<div class="arithmatex">\[
+\kappa_0 (m_e c^2)^{5/2}
+= \frac{  \kappa_{SH,0}  }{c_v n_0} (m_e c^2)^{5/2}
+= \frac{ n_c }{c_v n_0} \frac{16}{\pi^2} \sqrt{\frac{2}{\pi}} 
+\frac{c \lambda_L^2 }{z r_e \ln{\Lambda}}
+\]</div>
+<div class="arithmatex">\[
+c\lambda_L^2 /r_e = \frac{\lambda_L^2}{\tau_L} \frac{\lambda_L}{r_e}
+\]</div>
+<ul>
+<li>keV, micron, ps , n_0 = n_cのオーダーで拡散係数に相当する量は、</li>
+<li>クーロン対数=5</li>
+<li>z=1</li>
+</ul>
+<pre class="highlight"><code class="language-shell">print 32.0/pi/pi/3.0*sqrt(2.0/pi)/5.0/r_e*1.0e-6*299.792458/510.99895**2.5
+#  3108.40735366193</code></pre>
+<div class="arithmatex">\[
+\kappa_0 (\rm{keV})^{5/2}  = 3.108 *10^3 \rm{\frac{\mu m^2}{ps}}
+\]</div>
+<ul>
+<li>スケール長さで規格化された拡散係数は、psのオーダーでは、</li>
+</ul>
+<div class="arithmatex">\[
+    D_0 = \kappa_0/L^2 
+    =\frac{16\sqrt{2}}{c_v \ln{\Lambda} \pi^2 \sqrt{\pi}} 
+    \frac{ps^{-1}}{n_{0,n_c} L_{\mu m}^2  r_{e,\mu m} \tau_{L,ps}} 
+    = \frac{3.108*10^3 \, }{n_{0,n_c} L_{\mu m}^2 } \rm{ps}^{-1}
+\]</div>
+<ul>
+<li>例えば、10keV, 100n_cのプラズマなら、拡散係数は1psで100マイクロぐらい。</li>
+</ul>
+<div class="arithmatex">\[
+ \kappa_0(n = 100 n_c)* (10keV)^{2.5} \rm{\frac{\mu m^2}{ps}}
+ = 3108*10^{0.5}\sim 10^4 \rm{\frac{\mu m^2}{ps}}
+\]</div>
+<h2 id="_4">物理量の規格化を整理</h2>
+<p>解釈で混乱するので物理量の規格化を整理する。</p>
+<div class="arithmatex">\[
+    \frac{\partial T}{\partial t} = \frac{\kappa_0 }{c_v n_0} e^{x/L} \nabla (T^n \nabla T)
+\]</div>
+<p>温度を適当な温度<span class="arithmatex">\(T_0\)</span>で規格化する。<span class="arithmatex">\(T = T_0 \theta\)</span>。
+長さをスケール長さで規格化する。<span class="arithmatex">\(x = L \xi\)</span>。
+時間を<span class="arithmatex">\(t = t_0 \tau\)</span>で規格化する。</p>
+<p>この時、微分方程式は</p>
+<div class="arithmatex">\[
+    \frac{\partial \theta}{\partial \tau} 
+    = \frac{t_0 \kappa_0 T_0^n}{c_v n_0 L^2} e^{\xi} 
+    \nabla ( \theta^n \nabla \theta )
+\]</div>
+<div class="arithmatex">\[
+    \frac{t_0 \kappa_0 T_0^n}{c_v n_0 L^2}  =1
+\]</div>
+<p>になるように無次元化すれば(例えば、t_0を選べば)、</p>
+<div class="arithmatex">\[
+    \frac{\partial \theta}{\partial \tau} 
+    = e^{\xi} 
+    \nabla_{\xi} ( \theta^n \nabla_{\xi} \theta )
+\]</div>
+<p>解の形状を次のように仮定する。</p>
+<div class="arithmatex">\[
+\theta(\xi,\tau) =  [\tau^{1-a} K(\xi-\ln{\tau^a})]^{2/5}
+\]</div>
+<p>この時仮に、<span class="arithmatex">\(K(s_0 = \xi-\ln{\tau^a})=0\)</span>を満たす、解<span class="arithmatex">\(K(s)\)</span>が存在するとする。</p>
+<p><span class="arithmatex">\(s_0 = \xi-\ln{\tau^a}\)</span></p>
+<p><span class="arithmatex">\(\xi' = \xi-s_0\)</span>と取り直せば、
+満たすべき微分方程式は</p>
+<div class="arithmatex">\[
+    \frac{\partial \theta}{\partial \tau} 
+    = e^{\xi'} e^{s_0} 
+    \nabla_{\xi'} ( \theta^n \nabla_{\xi'} \theta )
+\]</div>
+<p>フロントに対応する座標は</p>
+<p><span class="arithmatex">\(0= \xi'-\ln{\tau^a}\)</span>, <span class="arithmatex">\(K(\xi'=0)=0\)</span>に付け替えることができる。</p>
+<p>さらに<span class="arithmatex">\(\tau' = \tau e^{s_0}\)</span>とすることで、方程式が不変になる。
+ということはこれはまた次のような解を持つ。</p>
+<div class="arithmatex">\[
+\theta(\xi',\tau') =  [\tau'^{1-a} K(\xi'-\ln{\tau'^a})]^{2/5}
+\]</div>
+<p><span class="arithmatex">\(K(s_0 = \xi'-\ln{\tau'^a})=0\)</span>を満たす、解<span class="arithmatex">\(K(s)\)</span>が存在する。
+そりゃそうだ。循環論法だ。</p>
+<p>こうではなくて、拡散係数のほうに押しつければいいのか？
+一度全て最初のセットアップに入れ直して、</p>
+<div class="arithmatex">\[
+T = T_0 [\left( \frac{t c_v n_0 L^2}{\kappa_0 T_0^n} \right) ^{1-a}
+K(\frac{x}{L}-a\ln{\frac{t c_v n_0 L^2}{\kappa_0 T_0^n}})]
+\]</div>
+<h2 id="x_f-allnt">より一般の状況として、x_f ~ aLln(t)を考える。</h2>
+<div class="arithmatex">\[
+    \frac{\partial T}{\partial t} = \frac{2}{7} e^{-x/L} \kappa_0 \frac{\partial ^2 T^{7/2}}{\partial x^2}   
+\]</div>
+<div class="arithmatex">\[
+x_f \sim aL\ln{t} = L \ln{t^a}
+\]</div>
+<ul>
+<li>最初の議論で用いた関数形状の仮定だと、a=1しか許されなかった。</li>
+<li>zeldovich (10.25)の方針で、tの冪を解から括り出せば、常微分方程式に落とせるのではないか。</li>
+</ul>
+<div class="arithmatex">\[
+T(x,t) = t^{k} f(x-aL\ln{t}), \quad \xi = x-aL\ln{t}
+\]</div>
+<p>両辺それぞれ整理すると、</p>
+<div class="arithmatex">\[
+\begin{align*}
+    \frac{\partial T}{\partial t} &amp;= \partial_t ( t^{k} f(x-aL\ln{t}) )\\
+    &amp;= [kf - aLf' ]t^k/t\\
+    \frac{2}{7} e^{-x/L} \kappa_0 \frac{\partial ^2 T^{7/2}}{\partial x^2}   
+    &amp;= \frac{2}{7} e^{-\xi/L} t^{-a} \kappa_0 (f^{7/2})''
+\end{align*}
+\]</div>
+<p>拡散方程式は、tの冪が余る形で出てくる。tの冪を消すようなkの選択をすれば二階の常微分方程式に落ちる。</p>
+<div class="arithmatex">\[
+\begin{align*}
+    [kf - aLf' ]t^{k-1} \
+    &amp;= 
+    \frac{2}{7} e^{-\xi/L} t^{-a} \kappa_0 (f^{7/2})'' t^{7k/2}
+\end{align*}
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+    k-1 &amp;= 7k/2 -a \\
+    k &amp;= \frac{2}{5}(a-1)
+\end{align*}
+\]</div>
+<div class="arithmatex">\[
+\boxed{
+    [\frac{2}{5}(a-1)f - aLf' ] 
+    = 
+    \frac{2}{7} e^{-\xi/L}  \kappa_0 (f^{7/2})''  }
+\]</div>
+<ul>
+<li><span class="arithmatex">\(a=1\)</span>の時、<span class="arithmatex">\(k=0\)</span>できちんと最初の議論の形に一致する。</li>
+<li>この、より一般の形式で常微分方程式の解は存在しているだろうか。</li>
+<li>まず無難な変換,$ f =K^{2/5}, K = f^{5/2}$の空間形状で解を探す。</li>
+<li>微分を整理すると、</li>
+</ul>
+<div class="arithmatex">\[
+ f' = \frac{2}{5} K^{-3/5} K'
+\]</div>
+<div class="arithmatex">\[
+ (f^{7/2})'' = (K^{7/5} )'' =  \frac{7}{5} (K^{2/5}K')' 
+ = \frac{7}{5}[\frac{2}{5}K^{-3/5}K'^2 + K^{2/5}K'']
+\]</div>
+<ul>
+<li>常微分方程式に戻すと、</li>
+</ul>
+<div class="arithmatex">\[
+    \frac{2}{5} [(a-1)K^{2/5} - aLK^{-3/5} K' ] 
+    = 
+    \frac{2}{7} e^{-\xi/L}  \kappa_0 \frac{7}{5} [\frac{2}{5} K^{-3/5} K'^2 + K^{2/5}K'']
+\]</div>
+<div class="arithmatex">\[
+\boxed{
+    [(a-1)K - aL K' ] 
+    = 
+    e^{-\xi/L}  \kappa_0  [\frac{2}{5} K'^2 + K K''] }
+\]</div>
+<p>解の空間形状を表す変数をスケール長で規格化して、</p>
+<div class="arithmatex">\[
+s = \xi/L\\
+D_0 = \kappa_0 /L^2\\
+K(s) = K(\xi)
+\]</div>
+<div class="arithmatex">\[
+\boxed{
+    [(a-1)K - a K' ] 
+    = 
+    e^{-s}  D_0 [\frac{2}{5} K'^2 + K K''] }
+\]</div>
+<p><span class="arithmatex">\(K''\)</span>について解くと、</p>
+<div class="arithmatex">\[
+\boxed{
+    K'' = \frac{e^s}{D_0} [(a-1)-a\frac{K'}{K}]- \frac{2 K'^2}{5K} }
+\]</div>
+<ul>
+<li>級数解を出しに行く。</li>
+<li>a=1の解と比較して、不等式評価とかできないだろうか。</li>
+<li>基本的に<span class="arithmatex">\(a&lt;1\)</span>の方が筋がいいのではとは思っている。<span class="arithmatex">\(K''&lt;0\)</span>のセンスの項を強くするから。物理的な解になりやすいだろう。また、フロントの速度が遅めに出るということなので、過剰な熱を与えていない状況につながる。</li>
+</ul>
+<h3 id="_5">級数解を探す。</h3>
+<ul>
+<li>フロント構造の存在を仮定する。K(s)=0となるsが存在するという仮定。</li>
+<li>K(s=0) = 0で一般性失わないだろう。<span class="arithmatex">\(s\to s+s'\)</span>で、<span class="arithmatex">\(D_0\to D_0' = D_0 e^{-s'}\)</span>でクッションすればいい。（系の並進対称。）</li>
+</ul>
+<div class="arithmatex">\[
+\boxed{
+    [(a-1)K - a K' ] 
+    = 
+    e^{-s}  D_0 [\frac{2}{5} K'^2 + K K''] }
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+　    K   &amp;=        c_1s +    c_2s^2 +  c_3s^3 + c_4s^4..\\
+    K'  &amp;=  c_1  + 2c_2s +   3c_3s^2 + 4c_4s^3     ..\\
+    K'' &amp;= 2c_2  + 6c_3s +  12c_4s^2 ..\\
+\end{align*}
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+    K'^2    &amp;=   c_1^2 + 4c_1c_2s + ( 4c_2^2  +  6c_1c_3 ) s^2 +.. \\
+    K K''   &amp;=         2c_1c_2s + ( 2c_2^2  +  6c_1c_3 ) s^2 + ..\\
+    \frac{2}{5}K'^2 + KK'' &amp;= \frac{2}{5}c_1^2 + \frac{18}{5}c_1c_2s   + (\frac{18}{5} c_2^2 +\frac{42}{5}c_1c_3 s^2) + ..\\
+    e^{-s} &amp;= 1-s+\frac{s^2}{2}+...\\
+    e^{-s} [\frac{2}{5}K'^2 + KK''] 
+    &amp;= 
+    \frac{2}{5}c_1^2 + (\frac{18}{5}c_1c_2 - \frac{2}{5}c_1^2)s   
+    + (\frac{1}{5}c_1^2 + \frac{18}{5} c_2^2 +\frac{42}{5}c_1c_3 -\frac{18}{5}c_1c_2) + ..\\
+    (a-1)K -aK' 
+    &amp;=  -ac_1 + [(a-1)c_1-2ac_2]s + [(a-1)c_2 -3ac_3]s^2
+\end{align*}
+\]</div>
+<ul>
+<li>微分方程式の係数を比較して、0,1,2次それぞれ</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+    ac_1  &amp;= \frac{-2D_0 c_1^2}{5}\\
+    (a-1)c_1 -2ac_2 &amp;=  D_0 (\frac{18}{5}c_1c_2 - \frac{2}{5}c_1^2) \\
+    (a-1)c_2 -3ac_3 &amp;=  D_0(\frac{1}{5}c_1^2 + \frac{18}{5} c_2^2 
+    +\frac{42}{5}c_1c_3 -\frac{18}{5}c_1c_2)\\
+\end{align*}
+\]</div>
+<ul>
+<li>リーディングタームは、</li>
+</ul>
+<div class="arithmatex">\[
+    c_1  = -\frac{5a}{2D_0}
+\]</div>
+<ul>
+<li>二次の係数は、</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+     -2ac_2 &amp;=  D_0 (\frac{18}{5}c_1c_2 - \frac{2}{5}c_1^2)- (a-1)c_1\\
+            &amp;=  D_0 (- \frac{9a}{D_0} c_2 - \frac{5a^2}{2D_0^2} ) +(a-1)\frac{5a}{2D_0}\\
+    7ac_2   &amp;=  \frac{5a}{2D_0} (-a +(a-1) ) = -\frac{5a}{2D_0} = c_1\\
+    c_2     &amp;= -\frac{5}{14D_0}  = \frac{c_1}{7a} \\
+\end{align*}
+\]</div>
+<ul>
+<li>三次の係数は、</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+(a-1)c_2 -3ac_3 
+&amp;=  
+D_0 (\frac{1}{5}c_1^2 + \frac{18}{5} c_2^2 +\frac{42}{5}c_1c_3 -\frac{18}{5}c_1c_2)\\
+(a-1)\frac{c_1}{7a} -3ac_3 
+&amp;= 
+D_0(\frac{1}{5}c_1^2 + \frac{18}{5*49a^2} c_1^2 +\frac{42}{5}c_1c_3 -\frac{18}{5*7a}c_1^2)\\
+-3ac_3 -\frac{42}{5}c_1c_3D_0
+&amp;= 
+D_0(\frac{1}{5}c_1^2 + \frac{18}{5*49a^2} c_1^2  -\frac{18}{5*7a}c_1^2)
+-(a-1)\frac{c_1}{7a} \\
+18ac_3 
+&amp;= 
+\frac{D_0 c_1^2}{5*7*7*a^2} [7*7a^2 +18 -18*7a -a(a-1)*5*7\frac{1}{D_0c_1}] 
+\\
+&amp;=  \frac{D_0 c_1^2} {5*7*7a^2} [ 49a^2 -18*7a +18 + 14(a-1)] \\
+&amp;=  \frac{D_0 c_1^2} {5*7*7a^2} [ 49a^2 -16*7a +4 ] \\
+c_3 
+&amp;=
+\frac{D_0 c_1^2} {5*7^2*2*3^2 a^3} [ 49a^2 -16*7a +4 ] \\
+\\
+&amp;= 
+-c_1
+\frac{[ 4 -16*7a +49a^2  ]  } {(2*3*7a)^2}  \\
+\end{align*}
+\]</div>
+<ul>
+<li>これを無限に繰り返して、級数解が得られる。収束性は不明。</li>
+</ul>
+<div class="arithmatex">\[
+    K(s) = \sum_{i\ge1} a_i s^i 
+    = -\frac{5a}{2D_0} [s+ \frac{1}{7a}s^2
+    +\frac{[ -4 +16*7a -49a^2  ] }{(2*3*7a)^2}s^3 + O(s^4)]
+\]</div>
+<div class="arithmatex">\[
+\boxed{
+\begin{align*}
+    U(s) = T 
+    &amp;= \left[t^{a-1} \sum_{n\ge1} a_n s^n\right]^{2/5} \\
+    &amp;= \left[ -\frac{5a t^{a-1}}{2D_0} [s+ \frac{1}{7a}s^2
+    +\frac{[ -4 +16*7a -49a^2  ] }{(2*3*7a)^2}s^3 + O(s^4)] \right]^{2/5}\\
+\end{align*}}
+\]</div>
+<div class="arithmatex">\[
+    \left(s = \frac{x}{L} - a\ln{t}, \quad D_0 =\kappa_0/ L^2 \right)
+\]</div>
+<ul>
+<li>大域的な解がきちんとこれで収束するかは不明だが、フロント部分の局所解は表現できているだろう。</li>
+<li>a=1で、最初の議論に一致する。aの自由度を増やせた。</li>
+<li>a&lt;1の解はフロント部のフラックスがへたっていくような状況。</li>
+<li>a&gt;1では後の時刻の方がフラックスが強くなるような解であるから、物理的な境界条件を考えれば選ばれにくい。</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+    x_f(t) &amp;= aL\ln{t}+ x_0\\
+    n_f(t) &amp;= \exp(x_f(t)/L) = n_0 t^a\\
+    v_f(t) &amp;= \frac{aL}{t}\\
+    T_f(t) &amp;\sim \propto t^{2(a-1)/5}\\
+    q_f(t) &amp;\sim n_f v_f T_f \\
+    &amp;\sim \propto t^{7(a-1)/2}
+\end{align*}
+\]</div>
+<h3 id="x-ll-l"><span class="arithmatex">\(x \ll L\)</span>の処理をちゃんと理解したい。</h3>
+<div class="arithmatex">\[
+x_f \sim aL\ln{t} = L \ln{t^a} 
+\]</div>
+<p>$$
+x &lt;&lt; L, \quad \delta_x \sim v_0 \delta_t &lt;&lt; L
+$$
+みたいなのを考えたいということ。か？</p>
+<ul>
+<li>そのままこの相似変数sで見ると、時間が無限小でないといけないのかな。わからん。</li>
+</ul>
+<p>今のansatz上で、t,xが有限でLが無限になるような状況を考えることになる。</p>
+<div class="arithmatex">\[
+    s = \frac{x}{L} - a\ln{t}
+\]</div>
+<div class="arithmatex">\[
+    t^a = \exp{(s-\frac{x}{L})}
+\]</div>
+<div class="arithmatex">\[
+    s = \frac{x}{L} -a \ln{t_0} -a \frac{t-t_0}{t_0} 
+    +a \frac{(t-t_0)^2}{t_0^2} + ..
+\]</div>
+<div class="arithmatex">\[
+x_f(t) = aL\ln{t} \simeq aL\ln{t_0} + v_0(t-t_0) + ...
+\]</div>
+<div class="arithmatex">\[
+    \delta t = (t-t_0)&lt;t_0 \quad, v_0 =\frac{aL}{t_0}
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+    T 
+    &amp;= \left[ -\frac{5a t^{a-1}}{2D_0} s \right]^{2/5}\\
+    &amp;\simeq \left[ -\frac{5at^{a-1}L}{2\kappa_0} (x-x_0-v_0 \delta t) \right]^{2/5}\\
+    &amp;= 
+    \left[ -\frac{5 v_0 t_0 t^{a-1}}{2 \kappa_0} (x-x_0-v_0 \delta t) \right]^{2/5}\\
+\end{align*}
+\]</div>
+<p>フロント変数が満たす速度は<span class="arithmatex">\(s=0\)</span>の軌道だから、
+$$aL\ln{t} = x_f, \quad \frac{aLdt}{t} = dx_f $$</p>
+<div class="arithmatex">\[
+v_f =  \frac{dx_f}{dt} = \frac{aL}{t}
+\]</div>
+<ul>
+<li>有限だと考えると良いのはtやxではなくて、vではないだろうか。</li>
+</ul>
+<div class="arithmatex">\[
+    s = \frac{x}{L} - a\ln{\frac{aL}{v}}
+\]</div>
+<ul>
+<li>Lをvtで消せばいいのか。</li>
+</ul>
+<div class="arithmatex">\[
+L =\frac{vt}{a}
+\]</div>
+<div class="arithmatex">\[
+v(t=t_0 + \delta t) = \frac{aL}{t_0 + \delta t} \sim 
+\]</div>
+<div class="arithmatex">\[
+Ls = x - vt\ln{t} = x - vt \ln{(t_0 + \delta t)}
+\]</div>
+<p><span class="arithmatex">\(v\)</span>はtの関数だが、今注目しているスケールで定数のようなものだと思えばいい。</p>
+<p>すると、漸近解の主要項は、</p>
+<div class="arithmatex">\[
+\begin{align*}
+    T 
+    &amp;= \left[ -\frac{2t^{a-1}}{5D_0} s \right]^{2/5}\\
+    &amp;= \left[ -\frac{2t^{a-1} L}{5\kappa_0} (x-vt\ln{t}) \right]^{2/5}\\
+    &amp;= \left[ -\frac{2t^{a} v}{5a \kappa_0} (x-vt\ln{t}) \right]^{2/5}\\
+\end{align*}
+\]</div>
+<ul>
+<li>密度勾配がない時の解に時間依存性が一致してくれない。</li>
+</ul>
+<h2 id="_6"></h2>
+<h2 id="_7">時間の無次元化について再検討</h2>
+<ul>
+<li>時間の単位をあらわに含ませてみる。<span class="arithmatex">\(t_0\)</span>とする。</li>
+</ul>
+<div class="arithmatex">\[
+    \frac{\partial T}{\partial t} = \frac{2}{7} e^{-x/L} \kappa_0 \frac{\partial ^2 T^{7/2}}{\partial x^2}   
+\]</div>
+<div class="arithmatex">\[
+x_f \sim aL\ln{t/t_0} = L \ln{(t/t_0)^a} = aL(\ln{t}-\ln{t_0})
+\]</div>
+<div class="arithmatex">\[
+T(x,t) = (t/t_0)^{k} f(x-aL\ln{t/t_0}), \quad \xi = x-aL\ln{t/t_0}
+\]</div>
+<p><span class="arithmatex">\(\kappa_0' = \kappa_0 t_0\)</span>と定数分クッション作れば、<span class="arithmatex">\(\tau=t/t_0\)</span>の無次元時間に対して方程式の構造は一切変わらない。媒質の拡散スケールと時間がスケールすると言っているだけ。</p>
+<div class="arithmatex">\[
+    \frac{\partial T}{\partial \tau} = \frac{2}{7} e^{-x/L} \kappa_0' \frac{\partial ^2 T^{7/2}}{\partial x^2}   
+\]</div>
+<h2 id="kk">加速度項の(K,K')平面上の振る舞い</h2>
+<ul>
+<li>正値かつ減少関数なので、<span class="arithmatex">\(K&gt;0, K'&lt;0\)</span></li>
+<li>フロントは位置に対して増加を考えるので、<span class="arithmatex">\(a&gt;0\)</span></li>
+<li>加速度項の正負を見るのが良いと思っている。
+基本的に曲線は上凸気味で、安定に収束する。<span class="arithmatex">\(K''&lt;0\)</span>が望ましい。</li>
+</ul>
+<div class="arithmatex">\[
+    [(a-1)K - a K' ] 
+    = 
+    e^{-s}  D_0 [\frac{2}{5} K'^2 + K K''] 
+\]</div>
+<div class="arithmatex">\[
+    K'' = \frac{e^s}{D_0} [(a-1)-a\frac{K'}{K}]- \frac{2 K'^2}{5K} 
+\]</div>
+<p><span class="arithmatex">\(D_0=1\)</span>で一般性を失わないだろう。(sの原点を変えるのと同じ。)</p>
+<div class="arithmatex">\[
+    K'' = e^s[(a-1)-a\frac{K'}{K}]- \frac{2 K'^2}{5K} 
+\]</div>
+<ul>
+<li>三項目は常に負。解の存在に寄与。</li>
+<li>一項目はaによって正負が変わる。</li>
+<li>二項目は常に正</li>
+</ul>
+<p>加速度が0以下になる場所は、</p>
+<div class="arithmatex">\[
+    K'' = e^s[(a-1)-a\frac{K'}{K}]- \frac{2 K'^2}{5K} \le 0
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+     &amp; e^s[(a-1)-a\frac{K'}{K}]- \frac{2 K'^2}{5K} \le 0 \\
+     &amp;(a-1)K \le  aK' +e^{-s}\frac{2}{5}K'^2 = K' [a+ \frac{2e^{-s}}{5}K']\\
+\end{align*}
+\]</div>
+<ul>
+<li><span class="arithmatex">\(0 &lt; a&lt; 1\)</span>の時、</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+      K  &amp;\ge \frac{K'}{a-1} \left[a+ \frac{2e^{-s}}{5}K' \right] 
+      = \frac{-2e^{-s}}{5(1-a)} [K'+\frac{5ae^s}{4}]^2 + \frac{5a^2e^s}{8(1-a)} \\
+         &amp;\ge \frac{-aK'}{1-a} \left[1+ \frac{2e^{-s}}{5a}K' \right]
+\end{align*}
+\]</div>
+<ul>
+<li>
+<p>K'の二次曲線で正負が切り替わる。</p>
+<ul>
+<li>つまり<span class="arithmatex">\(K' = 0, 2e^{s}/a5\)</span>で切り取られる、二次曲線の内側に<span class="arithmatex">\(K''&gt;0\)</span>なる領域が存在し、そこに向かうフローは分岐する。</li>
+<li>sの増大とともにその領域が拡大していく。</li>
+<li>膨らむ領域からうまく逃げ切るようなフローは、自然に解になる。逃げ切るとは有限のsの変化のうちに<span class="arithmatex">\(K=0\)</span>に到達するという意味。</li>
+<li>極大値は<span class="arithmatex">\(K_{max} = \frac{5a^2e^s}{8(1-a)}\)</span>領域の広さの目安。</li>
+</ul>
+</li>
+<li>
+<p><span class="arithmatex">\(a&gt; 1\)</span>の時、</p>
+</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+      K  &amp;\le \frac{K'}{a-1} \left[a+ \frac{2e^{-s}}{5}K' \right]\\
+         &amp;\le \frac{aK'}{a-1} \left[1+ \frac{2e^{-s}}{5a}K' \right]
+\end{align*}
+\]</div>
+<p><span class="arithmatex">\(K'=0\)</span>と、二次曲線で囲まれる、無限の領域の内部で、二階微分が負にならない
+- ふちを追い越そうとすると律速される。
+<span class="arithmatex">\(a&gt;1\)</span>では、符号が反転するので、大域的な解は難しいかもしれない？</p>
+<ul>
+<li>特別な場合として、<span class="arithmatex">\(a=1\)</span>を考える。</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+    K''  &amp;= -e^s \frac{K'}{K}- \frac{2 K'^2}{5K}\\
+         &amp;= \frac{-K'}{K} \left[e^s+ \frac{2}{5}K' \right]
+\end{align*}
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+    K''&lt;0 \iff  - \frac{5 e^s}{2} &gt; K' 
+\end{align*}
+\]</div>
+<ul>
+<li><span class="arithmatex">\(K'=0\)</span>は自明な解で、温度が時空間全域で一様な解。</li>
+<li>二項目はある場所を境目に加速度の正負が切り替わることを示唆している。</li>
+<li>K'の絶対値の増加が指数的なsの増加に追いつかれるよりも先に<span class="arithmatex">\(K=0\)</span>に到達できれば、それは大域的な解を作ることが許される。</li>
+<li><span class="arithmatex">\(a&lt;1\)</span>よりも条件が厳しいが無理ではない。</li>
+</ul>
+<h2 id="_8"></h2>
+<p>二変数の偏微分の自由度を残したまま、解を探してみるのはどうだろうか。</p>
+<div class="arithmatex">\[
+    \xi(x,t) = x- aL \ln{t}, \quad \tau(x,t) = t
+\]</div>
+<div class="arithmatex">\[
+    \begin{align*}
+    \partial_t &amp;= -\frac{aL}{t}\partial_{\xi} + \partial_\tau \\
+     &amp;= -\frac{aL}{\tau}\partial_{\xi} + \partial_\tau \\
+    \partial_x &amp;= \partial_{\xi}
+    \end{align*}
+\]</div>
+<div class="arithmatex">\[
+    \frac{\partial T}{\partial t} = \frac{2}{7} e^{-x/L} \kappa_0 \frac{\partial ^2 T^{7/2}}{\partial x^2}   
+\]</div>
+<div class="arithmatex">\[
+    \frac{\partial T}{\partial \tau} 
+    - \frac{aL}{\tau} \frac{\partial T}{\partial \xi}
+    = \frac{2}{7} e^{-\xi/L} \tau^{-a}
+    \frac{\partial ^2 T^{7/2}}{\partial \xi^2}  
+\]</div>
+<ul>
+<li><span class="arithmatex">\(T(\xi,\tau) \to T(\xi), a\to1\)</span>としたものが、最初の議論。</li>
+<li><span class="arithmatex">\(T(\xi,\tau) \to \tau^k f(\xi), k=2(a-1)/5\)</span>と思ったやつが、一般化したものの議論。</li>
+<li>では、<span class="arithmatex">\(T(\xi,\tau) \to \tau^k f(\xi,\tau)\)</span>で考えれば？</li>
+<li>あるいは、ここで変数分離とか。<span class="arithmatex">\(T(\xi,\tau) \to f(\xi)g(\tau)\)</span></li>
+<li>\tauは\xi領域で綺麗に出る解からのずれの場の自由度と思っていいと思う。</li>
+</ul>
+<h3 id="_9">変数分離の方針</h3>
+<ul>
+<li>多分、変数分離の形にできるのがかなり限られるというか、それがベキの形になるのではという感じがする。</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+       fg' - \frac{aL}{\tau} f' g
+    &amp;= \frac{2}{7} e^{-\xi/L} \tau^{-a} g^{7/2} (f^{7/2})'' \\
+       f \frac{g' \tau^a }{g^{7/2} } 
+       - aLf' \frac{\tau^{a-1}}{g^{5/2}}
+    &amp;= \frac{2}{7} e^{-\xi/L} (f^{7/2})'' \\
+       A \frac{g' \tau^a }{g^{7/2} } 
+       + B \frac{\tau^{a-1}}{g^{5/2}}
+    &amp;= C\\
+    \frac{-2}{5}A (g^{-5/2})' + B \tau^{-1}g^{-5/2}
+    &amp;= C \tau^{-a}\\
+    A' h' + B \frac{h}{\tau}
+    &amp;= C \tau^{-a}\\
+      (d/d\tau + B'/\tau) h
+    &amp;= C' \tau^{-a}\\
+      \exp(- B'\ln{\tau} ) \frac{d}{d\tau}\exp(B' \ln{\tau}) h
+    &amp;= C' \tau^{-a}\\
+       \frac{d}{d\tau} \tau^{B'} h
+    &amp;= C'  \tau^{B'-a}\\
+    \tau^{B'} h
+    &amp;= \frac{C'}{B'-a+1}  \tau^{B'-a+1} + C_2\\
+    h
+    &amp;= 
+    \frac{C'}{B'-a+1}  \tau^{-a+1} + C_2 \tau^{-B'}\\
+\end{align*}
+\]</div>
+<ul>
+<li>C_2は変数分離\tauを積分した時の積分定数で、\xiの任意関数</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+g &amp;= h^{-2/5}\\
+A &amp;= f\\
+A' &amp;= \frac{-2f}{5}\\
+B  &amp;=  -aLf'\\
+B' &amp;= \frac{5aLf'}{2f}\\
+C  &amp;= \frac{2}{7} e^{-\xi/L} (f^{7/2})''\\
+C' &amp;= -\frac{5 e^{-\xi/L} (f^{7/2})''}{7f}\\
+\frac{C'}{B'-a+1} 
+&amp;=
+ \frac{-5 e^{-\xi/L} (f^{7/2})'' }{7(5aLf'-af+f) }
+\end{align*}
+\]</div>
+<p>元の方程式は、\xi側の方程式に対応しているのか。２種類の常微分方程式を解く問題にすり替わっているだけか。
+- C_2=0でとると、多分g(tau) = tau^{2(a-1)/5} c_3の元のやつに帰着する。第一項残ったものがこの時の常微分方程式か。
+- C_2残すと、べきの引数にfが入って難しすぎやしないだろうか。</p>
+<div class="arithmatex">\[
+\begin{align*}
+    h &amp;= \frac{C'}{B'-a+1}  \tau^{-a+1} + C_2 \tau^{-B'}\\
+  g^{-2/5} &amp;= 
+  \frac{-5 e^{-\xi/L} (f^{7/2})'' }{7(5aLf'/2-af+f) }  \tau^{-a+1} 
+  + C_2 \tau^{-\frac{5aLf'}{2f}}\\
+  g^{-2/5} \tau^{a-1} (5aLf'/2-af+f)
+  &amp;= 
+  \frac{-5 e^{-\xi/L} (f^{7/2})'' }{7 } 
+  + C_2 (5aLf'/2-af+f) \tau^{-\frac{5aLf'}{2f} +a-1}\\
+  g^{-2/5} \tau^{a-1} (5aLf'/2-af+f)
+  &amp;= 
+  \frac{-5 e^{-\xi/L} (f^{7/2})'' }{7 } 
+  + C_2' \tau^{-\frac{5aLf'}{2f} +a-1}\\
+\end{align*}
+\]</div>
+<ul>
+<li>c_2を残すと解析的には事実上解けないだろう。</li>
+<li>c_2を0にしてみる。</li>
+<li>この時点で左辺はtauの項があるが、右辺にはtauの項がない。したがって、<span class="arithmatex">\(g^{-2/5}\tau^{a-1}\)</span>はtauにも\xiにも依存しない定数である。これで綺麗に変数分離して、やはり元の解の議論に合流する。</li>
+<li>べきで括り出すのは正当化されたか。</li>
+</ul>
+<p>ところで、c_2残すと、この項の物理的な意味はなんなんだろうか？</p>
+<p>分離の十分条件として、右辺のtauのベキが0で、かつfがこの方程式を満たせばいいが、それは不適な解だとわかる。</p>
+<p>$$
+    5aLf'/2=(a-1)f
+$$
+としてみると、</p>
+<div class="arithmatex">\[
+    f = c_3 \exp{\frac{2(a-1)}{5aL}\xi}
+\]</div>
+<div class="arithmatex">\[
+    C_2' = 0* C_2
+\]</div>
+<div class="arithmatex">\[
+    (f^{2/7})'' e^{-\xi/L} = c_3^{2/7} (\frac{7(a-1)}{5aL} )^2
+    \exp{\frac{7(a-1)}{5aL} \xi} \ne0
+\]</div>
+<ul>
+<li>残念ながら不適。</li>
+</ul>
+<h3 id="c_2">C_2の解釈</h3>
+<ul>
+<li><span class="arithmatex">\(C_2\)</span> は、<span class="arithmatex">\(\tau\)</span>に関する一次積分を行ったときに残る 初期条件や境界条件に由来する自由度（空間依存を持つ定数関数）を表す。</li>
+<li>分離解（純粋な自己相似解、すなわち <span class="arithmatex">\(C_2=0\)</span>は特殊で普遍的なモード（しばしば長時間に支配的になるモード）を表す。一方 <span class="arithmatex">\(C_2\neq 0\)</span> の項は、非分離の過渡解で、初期条件の残骸や短期的な遷移を表すことが多い。</li>
+<li>
+<p>したがって、物理的には</p>
+</li>
+<li>
+<p>初期条件や境界によっては短期的に <span class="arithmatex">\(C_2\)</span>-項が重要になり得るが、系が自己相似モードに安定であれば長時間で <span class="arithmatex">\(C_2\)</span> 項は相対的に散逸・減衰して見えなくなる（あるいは発散する場合もある）。</p>
+</li>
+<li>つまり<span class="arithmatex">\(C_2\)</span>は「分離解以外の余剰モード／過渡モード」を示す、と考えるのが良い。</li>
+</ul>
+<h2 id="n">変数分離形かつ任意の<span class="arithmatex">\(n\)</span></h2>
+<div class="arithmatex">\[
+\frac{\partial T}{\partial t}= 
+\frac{e^{-x/L} D_0}{n+1}  \frac{\partial ^2 T^{n+1}} { \partial x^2}
+\]</div>
+<p>変数分離形を仮定</p>
+<div class="arithmatex">\[
+\begin{align*}
+ s &amp;= \frac{x}{L} - a\ln{t} \\
+ T(x,t) &amp;= T(s,t) = h(t)f(s)
+\end{align*}
+\]</div>
+<div class="arithmatex">\[
+ \kappa_0 = D_0/L^2
+\]</div>
+<div class="arithmatex">\[
+    h' f  -\frac{a}{t}hf' = \frac{1}{n+1} e^{s} t^{a}\kappa_0h^{n+1} (f^{n+1})''
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+    \frac{h'}{h^{n+1}} f  -\frac{a}{t}f' h^{-n} &amp;= \frac{1}{n+1} e^{-s} t^{-a}\kappa_0 (f^{n+1})''\\
+    -f \frac{(h^{-n})'}{n}-\frac{a}{t}f' h^{-n} &amp;= \frac{1}{n+1} e^{-s} t^{-a}\kappa_0 (f^{n+1})'' f^{-1}\\
+     [\frac{d}{ds}+ \frac{anf'}{tf}] h^{-n} &amp;= -\frac{n}{n(n+1)} e^{-s} t^{-a}\kappa_0 (f^{n+1})'' f^{-1}\\
+    \frac{d}{ds} [\exp{\frac{anf' \ln{t}}{f}} h^{-n}] 
+    &amp;= 
+    -\exp{\frac{anf'\ln{t}}{f}}\frac{n}{(n+1)} e^{-s} 
+    t^{-a}\kappa_0 (f^{n+1})'' f^{-1}\\
+    \frac{d}{ds} [t^{\frac{anf'}{f}} h^{-n}] 
+    &amp;= 
+    -t^{\frac{anf'}{f}-a}\frac{n}{(n+1)} e^{-s} \kappa_0 (f^{n+1})'' f^{-1}\\
+    t^{\frac{anf'}{f}} h^{-n}
+    &amp;= 
+    -\frac{1}{\frac{anf'}{f}-a+1} t^{\frac{anf'}{f}-a+1}\frac{n}{(n+1)} e^{s} \kappa_0 (f^{n+1})'' f^{-1}
+    + C_1(s)\\
+    h^{-n}
+    &amp;= 
+    -\frac{1}{\frac{anf'}{f}-a+1} t^{1-a}\frac{n}{(n+1)} e^{-s} \kappa_0 (f^{n+1})'' f^{-1} 
+    + C_1(s) t^{-\frac{anf'}{f}}\\
+    h^{-n} t^{a-1}
+    &amp;= 
+    -\frac{1}{\frac{anf'}{f}-a+1} \frac{n}{(n+1)} e^{-s} \kappa_0 (f^{n+1})'' f^{-1}
+    + C_1(s) t^{-\frac{anf'}{f}+a-1}
+\end{align*}
+\]</div>
+<p>左辺はtの関数だが、右辺は<span class="arithmatex">\(A(s) + B(s)t^{C(s)}\)</span>。
+<span class="arithmatex">\(B(s)=0\)</span>は恒等的には満たされないと仮定する。
+両辺をsで微分すると、</p>
+<div class="arithmatex">\[
+0 = A'(s) + [B'(s)+ C'(s)\ln{t} ]t^{C(s)}
+\]</div>
+<p>ここで以下を使った。</p>
+<div class="arithmatex">\[
+ \frac{d}{dx} \ln(t^x) = \ln{t}= \frac {\frac{d}{dx} (t^x)}{t^x}
+\]</div>
+<p>今度はtで微分してみれば、</p>
+<div class="arithmatex">\[
+\begin{align*}
+0 &amp;= [B'(s)+ \frac{C'(s)}{t} + \frac{B'(s)+ C'(s)\ln{t} }{t} ]t^{C(s)}\\
+0 &amp;= B'(s) t + C'(s)t+ B'(s)+ C'(s)\ln{t}
+\end{align*}
+\]</div>
+<p>tで微分して、</p>
+<div class="arithmatex">\[
+\begin{align*}
+0 &amp;= B'(s)  + C'(s)+ \frac{C'(s)}{t}\\
+0 &amp;= (B'(s)  + C'(s))t + C'(s)
+\end{align*}
+\]</div>
+<p>もう一度t微分。</p>
+<div class="arithmatex">\[
+\begin{align*}
+0 &amp;= (B'(s)  + C'(s))
+\end{align*}
+\]</div>
+<div class="arithmatex">\[
+0 = (B'(s)  + C'(s))t + C'(s)
+\]</div>
+<p>から、</p>
+<div class="arithmatex">\[
+C'(s) =-B'(s)= 0,\quad C(s) = C_0, B(s) = B_0
+\]</div>
+<div class="arithmatex">\[
+0 = A'(s) + [B'(s)+ C'(s)\ln{t} ]t^{C(s)}
+\]</div>
+<p>から、</p>
+<div class="arithmatex">\[
+A'(s) = 0, \quad A(s)=A_0
+\]</div>
+<p>結局、右辺は<span class="arithmatex">\(A_0 + B_0 t^{C_0}\)</span>。これで右辺が<span class="arithmatex">\(t\)</span>に依存しない必要十分な条件。
+<span class="arithmatex">\(f(s)\)</span>をC_0についてとくと、</p>
+<div class="arithmatex">\[
+\begin{align*}
+C(s) = C_0 &amp;= -anL(\ln{f})'+a-1\\
+\ln{f(s)}&amp;= \frac{(a-1-C_0)}{an} s + l_0\\
+f(s)&amp;= \exp{\left[ \frac{(a-1-C_0)}{an} s + l_0 \right]}
+\end{align*}
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+    A(0) &amp;= A(s) \\
+    &amp;\propto \frac{(f^{n+1}(s))''}{C(s)f(s)} \\
+    &amp;\propto \frac{(f^{n+1}(s))''}{f(s)} \\
+    &amp;\propto \exp{\left[ \frac{(a-1-C_0)}{an} s (n+1-1) \right]}
+    = \exp{\left[ \frac{(a-1-C_0)}{a} s  \right]} \ne const.
+\end{align*}
+\]</div>
+<p><span class="arithmatex">\(a-1-C_0=0\)</span>ならば、これは定数で、解になるが、これは自明な解なので興味がない。
+<span class="arithmatex">\(a-1-C_0 \ne 0\)</span>ならば、この解は不適。<span class="arithmatex">\(B(s)\)</span>を0に取らない限りこうなるので、<span class="arithmatex">\(B(s)\)</span>は0である。そうすれば、</p>
+<div class="arithmatex">\[
+\begin{align*}
+    h^{-n} t^{a-1}
+    &amp;= 
+    -\frac{1}{\frac{anf'}{f}-a+1} \frac{n}{(n+1)} e^{-s} \kappa_0 (f^{n+1})'' f^{-1}  = A_0
+\end{align*}
+\]</div>
+<p>よって変数分離の結果、</p>
+<div class="arithmatex">\[
+\boxed{
+\begin{align*}
+    A_0 &amp;&gt; 0 \\
+    h  &amp;= A_0  t^{(a-1)/n} \\
+    0&amp;= \frac{e^{-s} n}{(n+1)}  \kappa_0 (f^{n+1})'' +A_0 anf'
+    + A_0 (1-a)f\\
+    0&amp;= 
+    \frac{e^{-s}}{(n+1)}  \frac{\kappa_0}{A_0} (f^{n+1})'' + af'
+    +  \frac{1-a}{n}f
+\end{align*}}
+\]</div>
+<div class="arithmatex">\[
+    k_0 = \frac{\kappa_0}{A_0}
+\]</div>
+<p><span class="arithmatex">\(A_0=1\)</span>かつ、<span class="arithmatex">\(n=5/2\)</span>で以前の結果ときちんと一致している。</p>
+<div class="arithmatex">\[
+\boxed{
+    [\frac{2}{5}(a-1)f - aLf' ] 
+    = 
+    \frac{2}{7} e^{-\xi/L}  k_0 (f^{7/2})''  }
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+  0&amp;= e^{-s} k_0 \frac{(f^{n+1} )''}{n+1} + af'+\frac{1-a}{n}f\\
+  0&amp;= e^{-s} k_0 (f^{n}f' )' + af'+\frac{1-a}{n}f\\
+  0&amp;= e^{-s} k_0 (f^{n}f'' + nf^{n-1}f'^2 ) +af'+\frac{1-a}{n}f\\
+\end{align*}
+\]</div>
+<ul>
+<li>変数変換の上、代入。</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+&amp;f   = K^{1/n}\\
+&amp;f'  = \frac{K^{\frac{1}{n} -1}}{n} K'\\
+&amp;f'' = \frac{K^{\frac{1}{n} -1}}{n} K'' 
+      + K^{\frac{1}{n} -2} \frac{1-n}{n^2} (K')^2
+\end{align*}
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+  0&amp;= e^{-s} k_0 \left [\frac{K K^{\frac{1}{n} -1}}{n} K'' 
+      + K^{\frac{1}{n} -1} \frac{1-n}{n^2} (K')^2 + n K^{1-\frac{1}{n}}\frac{K^{\frac{2}{n}-2}}{n^2}\right]
+      + a\frac{K^{\frac{1}{n} -1}}{n} K' +\frac{1-a}{n} K^{1/n}\\
+  0&amp;= e^{-s} k_0 \left [\frac{K K^{\frac{1}{n} -1}}{n} K'' 
+      + K^{\frac{1}{n} -1} \frac{1}{n^2} (K')^2 \right]
+      +a\frac{K^{\frac{1}{n} -1}}{n} K' +\frac{1-a}{n} K^{1/n}\\
+  0&amp;= 
+      e^{-s} k_0 \left[ K K'' 
+      + \frac{K'^2}{n}  \right]
+      +a K' +(1-a) K\\
+\end{align*}
+\]</div>
+<p>n= 5/2を代入してみて、以前の結果と一致。</p>
+<div class="arithmatex">\[
+\boxed{
+    [(a-1)K - a K' ] 
+    = 
+    e^{-s}  D_0 [\frac{2}{5} K'^2 + K K''] }
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+  0&amp;= 
+      e^{-s} k_0 \left[ K K'' 
+      + \frac{K'^2}{n}  \right]
+      +a K' +(1-a) K\\
+\end{align*}
+\]</div>
+<ul>
+<li>まとめると、一般のnかつ変数分離形で、</li>
+</ul>
+<div class="arithmatex">\[
+    \frac{\partial T}{\partial t} = \frac{e^{x/L} D_0}{n+1} \frac{\partial^2 T^{n+1}}{\partial x^2}
+\]</div>
+<div class="arithmatex">\[
+   s = \frac{x}{L} - a\ln{t}
+\]</div>
+<div class="arithmatex">\[
+A_0 &gt;0
+\]</div>
+<div class="arithmatex">\[
+  \boxed{ h(t) = \left( \frac{t^{a-1} } {A_0}  \right)^{1/n} }
+\]</div>
+<div class="arithmatex">\[
+\boxed{
+    T(x,t) = h(t) f(s)
+    = \left[ \frac{ t^{a-1} K(s) }{A_0} \right]^{1/n} }
+\]</div>
+<div class="arithmatex">\[
+\boxed{
+\begin{align*}
+  0&amp;= 
+      e^{-s} \frac{D_0}{L^2 A_0} \left[ K K'' 
+      + \frac{K'^2}{n}  \right]
+      + a K' +(1-a) K\\
+\end{align*}
+}
+\]</div>
+<p>パラメータA_0の解釈として、</p>
+<div class="arithmatex">\[
+    T(x,t) = h(t) f(s)
+    = \left[ \frac{ t^{a-1} K(s) }{A_0} \right]^{1/n} 
+    = T_0 \left[ \left( \frac{t}{t_0} \right)^{a-1} K(s) \right]^{1/n} 
+\]</div>
+<div class="arithmatex">\[
+    \frac{T_0^n}{t_0^{a-1}} = \frac{1}{A_0}
+\]</div>
+<h2 id="n_1">一般のnで級数解を探す</h2>
+<div class="arithmatex">\[
+\frac{\partial T}{\partial t}= 
+\frac{e^{-x/L} D_0}{n+1}  \frac{\partial ^2 T^{n+1}} { \partial x^2}
+\]</div>
+<ul>
+<li>フロント構造の存在を仮定する。K(s)=0となるsが存在するという仮定。</li>
+<li>
+<p>K(s=0) = 0で一般性失わないだろう。<span class="arithmatex">\(s\to s+s'\)</span>で、<span class="arithmatex">\(D_0\to D_0' = D_0 e^{-s'}\)</span>でクッションすればいい。（系の並進対称。）</p>
+</li>
+<li>
+<p>とりあえず、<span class="arithmatex">\(\frac{D_0}{L^2 A_0} \to D_0\)</span>としよう。</p>
+</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+  0&amp;= 
+      e^{-s} \frac{D_0}{L^2 A_0} \left[ K K'' 
+      + \frac{K'^2}{n}  \right]
+      + a K' +(1-a) K\\
+    &amp;[(a-1)K - a K' ] 
+    = 
+    e^{-s}  D_0 [\frac{1}{n} K'^2 + K K''] 
+\end{align*}
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+　    K   &amp;=        c_1s +    c_2s^2 +  c_3s^3 + c_4s^4..\\
+    K'  &amp;=  c_1  + 2c_2s +   3c_3s^2 + 4c_4s^3     ..\\
+    K'' &amp;= 2c_2  + 6c_3s +  12c_4s^2 ..\\
+\end{align*}
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+    K'^2    &amp;=   c_1^2 + 4c_1c_2s + ( 4c_2^2  +  6c_1c_3 ) s^2 +.. \\
+    K K''   &amp;=         2c_1c_2s + ( 2c_2^2  +  6c_1c_3 ) s^2 + ..\\
+    \frac{1}{n}K'^2 + KK'' &amp;= \frac{1}{n}c_1^2 + (\frac{4}{n}+2)c_1c_2s   + ((4/n+2) c_2^2 +(1/n+1)6c_1c_3 s^2) + ..\\
+    e^{-s} &amp;= 1-s+\frac{s^2}{2}+...\\
+    e^{-s} [\frac{1}{n}K'^2 + KK''] 
+    &amp;= 
+    \frac{1}{n}c_1^2 + ((4/n+2)c_1c_2 - (1/n)c_1^2)s   
+    + (\frac{1}{2n}c_1^2 + (4/n+2) c_2^2 +(1/n+1)6c_1c_3 -(4/n+2)c_1c_2)s^2 + ..\\
+    (a-1)K -aK' 
+    &amp;=  -ac_1 + [(a-1)c_1-2ac_2]s + [(a-1)c_2 -3ac_3]s^2
+\end{align*}
+\]</div>
+<ul>
+<li>微分方程式の係数を比較して、0,1,2次それぞれ</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+    ac_1  &amp;= \frac{-D_0 c_1^2}{n}\\
+    (a-1)c_1 -2ac_2 &amp;=  D_0 (\frac{n+2}{n}2c_1c_2 - \frac{1}{n}c_1^2) \\
+    (a-1)c_2 -3ac_3 &amp;=  D_0(\frac{1}{2n}c_1^2 + \frac{n+2}{n} 2c_2^2 
+    +\frac{n+1}{n}6c_1c_3 -\frac{n+2}{n}2c_1c_2)\\
+\end{align*}
+\]</div>
+<ul>
+<li>リーディングタームは、</li>
+</ul>
+<div class="arithmatex">\[
+    c_1  = -\frac{na}{D_0}
+\]</div>
+<ul>
+<li>二次の係数は、</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+     -2ac_2 &amp;=  D_0 (\frac{n+2}{n}2c_1c_2 - \frac{1}{n}c_1^2)- (a-1)c_1\\
+            &amp;=  D_0 (- \frac{2(n+2)a}{D_0} c_2 - \frac{na^2}{D_0^2} ) +(a-1)\frac{na}{D_0}\\
+    2(n+1)ac_2   &amp;=  \frac{na}{D_0} (-a +(a-1) ) = -\frac{na}{D_0} = c_1\\
+    c_2     &amp;= -\frac{n}{2(n+1)D_0}  = \frac{c_1}{2(n+1)a} \\
+\end{align*}
+\]</div>
+<ul>
+<li>三次の係数は、</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+(a-1)c_2 -3ac_3 
+&amp;=  
+D_0 (\frac{1}{2n}c_1^2 + \frac{n+2}{n} 2c_2^2 +\frac{n+1}{n}6c_1c_3 -\frac{n+2}{n}2c_1c_2)\\
+(a-1)\frac{c_1}{2(n+1)a} -3ac_3 
+&amp;= 
+D_0(\frac{1}{2n}c_1^2 + \frac{n+2}{2n(n+1)^2a^2} c_1^2 +\frac{n+1}{n}6c_1c_3 -\frac{n+2}{n(n+1)a}c_1^2)\\
+-3ac_3 -\frac{n+1}{n}6c_1c_3D_0
+&amp;= 
+D_0(\frac{1}{2n}c_1^2 + \frac{n+2}{2n(n+1)^2a^2} c_1^2  -\frac{n+2}{n(n+1)a}c_1^2)
+-(a-1)\frac{c_1}{2(n+1)a} 
+\end{align*}
+\]</div>
+<div class="arithmatex">\[
+-3a-\frac{n+1}{n}6c_1 D_0 = -3a +\frac{n+1}{n} 6na = -3a+6(n+1)a = 3a+6na = 3a(2n+1)
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+3(2n+1)ac_3
+&amp;= 
+\frac{D_0 c_1^2}{2n(n+1)^2a^2} [(n+1)^2a^2 +(n+2) -2(n+2)(n+1)a -a(a-1)n(n+1)\frac{1}{D_0c_1}] 
+\\
+&amp;= 
+\frac{D_0 c_1^2}{2n(n+1)^2a^2} [(n+1)^2a^2 +(n+2) -2(n+2)(n+1)a +(a-1)(n+1)] \\
+&amp;= 
+\frac{D_0 c_1^2}{2n(n+1)^2a^2} [(n+1)^2a^2  -(2n+3)(n+1)a +1] 
+\\
+c_3 &amp;= 
+\frac{D_0 c_1^2}{6n(n+1)^2(2n+1)a^3} [(n+1)^2a^2  -(2n+3)(n+1)a +1] 
+\\
+&amp;= 
+-c_1 \frac{[(n+1)^2a^2  -(2n+3)(n+1)a +1] }{6(n+1)^2(2n+1)a^2}
+\end{align*}
+\]</div>
+<ul>
+<li>これを無限に繰り返して、級数解が得られる。収束性は不明。</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+    K(s) = \sum_{i\ge1} a_i s^i 
+    &amp;= -\frac{na}{D_0} [s+ \frac{1}{2(n+1)a}s^2
+    +\frac{[(n+1)^2a^2  -(2n+3)(n+1)a +1] }{6(n+1)^2(2n+1)a^2} s^3+ O(s^4)] \\
+    &amp;= -\frac{naA_0 L^2}{\kappa_0} [s+ \frac{1}{2(n+1)a}s^2
+    +\frac{[(n+1)^2a^2  -(2n+3)(n+1)a +1] }{6(n+1)^2(2n+1)a^2} s^3+ O(s^4)]
+\end{align*}
+\]</div>
+<div class="arithmatex">\[
+\boxed{
+\begin{align*}
+    T (x,t) = h(t)f(s)
+    &amp;= \left[\frac{t^{a-1}}{A_0} \sum_{n\ge1} a
+    _i s^i\right]^{\frac{1}{n}} \\
+    &amp;= 
+    \left[ -\frac{na t^{a-1}}{A_0 D_0} 
+      [s+ \frac{1}{2(n+1)a}s^2
+    +\frac{[(n+1)^2a^2  -(2n+3)(n+1)a +1] }{6(n+1)^2(2n+1)a^2} s^3+ O(s^4)
+     \right]^{\frac{1}{n}}\\
+\end{align*}}
+\]</div>
+<div class="arithmatex">\[
+    \left(s = \frac{x}{L} - a\ln{t}, 
+    \quad D_0 =\frac{\kappa_0}{A_0 L^2} 
+    \quad
+    \frac{\partial T}{\partial t}= 
+    \frac{e^{-x/L} \kappa_0}{n+1}  \frac{\partial ^2 T^{n+1}} { \partial x^2}
+    \right)
+\]</div>
+<ul>
+<li>この解の言わんとするところは、解の傾きは速度に対応するものなので、フリーパラメータになっているが、<span class="arithmatex">\(K(s)\to 0\)</span>での傾きを決めれば、一次項と高次項の関係はs上の関数形状としてきちんと決まるということ。</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+    x_f(t) &amp;= aL\ln{t}+ x_0\\
+    n_f(t) &amp;= \exp(x_f(t)/L) = n_0 t^a\\
+    v_f(t) &amp;= \frac{aL}{t}\\
+    T_f(t) &amp;\sim \propto t^{2(a-1)/5}\\
+    q_f(t) &amp;\sim n_f v_f T_f \\
+    &amp;\sim \propto t^{7(a-1)/2}
+\end{align*}
+\]</div>
+<p>解のフロント部は<span class="arithmatex">\(s_0=s\)</span>で特徴づけられる。だから、<span class="arithmatex">\(x_f = aL\ln{t}\)</span>, <span class="arithmatex">\(t = e^{x_f/aL}\)</span>。
+<span class="arithmatex">\(t=1\)</span>で、原点にいる。
+フロントの速度は<span class="arithmatex">\(v_f(t) = \frac{L}{t} = L e^{-x_f/aL}\)</span>
+この速さは、原点近傍で、<span class="arithmatex">\(v_f = L\)</span>である。</p>
+<p><span class="arithmatex">\(L\to \infty\)</span>とは、<span class="arithmatex">\(e^{x/L}\to1\)</span>で、<span class="arithmatex">\(x \sim 0\)</span>の近傍を拡大する操作に対応している。</p>
+<p>s_0をずらすという操作は時間の規格化に対応している。すなわち、<span class="arithmatex">\(t=1\)</span>に解のフロントは比熱が<span class="arithmatex">\(e^{x/L}=1\)</span>となる場所にフロントが存在する。
+t=0への時間の外挿は、解が-無限大に発散する時刻に対応している。
+解の主要項は、
+$$
+\begin{align<em>}
+    T (x,t) &amp;=<br />
+    \left[ -\frac{na t^{a-1}L^2}{\kappa_0} (\frac{x}{L}-a\ln{t})\right]^{\frac{1}{n}}\
+    &amp;=<br />
+    \left[ -\frac{na t^{a-1}L}{\kappa_0} (x-aL\ln{t})\right]^{\frac{1}{n}}\
+\end{align</em>}
+$$</p>
+<p>Lを無限大にする操作は時間に関して時刻の原点を見て、<span class="arithmatex">\(e^{x/L}\to1\)</span>, <span class="arithmatex">\(t\to 1\)</span>,<span class="arithmatex">\(x\to1\)</span>、<span class="arithmatex">\(v_f \to aL\)</span>という操作に対応している。従って、これは</p>
+<div class="arithmatex">\[
+\begin{align*}
+    T (x,t)  &amp;= 
+    \left[ -\frac{na t^{a-1}L}{\kappa_0} (x-aL\ln{t})\right]^{\frac{1}{n}}\\
+    &amp;\to
+    \left[ -\frac{nv_f}{\kappa_0} (x-v_ft)\right]^{\frac{1}{n}}\\
+\end{align*}
+\]</div>
+<p>これは、</p>
+<div class="arithmatex">\[
+    \partial _t T = \kappa_0 e^{-x/L}\partial _x [T^n \partial _x T]
+    \quad \to  
+    \partial _t T = \kappa_0 \partial _x [T^n \partial _x T]
+\]</div>
+<p>に対する、フロント解の仮定、<span class="arithmatex">\((x-v_0t)\)</span>を積分した結果と対応する。</p>
+<h2 id="_10">球対称な幾何学ならばどのように変化するべきか</h2>
+<div class="arithmatex">\[
+    \frac{\partial T}{\partial t} = 
+    D_0\frac{e^{+r/L}}{r^{d-1}}\frac{\partial }{ \partial r} r^{d-1} \frac{\partial T}{\partial r}
+\]</div>
+<p><span class="arithmatex">\(r/L \to r\)</span></p>
+<div class="arithmatex">\[
+    \frac{\partial T}{\partial t} = 
+    D_0/L^2 \frac{e^{r}}{r^{d-1}}\frac{\partial }{ \partial r} r^{d-1} \frac{\partial T}{\partial r}
+\]</div>
+<p><span class="arithmatex">\(T = \theta r^m\)</span></p>
+<div class="arithmatex">\[
+\begin{align*}
+    \partial_r T  &amp;= (1 + \frac{m}{r}) r^m   \theta \\
+    r^{d-1} \partial_r T  &amp;= r^{d-1+m}   (\partial_r + \frac{m}{r}) \theta \\
+    \partial_r r^{d-1} \partial_r T  
+    &amp;= \partial_r \left [r^{d-1+m}   (\partial_r + \frac{m}{r}) \theta \right ] \\
+    &amp;= (d-1+m) r^{d-2+m} (\partial_r +\frac{m}{r}) \theta + r^{d-1+m}(\partial_r^2 -mr^{-2} ) \theta\\
+    \frac{1}{r^{d-1+m}}\partial_r r^{d-1} \partial_r T 
+    &amp;= (d-1+m) (\frac{1}{r}\partial_r + \frac{m}{r^2})\theta  
+     + (\partial_r^2 - \frac{m}{r^2}) \theta
+\end{align*}
+\]</div>
+<div class="arithmatex">\[
+    \xi = \frac{r}{A(t)}
+\]</div>
+<div class="arithmatex">\[
+    T(\xi, t) = h(t) g(\xi)
+\]</div>
+<div class="arithmatex">\[
+    \frac{\partial T}{\partial t} = 
+    d_0\frac{e^{r}}{r^{d-1}}\frac{\partial }{ \partial r} r^{d-1} \frac{\partial T}{\partial r}
+\]</div>
+<h1 id="_11">一次元の非線形拡散の自己相似解からの摂動</h1>
+<div class="arithmatex">\[
+    \frac{\partial T}{\partial t} = \frac{2}{7} \kappa_0 \frac{\partial ^2 T^{7/2}}{\partial x^2}
+\]</div>
+<div class="arithmatex">\[
+    T = T_0 + \epsilon \theta
+\]</div>
+<ul>
+<li>一次摂動が満たすべき0<span class="arithmatex">\(を方程式は,\)</span>D_0$を０次解領域が作る拡散係数として、</li>
+</ul>
+<div class="arithmatex">\[
+    \begin{align*}
+    \frac{\partial \theta}{\partial t} &amp;= \frac{\partial D_0 \theta}{\partial x^2}\\
+    D_0 &amp;= \kappa_0 T_0^{5/2}
+    \end{align*}
+\]</div>
+<p>非摂動の解が自己相似形になるとする。</p>
+<div class="arithmatex">\[
+    T_0 = A*(vt-x)^{2/5}
+\]</div>
+<div class="arithmatex">\[
+   A = [\frac{5v }{2\kappa_0 }]^{2/5}
+\]</div>
+<div class="arithmatex">\[
+    B = \kappa_0 A^{5/2} =\frac{5v}{2}
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+    \frac{\partial \theta}{\partial t} &amp;= B * \frac{\partial ^2 (vt-x)\theta }{\partial x^2 } \\
+    \frac{\partial \theta}{\partial t} &amp;= 
+    \frac{5 v}{2}[- 2\frac{\partial \theta}{\partial x} 
+    + (vt-x)\frac{\partial^2 \theta}{\partial x^2}]\\
+    \frac{2}{5v}\frac{\partial\theta}{\partial t} + 2\frac{\partial \theta}{\partial x} &amp;= (vt-x) \frac{\partial^2 \theta}{\partial x^2}
+\end{align*}
+\]</div>
+<ul>
+<li>この一次摂動も<span class="arithmatex">\(vt-x\)</span>変数の解として書けないだろうか。</li>
+<li>放物型の微分方程式に見える。おそらく移流拡散的な。</li>
+<li><span class="arithmatex">\(\theta(x,t) = \Theta(vt-x)\)</span>, <span class="arithmatex">\(vt-x =\xi\)</span></li>
+</ul>
+<div class="arithmatex">\[
+    v\Theta' = B* \frac{d^2 \xi \Theta}{d\xi^2}
+\]</div>
+<p>これは一回積分できる。</p>
+<div class="arithmatex">\[
+\begin{align*}
+    v\Theta &amp;= \frac{5}{2}v \frac{d(\xi \Theta)}{d\xi}+c\\
+     \Theta &amp;= \frac{5}{2}(\Theta+\xi\Theta') +c_1 \\
+    \frac{-3}{5}\Theta - \frac{2}{5}c_1 &amp;= \xi \Theta' \\
+    \frac{-5\Theta'}{3 \Theta + 2c_1}  &amp;= \frac{1}{\xi}\\
+    \ln{[ 3\Theta+2c_1] } &amp;= \frac{-3}{5} \ln{c_2\xi}\\
+    \Theta &amp;= \frac{ (c_2\xi)^{-3/5} - 2c_1} {3}\\
+           &amp;= \frac{2}{3}[c_1 - \frac{c_3}{\xi^{3/5}}] \\
+           &amp;=  \alpha +\beta\frac{1}{\xi^{3/5}}
+\end{align*}
+\]</div>
+<ul>
+<li>2つの摂動モード。定数と、<span class="arithmatex">\(\xi^{-3/5}\)</span>のモード。</li>
+<li>この解は摂動が消えずに一緒に０次の解とともに流れていく。</li>
+<li>摂動項としての条件,<span class="arithmatex">\(T_0 \gg\Theta\)</span>がフロント部で破れる。</li>
+</ul>
+<div class="arithmatex">\[
+  \frac{\xi^{-3/5}}{T_0}  = \frac{\xi^{-3/5}}{A\xi^{2/5}} \propto \xi^{-1}
+\]</div>
+<ul>
+<li>というわけで、摂動解を具体的に導出できるものの、あまり嬉しい解ではないかもしれない。</li>
+</ul>
+<h1 id="_12">別の整理方法を考える。</h1>
+<div class="arithmatex">\[
+\begin{align*}
+    \frac{\partial \theta}{\partial t} &amp;= \frac{5v}{2} * \frac{\partial ^2 (vt-x)\theta }{\partial x^2 } \\
+    \frac{\partial \theta}{\partial t} &amp;= 
+    \frac{5 v}{2}[- 2\frac{\partial \theta}{\partial x} 
+    + (vt-x)\frac{\partial^2 \theta}{\partial x^2}]\\
+    \frac{2}{5}\frac{\partial\theta}{\partial vt} + 2\frac{\partial \theta}{\partial x} &amp;= (vt-x) \frac{\partial^2 \theta}{\partial x^2}\\
+\end{align*}
+\]</div>
+<h3 id="2">案2</h3>
+<ul>
+<li><span class="arithmatex">\((x,vt) \to (\xi,\tau)=(vt-x, vt)\)</span>で変換。</li>
+</ul>
+<div class="arithmatex">\[
+\begin{align*}
+    \partial_{vt} &amp;= \partial_{\xi} + \partial_{\tau}\\
+    \partial_{x} &amp;= -\partial_{\xi}\\
+\end{align*}
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+    \frac{2}{5}\frac{\partial\theta}{\partial \tau} -\frac{8}{5}\frac{\partial \theta}{\partial \xi} &amp;= \xi \frac{\partial^2 \theta}{\partial \xi^2}\\
+\end{align*}
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+y &amp;= \ln{\xi}\\ 
+\partial_y &amp;= \frac{d \xi}{d y}\partial_{\xi}
+ = \xi\partial_{\xi}\\
+ \partial_y^2  &amp;=  \xi\partial_{\xi} \xi\partial_{\xi} 
+ = \xi \partial_{\xi} + \xi^2 \partial_{\xi}^2 = \partial_y +\xi^2 \partial_{\xi}^2
+ \end{align*}
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+\xi &amp;= e^y\\ 
+\partial_\xi   &amp;=  e^{-y} \partial_y\\
+ \partial_{\xi}^2  &amp;= e^{-2y}(\partial_y^2 - \partial_y )
+ \end{align*}
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+    \frac{2}{5}\frac{\partial\theta}{\partial \tau} 
+    &amp;=
+    e^{-y} [\frac{8}{5}\frac{\partial }{\partial y} +   \frac{\partial^2 }{\partial y^2} - \frac{\partial}{\partial y}]\theta \\
+    &amp;=
+    e^{-y} [\frac{3}{5}\frac{\partial }{\partial y} + 
+    \frac{\partial^2 }{\partial y^2} ] \theta \\
+   &amp;=
+    e^{-y} [\frac{3}{5}\frac{\partial }{\partial y} + 
+    \frac{\partial^2 }{\partial y^2} ] \theta \\
+   &amp;=
+    e^{-y}[\frac{3}{5} + 
+    \frac{\partial }{\partial y} ] \frac{\partial }{\partial y}\theta \\
+   &amp;=
+    e^{-y+ay} e^{-ay}[\frac{3}{5} + 
+    \frac{\partial }{\partial y} ] e^{ay} e^{-ay}\frac{\partial }{\partial y}e^{ay}  e^{-ay} \theta \\
+\end{align*}
+\]</div>
+<ul>
+<li>両辺ラプラス変換とか。</li>
+</ul>
+<h3 id="3">案3</h3>
+<ul>
+<li><span class="arithmatex">\((x,vt) \to (\xi,\tau)=(vt-x, 5vt-x)\)</span>で変換。</li>
+</ul>
+<h3 id="4">案4</h3>
+<ul>
+<li><span class="arithmatex">\((x,vt) \to (\xi,\tau)=(a_{11}vt-a_{12}x, a_{21}vt-a_{22}x)\)</span>で一般の線形変換</li>
+</ul>
+<p>-darui.. kanngaetakunai</p>
+<h2 id="4_1">4) 実用的な次の手（解析・数値）</h2>
+<p>自己相似基底に対する安定性解析</p>
+<p>自己相似解 <span class="arithmatex">\(T_s(\xi,\tau)=\tau^{k}f(\xi)\)</span>を基底に取り、摂動 <span class="arithmatex">\(u(\xi,\tau)\)</span>を入れて線形化する：</p>
+<div class="arithmatex">\[
+T(\xi,\tau)=\tau^k f(\xi) + u(\xi,\tau)
+\]</div>
+<p>を PDE に代入し、一次近似で得られる線形方程式で分離 <span class="arithmatex">\(u(\xi,\tau)=\tau^\lambda \phi(\xi)\)</span> を試す。すると固有値問題が出てきて、</p>
+<ul>
+<li>(\Re(\lambda)&lt;0) のモードは減衰（安定）</li>
+<li>(\Re(\lambda)&gt;0) のモードは発散（不安定）
+  となり、(C_2)-に相当するモードが安定か否か判定できる。これが <strong>「(C_2) が長期に残るか」</strong> を決める正統な方法。</li>
+</ul>
+<h1 id="_13">密度に勾配がある時</h1>
+<div class="arithmatex">\[
+\begin{align}
+    \frac{\partial e^{x/L} T}{\partial t} &amp;= \frac{\partial T^{7/2}}{\partial x^2} \\
+    \frac{\partial T}{\partial t} &amp;= e^{-x/L} \frac{\partial T^{7/2}}{\partial x^2}
+\end{align}
+\]</div>
+<p>例えば、勾配下で０次解出して、一次の摂動が満たすべき方程式はどうなる？</p>
+<div class="arithmatex">\[
+\begin{align}
+    \frac{\partial T}{\partial t} &amp;= e^{-x/L} e^{ax} (\partial_x + a )^2 (e^{-ax} T^{7/2})\\
+    \frac{\partial e^{x(1/L-a)}T}{\partial t} &amp;=  (\partial_x + a )^2 ((e^{-2ax/7} T)^{7/2})\\
+    1/L -a &amp;= -2a/7,  \quad a=\frac{7}{5L}\\
+    S &amp;= e^{-\frac{2x}{5L}} T \\
+    \frac{\partial S}{\partial t} &amp;= (\partial_x + \frac{7}{5L} )^2 (S^{7/2})\\    
+  &amp;= \left [\partial_x^2  + 2\frac{7}{5L}\frac{\partial}{\partial x} + (\frac{7}{5L})^2 \right] (S^{7/2})\\
+\end{align}
+\]</div>
+<div class="arithmatex">\[
+    S(x-vt) = S(s)
+\]</div>
+<div class="arithmatex">\[
+    (\frac{d}{ds} -v )S = \left [\frac{d^2}{ds^2} + \frac{14}{5L} \frac{d}{ds} + \frac{49}{25L^2}  \right ] S^{7/2} 
+\]</div>
+<ul>
+<li>この変形はあんまり役に立たなさそう。綺麗だけど、問題が簡単になっているようには感じられない。</li>
+<li>いや、ここから自己相似解を構成しにいくと？</li>
+<li><span class="arithmatex">\(\xi = x-vt\)</span>が物理的な解になる気が全くしない。。</li>
+<li><span class="arithmatex">\(\xi = x - f(t)\)</span>, f(t)\propto tじゃないとODEに落ちないからなぁ。</li>
+<li><span class="arithmatex">\(S = X^{2m}\)</span>で関数変換して、整数階の微分方程式に無理に持っていく。意味ないよな。</li>
+<li>ここでも、S = K^{2/5}で変換してみるとか。</li>
+</ul>
+<p>温度勾配が非常に弱い箇所では、適切な熱勾配を作る方向に熱が移動する。</p>
+<div class="arithmatex">\[
+\begin{align}
+\frac{\partial S}{\partial t} &amp;= (\frac{7}{5L} )^2 (S^{7/2})\\
+\frac{-2}{5}\frac{\partial S^{-5/2}}{\partial t} &amp;= (\frac{7}{5L} )^2 \\
+\frac{\partial S^{-5/2}}{\partial t} &amp;= (\frac{-7^2}{10L^2} ) \\
+      S^{-5/2} &amp;= (\frac{-7^2}{10L^2} )t + S_0^{-5/2}(x) \\
+      T^{-5/2}e^{x/L} &amp;= (\frac{-7^2}{10L^2} )t + S_0^{-5/2}(x) \\
+      T &amp;= [(\frac{-7^2}{10L^2} )t e^{-x/L}+ T_0^{-5/2}(x) ]^{-2/5}\\
+\end{align}
+\]</div>
+<p>流れが釣り合って温度がほとんど定常になるような場所は<span class="arithmatex">\(T^{7/2}\)</span>の凸がない。</p>
+<div class="arithmatex">\[
+  \begin{align}
+    \frac{\partial T^{7/2}}{\partial x^2} &amp;= 0 \\
+    T &amp;= (a(t)x + b(t))^{2/7} \\
+  \end{align}
+\]</div>
+<p>あるいは、次も同じ。</p>
+<div class="arithmatex">\[
+\begin{align}
+    (\partial_x + \frac{7}{5L} )^2 (S^{7/2}) = 0\\
+    (\partial_x )^2 e^{7x/5L} (S^{7/2}) = 0\\
+    (\partial_x )^2 T^{7/2} = 0\\
+\end{align}
+\]</div>
+<p>粗いscalingとして、</p>
+<div class="arithmatex">\[
+\partial_t T \sim e^{-x/L} \frac{T^{7/2}}{l^2}
+\]</div>
+<p>front位置x_f(t)では、</p>
+<div class="arithmatex">\[  
+\frac{dx_f}{dt} \sim e^{-x_f/L}
+\]</div>
+<div class="arithmatex">\[  
+    x_f(t) \sim L\ln{t}
+\]</div>
+<h2 id="exp">exp熱容量中の伝播</h2>
+<div class="arithmatex">\[
+\partial_t T = e^{-x/L} \partial_x^2 (T^{7/2}) \qquad T\ge 0
+\]</div>
+<p>初期条件は</p>
+<ul>
+<li><span class="arithmatex">\(T(x,0)\)</span> は (x&lt;0) にコンパクト</li>
+<li><span class="arithmatex">\(x\to+\infty\)</span> では <span class="arithmatex">\(T=0\)</span></li>
+</ul>
+<p>という「加熱フロント」状況を想定する。</p>
+<p>定義としてフロント位置を考える。</p>
+<div class="arithmatex">\[
+x_f(t) := \sup{x \mid T(x,t)&gt;0}
+\]</div>
+<ul>
+<li>
+<p>有限伝播性　　無限速伝播は起きない</p>
+</li>
+<li>
+<p>拡散係数：(D(x,T)=e^{-x/L} T^{5/2})
+で、degenerate diffusionで、porous medium 型なので</p>
+</li>
+<li>
+<p>フロントは有限位置に存在する
+これは既存理論（PME / FDE）に乗る。</p>
+</li>
+</ul>
+<p>フロント近傍では</p>
+<ul>
+<li><span class="arithmatex">\(T\to 0\)</span></li>
+<li>勾配は有限</li>
+<li>非線形指数 (7/2) は「形」を決めるが
+  進む速さを決めるのは前の係数</li>
+</ul>
+<p>という構造になる。</p>
+<h2 id="_14">上からの評価</h2>
+<p>フロントの最大速度（これ以上速く進めない）を評価する。
+フロント近傍の幅を <span class="arithmatex">\(\ell(t)\)</span> とすると</p>
+<div class="arithmatex">\[
+\partial_t T
+\sim \frac{T}{t}
+,\quad
+\partial_x^2(T^{7/2})
+\sim \frac{T^{7/2}}{\ell^2}
+\]</div>
+<p>したがって</p>
+<div class="arithmatex">\[
+\frac{T}{t}
+\lesssim
+e^{-x_f/L}\frac{T^{7/2}}{\ell^2}
+\]</div>
+<p>フロントでは <span class="arithmatex">\(T\sim 0\)</span> なので
+<span class="arithmatex">\(\ell\)</span> は (T) 依存だが、時間依存は弱い（PME の既知結果）。</p>
+<p>→ 有効速度として</p>
+<div class="arithmatex">\[
+\frac{dx_f}{dt}
+\lesssim C  e^{-x_f/L}
+\]</div>
+<p>ここで (C) は定数（初期条件依存）。</p>
+<p>これを積分すると</p>
+<div class="arithmatex">\[
+x_f(t) \le L\ln t + C_1
+\]</div>
+<h2 id="_15">下からの評価</h2>
+<p>少なくともこのくらいは進む」ことは示せるだろうか。
+サブソリューションとして</p>
+<div class="arithmatex">\[
+T(x,t)
+=
+\begin{cases}
+A(t)\left(1-\dfrac{x}{X(t)}\right)^{2/5} &amp; x&lt;X(t) \
+0 &amp; x\ge X(t)
+\end{cases}
+\]</div>
+<p>のような PME型の自己相似プロファイルを考える。</p>
+<div class="arithmatex">\[
+\dot X(t)
+\sim e^{-X(t)/L}
+\]</div>
+<p>を満たすように
+(A(t),X(t)) を選べる。</p>
+<p>すると比較原理より</p>
+<div class="arithmatex">\[
+x_f(t) \ge X(t)
+\]</div>
+<p>であり、積分すると</p>
+<div class="arithmatex">\[
+X(t)=L\ln t + C_2
+\]</div>
+<p>上下から</p>
+<p>[
+L\ln t + C_2
+;\le;
+x_f(t)
+;\le;
+L\ln t + C_1
+]</p>
+<p>が得られる。</p>
+<p>したがって</p>
+<p>[
+\boxed{
+x_f(t)=L\ln t + O(1)
+}
+]</p>
+<p>これは</p>
+<ul>
+<li>単なる次元解析ではない</li>
+<li>ODE に落として解いたわけでもない</li>
+<li><strong>比較原理＋バリア構成による評価</strong></li>
+</ul>
+<p>という、PDEとして十分「ちゃんとした」主張。</p>
+<hr />
+<blockquote>
+<p>なぜ対数になるのか？</p>
+</blockquote>
+<ul>
+<li>フロントを進める唯一のエンジンが
+  (e^{-x/L}) という指数的に弱くなる係数</li>
+<li>非線形拡散は「形」を決めるが
+  <strong>進行法則は係数で決まる</strong></li>
+<li>その結果
+  $$
+  \dot x_f \propto e^{-x_f/L}
+  \Rightarrow x_f\sim \ln t
+  $$</li>
+</ul>
+<p>これは変数変換に依らない、<strong>構造的結論</strong>。</p>
+<ul>
+<li>フロント幅の時間依存</li>
+<li>(O(1)) の定数が何で決まるか</li>
+<li>数値解との一致の仕方</li>
+</ul>
+<p>OK、ここは<strong>一番ごまかしが入りやすい所</strong>だから、
+式変形を極力減らして、</p>
+<blockquote>
+<p><strong>何を比較して、どこで (\dot X \sim e^{-X/L}) が出るのか</strong></p>
+</blockquote>
+<p>だけに絞って説明するね。
+「納得できる最小単位」まで分解する。</p>
+<hr />
+<h1 id="_16">全体像</h1>
+<p>この議論は <strong>「解を当てて解く」話ではない</strong>。
+やっているのは次の一点だけ：</p>
+<blockquote>
+<p>フロント近傍では
+<strong>どんな解でも“これより遅くは進めない速度”がある</strong></p>
+</blockquote>
+<p>それを示すために
+<strong>人工的に作った関数 (T_-)</strong> を使う。</p>
+<hr />
+<h1 id="1">① なぜこの形を選ぶのか（最重要）</h1>
+<p>[
+T_-(x,t)
+========</p>
+<p>A(t)\Bigl(1-\frac{x}{X(t)}\Bigr)_+^{2/5}
+]</p>
+<p>これは「都合のいい形」ではなく、</p>
+<ul>
+<li>非線形拡散
+  [
+  \partial_t T=\partial_x^2(T^m)
+  ]
+  の<strong>フロント近傍の一般形</strong></li>
+</ul>
+<p>[
+T \sim (x_f-x)^{1/(m-1)}
+]</p>
+<p>に <strong>一致させただけ</strong>。</p>
+<p>今回 (m=7/2) なので</p>
+<p>[
+\frac{1}{m-1}=\frac{1}{5/2}=\frac{2}{5}
+]</p>
+<p>👉
+<strong>この指数は“勝手に選んでいない”</strong>。</p>
+<hr />
+<h1 id="2_1">② 「サブソリューション」とは何か</h1>
+<p>定義はこれだけ：</p>
+<p>[
+\boxed{
+\partial_t T_- ;\le; e^{-x/L}\partial_x^2(T_-^{7/2})
+}
+]</p>
+<p>これを満たせば、</p>
+<ul>
+<li>初期時刻で (T_- \le T)</li>
+<li>境界でも (T_- \le T)</li>
+</ul>
+<p>なら、</p>
+<p>[
+T_-(x,t)\le T(x,t)
+]</p>
+<p>が <strong>常に成り立つ</strong>（比較原理）。</p>
+<hr />
+<h1 id="3_1">③ どこを評価すればいいか</h1>
+<p>重要なのは <strong>フロント直前</strong>
+(x \approx X(t))。</p>
+<p>理由：</p>
+<ul>
+<li>内部の形はどうでもいい</li>
+<li><strong>フロントが進む速さは“縁”で決まる</strong></li>
+</ul>
+<hr />
+<h1 id="4_2">④ フロント近傍でのスケーリング（核心）</h1>
+<h2 id="a">(a) 時間変化は何で決まる？</h2>
+<p>フロント位置が動くので</p>
+<p>[
+\partial_t T_- \sim -\dot X ,\partial_x T_-
+]</p>
+<p>フロント近傍では</p>
+<p>[
+\partial_x T_- \sim A X^{-1}(X-x)^{-3/5}
+]</p>
+<p>したがって</p>
+<p>[
+\partial_t T_- \sim \dot X , A X^{-1}(X-x)^{-3/5}
+]</p>
+<hr />
+<h2 id="b">(b) 右辺は？</h2>
+<p>[
+T_-^{7/2} \sim A^{7/2}(X-x)^{7/5}
+]</p>
+<p>2階微分すると</p>
+<p>[
+\partial_x^2(T_-^{7/2})
+\sim
+A^{7/2}X^{-2}(X-x)^{-3/5}
+]</p>
+<p>👉
+<strong>両辺で ((X-x)^{-3/5}) が一致する</strong>
+（これが指数 (2/5) を選んだ理由）</p>
+<hr />
+<h1 id="5">⑤ ついに速度が出る</h1>
+<p>不等式
+[
+\partial_t T_- \le e^{-x/L}\partial_x^2(T_-^{7/2})
+]</p>
+<p>をフロント近傍で見ると：</p>
+<p>[
+\dot X , A X^{-1}
+;\lesssim;
+e^{-X/L} A^{7/2} X^{-2}
+]</p>
+<p>整理すると</p>
+<p>[
+\boxed{
+\dot X ;\lesssim; e^{-X/L},A^{5/2}X^{-1}
+}
+]</p>
+<hr />
+<h1 id="6-dot-x-sim-e-xl">⑥ なぜ (\dot X \sim e^{-X/L}) と言えるのか</h1>
+<p>ここで <strong>自由度</strong> がある：</p>
+<ul>
+<li>(A(t)) は好きに選べる</li>
+<li>(X^{-1}) は対数成長では無視できる</li>
+</ul>
+<p>だから</p>
+<p>[
+A^{5/2}X^{-1} \ge c &gt;0
+]</p>
+<p>となるように
+<strong>(A(t)) をゆっくり変える</strong>（あるいは定数）。</p>
+<p>👉 すると</p>
+<p>[
+\boxed{
+\dot X(t) \ge c, e^{-X(t)/L}
+}
+]</p>
+<p>これが出る。</p>
+<hr />
+<h1 id="7-ode">⑦ ここで初めて ODE を「評価として」使う</h1>
+<p>[
+\dot X = c e^{-X/L}
+]</p>
+<p>は<strong>支配方程式ではない</strong>。
+「これより遅くはならない」という評価。</p>
+<p>積分すると</p>
+<p>[
+X(t)=L\ln t + C
+]</p>
+<hr />
+<h1 id="8">⑧ なぜこれで下からの評価になるか</h1>
+<ul>
+<li>(T_-) はサブソリューション</li>
+<li>だから常に (T_- \le T)</li>
+<li>よってフロント位置も
+  [
+  X(t)\le x_f(t)
+  ]</li>
+</ul>
+<p>結論：</p>
+<p>[
+\boxed{
+x_f(t)\ge L\ln t + O(1)
+}
+]</p>
+<hr />
+<h1 id="9">⑨ 一言で言うと</h1>
+<p>この議論はこういう意味：</p>
+<blockquote>
+<p>フロント付近に
+「この形で、これ以上遅くは進めない
+擬似的な解」を置くと、
+本物の解は必ずそれより前にいる</p>
+</blockquote>
+<hr />
+<h2 id="_17">最後に（率直なことを言う）</h2>
+<p>君がここで引っかかったのは <strong>正常</strong>。
+この種の議論は論文でも</p>
+<blockquote>
+<p>“one can construct a suitable subsolution…”</p>
+</blockquote>
+<p>で一行で流される。</p>
+<p>でも今やっている数値計算と
+<strong>完全に同じ物理を言葉でやっている</strong>だけ。</p>
+<p>もし次に進むなら：</p>
+<ul>
+<li>この (T_-) を実際に数値で入れてみる</li>
+<li>フロント近傍の指数 (2/5) を測る</li>
+</ul>
+<p>ここまで行くと、もう腹落ちすると思う。</p>
+<p>どこをもう一段掘りたい？</p>
+<p>ここ、かなり大事なポイントやね。
+結論から言うと、<strong>「A を選べる」というのは物理をいじっているのではなく、評価（estimate）の自由度の話</strong>で、
+<strong>不等号の向きは「下から押さえる」ために意図的にそうしている</strong>。</p>
+<p>順にほどいて説明する。</p>
+<hr />
+<h2 id="1_1">1. まず前提を整理する</h2>
+<p>おそらく元にあるのはこんな形の式やと思う：</p>
+<div class="arithmatex">\[
+\dot X(t)
+=
+A(t)^{5/2} X(t)^{-1} e^{-X(t)/L}
+\quad (\text{あるいは } \ge \text{ で評価})
+\]</div>
+<ul>
+<li>(X(t))：拡散フロントや勾配位置</li>
+<li>(A(t))：密度勾配や振幅スケール（時間依存）</li>
+<li>(e^{-X/L})：物理的に本質的な減衰</li>
+</ul>
+<h2 id="2-at">2. 「A(t) は好きに選べる」とは何を意味するか</h2>
+<blockquote>
+<p><strong>A(t) の厳密な時間発展を解かずに、「あるクラスの挙動」だけを仮定して評価している</strong></p>
+</blockquote>
+<p>つまりこれは</p>
+<ul>
+<li><strong>存在証明・下限評価</strong></li>
+<li><strong>漸近挙動（large (X)）の議論</strong></li>
+</ul>
+<p>「A(t) が変動してもいいが、
+<span class="arithmatex">\(A(t)^{5/2} X(t)^{-1}\)</span>
+が <strong>ゼロに落ちないような時間発展</strong>なら十分」
+という <strong>仮定を置いている</strong>。</p>
+<div class="arithmatex">\[
+A(t)^{5/2} X(t)^{-1} \ge c &gt; 0
+\]</div>
+<p>となるような <strong>A(t) のクラスを選ぶ</strong>。
+「<strong>全解を扱うのではなく、ある条件を満たす解集合を見る</strong>」
+という解析的な操作。</p>
+<h2 id="3-x-1">3. なぜ (X^{-1}) を「無視できる」と言えるのか</h2>
+<p>これは <strong>対数成長 vs 指数減衰</strong> の話。</p>
+<div class="arithmatex">\[
+X^{-1} \sim \frac{1}{X} \quad\text{は}
+\quad X\to\infty \text{でゆっくり減る}
+\]</div>
+<p>一方で</p>
+<div class="arithmatex">\[
+e^{-X/L}
+\]</div>
+<p>は <strong>支配的に小さくなる</strong>。</p>
+<p>だから漸近的には</p>
+<ul>
+<li>本質的なのは指数</li>
+<li>多項式因子は「定数に吸収できる」</li>
+</ul>
+<p>→ 定数 (c) に押し込む。</p>
+<h2 id="4_3">4. なぜ不等号が「逆転」しているように見えるのか</h2>
+<p>ここが一番混乱しやすい。</p>
+<h3 id="_18">やりたいこと</h3>
+<div class="arithmatex">\[
+\dot X \sim e^{-X/L}
+\]</div>
+<p>という <strong>最低限これくらいは進む</strong>、という主張。</p>
+<p>つまり</p>
+<p>$
+\dot X(t) \ge \text{something}
+$</p>
+<p>を示したい。</p>
+<h3 id="_19">元の形を分解すると</h3>
+<div class="arithmatex">\[
+\dot X
+=
+\big(A^{5/2} X^{-1}\big) e^{-X/L}
+\]</div>
+<div class="arithmatex">\[
+A^{5/2} X^{-1} \ge c
+\]</div>
+<p>と仮定すると</p>
+<div class="arithmatex">\[
+\dot X
+\ge
+c e^{-X/L}
+\]</div>
+<p>👉 <strong>不等号は一度も逆転していない</strong>
+ただし</p>
+<ul>
+<li>「等式」→「下からの評価」に変えている</li>
+<li>そのため <strong>≥ を使う</strong></li>
+</ul>
+<h4 id="_20">物理的な意味</h4>
+<p>拡散フロントはどんなに条件が悪くても指数的に抑制された速度では前進し続ける</p>
+<ul>
+<li>
+<p>A が多少揺れても勾配が多少薄れても指数項が支配している限り、運動は止まらない</p>
+</li>
+<li>
+<p><strong>A(t) を選べる</strong>
+  → 解のクラスを限定して評価しているだけ</p>
+</li>
+<li><strong>不等号は逆転していない</strong>
+  → 下限評価に切り替えただけ</li>
+</ul>
+<p>$$
+  \boxed{
+  \dot X \gtrsim e^{-X/L}
+  }
+  $$
+  という漸近構造</p>
+  </div>
+</article>
+                                <div class="mx-auto flex flex-wrap h-16 w-full max-w-2xl items-center gap-2 px-4 md:px-0">
+    
+    
+</div>
+                                <dialog id="bottom-sidebar" onclick="onBottomSidebarDialogClick(event)" class="bg-transparent"
+    style="position: fixed; left: 0px; top: 0px; transform: translate(0px, 58px); min-width: max-content; --radix-popper-transform-origin: 0% 0px; will-change: transform; z-index: 50; --radix-popper-available-width: 504px; --radix-popper-available-height: 857px; --radix-popper-anchor-width: 72.94999694824219px; --radix-popper-anchor-height: 32px;">
+    <div data-side="bottom" data-align="start" data-state="open" role="dialog" data-slot="popover-content"
+        class="text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 origin-(--radix-popover-content-transform-origin) border outline-hidden bg-background/90 no-scrollbar h-(--radix-popper-available-height) w-(--radix-popper-available-width) overflow-y-auto rounded-none border-none p-0 shadow-none backdrop-blur duration-100"
+        style="--radix-popover-content-transform-origin: var(--radix-popper-transform-origin); --radix-popover-content-available-width: var(--radix-popper-available-width); --radix-popover-content-available-height: var(--radix-popper-available-height); --radix-popover-trigger-width: var(--radix-popper-anchor-width); --radix-popover-trigger-height: var(--radix-popper-anchor-height);"
+        tabindex="-1">
+        <div class="flex flex-col gap-12 overflow-auto px-6 py-6">
+            
+            
+            
+
+            
+            <div class="flex flex-col gap-4">
+                <div class="text-muted-foreground text-sm font-medium">Menu</div>
+                <div class="flex flex-col gap-3">
+                    
+                    <a class="text-2xl font-medium" href="index.html">
+                        
+                        Home
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="01_non-lin-diff-analyticals.html">
+                        
+                        非線形拡散
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="02juttner.html">
+                        
+                        Jüttner分布
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="03_scale_inv_VM.html">
+                        
+                        Maxwell-Vlasov系のスケール変換
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="LL_4_Collisions_in_Plasmas.html">
+                        
+                        kinetics PROBLEM
+                        
+                    </a>
+                    
+                </div>
+            </div>
+            
+
+            
+            
+
+        </div>
+    </div>
+</dialog>
+                            </div>
+                            <div
+                                class="sticky top-[calc(var(--header-height)+1px)] ml-auto hidden h-[calc(100svh-var(--header-height)-var(--footer-height))] w-72 flex-col gap-4 overflow-hidden overscroll-none pb-8 xl:flex">
+                                <div class="h-(--top-spacing) shrink-0"></div>
+                                <div view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
+    <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
+        <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            デルタソースからの拡散
+        </a>
+        
+
+        
+        <a href="#_2"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            別の解を探す。
+        </a>
+        
+
+        
+        <a href="#_3"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            密度勾配の下での伝播
+        </a>
+        
+        
+        <a href="#sto-infty"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            \(s\to -\infty\)の振る舞い
+        </a>
+        
+        <a href="#plasma"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            plasma中の輸送として、真っ当な範囲の解はどのようなものか。
+        </a>
+        
+        <a href="#_4"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            物理量の規格化を整理
+        </a>
+        
+        <a href="#x_f-allnt"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            より一般の状況として、x_f ~ aLln(t)を考える。
+        </a>
+        
+        <a href="#_6"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            
+        </a>
+        
+        <a href="#_7"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            時間の無次元化について再検討
+        </a>
+        
+        <a href="#kk"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            加速度項の(K,K')平面上の振る舞い
+        </a>
+        
+        <a href="#_8"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            
+        </a>
+        
+        <a href="#n"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            変数分離形かつ任意の\(n\)
+        </a>
+        
+        <a href="#n_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            一般のnで級数解を探す
+        </a>
+        
+        <a href="#_10"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            球対称な幾何学ならばどのように変化するべきか
+        </a>
+        
+        
+
+        
+        <a href="#_11"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            一次元の非線形拡散の自己相似解からの摂動
+        </a>
+        
+
+        
+        <a href="#_12"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            別の整理方法を考える。
+        </a>
+        
+        
+        <a href="#2"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            案2
+        </a>
+        
+        <a href="#3"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            案3
+        </a>
+        
+        <a href="#4"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            案4
+        </a>
+        
+        <a href="#4_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            4) 実用的な次の手（解析・数値）
+        </a>
+        
+        
+
+        
+        <a href="#_13"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            密度に勾配がある時
+        </a>
+        
+        
+        <a href="#exp"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            exp熱容量中の伝播
+        </a>
+        
+        <a href="#_14"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            上からの評価
+        </a>
+        
+        <a href="#_15"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            下からの評価
+        </a>
+        
+        
+
+        
+        <a href="#_16"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            全体像
+        </a>
+        
+
+        
+        <a href="#1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            ① なぜこの形を選ぶのか（最重要）
+        </a>
+        
+
+        
+        <a href="#2_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            ② 「サブソリューション」とは何か
+        </a>
+        
+
+        
+        <a href="#3_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            ③ どこを評価すればいいか
+        </a>
+        
+
+        
+        <a href="#4_2"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            ④ フロント近傍でのスケーリング（核心）
+        </a>
+        
+        
+        <a href="#a"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            (a) 時間変化は何で決まる？
+        </a>
+        
+        <a href="#b"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            (b) 右辺は？
+        </a>
+        
+        
+
+        
+        <a href="#5"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            ⑤ ついに速度が出る
+        </a>
+        
+
+        
+        <a href="#6-dot-x-sim-e-xl"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            ⑥ なぜ (\dot X \sim e^{-X/L}) と言えるのか
+        </a>
+        
+
+        
+        <a href="#7-ode"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            ⑦ ここで初めて ODE を「評価として」使う
+        </a>
+        
+
+        
+        <a href="#8"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            ⑧ なぜこれで下からの評価になるか
+        </a>
+        
+
+        
+        <a href="#9"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            ⑨ 一言で言うと
+        </a>
+        
+        
+        <a href="#_17"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            最後に（率直なことを言う）
+        </a>
+        
+        <a href="#1_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            1. まず前提を整理する
+        </a>
+        
+        <a href="#2-at"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            2. 「A(t) は好きに選べる」とは何を意味するか
+        </a>
+        
+        <a href="#3-x-1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            3. なぜ (X^{-1}) を「無視できる」と言えるのか
+        </a>
+        
+        <a href="#4_3"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            4. なぜ不等号が「逆転」しているように見えるのか
+        </a>
+        
+        
+
+        
+        
+        
+        
+
+    </div>
+    <div class="h-12"></div>
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer view-transition-name="footer"
+    class="group-has-[.section-soft]/body:bg-surface/40 3xl:fixed:bg-transparent dark:bg-transparent">
+    <div class="container-wrapper px-4 xl:px-6">
+        <div class="flex h-(--footer-height) items-center justify-between">
+            <div class="text-muted-foreground w-full text-center text-xs leading-loose sm:text-sm">
+                
+                <a href="https://github.com/asiffer/mkdocs-shadcn">shadcn theme</a> provided by
+                <a href="https://github.com/asiffer">@asiffer</a>
+            </div>
+        </div>
+    </div>
+</footer>
+    </div>
+     
+
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js"></script>
+
+     
+
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js"></script>
+
+     
+
+<script src="js/katex_auto.js"></script>
+
+     
+
+<script src="search/main.js"></script>
+
+
+    
+
+    <script src="js/copy-button.js"></script>
+    <script>updatePygmentsStylesheet();</script>
+    
+    <script>fetchStargazers("None");</script>
+    
+    
+    
+    <script type="speculationrules">
+{
+  "prerender": [
+    {
+      "where": {
+          "selector_matches": ["#next-button", "#previous-button"],
+      }
+    }
+  ]
+}
+</script>
+</body>
+
+</html>

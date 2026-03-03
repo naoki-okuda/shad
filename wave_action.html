@@ -1,0 +1,2270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        // for search plugin notably
+        const base_url = "https://naoki-okuda.github.io/shad/";
+    </script>
+    <script>
+    const darkTheme = window.matchMedia("(prefers-color-scheme: dark)");
+    darkTheme.onchange = (e) => {
+        if (e.matches) {
+            document.documentElement.classList.add("dark")
+            localStorage.theme = 'dark';
+        } else {
+            document.documentElement.classList.remove("dark")
+            localStorage.removeItem("theme")
+        }
+    };
+
+    // On page load. Priotiry to lcaolStorage
+    if (localStorage.theme === "dark") {
+        document.documentElement.classList.add("dark")
+    } else if (localStorage.theme === "light") {
+        document.documentElement.classList.remove("dark")
+    } else if (darkTheme.matches) {
+        document.documentElement.classList.add("dark")
+    } else {
+        document.documentElement.classList.remove("dark")
+    }
+
+    // set the layout based on localStorage
+    document.documentElement.classList.add(localStorage.getItem("html-layout") || "layout-fixed");
+</script>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wave action - Cube</title>
+    
+
+
+<title>Wave action</title>
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://naoki-okuda.github.io/shad/wave_action.html">
+
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+
+
+<meta property="og:title" content="Wave action">
+
+
+
+
+
+<meta property="og:url" content="https://naoki-okuda.github.io/shad/wave_action.html">
+
+
+
+
+
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+
+
+<meta name="twitter:title" content="Wave action">
+
+
+
+
+
+
+<!-- JSON-LD Structured Data -->
+
+
+
+    <link rel="icon" href="img/favicon.ico">
+
+    <link href="css/base.css" rel="stylesheet">
+    <link href="css/geist.css" rel="stylesheet">
+
+    
+    
+
+<link id="pygments-light" rel="stylesheet"
+    href="css/pygments/shadcn-light.css">
+<link id="pygments-dark" rel="stylesheet"
+    href="css/pygments/github-dark.css"
+    media="(prefers-color-scheme: dark)">
+
+
+    
+    <link href="extra.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" rel="stylesheet">
+
+    
+
+    <script src="js/callbacks.js"></script>
+
+    
+    <!-- katex -->
+<link rel="stylesheet" href="css/katex.min.css">
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="js/katex.min.js"></script>
+<!-- To automatically render math in text elements, include the auto-render extension: -->
+<script defer src="js/auto-render.min.js"
+    onload='renderMathInElement(document.body, {"macros": {"\\RR": "\\mathbb{R}", "\\dx": "\\mathrm{d}x"}});'></script>
+    
+
+    
+
+    
+
+</head>
+
+<body
+    class="text-foreground group/body overscroll-none font-sans antialiased [--footer-height:calc(var(--spacing)*14)] [--header-height:calc(var(--spacing)*14)] xl:[--footer-height:calc(var(--spacing)*24)] theme-default">
+    <div id="inner-body" class="bg-background relative z-10 flex min-h-svh flex-col">
+        <header class="bg-background sticky top-0 z-50 w-full" view-transition-name="header">
+    <div class="container-wrapper 3xl:fixed:px-0 px-6">
+        <div class="3xl:fixed:container flex h-(--header-height) items-center gap-2 **:data-[slot=separator]:!h-4">
+            <button id="menu-button" data-slot="popover-trigger" onclick="onMobileMenuButtonClick(event)"
+                class="group whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:text-accent-foreground px-4 py-2 has-[&gt;svg]:px-3 extend-touch-target h-8 touch-manipulation items-center justify-start gap-2.5 !p-0 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 active:bg-transparent dark:hover:bg-transparent flex lg:hidden"
+                type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«Rmplb»"
+                data-state="closed">
+                <div class="relative flex h-8 w-4 items-center justify-center">
+                    <div class="relative size-4">
+                        <!-- 16px x 16px -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="0" x2="16" y1="5" y2="5"
+                                class="group-data-[state=open]:translate-y-[2.25px] group-data-[state=open]:-translate-x-[2.25px] group-data-[state=open]:rotate-45 transition-all duration-300 origin-center" />
+                            <line x1="0" x2="16" y1="11" y2="11"
+                                class="group-data-[state=open]:-translate-y-[2.25px] group-data-[state=open]:-translate-x-[2.25px] group-data-[state=open]:-rotate-45 transition-all duration-300 origin-center" />
+                        </svg>
+                    </div>
+
+                    <span class="sr-only">Toggle Menu</span>
+                </div>
+                <span class="flex h-8 items-center text-lg leading-none font-medium">Menu</span>
+            </button>
+            <a data-slot="button"
+                class="items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-5 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 hidden h-8 lg:flex"
+                href="https://naoki-okuda.github.io/shad/">
+                <span class="size-8 flex flex-row justify-center items-center">
+                    
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"
+    class="size-5">
+    <rect width="256" height="256" fill="none"></rect>
+    <line x1="208" y1="128" x2="128" y2="208" fill="none" stroke="currentColor" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="32"></line>
+    <line x1="192" y1="40" x2="40" y2="192" fill="none" stroke="currentColor" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="32"></line>
+</svg>
+
+
+                </span>
+
+                
+                <h1 class="pr-2">Cube</h1>
+                
+            </a>
+            
+            <nav class="items-center gap-0.5 hidden lg:flex">
+    
+</nav>
+            
+            <div class="ml-auto flex items-center gap-2 md:flex-1 md:justify-end">
+                <div class="hidden w-full flex-1 md:flex md:w-auto md:flex-none">
+                    <button data-slot="dialog-trigger" onclick="onSearchBarClick(event)"
+    class="inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-secondary/80 px-4 py-2 has-[&gt;svg]:px-3 bg-surface text-surface-foreground/60 dark:bg-card relative h-8 w-full justify-start pl-2.5 font-normal shadow-none sm:pr-12 md:w-40 lg:w-56 xl:w-64"
+    type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«R66plb»" data-state="closed">
+    <span class="text-muted-foreground hidden lg:inline-flex">Search documentation...</span>
+    <span class="text-muted-foreground inline-flex lg:hidden">Search...</span>
+    <div class="absolute top-1.5 right-1.5 hidden gap-1 sm:flex">
+        <kbd
+            class="bg-background text-muted-foreground pointer-events-none flex h-5 items-center justify-center gap-1 rounded border px-1 font-sans text-[0.7rem] font-medium select-none [&amp;_svg:not([class*='size-'])]:size-3">Ctrl</kbd><kbd
+            class="bg-background text-muted-foreground pointer-events-none flex h-5 items-center justify-center gap-1 rounded border px-1 font-sans text-[0.7rem] font-medium select-none [&amp;_svg:not([class*='size-'])]:size-3 aspect-square">K</kbd>
+    </div>
+</button>
+<dialog id="search-dialog" onclick="onSearchDialogClick(event)"
+    class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background rounded-lg shadow-lg border overflow-hidden p-0">
+    <div class="w-lg gap-4">
+        <div class="flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground">
+            <div data-slot="command-input-wrapper" class="flex h-9 items-center gap-2 border-b px-3"><svg
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-search size-4 shrink-0 opacity-50">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                </svg>
+                <input data-slot="command-input"
+                    class="placeholder:text-muted-foreground flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
+                    placeholder="Search documentation..." cmdk-input="" autocomplete="off" autocorrect="off"
+                    spellcheck="false" aria-autocomplete="list" role="combobox" aria-expanded="true"
+                    aria-controls="radix-«r1t6»" aria-labelledby="radix-«r1t7»" id="radix-«r1t8»" type="text" value=""
+                    aria-activedescendant="radix-«r1th»" oninput="onInputHandler(event)">
+            </div>
+        </div>
+        <div id="mkdocs-search-results">
+            <!-- search results go there -->
+        </div>
+    </div>
+</dialog>
+<script>
+    document.removeEventListener("keydown", searchShortcutHandler);
+    document.addEventListener("keydown", searchShortcutHandler);
+</script>
+                </div>
+                <div data-orientation="vertical" role="none" data-slot="separator"
+                    class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px ml-2 hidden lg:block">
+                </div>
+                <a target="_blank" rel="noreferrer" data-slot="button"
+                    class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 h-8 shadow-none"
+                    href="None">
+                    <svg viewBox="0 0 438.549 438.549">
+                        <path fill="currentColor"
+                            d="M409.132 114.573c-19.608-33.596-46.205-60.194-79.798-79.8-33.598-19.607-70.277-29.408-110.063-29.408-39.781 0-76.472 9.804-110.063 29.408-33.596 19.605-60.192 46.204-79.8 79.8C9.803 148.168 0 184.854 0 224.63c0 47.78 13.94 90.745 41.827 128.906 27.884 38.164 63.906 64.572 108.063 79.227 5.14.954 8.945.283 11.419-1.996 2.475-2.282 3.711-5.14 3.711-8.562 0-.571-.049-5.708-.144-15.417a2549.81 2549.81 0 01-.144-25.406l-6.567 1.136c-4.187.767-9.469 1.092-15.846 1-6.374-.089-12.991-.757-19.842-1.999-6.854-1.231-13.229-4.086-19.13-8.559-5.898-4.473-10.085-10.328-12.56-17.556l-2.855-6.57c-1.903-4.374-4.899-9.233-8.992-14.559-4.093-5.331-8.232-8.945-12.419-10.848l-1.999-1.431c-1.332-.951-2.568-2.098-3.711-3.429-1.142-1.331-1.997-2.663-2.568-3.997-.572-1.335-.098-2.43 1.427-3.289 1.525-.859 4.281-1.276 8.28-1.276l5.708.853c3.807.763 8.516 3.042 14.133 6.851 5.614 3.806 10.229 8.754 13.846 14.842 4.38 7.806 9.657 13.754 15.846 17.847 6.184 4.093 12.419 6.136 18.699 6.136 6.28 0 11.704-.476 16.274-1.423 4.565-.952 8.848-2.383 12.847-4.285 1.713-12.758 6.377-22.559 13.988-29.41-10.848-1.14-20.601-2.857-29.264-5.14-8.658-2.286-17.605-5.996-26.835-11.14-9.235-5.137-16.896-11.516-22.985-19.126-6.09-7.614-11.088-17.61-14.987-29.979-3.901-12.374-5.852-26.648-5.852-42.826 0-23.035 7.52-42.637 22.557-58.817-7.044-17.318-6.379-36.732 1.997-58.24 5.52-1.715 13.706-.428 24.554 3.853 10.85 4.283 18.794 7.952 23.84 10.994 5.046 3.041 9.089 5.618 12.135 7.708 17.705-4.947 35.976-7.421 54.818-7.421s37.117 2.474 54.823 7.421l10.849-6.849c7.419-4.57 16.18-8.758 26.262-12.565 10.088-3.805 17.802-4.853 23.134-3.138 8.562 21.509 9.325 40.922 2.279 58.24 15.036 16.18 22.559 35.787 22.559 58.817 0 16.178-1.958 30.497-5.853 42.966-3.9 12.471-8.941 22.457-15.125 29.979-6.191 7.521-13.901 13.85-23.131 18.986-9.232 5.14-18.182 8.85-26.84 11.136-8.662 2.286-18.415 4.004-29.263 5.146 9.894 8.562 14.842 22.077 14.842 40.539v60.237c0 3.422 1.19 6.279 3.572 8.562 2.379 2.279 6.136 2.95 11.276 1.995 44.163-14.653 80.185-41.062 108.068-79.226 27.88-38.161 41.825-81.126 41.825-128.906-.01-39.771-9.818-76.454-29.414-110.049z">
+                        </path>
+                    </svg>
+                    
+                    <span id="stargazers" class="text-muted-foreground w-8 text-xs tabular-nums" onload="test()">
+                    </span>
+                    
+                </a>
+                <div data-orientation="vertical" role="none" data-slot="separator"
+                    class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px 3xl:flex hidden">
+                </div>
+                <button data-slot="button"
+                    class="items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 size-8 3xl:flex hidden"
+                    title="Toggle layout" onclick="toggleLayout(event)">
+                    <span class="sr-only">Toggle layout</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-gallery-horizontal">
+                        <path d="M2 3v18"></path>
+                        <rect width="12" height="18" x="6" y="3" rx="2"></rect>
+                        <path d="M22 3v18"></path>
+                    </svg>
+                </button>
+                <div data-orientation="vertical" role="none" data-slot="separator"
+                    class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px">
+                </div>
+                <button data-slot="button"
+                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 group/toggle extend-touch-target size-8"
+                    title="Toggle theme" onclick="onThemeSwitch(event)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="size-4.5">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                        <path d="M12 3l0 18"></path>
+                        <path d="M12 9l4.65 -4.65"></path>
+                        <path d="M12 14.3l7.37 -7.37"></path>
+                        <path d="M12 19.6l8.85 -8.85"></path>
+                    </svg>
+                    <span class="sr-only">Toggle theme</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+        <main class="flex flex-1 flex-col">
+            <div class="container-wrapper flex flex-1 flex-col px-2">
+                <div data-slot="sidebar-wrapper" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;"
+                    class="group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex w-full 3xl:fixed:container 3xl:fixed:px-3 min-h-min flex-1 items-start px-0 [--sidebar-width:220px] [--top-spacing:0] lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)] lg:[--sidebar-width:240px] lg:[--top-spacing:calc(var(--spacing)*4)]">
+                    <div data-slot="sidebar"
+                        class="text-sidebar-foreground w-(--sidebar-width) flex-col sticky top-[calc(var(--header-height)+1px)] z-30 hidden h-[calc(100svh-var(--header-height)-var(--footer-height))] bg-transparent lg:flex">
+                        <div data-slot="sidebar-content" data-sidebar="content"
+                            class="flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden no-scrollbar px-2 pb-12">
+                            <div class="h-(--top-spacing) shrink-0"></div>
+                            <div view-transition-name="sidebar" data-slot="sidebar-group" data-sidebar="group"
+    class="relative flex w-full min-w-0 flex-col p-2 no-scrollbar">
+    
+
+    
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    <div data-slot="sidebar-group" data-sidebar="group" class="relative flex w-full min-w-0 flex-col p-2">
+        <div data-slot="sidebar-group-content" data-sidebar="group-content" class="w-full text-sm">
+            <ul data-slot="sidebar-menu" data-sidebar="menu" class="flex w-full min-w-0 flex-col gap-0.5">
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/index.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        Home
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/01_non-lin-diff-analyticals.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        非線形拡散
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/02juttner.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        Jüttner分布
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/03_scale_inv_VM.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        Maxwell-Vlasov系のスケール変換
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/LL_4_Collisions_in_Plasmas.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        kinetics PROBLEM
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+
+    
+
+
+    
+</div>
+                        </div>
+                    </div>
+                    <div class="h-full w-full">
+                        <div data-slot="docs" class="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full">
+                            <div class="flex min-w-0 flex-1 flex-col">
+                                <div class="h-(--top-spacing) shrink-0"></div>
+                                <article class="w-full" view-transition-name="page">
+  <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-2">
+      <div id="page-header" class="flex items-start justify-between">
+        <h1
+          class="scroll-m-20 text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl"
+        >
+          Wave action
+        </h1>
+
+        <div class="flex items-center gap-2 pt-1.5">
+          
+<button onclick="fetch(`https://naoki-okuda.github.io/shad/wave_action.md`).then((r) => r.blob()).then((blob) => navigator.clipboard.write([new ClipboardItem({ 'text/plain': blob })]))" 
+        data-slot="button" 
+        class="cursor-pointer inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md gap-1.5 px-3 has-[&>svg]:px-2.5 h-8 shadow-none md:h-7 md:text-[0.8rem]">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-copy ">
+    <path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z"></path><path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1"></path>
+</svg>
+<span class="max-md:hidden">Copy Page</span>
+</button> 
+           
+          
+        </div>
+      </div>
+      
+    </div>
+    <div class="flex justify-end items-center">
+       
+    </div>
+  </div>
+  <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
+    <h2 id="2-wave-action">2. なぜ Wave Action が「強力」なのか？</h2>
+<p>Wave Action が「強力」と呼ばれる最大の理由は、エネルギーが保存しない状況でもそれが保存する（あるいは保存則を満たす）からです。</p>
+<h3 id="e-vs-wave-action-j">エネルギー <span class="arithmatex">\(E\)</span> vs Wave Action <span class="arithmatex">\(J\)</span></h3>
+<ol>
+<li>
+<p><strong>エネルギー (<span class="arithmatex">\(E\)</span>) は保存しない</strong>
+    例えば、波が平均流（プラズマの流れや海流など）からエネルギーをもらって成長する（不安定性）場合や、逆に波が平均流にエネルギーを渡す場合、波自体のエネルギー <span class="arithmatex">\(E\)</span> は時間とともに変化します。つまり、<strong>保存しません</strong>。</p>
+</li>
+<li>
+<p><strong>Wave Action (<span class="arithmatex">\(J\)</span>) は保存する</strong>
+    ところが、散逸（摩擦や抵抗）がない系では、波が平均流とエネルギーをやり取りしている最中でも、<strong>Wave Action <span class="arithmatex">\(J\)</span> は保存します</strong>（正確には、Wave Action 密度 <span class="arithmatex">\(A\)</span> とそのフラックス <span class="arithmatex">\(\boldsymbol{F}\)</span> が <span class="arithmatex">\(\frac{\partial A}{\partial t} + \nabla \cdot \boldsymbol{F} = 0\)</span> という保存則を満たします）。</p>
+</li>
+</ol>
+<h3 id="_1">🌍 具体例：勾配のある場所を進む波</h3>
+<p>海で、水深が浅くなる（ゆっくりと勾配がある）場所に向かって波が進むと、波の振幅は大きくなります（砕波）。</p>
+<ul>
+<li>このとき、波のエネルギー <span class="arithmatex">\(E\)</span> も周波数 <span class="arithmatex">\(\omega\)</span> も変化してしまいます。</li>
+<li>しかし、Wave Action <span class="arithmatex">\(J \approx E/\omega\)</span> は（ゆっくりとした変化であれば）<strong>保存しようとします</strong>。</li>
+<li>この「Wave Action が保存する」という条件を使うことで、エネルギーや周波数がどう変化し、結果として振幅がどれだけ大きくなるかを、非常に見通しよく計算できます。</li>
+</ul>
+<p>これは、プラズマ中で密度や磁場の勾配がある場所を波が伝播する際にも全く同様に当てはまり、波の振幅変化（成長や減衰）を追跡する上で極めて強力な道具となります。非線形相互作用（3波相互作用など）の記述にも用いられます（Manley-Roweの関係など）。</p>
+<h2 id="3">3. ラグランジアン密度との関係</h2>
+<p>では、ラグランジアン密度 <span class="arithmatex">\(\mathcal{L}\)</span> と Wave Action <span class="arithmatex">\(J\)</span> はどう関係するのか。</p>
+<p>ここで登場するのが<strong>「Whitham の平均化ラグランジアン法」</strong>です。</p>
+<ol>
+<li>系のラグランジアン密度 <span class="arithmatex">\(\mathcal{L}\)</span> から出発します。</li>
+<li>波の速い振動（例：<span class="arithmatex">\(\cos(kx - \omega t)\)</span>）と、振幅や波数がゆっくり変化する時空間スケールを分離します。</li>
+<li><span class="arithmatex">\(\mathcal{L}\)</span> を、この速い振動の1周期にわたって<strong>平均化</strong>したラグランジアン <span class="arithmatex">\(\langle \mathcal{L} \rangle\)</span> を作ります。</li>
+<li>この <span class="arithmatex">\(\langle \mathcal{L} \rangle\)</span> に対して変分原理（最小作用の原理）を適用します。</li>
+<li>すると、驚くべきことに、この操作から<strong>波の分散関係</strong>（<span class="arithmatex">\(\omega(k)\)</span>）と<strong>Wave Action の保存則</strong>が、統一的かつ系統的に導出されるのです。</li>
+</ol>
+<p>つまり、Wave Action は、元のラグランジアン密度を「波のスケールで平均化したもの」から導かれる保存量、という関係にあります。</p>
+<hr />
+<h2 id="_2">まとめ</h2>
+<p>「Wave Action を考えるのが強力」とは、</p>
+<blockquote>
+<p>波のエネルギーが保存しないような複雑な状況（媒質が不均一、平均流がある、非線形相互作用がある）でも、<strong>Wave Action (<span class="arithmatex">\(J \propto E/\omega'\)</span>)</strong> という量は保存則を満たす。</p>
+<p>この保存則は、元の系の<strong>ラグランジアン密度 <span class="arithmatex">\(\mathcal{L}\)</span> を平均化する</strong>という系統的な手法（Whitham の方法）によって導出できる。</p>
+<p>これにより、運動方程式を直接解くよりもはるかに見通し良く、波の振幅の振る舞いを解析できる。</p>
+</blockquote>
+<p>ということを意味しています。</p>
+<p>いいところ突いてる。結論から言うと</p>
+<p><strong>「考える。しかも体系的にやる流儀がちゃんとある」</strong>
+です。</p>
+<p>ただし、それはもう
+「線形波動」でも「普通の流体方程式」でもなくて、
+<strong>多重スケール展開・平均化・波動運動論</strong>の世界に入ります。</p>
+<hr />
+<h2 id="1">1. 何が起きているか（整理）</h2>
+<p>あなたの言っている構図はこう：</p>
+<ul>
+<li>0次：背景（平均場）</li>
+<li>1次：線形波動（振幅 ( \epsilon )）</li>
+<li>
+<p>2次：</p>
+</li>
+<li>
+<p>波どうしの自己相互作用</p>
+</li>
+<li>波が平均場に与える輸送（運動量・エネルギー）</li>
+</ul>
+<p>重要なのは：</p>
+<blockquote>
+<p><strong>輸送は 1次を平均すると消えて、2次で初めて残る</strong></p>
+</blockquote>
+<p>これは
+$$
+\langle \delta v \rangle = 0,\quad
+\langle \delta v,\delta v \rangle \neq 0
+$$
+という、ほぼ統計力学と同じ構造。</p>
+<h2 id="2">2. 「一次を取り除いた二次の方程式」は実際に作る</h2>
+<h3 id="a-reynolds">(A) Reynolds分解 → 波による応力項</h3>
+<p>流体量を
+$$
+\mathbf{v} = \bar{\mathbf{v}} + \tilde{\mathbf{v}}
+$$</p>
+<p>と分けて平均を取る。</p>
+<p>すると運動方程式は</p>
+<div class="arithmatex">\[
+\rho(\partial_t \bar{\mathbf{v}} + \bar{\mathbf{v}}\cdot\nabla\bar{\mathbf{v}})
+= -\nabla \bar{p}
+;\color{blue}{-\nabla\cdot\langle \rho,\tilde{\mathbf{v}}\tilde{\mathbf{v}}\rangle}
+\]</div>
+<p>この青い項が</p>
+<ul>
+<li>波による運動量輸送</li>
+<li>放射応力（radiation stress）</li>
+<li>ponderomotive force</li>
+</ul>
+<p>これは「一次の波動を消して、二次の効果だけ残した平均方程式」。</p>
+<h3 id="b-wkb-multiple-scale">(B) 多重スケール展開（WKB / multiple-scale）</h3>
+<p>小パラメータ $ \epsilon $ を入れて</p>
+<p>$$
+\begin{aligned}
+f &amp;= f_0(X,T)</p>
+<ul>
+<li>\epsilon f_1(x,t;X,T)</li>
+<li>
+<p>\epsilon^2 f_2 + \cdots \
+  X &amp;= \epsilon x,\quad T=\epsilon t
+  \end{aligned}
+$$</p>
+</li>
+<li>
+<p>(f_1)：線形波動</p>
+</li>
+<li>(f_2)：平均場の進化</li>
+</ul>
+<p>を入れて整理すると：</p>
+<ul>
+<li>(O(\epsilon))：分散関係</li>
+<li>(O(\epsilon^2))：<strong>共鳴条件・平均場へのバックリアクション</strong></li>
+</ul>
+<p>が出てくる。</p>
+<p>このとき
+$$
+\partial_T f_0 = -\nabla_X\cdot \langle f_1 f_1 \rangle
+$$
+みたいな式が現れる。</p>
+<h3 id="c-wave-action">(C) wave action 保存則（あなたが気にしてたやつ）</h3>
+<p>実はこれも二次まで取った結果を、うまくまとめたもの</p>
+<p>$$
+\partial_t \mathcal{A}</p>
+<ul>
+<li>
+<p>\nabla\cdot(\mathbf{v}_g \mathcal{A}) = 0
+$$</p>
+</li>
+<li>
+<p><span class="arithmatex">\(\mathcal{A} \sim E/\omega\)</span></p>
+</li>
+<li>エネルギー (E) 自体が2次量</li>
+</ul>
+<p>👉 「波を自由度として残し、平均場と結合させた閉じた理論」</p>
+<h2 id="3_1">3. じゃあ「二次だけの閉じた方程式」は書けるのか？</h2>
+<p>一般には無理。</p>
+<p>理由：</p>
+<ul>
+<li>2次項は
+  $$
+  \langle f_1 f_1 \rangle
+  $$
+  を含む</li>
+<li>これは <strong>波の位相・スペクトル</strong>を知らないと決まらない</li>
+</ul>
+<p>だから：</p>
+<ul>
+<li>平均場の方程式</li>
+<li>波動（action, energy, spectrum）の方程式</li>
+</ul>
+<p>を 同時に解くしかない。</p>
+<p>👉 これが
+<strong>wave–mean flow interaction</strong>
+<strong>波動運動論</strong>
+<strong>準線形理論（quasilinear theory）</strong>
+の正体。</p>
+<h2 id="4">4. 物理的な見方（直感）</h2>
+<p>線形波：</p>
+<ul>
+<li>「粒子は揺れるだけ」</li>
+<li>「平均移動しない」</li>
+</ul>
+<p>二次効果：</p>
+<ul>
+<li>位相がずれる</li>
+<li>非対称が蓄積する</li>
+<li><strong>ゆっくりしたドリフトや流れが生まれる</strong></li>
+</ul>
+<p>例：</p>
+<ul>
+<li>Stokes drift（表面波）</li>
+<li>ゾーナルフロー生成</li>
+<li>レーザーの ponderomotive force</li>
+<li>プラズマ波による運動量輸送</li>
+</ul>
+<h2 id="5">5. あなたの疑問への短い答え</h2>
+<blockquote>
+<p>一次の摂動を取り除いた、二次の水準まで考えた方程式は？</p>
+</blockquote>
+<p><strong>ある。しかも重要。</strong></p>
+<p>ただし：</p>
+<ul>
+<li>単独では閉じない</li>
+<li>波動の自由度とセットで初めて意味を持つ</li>
+<li>
+<p>その整理された形が
+  <strong>Reynolds応力 / wave action / quasilinear theory</strong></p>
+</li>
+<li>
+<p><strong>「なぜ線形波が必ず二次作用を持つのか」</strong>を
+  最小モデルで式から見せる</p>
+</li>
+<li>それとも <strong>レーザープラズマ or 音波減衰</strong>に即した具体例</li>
+</ul>
+<blockquote>
+<p><strong>波は「基本的には」媒質を運ばないが、
+非線形・減衰・境界が入ると、必ず輸送に変換される。</strong></p>
+</blockquote>
+<p>その変換の仕方を整理すると見通しがよくなる。</p>
+<h2 id="1_1">1. 線形・理想波動：輸送するのは「場」</h2>
+<p>まずいちばん教科書的な状況。</p>
+<ul>
+<li>微小振幅</li>
+<li>一様媒質</li>
+<li>無限空間</li>
+<li>減衰なし</li>
+</ul>
+<p>このとき波は</p>
+<ul>
+<li><strong>エネルギー</strong></li>
+<li><strong>運動量</strong></li>
+<li>（場合によって）<strong>波作用（wave action）</strong></li>
+</ul>
+<p>を運ぶけど、</p>
+<ul>
+<li>媒質の<strong>ラグランジュ平均の位置</strong>は動かない</li>
+<li>質量流束は <strong>0</strong></li>
+</ul>
+<p>たとえば音波：
+$$
+\langle \rho u \rangle = 0
+$$
+（オイラー平均では）</p>
+<p>この意味で</p>
+<blockquote>
+<p>「波が立っても媒質は移動しない」
+は<strong>一次理論では正しい</strong>。</p>
+</blockquote>
+<h2 id="2_1">2. でも「運動量を運ぶ」のは事実</h2>
+<p>ここが一段深いところ。</p>
+<p>波は
+$$
+\Pi \sim \langle \delta p, \delta u \rangle
+$$
+みたいな <strong>二次量</strong>として
+<strong>運動量フラックス</strong>を持つ。</p>
+<p>重要なのは：</p>
+<ul>
+<li>運動量は <strong>保存量</strong></li>
+<li>どこかで波が消えれば（吸収・減衰・反射）</li>
+<li>その運動量は <strong>媒質に渡される</strong></li>
+</ul>
+<p>つまり：</p>
+<blockquote>
+<p><strong>波が運ぶ運動量は、必ずどこかで流れに変わる</strong></p>
+</blockquote>
+<h2 id="3-0">3. 一次摂動が0次プロファイルに効く理由</h2>
+<p>君が言ってる</p>
+<blockquote>
+<p>0次のプロファイルにも一次摂動の伝播は影響を受ける</p>
+</blockquote>
+<p>これは完全に正しい。</p>
+<p>理由は単純で、</p>
+<ul>
+<li><strong>平均すると二次が残る</strong></li>
+<li>二次は0次方程式に入る</li>
+</ul>
+<p>典型例：</p>
+<ul>
+<li>Reynolds応力</li>
+<li>ponderomotive force</li>
+<li>radiation pressure</li>
+<li>wave-induced stress</li>
+</ul>
+<p>流体方程式で言うと：
+$$
+\partial_t U_0 = - \partial_x \langle u_1 u_1 \rangle + \cdots
+$$</p>
+<p>一次は「揺れ」だけど、
+<strong>揺れの相関が平均流を駆動する</strong>。</p>
+<h2 id="4_1">4. 海の波：なぜ質量輸送が見えるか</h2>
+<p>海の波は最高の例だね。</p>
+<h3 id="1-stokes-drift">(1) Stokes drift</h3>
+<p>有限振幅波では：</p>
+<ul>
+<li>粒子の軌道が閉じない</li>
+<li>表層ほど前進が大きい</li>
+</ul>
+<div class="arithmatex">\[
+u_{\rm drift} \sim \omega k a^2 e^{2kz}
+\]</div>
+<p>これ、<strong>純粋に非線形効果</strong>。</p>
+<p>線形理論では消えていたやつ。</p>
+<h3 id="2_2">(2) 波の減衰と砕波</h3>
+<p>波打ち際では：</p>
+<ul>
+<li>砕波 → エネルギー散逸</li>
+<li>波の運動量が失われる</li>
+<li>保存則により → <strong>平均流が生成</strong></li>
+</ul>
+<p>これが</p>
+<ul>
+<li>海浜流</li>
+<li>沿岸流</li>
+<li>セットアップ</li>
+</ul>
+<h2 id="6">6. プラズマの文脈に寄せると</h2>
+<p>たぶん君の頭にはこれがあるよね：</p>
+<ul>
+<li>レーザー駆動波</li>
+<li>プラズマ波</li>
+<li>エネルギー輸送</li>
+<li>非熱電子</li>
+</ul>
+<p>ここでは：</p>
+<ul>
+<li>Langmuir波の減衰
+  → 電子加熱</li>
+<li>波の群速度
+  → エネルギーフラックス</li>
+<li>波圧
+  → 密度プロファイル変形</li>
+</ul>
+<p>つまり：</p>
+<blockquote>
+<p><strong>波は「輸送そのもの」ではなく、
+輸送へ変換される中間キャリア</strong></p>
+</blockquote>
+<h2 id="7">7. 直感的なまとめ</h2>
+<p>いい比喩を使うなら：</p>
+<blockquote>
+<p>波は「運ぶ意思」を持たないが、
+<strong>壊れると必ず何かを運ぶ</strong></p>
+</blockquote>
+<p>揺れている間は情報と保存量を運び、
+消える瞬間に物質世界に痕跡を残す。</p>
+<p>もしよければ次は</p>
+<ul>
+<li>wave action と輸送の関係</li>
+<li>波エネルギー密度はどれくらい大きくなれるか</li>
+<li>流れと波を分ける意味はどこまであるか</li>
+</ul>
+<p>うん、その式は<strong>基本的に正しい</strong>です。ただし、<strong>成立条件と意味づけ</strong>をかなり厳密に押さえておく必要があります。
+Naoki さんが気にしている「波のエネルギー容量はどれくらいか」「流れの運動エネルギーとどう切り分けるか」という文脈に、まさに直結する式です。</p>
+<h2 id="_3">結論（まず要点）</h2>
+<p>線形・弱減衰のプラズマ波に対して、
+<strong>単色平面波</strong> ( (\omega,\mathbf{k}) ) について</p>
+<div class="arithmatex">\[
+\boxed{
+W_w
+= \frac{|E|^2}{16\pi},
+\frac{\partial}{\partial\omega}
+\bigl[\omega,\varepsilon(\omega,\mathbf{k})\bigr]
+}
+\]</div>
+<p>という形で
+<strong>波動エネルギー密度</strong>（正確には <em>平均エネルギー密度</em>）が書けます。</p>
+<ul>
+<li>電磁場のエネルギー</li>
+<li>粒子の秩序運動エネルギー（振動エネルギー）</li>
+</ul>
+<p>を <strong>まとめた量</strong> です。</p>
+<h2 id="_4">どこから来る式か（物理的意味）</h2>
+<p>この式は</p>
+<ul>
+<li>分散媒質中の電磁エネルギー保存則</li>
+<li>または <strong>Poynting 定理を分散媒質に拡張したもの</strong></li>
+<li>Brillouin, Landau–Lifshitz, Stix などの古典的結果</li>
+</ul>
+<p>に基づきます。</p>
+<p>ポイントは：</p>
+<blockquote>
+<p>プラズマ中では
+「電場エネルギー = ( |E|^2/8\pi )」
+だけでは <strong>全エネルギーを数え切れない</strong></p>
+</blockquote>
+<p>ということ。</p>
+<p>粒子が電場に引きずられて振動しており、その運動エネルギーが
+<span class="arithmatex">\(\varepsilon(\omega,k)\)</span> の (\omega)-依存性として隠れている。</p>
+<p>それを正しく拾うのが</p>
+<div class="arithmatex">\[
+\frac{\partial}{\partial\omega}(\omega\varepsilon)
+\]</div>
+<p>という因子。</p>
+<h2 id="16pi">係数 (16\pi) について</h2>
+<p>これは</p>
+<ul>
+<li>実効値（時間平均）</li>
+<li>複素振幅表記</li>
+<li>ガウス単位系</li>
+</ul>
+<p>を使った結果です。</p>
+<p>例えば
+$$
+\mathbf{E} = \Re{ \mathbf{E}_0 e^{-i\omega t}}
+$$
+なら</p>
+<div class="arithmatex">\[
+\langle |E|^2\rangle = \frac{1}{2}|E_0|^2
+\]</div>
+<p>が効いて、最終的に (16\pi) が出ます。
+文献によって (8\pi) が出てきても、<strong>定義の違い</strong>なので注意。</p>
+<h3 id="_5">どういう場合にダメか</h3>
+<p>この式は<strong>万能ではありません</strong>。</p>
+<h3 id="_6">❌ 成立しない／危ないケース</h3>
+<ul>
+<li>強い減衰（(\Im \varepsilon \not\ll \Re \varepsilon)）</li>
+<li>非線形波動</li>
+<li>波が粒子を捕捉している場合</li>
+<li>強い空間非一様性</li>
+<li>波束の急激な時間変化</li>
+</ul>
+<p>特に <strong>Landau 減衰が強いとき</strong>は、
+「波のエネルギー密度」という概念自体が曖昧になります。</p>
+<h2 id="wave-action-naoki">wave action との関係（Naoki さんの関心点）</h2>
+<p>このエネルギー密度から</p>
+<div class="arithmatex">\[
+\boxed{
+\mathcal{N}
+= \frac{W_w}{\omega}
+}
+\]</div>
+<p>を定義したものが <strong>wave action</strong>。</p>
+<ul>
+<li>断熱変化に対して保存</li>
+<li>背景がゆっくり変わるときに有効</li>
+<li>幾何光学近似の本体</li>
+</ul>
+<p>なので、</p>
+<blockquote>
+<p>「エネルギーは保存しないが、action は保存する」</p>
+</blockquote>
+<p>というあの話につながります。</p>
+<h2 id="_7">比熱との比較という観点で言うと</h2>
+<p>Naoki さんの直感はほぼ正しくて、</p>
+<ul>
+<li>通常の線形波動では
+  (W_w \ll nT)</li>
+<li>大きくなると
+  それはもう「流れ」や「非線形運動」</li>
+</ul>
+<p>として扱うべき領域に入る。</p>
+<p>この式は
+<strong>「波として数えられる最大のエネルギー」</strong>
+を与えているとも言えます。</p>
+<h2 id="_8">参考になる文献</h2>
+<ul>
+<li>Stix, <em>Waves in Plasmas</em></li>
+<li>Landau &amp; Lifshitz, <em>Electrodynamics of Continuous Media</em></li>
+<li>Breizman &amp; Ryutov (wave action)</li>
+</ul>
+<p>もしよければ次に：</p>
+<ul>
+<li>電子プラズマ波で具体的に (\varepsilon(\omega)) を入れて評価する</li>
+<li>「このエネルギーのどれくらいが粒子側か？」を分解する</li>
+</ul>
+<blockquote>
+<p><strong>「一次摂動を解いて、振幅²をエネルギーに対応させる」だけでは不十分</strong>
+ただし、<strong>正しい枠組みに乗せれば同値な結果に到達できる</strong>。</p>
+</blockquote>
+<p>その「正しい枠組み」が何か、という話です。</p>
+<h2 id="1-2">1️⃣ なぜ「一次摂動 → 振幅²」だけではダメか</h2>
+<p>流体方程式（あるいは Vlasov）を</p>
+<div class="arithmatex">\[
+f = f_0 + \delta f
+\]</div>
+<p>として一次で解くと、
+<span class="arithmatex">\(\delta n\)</span><span class="arithmatex">\(\delta u\)</span>, <span class="arithmatex">\(\delta E\)</span>
+は確かに求まる。</p>
+<blockquote>
+<p><strong>エネルギーは二次量</strong>
+→ 本質的に <strong>二次摂動</strong> の情報が必要</p>
+</blockquote>
+<h3 id="_9">典型的な落とし穴</h3>
+<p>例えば流体で書くと：</p>
+<p>[
+\mathcal{E}
+= \frac{1}{2}mn u^2 + \frac{p}{\gamma-1} + \frac{E^2+B^2}{8\pi}
+]</p>
+<p>これを展開すると：</p>
+<p>[
+\mathcal{E}
+= \mathcal{E}_0</p>
+<ul>
+<li>(\text{一次})</li>
+<li>(\text{二次})</li>
+<li>
+<p>\cdots
+  ]</p>
+</li>
+<li>
+<p><strong>一次項</strong>：平均すると 0</p>
+</li>
+<li><strong>二次項</strong>：これが「波のエネルギー」</li>
+</ul>
+<p>👉 一次摂動だけ解いても、
+<strong>どの二次の組み合わせが保存量になるか</strong>は自動では出てこない。</p>
+<hr />
+<h2 id="2-1">2️⃣ 正攻法①：エネルギー保存則から導出（王道）</h2>
+<p>一番きれいなのはこれ。</p>
+<h3 id="a">(a) 出発点</h3>
+<ul>
+<li>Maxwell 方程式</li>
+<li>流体 or Vlasov 方程式</li>
+</ul>
+<p>から <strong>エネルギー保存則</strong> を作る：</p>
+<p>$$
+\frac{\partial}{\partial t}
+\left(
+\frac{E^2+B^2}{8\pi}</p>
+<ul>
+<li>\sum_s \int d^3v, \frac{mv^2}{2} f_s
+  \right)</li>
+<li>\nabla\cdot \mathbf{S}
+  = 0
+$$</li>
+</ul>
+<p>（Poynting 定理）</p>
+<h3 id="b">(b) 線形化</h3>
+<div class="arithmatex">\[
+E = E_1,\quad
+f = f_0 + f_1
+\]</div>
+<p>として <strong>二次まで残す</strong>。</p>
+<h3 id="c">(c) 時間平均</h3>
+<p>単色波 (e^{-i\omega t}) に対して時間平均すると</p>
+<ul>
+<li>一次項は消える</li>
+<li>二次項だけが残る</li>
+</ul>
+<h3 id="d">(d) 分散関係を使う</h3>
+<p>ここで
+$$
+\varepsilon(\omega,k)
+$$
+が自然に登場して、</p>
+<div class="arithmatex">\[
+W_w
+= \frac{|E|^2}{16\pi}
+\frac{\partial}{\partial\omega}
+\left[
+\omega \varepsilon(\omega,k)
+\right]
+\]</div>
+<p>が出てくる。</p>
+<p>👉 <strong>エネルギー密度は「保存則」からしか一意に定義できない</strong>
+これが重要。</p>
+<h2 id="3-2wave-action">3️⃣ 正攻法②：変分原理（wave action 直結）</h2>
+<p>これは少し抽象的だけど、本質が一番見える。</p>
+<h3 id="a_1">(a) 波のラグランジアン密度</h3>
+<p>線形波に対して</p>
+<div class="arithmatex">\[
+\mathcal{L}
+= \frac{1}{16\pi}
+\left[
+\varepsilon(\omega,k)|E|^2
+\right]
+\]</div>
+<p>という <strong>有効ラグランジアン</strong> が書ける。</p>
+<h3 id="b_1">(b) エネルギーの定義</h3>
+<p>時間並進に対応する Noether 量：</p>
+<p>$$
+W
+= \omega \frac{\partial \mathcal{L}}{\partial \omega}</p>
+<ul>
+<li>\mathcal{L}
+$$</li>
+</ul>
+<p>これを計算すると：</p>
+<div class="arithmatex">\[
+W
+= \frac{|E|^2}{16\pi}
+\frac{\partial}{\partial\omega}
+(\omega\varepsilon)
+\]</div>
+<p>👉 <strong>一発で出る</strong>
+そして</p>
+<div class="arithmatex">\[
+\mathcal{N} = \frac{W}{\omega}
+\]</div>
+<p>が wave action。</p>
+<h3 id="4_2">4️⃣ 「一次解を使って確認する」ならどうやる？</h3>
+<p>Naoki さんの案を <strong>正しい形</strong> に直すとこう。</p>
+<h3 id="_10">手順</h3>
+<ol>
+<li>流体方程式を線形化</li>
+<li>(\delta n, \delta u, \delta E) を解く</li>
+<li><strong>全エネルギー密度を二次まで展開</strong></li>
+<li>時間平均</li>
+<li>分散関係を代入して整理</li>
+</ol>
+<h3 id="_11">例：電子プラズマ波</h3>
+<p>[
+W
+= \frac{|E|^2}{8\pi}</p>
+<ul>
+<li>\frac{1}{2}mn_0 |\delta u|^2
+  ]</li>
+</ul>
+<p>に一次解</p>
+<p>[
+\delta u
+= \frac{eE}{m i\omega}
+]</p>
+<p>を代入すると：</p>
+<p>[
+W
+= \frac{|E|^2}{16\pi}
+\left(
+1 + \frac{\omega_p^2}{\omega^2}
+\right)
+]</p>
+<p>これは</p>
+<p>[
+\varepsilon(\omega)
+= 1 - \frac{\omega_p^2}{\omega^2}
+]</p>
+<p>を使えば</p>
+<p>[
+\frac{\partial}{\partial\omega}(\omega\varepsilon)
+= 1 + \frac{\omega_p^2}{\omega^2}
+]</p>
+<p>と一致。</p>
+<p>👉 <strong>確認としては OK</strong>
+👉 <strong>定義としては NG</strong></p>
+<hr />
+<h2 id="5_1">5️⃣ なぜ「保存則 → 定義」じゃないとダメか</h2>
+<ul>
+<li>ゲージ不変性</li>
+<li>一意性</li>
+<li>群速度との整合性</li>
+<li>波束・非一様系への拡張</li>
+</ul>
+<p>これらは
+<strong>「振幅²っぽいから」では保証されない</strong>。</p>
+<hr />
+<h2 id="_12">まとめ（短く）</h2>
+<ul>
+<li>❌ 一次摂動だけでは足りない</li>
+<li>⭕ 二次まで含めた <strong>エネルギー保存則</strong> から導出する</li>
+<li>⭕ 変分原理を使うと本質が一番きれい</li>
+<li>⭕ 一次解は「検算」には使える</li>
+</ul>
+<hr />
+<p>この先、</p>
+<ul>
+<li>Vlasov 系でやるとどこに Landau 減衰が潜むか</li>
+<li>強減衰でこのエネルギー概念が壊れる瞬間</li>
+<li>「負のエネルギー波」</li>
+</ul>
+<p>どれに行く？</p>
+<p>その違和感は<strong>完全に正しい</strong>です。
+結論から言うと、</p>
+<blockquote>
+<p><strong>wave action は「あとから定義された便利量」ではなく、
+もともと“対称性＋変分原理”から必然的に出てくる保存量</strong></p>
+</blockquote>
+<p>で、<strong>それを示さずに使うのは本来ダメ</strong>、という感覚は理論的に健全です。</p>
+<p>以下、<strong>「どこから来たか」だけ</strong>を一直線に説明します。</p>
+<hr />
+<h2 id="0">0️⃣ 何を示せば「来歴を示した」ことになるか</h2>
+<p>最低限示すべきなのは：</p>
+<ol>
+<li>波動の<strong>有効作用（ラグランジアン）</strong>が書ける</li>
+<li>そこに <strong>位相の平行移動対称性</strong> がある</li>
+<li>その Noether 量が <strong>wave action</strong></li>
+</ol>
+<p>これが示せて初めて</p>
+<blockquote>
+<p>「action は保存する」
+と言ってよくなります。</p>
+</blockquote>
+<h2 id="1_2">1️⃣ 出発点：線形波動は必ず二次作用を持つ</h2>
+<p>Vlasov–Maxwell でも、流体–Maxwell でも、</p>
+<ul>
+<li>平衡解のまわりで展開</li>
+<li>一次方程式は線形</li>
+<li><strong>作用の二次部分</strong>だけを抜き出せる</li>
+</ul>
+<p>すると必ず</p>
+<div class="arithmatex">\[
+S^{(2)}
+= \int dt,d^3x; \mathcal{L}^{(2)}
+\]</div>
+<p>が定義できる。</p>
+<p>これは「仮定」じゃなくて：</p>
+<blockquote>
+<p><strong>線形方程式がある ⇔ 二次作用が存在</strong></p>
+</blockquote>
+<p>という事実。</p>
+<h2 id="2-wkb">2️⃣ WKB 展開で「位相」と「振幅」を分離する</h2>
+<p>波を</p>
+<div class="arithmatex">\[
+\mathbf{E}
+= \mathbf{A}(\mathbf{x},t)
+e^{i\theta(\mathbf{x},t)}
+\]</div>
+<p>と書く（幾何光学近似）。</p>
+<ul>
+<li>(\theta)：速く変化（位相）</li>
+<li>(\mathbf{A})：ゆっくり変化（包絡）</li>
+</ul>
+<p>このとき</p>
+<div class="arithmatex">\[
+\omega = -\partial_t \theta,\quad
+\mathbf{k} = \nabla \theta
+\]</div>
+<h2 id="3_2">3️⃣ 有効ラグランジアンの構造（ここが核心）</h2>
+<p>二次作用を代入して平均すると、</p>
+<p>$$
+\boxed{
+\mathcal{L}_{\text{eff}}
+= \mathcal{N}
+\left(
+\partial_t \theta</p>
+<ul>
+<li>\omega(\mathbf{k},\mathbf{x})
+  \right)
+  }
+$$</li>
+</ul>
+<p>という<strong>普遍形</strong>になる。</p>
+<p>ここで</p>
+<div class="arithmatex">\[
+\mathcal{N}
+= \frac{|E|^2}{16\pi}
+\frac{\partial \varepsilon}{\partial \omega}
+\]</div>
+<p>（係数は系によるが構造は不変）</p>
+<p>👉 これは「定義」ではなく
+<strong>WKB 極限で必ず出てくる形</strong>。</p>
+<h2 id="4_3">4️⃣ 位相の平行移動対称性</h2>
+<div class="arithmatex">\[
+\theta \rightarrow \theta + \text{const}
+\]</div>
+<ul>
+<li>物理は不変</li>
+<li>明らかな連続対称性</li>
+</ul>
+<p>→ Noether の定理より保存量がある。</p>
+<p>計算すると：</p>
+<div class="arithmatex">\[
+\boxed{
+\mathcal{N}
+= \frac{\partial \mathcal{L}_{\text{eff}}}
+{\partial(\partial_t \theta)}
+}
+\]</div>
+<p>これが <strong>wave action density</strong>。</p>
+<h2 id="5_2">5️⃣ 保存則の形</h2>
+<p>Euler–Lagrange 方程式より：</p>
+<p>$$
+\boxed{
+\partial_t \mathcal{N}</p>
+<ul>
+<li>
+<p>\nabla\cdot(\mathbf{v}_g \mathcal{N}) = 0
+  }
+$$</p>
+</li>
+<li>
+<p>(\mathbf{v}_g = \partial \omega / \partial \mathbf{k})</p>
+</li>
+<li>波束が「粒子」のように運ばれる</li>
+</ul>
+<p>👉 <strong>ここで初めて</strong>
+「action は断熱的に保存する」と言える。</p>
+<h2 id="6_1">6️⃣ エネルギーとの関係は“結果”</h2>
+<p>エネルギー密度は</p>
+<div class="arithmatex">\[
+W
+= -\frac{\partial \mathcal{L}_{\text{eff}}}{\partial t}
+\]</div>
+<p>背景が時間一定なら：</p>
+<div class="arithmatex">\[
+\boxed{
+W = \omega \mathcal{N}
+}
+\]</div>
+<ul>
+<li><strong>action が根源</strong></li>
+<li>エネルギーはその結果</li>
+</ul>
+<p>これが重要な力関係。</p>
+<h2 id="7-action">7️⃣ なぜエネルギーより action が「本質」なのか</h2>
+<ul>
+<li>背景が時間変化すると
+  → エネルギーは保存しない</li>
+<li>位相対称性が壊れない限り
+  → action は保存</li>
+</ul>
+<p>だから：</p>
+<blockquote>
+<p>波動の「粒子性」はエネルギーではなく action に宿る</p>
+</blockquote>
+<h2 id="8-naoki">8️⃣ Naoki さんの違和感を言語化すると</h2>
+<blockquote>
+<p>「energy/ω を action と呼ぶ」
+という説明は <strong>逆</strong></p>
+</blockquote>
+<p>正しくは：</p>
+<blockquote>
+<p><strong>位相対称性 → action → energy = ω action</strong></p>
+</blockquote>
+<h2 id="_13">まとめ（超要約）</h2>
+<ul>
+<li>wave action は「便利な量」ではない</li>
+<li><strong>二次作用＋位相対称性</strong>から必然的に出る</li>
+<li>Noether 量として一意に定まる</li>
+<li>
+<p>エネルギーより論理的に上流</p>
+</li>
+<li>
+<p>Landau 減衰で action 保存がどう壊れるか</p>
+</li>
+<li>負エネルギー波と action の符号</li>
+<li>トカマク帯状流で「何が action なのか」</li>
+</ul>
+<p>とても大事な疑問だし、ここが腑に落ちると
+<strong>wave action／エネルギーの話が全部一本につながる</strong>ところです。
+少し丁寧に、でも「なぜ必然なのか」だけに絞って説明します。</p>
+<h1 id="_14">結論を先に</h1>
+<blockquote>
+<p><strong>線形波動方程式が与えられているなら，
+それは必ず「ある二次作用の Euler–Lagrange 方程式」として書ける。</strong></p>
+</blockquote>
+<p>これは「特定のモデルではそうできる」ではなく、</p>
+<p><em>自己随伴（self-adjoint）な線形演算子</em>
+→ <em>必ず二次形式を持つ</em></p>
+<p>という <strong>かなり一般的な数学的事実</strong>です。</p>
+<hr />
+<h1 id="1_3">1️⃣ まず最も単純な例から（直感）</h1>
+<h3 id="_15">単振動子</h3>
+<p>[
+\ddot q + \omega^2 q = 0
+]</p>
+<p>これは線形方程式。</p>
+<p>対応する作用は：</p>
+<p>[
+S = \int dt;
+\frac{1}{2}
+\left(
+\dot q^2 - \omega^2 q^2
+\right)
+]</p>
+<p><strong>なぜ二次か？</strong></p>
+<ul>
+<li>方程式が (q) に関して線形</li>
+<li>変分するときは ( \delta q ) が掛かる</li>
+<li>→ ラグランジアンは <strong>最低でも (q^2)</strong></li>
+</ul>
+<p>ここでは誰も違和感を持たない。</p>
+<hr />
+<h1 id="2_3">2️⃣ 一般の線形波動方程式で何が起きているか</h1>
+<p>一般形で書く：</p>
+<p>[
+\hat L \psi = 0
+]</p>
+<ul>
+<li>(\psi)：場（電場、密度揺らぎ、位相…）</li>
+<li>(\hat L)：<strong>線形微分演算子</strong></li>
+</ul>
+<p>ここで重要なのは：</p>
+<blockquote>
+<p>物理的な波動方程式の (\hat L) は
+<strong>必ず自己随伴（エネルギー保存可能）</strong></p>
+</blockquote>
+<hr />
+<h2 id="_16">自己随伴って何？</h2>
+<p>[
+\int d^4x;
+\phi, (\hat L \psi)
+===================</p>
+<p>\int d^4x;
+(\hat L \phi), \psi
+\quad
+(+\text{境界項})
+]</p>
+<p>が成り立つこと。</p>
+<p>これは</p>
+<ul>
+<li>Maxwell</li>
+<li>流体</li>
+<li>Vlasov（衝突なし）</li>
+</ul>
+<p>すべてで成り立つ（減衰がなければ）。</p>
+<hr />
+<h1 id="3_3">3️⃣ 自己随伴演算子 → 二次作用（核心）</h1>
+<p>ここが一番重要。</p>
+<h3 id="_17">作用をこう定義する：</h3>
+<p>[
+\boxed{
+S[\psi]
+= \frac{1}{2}
+\int d^4x;
+\psi, \hat L \psi
+}
+]</p>
+<p>これを変分すると：</p>
+<p>[
+\delta S
+= \int d^4x;
+\delta\psi, \hat L \psi
+\quad(+\text{境界項})
+]</p>
+<p>よって：</p>
+<p>[
+\frac{\delta S}{\delta \psi}
+= \hat L \psi
+]</p>
+<p>つまり：</p>
+<p>[
+\boxed{
+\delta S = 0
+;\Longleftrightarrow;
+\hat L \psi = 0
+}
+]</p>
+<p>👉 <strong>線形方程式そのものが Euler–Lagrange 方程式</strong></p>
+<hr />
+<h1 id="4_4">4️⃣ なぜ「必ず」二次なのか</h1>
+<p>ここで論理をはっきりさせると：</p>
+<ol>
+<li>方程式は (\psi) に線形</li>
+<li>変分は (\delta\psi) に線形</li>
+<li>だから作用は (\psi \times \psi)（二次）しかありえない</li>
+</ol>
+<p>一次作用だと変分して定数しか出ない。
+三次以上だと方程式が非線形になる。</p>
+<p>👉 <strong>線形性 ⇔ 二次作用</strong></p>
+<hr />
+<h1 id="5_3">5️⃣ プラズマ波動の場合はどうなるか</h1>
+<h3 id="_18">例：電場表示</h3>
+<p>線形応答を書くと：</p>
+<p>[
+D(\omega,\mathbf{k}) E = 0
+]</p>
+<p>（(D = k^2 - \varepsilon(\omega) \omega^2 / c^2) など）</p>
+<p>対応する作用は：</p>
+<p>[
+S^{(2)}
+= \frac{1}{16\pi}
+\int d^4x;
+E, D(i\partial_t,-i\nabla), E
+]</p>
+<p>これは</p>
+<ul>
+<li>Maxwell の作用</li>
+<li>粒子の運動エネルギー</li>
+</ul>
+<p>を <strong>二次でまとめたもの</strong>。</p>
+<hr />
+<h1 id="6-vlasov">6️⃣ 「でも Vlasov は非局所・複素だよね？」問題</h1>
+<p>良いところに気づいている。</p>
+<h3 id="landau">Landau 減衰がない場合</h3>
+<ul>
+<li>(\varepsilon(\omega)) は実</li>
+<li>(\hat L) は自己随伴</li>
+<li>→ 作用が書ける</li>
+</ul>
+<h3 id="landau_1">Landau 減衰あり</h3>
+<ul>
+<li>(\varepsilon) が複素</li>
+<li>(\hat L) は非自己随伴</li>
+<li>→ <strong>厳密な作用は存在しない</strong></li>
+</ul>
+<p>👉 ここで初めて
+「wave action 保存が壊れる」
+という話につながる。</p>
+<hr />
+<h1 id="7_1">7️⃣ ここまでを一文で言うと</h1>
+<blockquote>
+<p><strong>線形・非散逸な波動方程式は、
+自己随伴演算子で書けるため、
+それ自身を核とした二次作用を必ず持つ。</strong></p>
+</blockquote>
+<p>だから wave action は
+「後付けの便利量」ではなく
+<strong>作用の存在そのものから出てくる</strong>。</p>
+<hr />
+<h1 id="8-naoki_1">8️⃣ Naoki さんの理解段階を言語化すると</h1>
+<p>たぶん引っかかっていたのは：</p>
+<blockquote>
+<p>「方程式を見ただけで
+どうして作用があると言えるの？」</p>
+</blockquote>
+<p>という点。</p>
+<p>答えは：</p>
+<blockquote>
+<p><strong>保存的な線形方程式である、という事実そのものが
+作用の存在をほぼ保証している</strong></p>
+</blockquote>
+<hr />
+<p>もし次に進むなら：</p>
+<ul>
+<li>Maxwell–Vlasov の二次作用を実際に書く</li>
+<li>自己随伴性が破れると何が起きるか（負エネルギー波）</li>
+<li>「帯状流」は action を持つのか？</li>
+</ul>
+<p>どれも今の疑問の自然な延長だと思う。</p>
+<p>うん、その式は<strong>基本的に正しい</strong>です。ただし、<strong>成立条件と意味づけ</strong>をかなり厳密に押さえておく必要があります。
+Naoki さんが気にしている「波のエネルギー容量はどれくらいか」「流れの運動エネルギーとどう切り分けるか」という文脈に、まさに直結する式です。</p>
+<hr />
+<h2 id="_19">結論（まず要点）</h2>
+<p>線形・弱減衰のプラズマ波に対して、
+<strong>単色平面波</strong> ( (\omega,\mathbf{k}) ) について</p>
+<p>[
+\boxed{
+W_w
+= \frac{|E|^2}{16\pi},
+\frac{\partial}{\partial\omega}
+\bigl[\omega,\varepsilon(\omega,\mathbf{k})\bigr]
+}
+]</p>
+<p>という形で
+<strong>波動エネルギー密度</strong>（正確には <em>平均エネルギー密度</em>）が書けます。</p>
+<p>これは</p>
+<ul>
+<li>電磁場のエネルギー</li>
+<li>粒子の秩序運動エネルギー（振動エネルギー）</li>
+</ul>
+<p>を <strong>まとめた量</strong> です。</p>
+<hr />
+<h2 id="_20">どこから来る式か（物理的意味）</h2>
+<p>この式は</p>
+<ul>
+<li>分散媒質中の電磁エネルギー保存則</li>
+<li>または <strong>Poynting 定理を分散媒質に拡張したもの</strong></li>
+<li>Brillouin, Landau–Lifshitz, Stix などの古典的結果</li>
+</ul>
+<p>に基づきます。</p>
+<p>ポイントは：</p>
+<blockquote>
+<p>プラズマ中では
+「電場エネルギー = ( |E|^2/8\pi )」
+だけでは <strong>全エネルギーを数え切れない</strong></p>
+</blockquote>
+<p>ということ。</p>
+<p>粒子が電場に引きずられて振動しており、その運動エネルギーが
+(\varepsilon(\omega,k)) の (\omega)-依存性として隠れている。</p>
+<p>それを正しく拾うのが</p>
+<p>[
+\frac{\partial}{\partial\omega}(\omega\varepsilon)
+]</p>
+<p>という因子。</p>
+<hr />
+<h2 id="16pi_1">係数 (16\pi) について</h2>
+<p>これは</p>
+<ul>
+<li>実効値（時間平均）</li>
+<li>複素振幅表記</li>
+<li>ガウス単位系</li>
+</ul>
+<p>を使った結果です。</p>
+<p>例えば
+[
+\mathbf{E} = \Re{ \mathbf{E}_0 e^{-i\omega t}}
+]
+なら</p>
+<p>[
+\langle |E|^2\rangle = \frac{1}{2}|E_0|^2
+]</p>
+<p>が効いて、最終的に (16\pi) が出ます。
+文献によって (8\pi) が出てきても、<strong>定義の違い</strong>なので注意。</p>
+<hr />
+<h2 id="_21">どういう場合にダメか</h2>
+<p>この式は<strong>万能ではありません</strong>。</p>
+<h3 id="_22">❌ 成立しない／危ないケース</h3>
+<ul>
+<li>強い減衰（(\Im \varepsilon \not\ll \Re \varepsilon)）</li>
+<li>非線形波動</li>
+<li>波が粒子を捕捉している場合</li>
+<li>強い空間非一様性</li>
+<li>波束の急激な時間変化</li>
+</ul>
+<p>特に <strong>Landau 減衰が強いとき</strong>は、
+「波のエネルギー密度」という概念自体が曖昧になります。</p>
+<hr />
+<h2 id="wave-action-naoki_1">wave action との関係（Naoki さんの関心点）</h2>
+<p>このエネルギー密度から</p>
+<p>[
+\boxed{
+\mathcal{N}
+= \frac{W_w}{\omega}
+}
+]</p>
+<p>を定義したものが <strong>wave action</strong>。</p>
+<ul>
+<li>断熱変化に対して保存</li>
+<li>背景がゆっくり変わるときに有効</li>
+<li>幾何光学近似の本体</li>
+</ul>
+<p>なので、</p>
+<blockquote>
+<p>「エネルギーは保存しないが、action は保存する」</p>
+</blockquote>
+<p>というあの話につながります。</p>
+<hr />
+<h2 id="_23">比熱との比較という観点で言うと</h2>
+<p>Naoki さんの直感はほぼ正しくて、</p>
+<ul>
+<li>通常の線形波動では
+  (W_w \ll nT)</li>
+<li>大きくなると
+  それはもう「流れ」や「非線形運動」</li>
+</ul>
+<p>として扱うべき領域に入る。</p>
+<p>この式は
+<strong>「波として数えられる最大のエネルギー」</strong>
+を与えているとも言えます。</p>
+<hr />
+<h2 id="_24">参考になる文献</h2>
+<ul>
+<li>Stix, <em>Waves in Plasmas</em></li>
+<li>Landau &amp; Lifshitz, <em>Electrodynamics of Continuous Media</em></li>
+<li>Breizman &amp; Ryutov (wave action)</li>
+</ul>
+<hr />
+<p>もしよければ次に：</p>
+<ul>
+<li>電子プラズマ波で具体的に (\varepsilon(\omega)) を入れて評価する</li>
+<li>「このエネルギーのどれくらいが粒子側か？」を分解する</li>
+</ul>
+<p>どっちをやるか、気分で選んでいいよ。</p>
+  </div>
+</article>
+                                <div class="mx-auto flex flex-wrap h-16 w-full max-w-2xl items-center gap-2 px-4 md:px-0">
+    
+    
+</div>
+                                <dialog id="bottom-sidebar" onclick="onBottomSidebarDialogClick(event)" class="bg-transparent"
+    style="position: fixed; left: 0px; top: 0px; transform: translate(0px, 58px); min-width: max-content; --radix-popper-transform-origin: 0% 0px; will-change: transform; z-index: 50; --radix-popper-available-width: 504px; --radix-popper-available-height: 857px; --radix-popper-anchor-width: 72.94999694824219px; --radix-popper-anchor-height: 32px;">
+    <div data-side="bottom" data-align="start" data-state="open" role="dialog" data-slot="popover-content"
+        class="text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 origin-(--radix-popover-content-transform-origin) border outline-hidden bg-background/90 no-scrollbar h-(--radix-popper-available-height) w-(--radix-popper-available-width) overflow-y-auto rounded-none border-none p-0 shadow-none backdrop-blur duration-100"
+        style="--radix-popover-content-transform-origin: var(--radix-popper-transform-origin); --radix-popover-content-available-width: var(--radix-popper-available-width); --radix-popover-content-available-height: var(--radix-popper-available-height); --radix-popover-trigger-width: var(--radix-popper-anchor-width); --radix-popover-trigger-height: var(--radix-popper-anchor-height);"
+        tabindex="-1">
+        <div class="flex flex-col gap-12 overflow-auto px-6 py-6">
+            
+            
+            
+
+            
+            <div class="flex flex-col gap-4">
+                <div class="text-muted-foreground text-sm font-medium">Menu</div>
+                <div class="flex flex-col gap-3">
+                    
+                    <a class="text-2xl font-medium" href="index.html">
+                        
+                        Home
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="01_non-lin-diff-analyticals.html">
+                        
+                        非線形拡散
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="02juttner.html">
+                        
+                        Jüttner分布
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="03_scale_inv_VM.html">
+                        
+                        Maxwell-Vlasov系のスケール変換
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="LL_4_Collisions_in_Plasmas.html">
+                        
+                        kinetics PROBLEM
+                        
+                    </a>
+                    
+                </div>
+            </div>
+            
+
+            
+            
+
+        </div>
+    </div>
+</dialog>
+                            </div>
+                            <div
+                                class="sticky top-[calc(var(--header-height)+1px)] ml-auto hidden h-[calc(100svh-var(--header-height)-var(--footer-height))] w-72 flex-col gap-4 overflow-hidden overscroll-none pb-8 xl:flex">
+                                <div class="h-(--top-spacing) shrink-0"></div>
+                                <div view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
+    <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
+        <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#2-wave-action"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            2. なぜ Wave Action が「強力」なのか？
+        </a>
+        
+        
+        <a href="#e-vs-wave-action-j"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            エネルギー \(E\) vs Wave Action \(J\)
+        </a>
+        
+        <a href="#_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            🌍 具体例：勾配のある場所を進む波
+        </a>
+        
+        
+
+        
+        <a href="#3"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            3. ラグランジアン密度との関係
+        </a>
+        
+
+        
+        <a href="#_2"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            まとめ
+        </a>
+        
+
+        
+        <a href="#1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            1. 何が起きているか（整理）
+        </a>
+        
+
+        
+        <a href="#2"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            2. 「一次を取り除いた二次の方程式」は実際に作る
+        </a>
+        
+        
+        <a href="#a-reynolds"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            (A) Reynolds分解 → 波による応力項
+        </a>
+        
+        <a href="#b-wkb-multiple-scale"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            (B) 多重スケール展開（WKB / multiple-scale）
+        </a>
+        
+        <a href="#c-wave-action"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            (C) wave action 保存則（あなたが気にしてたやつ）
+        </a>
+        
+        
+
+        
+        <a href="#3_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            3. じゃあ「二次だけの閉じた方程式」は書けるのか？
+        </a>
+        
+
+        
+        <a href="#4"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            4. 物理的な見方（直感）
+        </a>
+        
+
+        
+        <a href="#5"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            5. あなたの疑問への短い答え
+        </a>
+        
+
+        
+        <a href="#1_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            1. 線形・理想波動：輸送するのは「場」
+        </a>
+        
+
+        
+        <a href="#2_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            2. でも「運動量を運ぶ」のは事実
+        </a>
+        
+
+        
+        <a href="#3-0"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            3. 一次摂動が0次プロファイルに効く理由
+        </a>
+        
+
+        
+        <a href="#4_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            4. 海の波：なぜ質量輸送が見えるか
+        </a>
+        
+        
+        <a href="#1-stokes-drift"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            (1) Stokes drift
+        </a>
+        
+        <a href="#2_2"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            (2) 波の減衰と砕波
+        </a>
+        
+        
+
+        
+        <a href="#6"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            6. プラズマの文脈に寄せると
+        </a>
+        
+
+        
+        <a href="#7"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            7. 直感的なまとめ
+        </a>
+        
+
+        
+        <a href="#_3"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            結論（まず要点）
+        </a>
+        
+
+        
+        <a href="#_4"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            どこから来る式か（物理的意味）
+        </a>
+        
+
+        
+        <a href="#16pi"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            係数 (16\pi) について
+        </a>
+        
+        
+        <a href="#_5"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            どういう場合にダメか
+        </a>
+        
+        <a href="#_6"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            ❌ 成立しない／危ないケース
+        </a>
+        
+        
+
+        
+        <a href="#wave-action-naoki"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            wave action との関係（Naoki さんの関心点）
+        </a>
+        
+
+        
+        <a href="#_7"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            比熱との比較という観点で言うと
+        </a>
+        
+
+        
+        <a href="#_8"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            参考になる文献
+        </a>
+        
+
+        
+        <a href="#1-2"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            1️⃣ なぜ「一次摂動 → 振幅²」だけではダメか
+        </a>
+        
+        
+        <a href="#_9"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            典型的な落とし穴
+        </a>
+        
+        
+
+        
+        <a href="#2-1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            2️⃣ 正攻法①：エネルギー保存則から導出（王道）
+        </a>
+        
+        
+        <a href="#a"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            (a) 出発点
+        </a>
+        
+        <a href="#b"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            (b) 線形化
+        </a>
+        
+        <a href="#c"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            (c) 時間平均
+        </a>
+        
+        <a href="#d"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            (d) 分散関係を使う
+        </a>
+        
+        
+
+        
+        <a href="#3-2wave-action"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            3️⃣ 正攻法②：変分原理（wave action 直結）
+        </a>
+        
+        
+        <a href="#a_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            (a) 波のラグランジアン密度
+        </a>
+        
+        <a href="#b_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            (b) エネルギーの定義
+        </a>
+        
+        <a href="#4_2"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            4️⃣ 「一次解を使って確認する」ならどうやる？
+        </a>
+        
+        <a href="#_10"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            手順
+        </a>
+        
+        <a href="#_11"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            例：電子プラズマ波
+        </a>
+        
+        
+
+        
+        <a href="#5_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            5️⃣ なぜ「保存則 → 定義」じゃないとダメか
+        </a>
+        
+
+        
+        <a href="#_12"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            まとめ（短く）
+        </a>
+        
+
+        
+        <a href="#0"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            0️⃣ 何を示せば「来歴を示した」ことになるか
+        </a>
+        
+
+        
+        <a href="#1_2"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            1️⃣ 出発点：線形波動は必ず二次作用を持つ
+        </a>
+        
+
+        
+        <a href="#2-wkb"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            2️⃣ WKB 展開で「位相」と「振幅」を分離する
+        </a>
+        
+
+        
+        <a href="#3_2"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            3️⃣ 有効ラグランジアンの構造（ここが核心）
+        </a>
+        
+
+        
+        <a href="#4_3"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            4️⃣ 位相の平行移動対称性
+        </a>
+        
+
+        
+        <a href="#5_2"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            5️⃣ 保存則の形
+        </a>
+        
+
+        
+        <a href="#6_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            6️⃣ エネルギーとの関係は“結果”
+        </a>
+        
+
+        
+        <a href="#7-action"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            7️⃣ なぜエネルギーより action が「本質」なのか
+        </a>
+        
+
+        
+        <a href="#8-naoki"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            8️⃣ Naoki さんの違和感を言語化すると
+        </a>
+        
+
+        
+        <a href="#_13"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            まとめ（超要約）
+        </a>
+        
+
+        
+        <a href="#_14"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            結論を先に
+        </a>
+        
+
+        
+        <a href="#1_3"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            1️⃣ まず最も単純な例から（直感）
+        </a>
+        
+        
+        <a href="#_15"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            単振動子
+        </a>
+        
+        
+
+        
+        <a href="#2_3"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            2️⃣ 一般の線形波動方程式で何が起きているか
+        </a>
+        
+        
+        <a href="#_16"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            自己随伴って何？
+        </a>
+        
+        
+
+        
+        <a href="#3_3"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            3️⃣ 自己随伴演算子 → 二次作用（核心）
+        </a>
+        
+        
+        <a href="#_17"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            作用をこう定義する：
+        </a>
+        
+        
+
+        
+        <a href="#4_4"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            4️⃣ なぜ「必ず」二次なのか
+        </a>
+        
+
+        
+        <a href="#5_3"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            5️⃣ プラズマ波動の場合はどうなるか
+        </a>
+        
+        
+        <a href="#_18"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            例：電場表示
+        </a>
+        
+        
+
+        
+        <a href="#6-vlasov"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            6️⃣ 「でも Vlasov は非局所・複素だよね？」問題
+        </a>
+        
+        
+        <a href="#landau"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            Landau 減衰がない場合
+        </a>
+        
+        <a href="#landau_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            Landau 減衰あり
+        </a>
+        
+        
+
+        
+        <a href="#7_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            7️⃣ ここまでを一文で言うと
+        </a>
+        
+
+        
+        <a href="#8-naoki_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            8️⃣ Naoki さんの理解段階を言語化すると
+        </a>
+        
+        
+        <a href="#_19"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            結論（まず要点）
+        </a>
+        
+        <a href="#_20"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            どこから来る式か（物理的意味）
+        </a>
+        
+        <a href="#16pi_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            係数 (16\pi) について
+        </a>
+        
+        <a href="#_21"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            どういう場合にダメか
+        </a>
+        
+        <a href="#wave-action-naoki_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            wave action との関係（Naoki さんの関心点）
+        </a>
+        
+        <a href="#_23"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            比熱との比較という観点で言うと
+        </a>
+        
+        <a href="#_24"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            参考になる文献
+        </a>
+        
+        
+
+        
+        
+        
+        
+
+    </div>
+    <div class="h-12"></div>
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer view-transition-name="footer"
+    class="group-has-[.section-soft]/body:bg-surface/40 3xl:fixed:bg-transparent dark:bg-transparent">
+    <div class="container-wrapper px-4 xl:px-6">
+        <div class="flex h-(--footer-height) items-center justify-between">
+            <div class="text-muted-foreground w-full text-center text-xs leading-loose sm:text-sm">
+                
+                <a href="https://github.com/asiffer/mkdocs-shadcn">shadcn theme</a> provided by
+                <a href="https://github.com/asiffer">@asiffer</a>
+            </div>
+        </div>
+    </div>
+</footer>
+    </div>
+     
+
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js"></script>
+
+     
+
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js"></script>
+
+     
+
+<script src="js/katex_auto.js"></script>
+
+     
+
+<script src="search/main.js"></script>
+
+
+    
+
+    <script src="js/copy-button.js"></script>
+    <script>updatePygmentsStylesheet();</script>
+    
+    <script>fetchStargazers("None");</script>
+    
+    
+    
+    <script type="speculationrules">
+{
+  "prerender": [
+    {
+      "where": {
+          "selector_matches": ["#next-button", "#previous-button"],
+      }
+    }
+  ]
+}
+</script>
+</body>
+
+</html>

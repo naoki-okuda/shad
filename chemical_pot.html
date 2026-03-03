@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        // for search plugin notably
+        const base_url = "https://naoki-okuda.github.io/shad/";
+    </script>
+    <script>
+    const darkTheme = window.matchMedia("(prefers-color-scheme: dark)");
+    darkTheme.onchange = (e) => {
+        if (e.matches) {
+            document.documentElement.classList.add("dark")
+            localStorage.theme = 'dark';
+        } else {
+            document.documentElement.classList.remove("dark")
+            localStorage.removeItem("theme")
+        }
+    };
+
+    // On page load. Priotiry to lcaolStorage
+    if (localStorage.theme === "dark") {
+        document.documentElement.classList.add("dark")
+    } else if (localStorage.theme === "light") {
+        document.documentElement.classList.remove("dark")
+    } else if (darkTheme.matches) {
+        document.documentElement.classList.add("dark")
+    } else {
+        document.documentElement.classList.remove("dark")
+    }
+
+    // set the layout based on localStorage
+    document.documentElement.classList.add(localStorage.getItem("html-layout") || "layout-fixed");
+</script>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chemical pot - Cube</title>
+    
+
+
+<title>Chemical pot</title>
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://naoki-okuda.github.io/shad/chemical_pot.html">
+
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+
+
+<meta property="og:title" content="Chemical pot">
+
+
+
+
+
+<meta property="og:url" content="https://naoki-okuda.github.io/shad/chemical_pot.html">
+
+
+
+
+
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+
+
+<meta name="twitter:title" content="Chemical pot">
+
+
+
+
+
+
+<!-- JSON-LD Structured Data -->
+
+
+
+    <link rel="icon" href="img/favicon.ico">
+
+    <link href="css/base.css" rel="stylesheet">
+    <link href="css/geist.css" rel="stylesheet">
+
+    
+    
+
+<link id="pygments-light" rel="stylesheet"
+    href="css/pygments/shadcn-light.css">
+<link id="pygments-dark" rel="stylesheet"
+    href="css/pygments/github-dark.css"
+    media="(prefers-color-scheme: dark)">
+
+
+    
+    <link href="extra.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" rel="stylesheet">
+
+    
+
+    <script src="js/callbacks.js"></script>
+
+    
+    <!-- katex -->
+<link rel="stylesheet" href="css/katex.min.css">
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="js/katex.min.js"></script>
+<!-- To automatically render math in text elements, include the auto-render extension: -->
+<script defer src="js/auto-render.min.js"
+    onload='renderMathInElement(document.body, {"macros": {"\\RR": "\\mathbb{R}", "\\dx": "\\mathrm{d}x"}});'></script>
+    
+
+    
+
+    
+
+</head>
+
+<body
+    class="text-foreground group/body overscroll-none font-sans antialiased [--footer-height:calc(var(--spacing)*14)] [--header-height:calc(var(--spacing)*14)] xl:[--footer-height:calc(var(--spacing)*24)] theme-default">
+    <div id="inner-body" class="bg-background relative z-10 flex min-h-svh flex-col">
+        <header class="bg-background sticky top-0 z-50 w-full" view-transition-name="header">
+    <div class="container-wrapper 3xl:fixed:px-0 px-6">
+        <div class="3xl:fixed:container flex h-(--header-height) items-center gap-2 **:data-[slot=separator]:!h-4">
+            <button id="menu-button" data-slot="popover-trigger" onclick="onMobileMenuButtonClick(event)"
+                class="group whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:text-accent-foreground px-4 py-2 has-[&gt;svg]:px-3 extend-touch-target h-8 touch-manipulation items-center justify-start gap-2.5 !p-0 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 active:bg-transparent dark:hover:bg-transparent flex lg:hidden"
+                type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«Rmplb»"
+                data-state="closed">
+                <div class="relative flex h-8 w-4 items-center justify-center">
+                    <div class="relative size-4">
+                        <!-- 16px x 16px -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="0" x2="16" y1="5" y2="5"
+                                class="group-data-[state=open]:translate-y-[2.25px] group-data-[state=open]:-translate-x-[2.25px] group-data-[state=open]:rotate-45 transition-all duration-300 origin-center" />
+                            <line x1="0" x2="16" y1="11" y2="11"
+                                class="group-data-[state=open]:-translate-y-[2.25px] group-data-[state=open]:-translate-x-[2.25px] group-data-[state=open]:-rotate-45 transition-all duration-300 origin-center" />
+                        </svg>
+                    </div>
+
+                    <span class="sr-only">Toggle Menu</span>
+                </div>
+                <span class="flex h-8 items-center text-lg leading-none font-medium">Menu</span>
+            </button>
+            <a data-slot="button"
+                class="items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-5 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 hidden h-8 lg:flex"
+                href="https://naoki-okuda.github.io/shad/">
+                <span class="size-8 flex flex-row justify-center items-center">
+                    
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"
+    class="size-5">
+    <rect width="256" height="256" fill="none"></rect>
+    <line x1="208" y1="128" x2="128" y2="208" fill="none" stroke="currentColor" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="32"></line>
+    <line x1="192" y1="40" x2="40" y2="192" fill="none" stroke="currentColor" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="32"></line>
+</svg>
+
+
+                </span>
+
+                
+                <h1 class="pr-2">Cube</h1>
+                
+            </a>
+            
+            <nav class="items-center gap-0.5 hidden lg:flex">
+    
+</nav>
+            
+            <div class="ml-auto flex items-center gap-2 md:flex-1 md:justify-end">
+                <div class="hidden w-full flex-1 md:flex md:w-auto md:flex-none">
+                    <button data-slot="dialog-trigger" onclick="onSearchBarClick(event)"
+    class="inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-secondary/80 px-4 py-2 has-[&gt;svg]:px-3 bg-surface text-surface-foreground/60 dark:bg-card relative h-8 w-full justify-start pl-2.5 font-normal shadow-none sm:pr-12 md:w-40 lg:w-56 xl:w-64"
+    type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«R66plb»" data-state="closed">
+    <span class="text-muted-foreground hidden lg:inline-flex">Search documentation...</span>
+    <span class="text-muted-foreground inline-flex lg:hidden">Search...</span>
+    <div class="absolute top-1.5 right-1.5 hidden gap-1 sm:flex">
+        <kbd
+            class="bg-background text-muted-foreground pointer-events-none flex h-5 items-center justify-center gap-1 rounded border px-1 font-sans text-[0.7rem] font-medium select-none [&amp;_svg:not([class*='size-'])]:size-3">Ctrl</kbd><kbd
+            class="bg-background text-muted-foreground pointer-events-none flex h-5 items-center justify-center gap-1 rounded border px-1 font-sans text-[0.7rem] font-medium select-none [&amp;_svg:not([class*='size-'])]:size-3 aspect-square">K</kbd>
+    </div>
+</button>
+<dialog id="search-dialog" onclick="onSearchDialogClick(event)"
+    class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background rounded-lg shadow-lg border overflow-hidden p-0">
+    <div class="w-lg gap-4">
+        <div class="flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground">
+            <div data-slot="command-input-wrapper" class="flex h-9 items-center gap-2 border-b px-3"><svg
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-search size-4 shrink-0 opacity-50">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                </svg>
+                <input data-slot="command-input"
+                    class="placeholder:text-muted-foreground flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
+                    placeholder="Search documentation..." cmdk-input="" autocomplete="off" autocorrect="off"
+                    spellcheck="false" aria-autocomplete="list" role="combobox" aria-expanded="true"
+                    aria-controls="radix-«r1t6»" aria-labelledby="radix-«r1t7»" id="radix-«r1t8»" type="text" value=""
+                    aria-activedescendant="radix-«r1th»" oninput="onInputHandler(event)">
+            </div>
+        </div>
+        <div id="mkdocs-search-results">
+            <!-- search results go there -->
+        </div>
+    </div>
+</dialog>
+<script>
+    document.removeEventListener("keydown", searchShortcutHandler);
+    document.addEventListener("keydown", searchShortcutHandler);
+</script>
+                </div>
+                <div data-orientation="vertical" role="none" data-slot="separator"
+                    class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px ml-2 hidden lg:block">
+                </div>
+                <a target="_blank" rel="noreferrer" data-slot="button"
+                    class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 h-8 shadow-none"
+                    href="None">
+                    <svg viewBox="0 0 438.549 438.549">
+                        <path fill="currentColor"
+                            d="M409.132 114.573c-19.608-33.596-46.205-60.194-79.798-79.8-33.598-19.607-70.277-29.408-110.063-29.408-39.781 0-76.472 9.804-110.063 29.408-33.596 19.605-60.192 46.204-79.8 79.8C9.803 148.168 0 184.854 0 224.63c0 47.78 13.94 90.745 41.827 128.906 27.884 38.164 63.906 64.572 108.063 79.227 5.14.954 8.945.283 11.419-1.996 2.475-2.282 3.711-5.14 3.711-8.562 0-.571-.049-5.708-.144-15.417a2549.81 2549.81 0 01-.144-25.406l-6.567 1.136c-4.187.767-9.469 1.092-15.846 1-6.374-.089-12.991-.757-19.842-1.999-6.854-1.231-13.229-4.086-19.13-8.559-5.898-4.473-10.085-10.328-12.56-17.556l-2.855-6.57c-1.903-4.374-4.899-9.233-8.992-14.559-4.093-5.331-8.232-8.945-12.419-10.848l-1.999-1.431c-1.332-.951-2.568-2.098-3.711-3.429-1.142-1.331-1.997-2.663-2.568-3.997-.572-1.335-.098-2.43 1.427-3.289 1.525-.859 4.281-1.276 8.28-1.276l5.708.853c3.807.763 8.516 3.042 14.133 6.851 5.614 3.806 10.229 8.754 13.846 14.842 4.38 7.806 9.657 13.754 15.846 17.847 6.184 4.093 12.419 6.136 18.699 6.136 6.28 0 11.704-.476 16.274-1.423 4.565-.952 8.848-2.383 12.847-4.285 1.713-12.758 6.377-22.559 13.988-29.41-10.848-1.14-20.601-2.857-29.264-5.14-8.658-2.286-17.605-5.996-26.835-11.14-9.235-5.137-16.896-11.516-22.985-19.126-6.09-7.614-11.088-17.61-14.987-29.979-3.901-12.374-5.852-26.648-5.852-42.826 0-23.035 7.52-42.637 22.557-58.817-7.044-17.318-6.379-36.732 1.997-58.24 5.52-1.715 13.706-.428 24.554 3.853 10.85 4.283 18.794 7.952 23.84 10.994 5.046 3.041 9.089 5.618 12.135 7.708 17.705-4.947 35.976-7.421 54.818-7.421s37.117 2.474 54.823 7.421l10.849-6.849c7.419-4.57 16.18-8.758 26.262-12.565 10.088-3.805 17.802-4.853 23.134-3.138 8.562 21.509 9.325 40.922 2.279 58.24 15.036 16.18 22.559 35.787 22.559 58.817 0 16.178-1.958 30.497-5.853 42.966-3.9 12.471-8.941 22.457-15.125 29.979-6.191 7.521-13.901 13.85-23.131 18.986-9.232 5.14-18.182 8.85-26.84 11.136-8.662 2.286-18.415 4.004-29.263 5.146 9.894 8.562 14.842 22.077 14.842 40.539v60.237c0 3.422 1.19 6.279 3.572 8.562 2.379 2.279 6.136 2.95 11.276 1.995 44.163-14.653 80.185-41.062 108.068-79.226 27.88-38.161 41.825-81.126 41.825-128.906-.01-39.771-9.818-76.454-29.414-110.049z">
+                        </path>
+                    </svg>
+                    
+                    <span id="stargazers" class="text-muted-foreground w-8 text-xs tabular-nums" onload="test()">
+                    </span>
+                    
+                </a>
+                <div data-orientation="vertical" role="none" data-slot="separator"
+                    class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px 3xl:flex hidden">
+                </div>
+                <button data-slot="button"
+                    class="items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 size-8 3xl:flex hidden"
+                    title="Toggle layout" onclick="toggleLayout(event)">
+                    <span class="sr-only">Toggle layout</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-gallery-horizontal">
+                        <path d="M2 3v18"></path>
+                        <rect width="12" height="18" x="6" y="3" rx="2"></rect>
+                        <path d="M22 3v18"></path>
+                    </svg>
+                </button>
+                <div data-orientation="vertical" role="none" data-slot="separator"
+                    class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px">
+                </div>
+                <button data-slot="button"
+                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 group/toggle extend-touch-target size-8"
+                    title="Toggle theme" onclick="onThemeSwitch(event)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="size-4.5">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                        <path d="M12 3l0 18"></path>
+                        <path d="M12 9l4.65 -4.65"></path>
+                        <path d="M12 14.3l7.37 -7.37"></path>
+                        <path d="M12 19.6l8.85 -8.85"></path>
+                    </svg>
+                    <span class="sr-only">Toggle theme</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+        <main class="flex flex-1 flex-col">
+            <div class="container-wrapper flex flex-1 flex-col px-2">
+                <div data-slot="sidebar-wrapper" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;"
+                    class="group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex w-full 3xl:fixed:container 3xl:fixed:px-3 min-h-min flex-1 items-start px-0 [--sidebar-width:220px] [--top-spacing:0] lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)] lg:[--sidebar-width:240px] lg:[--top-spacing:calc(var(--spacing)*4)]">
+                    <div data-slot="sidebar"
+                        class="text-sidebar-foreground w-(--sidebar-width) flex-col sticky top-[calc(var(--header-height)+1px)] z-30 hidden h-[calc(100svh-var(--header-height)-var(--footer-height))] bg-transparent lg:flex">
+                        <div data-slot="sidebar-content" data-sidebar="content"
+                            class="flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden no-scrollbar px-2 pb-12">
+                            <div class="h-(--top-spacing) shrink-0"></div>
+                            <div view-transition-name="sidebar" data-slot="sidebar-group" data-sidebar="group"
+    class="relative flex w-full min-w-0 flex-col p-2 no-scrollbar">
+    
+
+    
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    <div data-slot="sidebar-group" data-sidebar="group" class="relative flex w-full min-w-0 flex-col p-2">
+        <div data-slot="sidebar-group-content" data-sidebar="group-content" class="w-full text-sm">
+            <ul data-slot="sidebar-menu" data-sidebar="menu" class="flex w-full min-w-0 flex-col gap-0.5">
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/index.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        Home
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/01_non-lin-diff-analyticals.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        非線形拡散
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/02juttner.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        Jüttner分布
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/03_scale_inv_VM.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        Maxwell-Vlasov系のスケール変換
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/LL_4_Collisions_in_Plasmas.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        kinetics PROBLEM
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+
+    
+
+
+    
+</div>
+                        </div>
+                    </div>
+                    <div class="h-full w-full">
+                        <div data-slot="docs" class="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full">
+                            <div class="flex min-w-0 flex-1 flex-col">
+                                <div class="h-(--top-spacing) shrink-0"></div>
+                                <article class="w-full" view-transition-name="page">
+  <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-2">
+      <div id="page-header" class="flex items-start justify-between">
+        <h1
+          class="scroll-m-20 text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl"
+        >
+          Chemical pot
+        </h1>
+
+        <div class="flex items-center gap-2 pt-1.5">
+          
+<button onclick="fetch(`https://naoki-okuda.github.io/shad/chemical_pot.md`).then((r) => r.blob()).then((blob) => navigator.clipboard.write([new ClipboardItem({ 'text/plain': blob })]))" 
+        data-slot="button" 
+        class="cursor-pointer inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md gap-1.5 px-3 has-[&>svg]:px-2.5 h-8 shadow-none md:h-7 md:text-[0.8rem]">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-copy ">
+    <path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z"></path><path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1"></path>
+</svg>
+<span class="max-md:hidden">Copy Page</span>
+</button> 
+           
+          
+        </div>
+      </div>
+      
+    </div>
+    <div class="flex justify-end items-center">
+       
+    </div>
+  </div>
+  <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
+    <ol>
+<li>古典的エントロピー汎関数(ギブスエントロピー)は</li>
+</ol>
+<p>[
+   S = - \int f(\mathbf p),\ln f(\mathbf p),d^3p
+   ]</p>
+<ol>
+<li>
+<p>内部エネルギーと粒子数の束縛は
+   [
+   U=\int E(\mathbf p),f(\mathbf p),d^3p,\qquad
+   N=\int f(\mathbf p),d^3p.
+   ]</p>
+</li>
+<li>
+<p>温度の定義は（拘束条件明記）
+   [
+   \frac{1}{T}=\Big(\frac{\partial S}{\partial U}\Big)_{N,V}.
+   ]</p>
+</li>
+<li>
+<p>自由エネルギーは通常
+   [
+   F=U-TS,
+   ]
+   そして化学ポテンシャルは定義通り
+   [
+   \mu=\Big(\frac{\partial F}{\partial N}\Big)_{T,V}.
+   ]</p>
+</li>
+<li>
+<p>分布関数を<strong>エントロピーを最大化する（または自由エネルギーを最小化する）変分問題</strong>として扱うと、平衡分布は
+   [
+   f(\mathbf p)\propto \exp!\Big[-\frac{E(\mathbf p)-\mu}{k_B T}\Big],
+   ]
+   すなわち化学ポテンシャルは指数の中に現れる（古典的ボルツマン分布では (\exp(\beta\mu)) が正規化定数として出る）。</p>
+</li>
+</ol>
+<hr />
+<h1 id="_1">簡潔な導出（変分で化学ポテンシャルが出る流れ）</h1>
+<p>エントロピーを最大化（固定 (U,N)）する。ラグランジュの未定乗数を使う：
+[
+\delta\Big{ S - \lambda_U\big(!U-\bar U\big) - \lambda_N\big(!N-\bar N\big)\Big}=0.
+]
+古典エントロピー (S=-k_B\int f\ln f,d^3p) を用いると
+[
+\delta S = -k_B\int (\ln f +1),\delta f,d^3p,
+\qquad
+\delta U=\int E,\delta f,d^3p,\qquad
+\delta N=\int \delta f,d^3p.
+]
+よって係数比較から
+[
+-k_B(\ln f +1) - \lambda_U E -\lambda_N =0,
+]
+すなわち
+[
+\ln f = -1 -\frac{\lambda_U}{k_B}E -\frac{\lambda_N}{k_B}.
+]
+指数を取って
+[
+f(\mathbf p)=C\exp!\Big(-\frac{\lambda_U}{k_B}E(\mathbf p)\Big),
+\quad C=\exp!\Big(-1-\frac{\lambda_N}{k_B}\Big).
+]
+物理的に (\lambda_U) は (1/T) に対応し、定数 (C) は (\exp(\beta\mu)) の形に書ける。正しく識別すると
+[
+\frac{\lambda_U}{k_B}=\frac{1}{k_B T}=\beta,\qquad
+-\frac{\lambda_N}{k_B}=\beta\mu,
+]
+したがって
+[
+f(\mathbf p)=\exp!\Big(\beta\mu\Big)\exp!\Big(-\beta E(\mathbf p)\Big)
+=\exp!\Big[-\beta\big(E(\mathbf p)-\mu\big)\Big].
+]</p>
+<p>つまり化学ポテンシャル (\mu) は「粒子数束縛に対するラグランジュ乗数」として現れ、平衡分布の指数にそのまま入る。</p>
+<hr />
+<h1 id="_2">注意点・補足（ユーザの式に対する評価）</h1>
+<ul>
+<li>
+<p>元の提示では<strong>符号（エントロピーの前のマイナス）</strong>や<strong>(k_B)</strong> が抜けている。物理的単位のためにも必ず明示すること。
+  正しい古典エントロピーは (S=-k_B\int f\ln f)（単位は J/K）。</p>
+</li>
+<li>
+<p>温度の定義は ( (\partial S/\partial U)_{N,V}=1/T) と<strong>束縛（N,V固定）</strong>を明示する必要がある。単に (\partial S/\partial U) と書くとどの変数を固定するか不明確になる。</p>
+</li>
+<li>
+<p>化学ポテンシャルは (\mu=\big(\partial F/\partial N\big)_{T,V})（<strong>T,V固定</strong>）が正しい。あなたの書き方は概念的には合っているが、添え字（保持する変数）を明示しておくと安全。</p>
+</li>
+<li>
+<p>分布関数 (f(\mathbf p)) の定義（単位や正規化）を明確にしておこう。例えば古典統計では位相空間での密度は (f(\mathbf p,\mathbf x)) や、量子では (\mathrm{d}^3p/h^3) のような状態密度の因子が必要。結果として平衡化学ポテンシャルの具体式（例：理想気体 (\mu=k_B T\ln(n\lambda^3))）には熱波長 (\lambda) 等が入る。</p>
+</li>
+<li>
+<p>量子統計（フェルミ・ボース）はエントロピー汎関数自体が変わる：
+  [
+  S=-k_B\int\big[f\ln f \pm (1\pm f)\ln(1\pm f)\big],d\Gamma,
+  ]
+  古典極限 (f\ll1) で先の (-k_B\int f\ln f) に還元される。</p>
+</li>
+</ul>
+<hr />
+<h1 id="_3">具体例（古典単原子理想気体）</h1>
+<p>平衡での古典分布（位置は均一、運動エネルギー (E=p^2/2m)）を正規化すると、化学ポテンシャルはよく知られた形：
+[
+z\equiv e^{\beta\mu}=n\lambda^3,\qquad
+\lambda=\frac{h}{\sqrt{2\pi m k_B T}},
+]
+すなわち
+[
+\mu = k_B T \ln!\big(n\lambda^3\big).
+]</p>
+<hr />
+<h1 id="_4">結論（短く）</h1>
+<p>あなたの流れ（エントロピー→温度→自由エネルギー→(\mu)）は正しい方向性。ただし</p>
+<ul>
+<li>エントロピーの符号と (k_B) を入れる、</li>
+<li>偏微分で固定する変数（(N,V) や (T,V)）を明示する、</li>
+<li>分布関数の正規化（粒子数制約）を明確にしてラグランジュ乗数法で処理する、</li>
+</ul>
+<p>――これらを行えば、分布関数の最大化から自然に (\mu) が出てきて、平衡分布 (f\propto\exp[-(E-\mu)/(k_BT)]) が得られる、というのが正しい結論です。</p>
+<p>必要なら、あなたの元の式を僕の修正版で LaTeX 整形してまとめるか、あるいは<strong>量子統計（FD/BE）版</strong>の導出や「理想気体の (\mu(T,n)) を導く（定数含めて）」まで書いて示すよ。どれが欲しい？</p>
+<p>短く結論：<strong>はい、kappa分布にも化学ポテンシャルは「出せる」</strong>（＝粒子数束縛に対応するラグランジュ乗数として現れる）。ただし（1）どの「kappa分布」を使うか（古典的なLévy型 / κ-ラーレンツ型・Tsallis系・Kaniadakis系など）で扱い方が少し変わる、（2）正規化積分から ( \mu ) を解く必要があり、閉形式にならないことが多い、という点に注意が必要です。以下に標準的な導き方と実務上の注意点をまとめます。</p>
+<hr />
+<h1 id="1">1) 一般的な考え方（ラグランジュ乗数法）</h1>
+<p>平衡分布を「エントロピーを最大化（または自由エネルギーを最小化）」で得る手順は通常の場合と同じです。粒子数 (N) と内部エネルギー (U) を固定して（あるいは温度 (T) を与えて (N) を固定）、ラグランジュ乗数を導入すると、粒子数束縛に対応する乗数が化学ポテンシャル (\mu) に対応します。形式的には</p>
+<p>[
+\delta\big{ S - \beta(U-\bar U) + \beta\mu(N-\bar N)\big}=0
+]</p>
+<p>とすると、分布は一般に
+[
+f(\mathbf p);\propto;\text{（kappa型のエクスポネンシャル的関数）}\times \exp(\beta\mu)\ \ \text{または}\ \ \propto;[,1+\text{(エネルギー−(\mu)) / scale},]^{-\alpha}
+]
+のように (\mu) を含みます。すなわち (\mu) は<strong>束縛条件のラグランジュ乗数</strong>としてそのまま「指数の中」あるいは括弧の中に現れます。</p>
+<hr />
+<h1 id="2">2) 典型的な (常用される) κ 分布の形</h1>
+<p>よく使われる非相対論的 κ（“kappa–Lorentzian”）分布の1変種はエネルギー ( \varepsilon\equiv E(p)) に対して</p>
+<p>[
+f(\varepsilon)=A\Big[1+\frac{\varepsilon-\mu}{\kappa \theta}\Big]^{-(\kappa+1)}
+]</p>
+<p>という形で書けます（定数の定義は文献により異なる）。ここで</p>
+<ul>
+<li>(\theta) は温度に類するスケール（(k_B T) と同次）、</li>
+<li>(\kappa) は尾部の厚さを決めるパラメータ（(\kappa\to\infty) で指数分布に戻る）、</li>
+<li>(A) は正規化定数（(\kappa,\theta,\mu) に依る）、</li>
+<li>(\mu) はここに入れた場合、エネルギーのシフトとして化学ポテンシャルの役目をします。</li>
+</ul>
+<blockquote>
+<p>注：上の形は「慣習的な書き方」の一つ。別の派生（Tsallisのq分布に対応させる形式など）では、形式は ([1-(1-q)\beta(\varepsilon-\mu)]^{1/(1-q)}) のようになります。kappa と q の関係がある場合もあります（文献参照）。</p>
+</blockquote>
+<hr />
+<h1 id="3">3) 化学ポテンシャルを「求める」手順</h1>
+<p>化学ポテンシャル (\mu) を物理的な粒子数密度 (n)（≡ (N/V)）で決めるには、<strong>正規化条件</strong>（粒子数束縛）を使う：</p>
+<p>[
+n=\int f(\mathbf p),\frac{d^3p}{(2\pi\hbar)^3}\quad\text{（量子状態密度因子は必要なら入れる）}.
+]</p>
+<p>具体的には非相対論で空間均一なら</p>
+<p>[
+n = 4\pi A \int_0^\infty p^2\Big[1+\frac{p^2/2m-\mu}{\kappa \theta}\Big]^{-(\kappa+1)}dp.
+]</p>
+<p>この積分を評価して (n) を (\mu) の関数として書き、与えられた (n,\theta,\kappa) から (\mu) を逆算します。多くの場合この逆問題は<strong>解析的に閉じない</strong>ので数値解を取りますが、積分自体はベータ関数やガンマ関数で表せる場合が多く、漸近展開（大負の (\mu) →古典極限、(\kappa\to\infty) →マクスウェル）で近似できます。</p>
+<hr />
+<h1 id="4">4) 重要な注意点（物理的制約）</h1>
+<ul>
+<li>
+<p>分布が正値となるために中身の括弧は正である必要がある（通常は全エネルギー領域で正になるよう (\mu) を制約する）。つまり
+  [
+  1+\frac{\varepsilon-\mu}{\kappa\theta}&gt;0\quad\forall\ \varepsilon\ge 0
+  ]
+  を見ると、典型的には (\mu&lt;\varepsilon_{\min}+\kappa\theta) 等の条件が出る。実務では (\mu) は多くの場合負（古典希薄気体相当）か、設定された領域内に収まる値になります。</p>
+</li>
+<li>
+<p>グランドカノニカルな扱い（グランド分配関数を使う）をそのままkappa系に拡張するには、標準的な指数関数の和（(\exp(\beta\mu)) を使う方法）をどう一般化するか＝<strong>熱力学整合性</strong>の問題がある。Tsallis系等では「一般化された対数・指数」を用い、熱力学的な一貫性（第一法則・第二法則との整合）を別途確認する必要があります。つまり「(\mu) を入れること自体は単純」でも、「熱力学ポテンシャルをどう定義し、熱力学関係式が満たされるか」は注意が要ります。</p>
+</li>
+</ul>
+<hr />
+<h1 id="5">5) 非相対論的例（形だけ示す）</h1>
+<p>非相対論的運動エネルギー ( \varepsilon=p^2/2m) の場合、密度は</p>
+<p>[
+n = 4\pi A \int_0^\infty p^2\Big[1+\frac{p^2/(2m)-\mu}{\kappa\theta}\Big]^{-(\kappa+1)}dp.
+]</p>
+<p>変数を ( \varepsilon ) に変えると（状態密度を使って）</p>
+<p>[
+n = C(\kappa,m),A\int_0^\infty \varepsilon^{1/2}\Big[1+\frac{\varepsilon-\mu}{\kappa\theta}\Big]^{-(\kappa+1)}d\varepsilon,
+]</p>
+<p>積分はガンマ関数・ベータ関数で表され（ただし (\mu) が括弧に入っているので単純な定数積分にはならない）、一般に</p>
+<p>[
+n = A,(\kappa\theta)^{3/2}\times F!\Big(\frac{-\mu}{\kappa\theta},\kappa\Big)
+]</p>
+<p>という形になり、ここから (\mu) を数値的に解く、というのが実際の手順です。</p>
+<hr />
+<h1 id="6">6) 実務的アドバイス</h1>
+<ul>
+<li>「kappa 分布に (\mu) を入れる」 → はまず <strong>入れてよい</strong>：粒子数束縛のラグランジュ乗数として自然に現れます。</li>
+<li>ただし熱力学的に<strong>一貫した導出</strong>をしたければ、使うエントロピー汎関数（Tsallis風かKaniadakisか等）を明示し、その最大化問題から (\mu) を導くのが正攻法です。</li>
+<li>(n(T,\kappa,\mu)) の正規化積分を評価して、与えられた (n,T,\kappa) から数値的に (\mu) を求めるのが現実的。閉形式解が欲しければ、特定の (\kappa) の値や極限（(\kappa\to\infty)、高温、低密度）で漸近展開を使う。</li>
+</ul>
+<hr />
+<p>必要なら、君の使っている<strong>具体的な kappa の定義</strong>（式）を教えて。そうすれば</p>
+<ol>
+<li>その式に (\mu) を入れた形を明確化、</li>
+<li>正規化積分を具体的に評価（ガンマ関数での表示含む）、</li>
+<li>(n(T,\kappa,\mu)) を出して (\mu) を逆算するスクリプト（数値で与えた (n,T,\kappa) から (\mu) を求めるPythonコード）まで作って渡せるよ。どれが欲しい？</li>
+</ol>
+<p>結論から言うと <strong>「はい、大きく変わる」</strong>。
+kappa分布を導くときに <strong>どのエントロピー汎関数を採用するか（Gibbs/Boltzmann–Shannon か、Tsallis か、Kaniadakis か等）で、化学ポテンシャルの入り方も、温度の意味も、熱力学関係式の形も変わる</strong>。
+これは「その分布を何の原理で正当化するか」という根本問題と直結する。</p>
+<p>以下、必要な点だけ明確にしておくね。</p>
+<hr />
+<h1 id="1-gibbsboltzmann">■ 1. Gibbs（Boltzmann）エントロピーで κ分布を導くことは原理的にできるか？</h1>
+<p><strong>ほとんどできない</strong>。
+正確に言うと、<strong>対数エントロピー（Gibbs）を最大化すると、常に指数分布（Maxwell–Boltzmann）しか出てこない</strong>。</p>
+<p>エントロピー
+[
+S = -k_B \int f \ln f, d\Gamma
+]
+を</p>
+<ul>
+<li>粒子数 (N)、</li>
+<li>エネルギー (U)</li>
+</ul>
+<p>を固定して最大化すると、
+エネルギーが (E) のとき</p>
+<p>[
+f \propto \exp[-\beta(E-\mu)]
+]</p>
+<p>という <strong>指数型</strong> しか出ない。</p>
+<p>したがって、
+<strong>Gibbs エントロピーから κ分布は生まれない。化学ポテンシャル (\mu) を入れたとしても指数型からは外れない。</strong></p>
+<p>だから、もし κ分布を「平衡状態の分布」と主張したいなら、<strong>Gibbs 熱力学の枠外に行く必要がある</strong>。</p>
+<hr />
+<h1 id="2-tsallis">■ 2. Tsallis エントロピーを採用すると κ型（パワーロー尾）分布が自然に出る</h1>
+<p>Tsallis エントロピーは</p>
+<p>[
+S_q = \frac{1}{q-1}\left(1 - \int f^q d\Gamma\right)
+]</p>
+<p>このエントロピーを</p>
+<ul>
+<li>粒子数</li>
+<li>エネルギー</li>
+</ul>
+<p>の拘束のもとで最大化すると</p>
+<p>[
+f \propto \left[1 - (1-q)\beta(E-\mu)\right]^{1/(1-q)}
+]</p>
+<p>という <strong>q指数分布（パワーロー尾）</strong> が出る。</p>
+<p>この分布は κ分布とほぼ同型で、
+パラメータ関係
+[
+q = 1 + \frac{1}{\kappa}
+\quad\text{（文献ごとに多少異なる）}
+]
+などの変換で κ分布と対応する。</p>
+<p><strong>ここで重要：化学ポテンシャル (\mu) は Tsallis の最大化で自然に出る。</strong>
+Gibbs のときと違い、指数ではなく q指数（パワーロー）が出る。</p>
+<hr />
+<h1 id="3_1">■ 3. つまり「κ分布の化学ポテンシャル」はどのエントロピーを使うかで違う</h1>
+<h3 id="gibbs-boltzmann">● Gibbs (Boltzmann) エントロピー</h3>
+<ul>
+<li>最適分布 → <strong>指数型（MB分布）</strong></li>
+<li>κ分布は出ない</li>
+<li>よって κに相当する化学ポテンシャルの位置づけもできない</li>
+</ul>
+<h3 id="tsallis">● Tsallis エントロピー（または κ統計）</h3>
+<ul>
+<li>最適分布 → <strong>パワーロー尾を持つ分布（q分布, κ分布）</strong></li>
+<li>化学ポテンシャル (\mu) は <strong>拘束条件のラグランジュ乗数として自然に出る</strong></li>
+<li>ただし温度・熱力学関係式 (dU = TdS - PdV + \mu dN) も “一般化” される</li>
+<li>(T) の解釈も微妙に変わる（熱バスとの熱平衡の扱いが異なる）</li>
+</ul>
+<hr />
+<h1 id="4_1">■ 4. κ分布を物理的に使うときの哲学的問題</h1>
+<p>よく言われること：</p>
+<ul>
+<li><strong>κ分布は平衡ではなく「非平衡定常状態」から出てくるものでは？</strong></li>
+<li>ならば「化学ポテンシャル」「温度」をどう定義すべきか？</li>
+</ul>
+<p>つまり、κ分布を使う場面はしばしば</p>
+<ul>
+<li>衝突頻度が低い</li>
+<li>長距離相互作用（クーロン）</li>
+<li>非ガウスな輸送</li>
+<li>非エルゴード性</li>
+<li>乱流</li>
+<li>プラズマ領域での韻律構造</li>
+</ul>
+<p>など、<strong>通常の熱力学がそもそも成立しない</strong>。</p>
+<p>そのため、Tsallis 統計を使う場合の「μ」「T」は
+<strong>古典熱力学の μ, T と同じものではない</strong>
+と理解しておく必要がある。</p>
+<hr />
+<h1 id="5_1">■ 5. したがって質問への最終回答</h1>
+<blockquote>
+<p>ギブスエントロピーをベースにするのと、Tsallis エントロピーをベースにするので変わってしまうよね？</p>
+</blockquote>
+<p><strong>はい、根本的に変わります。</strong></p>
+<ul>
+<li>
+<p>Gibbs なら：</p>
+</li>
+<li>
+<p>κ分布は出ない</p>
+</li>
+<li>化学ポテンシャルも通常の MB 分布に対応</li>
+<li>
+<p>κ統計に対応する μ は定義できない</p>
+</li>
+<li>
+<p>Tsallis / κエントロピーなら：</p>
+</li>
+<li>
+<p>κ分布が自然に出る</p>
+</li>
+<li>化学ポテンシャル μ もパワーローの中に自然に入る</li>
+<li>ただし μ や T の熱力学解釈は "一般化" される</li>
+</ul>
+<hr />
+<h1 id="_5">■ もしあなたの文脈が「レーザープラズマの非熱的電子」なら</h1>
+<p>これは実はかなり重要。</p>
+<ul>
+<li>レーザーが作る非熱的尾部（superthermal tail）は
+  <strong>平衡統計では説明できない</strong></li>
+<li>κ分布は実験的にはよくフィットする</li>
+<li>しかしその μ, T を「熱力学的ポテンシャル」とみなしてよいかは微妙</li>
+<li>実際には輸送方程式（Fokker–Planck）の定常解として κ分布が現れることが多い</li>
+</ul>
+<p>もし興味があれば、
+<strong>「輸送方程式から κ分布を導いたときの μ の意味」</strong>
+というもっと物理的な説明もできるよ。</p>
+<hr />
+<p>必要なら：</p>
+<ul>
+<li>Tsallis エントロピーから κ分布を厳密導出</li>
+<li>化学ポテンシャルを明確に定義</li>
+<li>その μ を実際の密度・温度・κ から数値的に解く手順</li>
+<li>あるいは Fokker–Planck から κ分布の μ の意味を説明</li>
+</ul>
+<p>どれが知りたい？</p>
+  </div>
+</article>
+                                <div class="mx-auto flex flex-wrap h-16 w-full max-w-2xl items-center gap-2 px-4 md:px-0">
+    
+    
+</div>
+                                <dialog id="bottom-sidebar" onclick="onBottomSidebarDialogClick(event)" class="bg-transparent"
+    style="position: fixed; left: 0px; top: 0px; transform: translate(0px, 58px); min-width: max-content; --radix-popper-transform-origin: 0% 0px; will-change: transform; z-index: 50; --radix-popper-available-width: 504px; --radix-popper-available-height: 857px; --radix-popper-anchor-width: 72.94999694824219px; --radix-popper-anchor-height: 32px;">
+    <div data-side="bottom" data-align="start" data-state="open" role="dialog" data-slot="popover-content"
+        class="text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 origin-(--radix-popover-content-transform-origin) border outline-hidden bg-background/90 no-scrollbar h-(--radix-popper-available-height) w-(--radix-popper-available-width) overflow-y-auto rounded-none border-none p-0 shadow-none backdrop-blur duration-100"
+        style="--radix-popover-content-transform-origin: var(--radix-popper-transform-origin); --radix-popover-content-available-width: var(--radix-popper-available-width); --radix-popover-content-available-height: var(--radix-popper-available-height); --radix-popover-trigger-width: var(--radix-popper-anchor-width); --radix-popover-trigger-height: var(--radix-popper-anchor-height);"
+        tabindex="-1">
+        <div class="flex flex-col gap-12 overflow-auto px-6 py-6">
+            
+            
+            
+
+            
+            <div class="flex flex-col gap-4">
+                <div class="text-muted-foreground text-sm font-medium">Menu</div>
+                <div class="flex flex-col gap-3">
+                    
+                    <a class="text-2xl font-medium" href="index.html">
+                        
+                        Home
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="01_non-lin-diff-analyticals.html">
+                        
+                        非線形拡散
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="02juttner.html">
+                        
+                        Jüttner分布
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="03_scale_inv_VM.html">
+                        
+                        Maxwell-Vlasov系のスケール変換
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="LL_4_Collisions_in_Plasmas.html">
+                        
+                        kinetics PROBLEM
+                        
+                    </a>
+                    
+                </div>
+            </div>
+            
+
+            
+            
+
+        </div>
+    </div>
+</dialog>
+                            </div>
+                            <div
+                                class="sticky top-[calc(var(--header-height)+1px)] ml-auto hidden h-[calc(100svh-var(--header-height)-var(--footer-height))] w-72 flex-col gap-4 overflow-hidden overscroll-none pb-8 xl:flex">
+                                <div class="h-(--top-spacing) shrink-0"></div>
+                                <div view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
+    <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
+        <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            簡潔な導出（変分で化学ポテンシャルが出る流れ）
+        </a>
+        
+
+        
+        <a href="#_2"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            注意点・補足（ユーザの式に対する評価）
+        </a>
+        
+
+        
+        <a href="#_3"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            具体例（古典単原子理想気体）
+        </a>
+        
+
+        
+        <a href="#_4"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            結論（短く）
+        </a>
+        
+
+        
+        <a href="#1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            1) 一般的な考え方（ラグランジュ乗数法）
+        </a>
+        
+
+        
+        <a href="#2"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            2) 典型的な (常用される) κ 分布の形
+        </a>
+        
+
+        
+        <a href="#3"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            3) 化学ポテンシャルを「求める」手順
+        </a>
+        
+
+        
+        <a href="#4"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            4) 重要な注意点（物理的制約）
+        </a>
+        
+
+        
+        <a href="#5"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            5) 非相対論的例（形だけ示す）
+        </a>
+        
+
+        
+        <a href="#6"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            6) 実務的アドバイス
+        </a>
+        
+
+        
+        <a href="#1-gibbsboltzmann"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            ■ 1. Gibbs（Boltzmann）エントロピーで κ分布を導くことは原理的にできるか？
+        </a>
+        
+
+        
+        <a href="#2-tsallis"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            ■ 2. Tsallis エントロピーを採用すると κ型（パワーロー尾）分布が自然に出る
+        </a>
+        
+
+        
+        <a href="#3_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            ■ 3. つまり「κ分布の化学ポテンシャル」はどのエントロピーを使うかで違う
+        </a>
+        
+        
+        <a href="#gibbs-boltzmann"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            ● Gibbs (Boltzmann) エントロピー
+        </a>
+        
+        <a href="#tsallis"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            ● Tsallis エントロピー（または κ統計）
+        </a>
+        
+        
+
+        
+        <a href="#4_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            ■ 4. κ分布を物理的に使うときの哲学的問題
+        </a>
+        
+
+        
+        <a href="#5_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            ■ 5. したがって質問への最終回答
+        </a>
+        
+
+        
+        <a href="#_5"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            ■ もしあなたの文脈が「レーザープラズマの非熱的電子」なら
+        </a>
+        
+
+        
+        
+        
+        
+
+    </div>
+    <div class="h-12"></div>
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer view-transition-name="footer"
+    class="group-has-[.section-soft]/body:bg-surface/40 3xl:fixed:bg-transparent dark:bg-transparent">
+    <div class="container-wrapper px-4 xl:px-6">
+        <div class="flex h-(--footer-height) items-center justify-between">
+            <div class="text-muted-foreground w-full text-center text-xs leading-loose sm:text-sm">
+                
+                <a href="https://github.com/asiffer/mkdocs-shadcn">shadcn theme</a> provided by
+                <a href="https://github.com/asiffer">@asiffer</a>
+            </div>
+        </div>
+    </div>
+</footer>
+    </div>
+     
+
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js"></script>
+
+     
+
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js"></script>
+
+     
+
+<script src="js/katex_auto.js"></script>
+
+     
+
+<script src="search/main.js"></script>
+
+
+    
+
+    <script src="js/copy-button.js"></script>
+    <script>updatePygmentsStylesheet();</script>
+    
+    <script>fetchStargazers("None");</script>
+    
+    
+    
+    <script type="speculationrules">
+{
+  "prerender": [
+    {
+      "where": {
+          "selector_matches": ["#next-button", "#previous-button"],
+      }
+    }
+  ]
+}
+</script>
+</body>
+
+</html>

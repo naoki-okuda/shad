@@ -2,22 +2,90 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://naoki-okuda.github.io/shad/index.html</loc>
-         <lastmod>2026-03-01</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://naoki-okuda.github.io/shad/01_non-lin-diff-analyticals.html</loc>
-         <lastmod>2026-03-01</lastmod>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://naoki-okuda.github.io/shad/02juttner.html</loc>
-         <lastmod>2026-03-01</lastmod>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://naoki-okuda.github.io/shad/03_integral_jackson527.html</loc>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://naoki-okuda.github.io/shad/03_scale_inv_VM.html</loc>
-         <lastmod>2026-03-01</lastmod>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://naoki-okuda.github.io/shad/04_gnuplot.html</loc>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://naoki-okuda.github.io/shad/05_ichimaru_03.html</loc>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://naoki-okuda.github.io/shad/07_Darwin_approx.html</loc>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://naoki-okuda.github.io/shad/08_nonlin_perturb.html</loc>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://naoki-okuda.github.io/shad/09_relativistic_kinetics.html</loc>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://naoki-okuda.github.io/shad/CHAP4_PROBLEM180.html</loc>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://naoki-okuda.github.io/shad/January_2026.html</loc>
+         <lastmod>2026-03-03</lastmod>
     </url>
     <url>
          <loc>https://naoki-okuda.github.io/shad/LL_4_Collisions_in_Plasmas.html</loc>
-         <lastmod>2026-03-01</lastmod>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://naoki-okuda.github.io/shad/bremsstrahrang_theory.html</loc>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://naoki-okuda.github.io/shad/cgs_unit.md.html</loc>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://naoki-okuda.github.io/shad/chemical_pot.html</loc>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://naoki-okuda.github.io/shad/dynamic_screening.html</loc>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://naoki-okuda.github.io/shad/gauss_smooth.html</loc>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://naoki-okuda.github.io/shad/savgol_filter.html</loc>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://naoki-okuda.github.io/shad/short_time_propagator.html</loc>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://naoki-okuda.github.io/shad/upload.html</loc>
+         <lastmod>2026-03-03</lastmod>
+    </url>
+    <url>
+         <loc>https://naoki-okuda.github.io/shad/wave_action.html</loc>
+         <lastmod>2026-03-03</lastmod>
     </url>
 </urlset>

@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        // for search plugin notably
+        const base_url = "https://naoki-okuda.github.io/shad/";
+    </script>
+    <script>
+    const darkTheme = window.matchMedia("(prefers-color-scheme: dark)");
+    darkTheme.onchange = (e) => {
+        if (e.matches) {
+            document.documentElement.classList.add("dark")
+            localStorage.theme = 'dark';
+        } else {
+            document.documentElement.classList.remove("dark")
+            localStorage.removeItem("theme")
+        }
+    };
+
+    // On page load. Priotiry to lcaolStorage
+    if (localStorage.theme === "dark") {
+        document.documentElement.classList.add("dark")
+    } else if (localStorage.theme === "light") {
+        document.documentElement.classList.remove("dark")
+    } else if (darkTheme.matches) {
+        document.documentElement.classList.add("dark")
+    } else {
+        document.documentElement.classList.remove("dark")
+    }
+
+    // set the layout based on localStorage
+    document.documentElement.classList.add(localStorage.getItem("html-layout") || "layout-fixed");
+</script>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>07 Darwin approx - Cube</title>
+    
+
+
+<title>07 Darwin approx</title>
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="https://naoki-okuda.github.io/shad/07_Darwin_approx.html">
+
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+
+
+<meta property="og:title" content="07 Darwin approx">
+
+
+
+
+
+<meta property="og:url" content="https://naoki-okuda.github.io/shad/07_Darwin_approx.html">
+
+
+
+
+
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+
+
+<meta name="twitter:title" content="07 Darwin approx">
+
+
+
+
+
+
+<!-- JSON-LD Structured Data -->
+
+
+
+    <link rel="icon" href="img/favicon.ico">
+
+    <link href="css/base.css" rel="stylesheet">
+    <link href="css/geist.css" rel="stylesheet">
+
+    
+    
+
+<link id="pygments-light" rel="stylesheet"
+    href="css/pygments/shadcn-light.css">
+<link id="pygments-dark" rel="stylesheet"
+    href="css/pygments/github-dark.css"
+    media="(prefers-color-scheme: dark)">
+
+
+    
+    <link href="extra.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" rel="stylesheet">
+
+    
+
+    <script src="js/callbacks.js"></script>
+
+    
+    <!-- katex -->
+<link rel="stylesheet" href="css/katex.min.css">
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="js/katex.min.js"></script>
+<!-- To automatically render math in text elements, include the auto-render extension: -->
+<script defer src="js/auto-render.min.js"
+    onload='renderMathInElement(document.body, {"macros": {"\\RR": "\\mathbb{R}", "\\dx": "\\mathrm{d}x"}});'></script>
+    
+
+    
+
+    
+
+</head>
+
+<body
+    class="text-foreground group/body overscroll-none font-sans antialiased [--footer-height:calc(var(--spacing)*14)] [--header-height:calc(var(--spacing)*14)] xl:[--footer-height:calc(var(--spacing)*24)] theme-default">
+    <div id="inner-body" class="bg-background relative z-10 flex min-h-svh flex-col">
+        <header class="bg-background sticky top-0 z-50 w-full" view-transition-name="header">
+    <div class="container-wrapper 3xl:fixed:px-0 px-6">
+        <div class="3xl:fixed:container flex h-(--header-height) items-center gap-2 **:data-[slot=separator]:!h-4">
+            <button id="menu-button" data-slot="popover-trigger" onclick="onMobileMenuButtonClick(event)"
+                class="group whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:text-accent-foreground px-4 py-2 has-[&gt;svg]:px-3 extend-touch-target h-8 touch-manipulation items-center justify-start gap-2.5 !p-0 hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 active:bg-transparent dark:hover:bg-transparent flex lg:hidden"
+                type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«Rmplb»"
+                data-state="closed">
+                <div class="relative flex h-8 w-4 items-center justify-center">
+                    <div class="relative size-4">
+                        <!-- 16px x 16px -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="0" x2="16" y1="5" y2="5"
+                                class="group-data-[state=open]:translate-y-[2.25px] group-data-[state=open]:-translate-x-[2.25px] group-data-[state=open]:rotate-45 transition-all duration-300 origin-center" />
+                            <line x1="0" x2="16" y1="11" y2="11"
+                                class="group-data-[state=open]:-translate-y-[2.25px] group-data-[state=open]:-translate-x-[2.25px] group-data-[state=open]:-rotate-45 transition-all duration-300 origin-center" />
+                        </svg>
+                    </div>
+
+                    <span class="sr-only">Toggle Menu</span>
+                </div>
+                <span class="flex h-8 items-center text-lg leading-none font-medium">Menu</span>
+            </button>
+            <a data-slot="button"
+                class="items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-5 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 hidden h-8 lg:flex"
+                href="https://naoki-okuda.github.io/shad/">
+                <span class="size-8 flex flex-row justify-center items-center">
+                    
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"
+    class="size-5">
+    <rect width="256" height="256" fill="none"></rect>
+    <line x1="208" y1="128" x2="128" y2="208" fill="none" stroke="currentColor" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="32"></line>
+    <line x1="192" y1="40" x2="40" y2="192" fill="none" stroke="currentColor" stroke-linecap="round"
+        stroke-linejoin="round" stroke-width="32"></line>
+</svg>
+
+
+                </span>
+
+                
+                <h1 class="pr-2">Cube</h1>
+                
+            </a>
+            
+            <nav class="items-center gap-0.5 hidden lg:flex">
+    
+</nav>
+            
+            <div class="ml-auto flex items-center gap-2 md:flex-1 md:justify-end">
+                <div class="hidden w-full flex-1 md:flex md:w-auto md:flex-none">
+                    <button data-slot="dialog-trigger" onclick="onSearchBarClick(event)"
+    class="inline-flex items-center gap-2 whitespace-nowrap rounded-md text-sm transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-secondary/80 px-4 py-2 has-[&gt;svg]:px-3 bg-surface text-surface-foreground/60 dark:bg-card relative h-8 w-full justify-start pl-2.5 font-normal shadow-none sm:pr-12 md:w-40 lg:w-56 xl:w-64"
+    type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="radix-«R66plb»" data-state="closed">
+    <span class="text-muted-foreground hidden lg:inline-flex">Search documentation...</span>
+    <span class="text-muted-foreground inline-flex lg:hidden">Search...</span>
+    <div class="absolute top-1.5 right-1.5 hidden gap-1 sm:flex">
+        <kbd
+            class="bg-background text-muted-foreground pointer-events-none flex h-5 items-center justify-center gap-1 rounded border px-1 font-sans text-[0.7rem] font-medium select-none [&amp;_svg:not([class*='size-'])]:size-3">Ctrl</kbd><kbd
+            class="bg-background text-muted-foreground pointer-events-none flex h-5 items-center justify-center gap-1 rounded border px-1 font-sans text-[0.7rem] font-medium select-none [&amp;_svg:not([class*='size-'])]:size-3 aspect-square">K</kbd>
+    </div>
+</button>
+<dialog id="search-dialog" onclick="onSearchDialogClick(event)"
+    class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-background rounded-lg shadow-lg border overflow-hidden p-0">
+    <div class="w-lg gap-4">
+        <div class="flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground">
+            <div data-slot="command-input-wrapper" class="flex h-9 items-center gap-2 border-b px-3"><svg
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-search size-4 shrink-0 opacity-50">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                </svg>
+                <input data-slot="command-input"
+                    class="placeholder:text-muted-foreground flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50"
+                    placeholder="Search documentation..." cmdk-input="" autocomplete="off" autocorrect="off"
+                    spellcheck="false" aria-autocomplete="list" role="combobox" aria-expanded="true"
+                    aria-controls="radix-«r1t6»" aria-labelledby="radix-«r1t7»" id="radix-«r1t8»" type="text" value=""
+                    aria-activedescendant="radix-«r1th»" oninput="onInputHandler(event)">
+            </div>
+        </div>
+        <div id="mkdocs-search-results">
+            <!-- search results go there -->
+        </div>
+    </div>
+</dialog>
+<script>
+    document.removeEventListener("keydown", searchShortcutHandler);
+    document.addEventListener("keydown", searchShortcutHandler);
+</script>
+                </div>
+                <div data-orientation="vertical" role="none" data-slot="separator"
+                    class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px ml-2 hidden lg:block">
+                </div>
+                <a target="_blank" rel="noreferrer" data-slot="button"
+                    class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 h-8 shadow-none"
+                    href="None">
+                    <svg viewBox="0 0 438.549 438.549">
+                        <path fill="currentColor"
+                            d="M409.132 114.573c-19.608-33.596-46.205-60.194-79.798-79.8-33.598-19.607-70.277-29.408-110.063-29.408-39.781 0-76.472 9.804-110.063 29.408-33.596 19.605-60.192 46.204-79.8 79.8C9.803 148.168 0 184.854 0 224.63c0 47.78 13.94 90.745 41.827 128.906 27.884 38.164 63.906 64.572 108.063 79.227 5.14.954 8.945.283 11.419-1.996 2.475-2.282 3.711-5.14 3.711-8.562 0-.571-.049-5.708-.144-15.417a2549.81 2549.81 0 01-.144-25.406l-6.567 1.136c-4.187.767-9.469 1.092-15.846 1-6.374-.089-12.991-.757-19.842-1.999-6.854-1.231-13.229-4.086-19.13-8.559-5.898-4.473-10.085-10.328-12.56-17.556l-2.855-6.57c-1.903-4.374-4.899-9.233-8.992-14.559-4.093-5.331-8.232-8.945-12.419-10.848l-1.999-1.431c-1.332-.951-2.568-2.098-3.711-3.429-1.142-1.331-1.997-2.663-2.568-3.997-.572-1.335-.098-2.43 1.427-3.289 1.525-.859 4.281-1.276 8.28-1.276l5.708.853c3.807.763 8.516 3.042 14.133 6.851 5.614 3.806 10.229 8.754 13.846 14.842 4.38 7.806 9.657 13.754 15.846 17.847 6.184 4.093 12.419 6.136 18.699 6.136 6.28 0 11.704-.476 16.274-1.423 4.565-.952 8.848-2.383 12.847-4.285 1.713-12.758 6.377-22.559 13.988-29.41-10.848-1.14-20.601-2.857-29.264-5.14-8.658-2.286-17.605-5.996-26.835-11.14-9.235-5.137-16.896-11.516-22.985-19.126-6.09-7.614-11.088-17.61-14.987-29.979-3.901-12.374-5.852-26.648-5.852-42.826 0-23.035 7.52-42.637 22.557-58.817-7.044-17.318-6.379-36.732 1.997-58.24 5.52-1.715 13.706-.428 24.554 3.853 10.85 4.283 18.794 7.952 23.84 10.994 5.046 3.041 9.089 5.618 12.135 7.708 17.705-4.947 35.976-7.421 54.818-7.421s37.117 2.474 54.823 7.421l10.849-6.849c7.419-4.57 16.18-8.758 26.262-12.565 10.088-3.805 17.802-4.853 23.134-3.138 8.562 21.509 9.325 40.922 2.279 58.24 15.036 16.18 22.559 35.787 22.559 58.817 0 16.178-1.958 30.497-5.853 42.966-3.9 12.471-8.941 22.457-15.125 29.979-6.191 7.521-13.901 13.85-23.131 18.986-9.232 5.14-18.182 8.85-26.84 11.136-8.662 2.286-18.415 4.004-29.263 5.146 9.894 8.562 14.842 22.077 14.842 40.539v60.237c0 3.422 1.19 6.279 3.572 8.562 2.379 2.279 6.136 2.95 11.276 1.995 44.163-14.653 80.185-41.062 108.068-79.226 27.88-38.161 41.825-81.126 41.825-128.906-.01-39.771-9.818-76.454-29.414-110.049z">
+                        </path>
+                    </svg>
+                    
+                    <span id="stargazers" class="text-muted-foreground w-8 text-xs tabular-nums" onload="test()">
+                    </span>
+                    
+                </a>
+                <div data-orientation="vertical" role="none" data-slot="separator"
+                    class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px 3xl:flex hidden">
+                </div>
+                <button data-slot="button"
+                    class="items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 size-8 3xl:flex hidden"
+                    title="Toggle layout" onclick="toggleLayout(event)">
+                    <span class="sr-only">Toggle layout</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-gallery-horizontal">
+                        <path d="M2 3v18"></path>
+                        <rect width="12" height="18" x="6" y="3" rx="2"></rect>
+                        <path d="M22 3v18"></path>
+                    </svg>
+                </button>
+                <div data-orientation="vertical" role="none" data-slot="separator"
+                    class="bg-border shrink-0 data-[orientation=horizontal]:h-px data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-px">
+                </div>
+                <button data-slot="button"
+                    class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50 group/toggle extend-touch-target size-8"
+                    title="Toggle theme" onclick="onThemeSwitch(event)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="size-4.5">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                        <path d="M12 3l0 18"></path>
+                        <path d="M12 9l4.65 -4.65"></path>
+                        <path d="M12 14.3l7.37 -7.37"></path>
+                        <path d="M12 19.6l8.85 -8.85"></path>
+                    </svg>
+                    <span class="sr-only">Toggle theme</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</header>
+        <main class="flex flex-1 flex-col">
+            <div class="container-wrapper flex flex-1 flex-col px-2">
+                <div data-slot="sidebar-wrapper" style="--sidebar-width: 16rem; --sidebar-width-icon: 3rem;"
+                    class="group/sidebar-wrapper has-data-[variant=inset]:bg-sidebar flex w-full 3xl:fixed:container 3xl:fixed:px-3 min-h-min flex-1 items-start px-0 [--sidebar-width:220px] [--top-spacing:0] lg:grid lg:grid-cols-[var(--sidebar-width)_minmax(0,1fr)] lg:[--sidebar-width:240px] lg:[--top-spacing:calc(var(--spacing)*4)]">
+                    <div data-slot="sidebar"
+                        class="text-sidebar-foreground w-(--sidebar-width) flex-col sticky top-[calc(var(--header-height)+1px)] z-30 hidden h-[calc(100svh-var(--header-height)-var(--footer-height))] bg-transparent lg:flex">
+                        <div data-slot="sidebar-content" data-sidebar="content"
+                            class="flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden no-scrollbar px-2 pb-12">
+                            <div class="h-(--top-spacing) shrink-0"></div>
+                            <div view-transition-name="sidebar" data-slot="sidebar-group" data-sidebar="group"
+    class="relative flex w-full min-w-0 flex-col p-2 no-scrollbar">
+    
+
+    
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    <div data-slot="sidebar-group" data-sidebar="group" class="relative flex w-full min-w-0 flex-col p-2">
+        <div data-slot="sidebar-group-content" data-sidebar="group-content" class="w-full text-sm">
+            <ul data-slot="sidebar-menu" data-sidebar="menu" class="flex w-full min-w-0 flex-col gap-0.5">
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/index.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        Home
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/01_non-lin-diff-analyticals.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        非線形拡散
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/02juttner.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        Jüttner分布
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/03_scale_inv_VM.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        Maxwell-Vlasov系のスケール変換
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+                
+                <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
+    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+        data-size="default" href="/shad/LL_4_Collisions_in_Plasmas.html"
+        class="hover:bg-sidebar-accent hover:text-sidebar-accent-foreground peer/menu-button flex items-center gap-2 rounded-md p-2 text-left outline-hidden ring-sidebar-ring transition-[width,height,padding] focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 data-[active=true]:bg-accent data-[active=true]:border-accent 3xl:fixed:w-full 3xl:fixed:max-w-48 relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md">
+
+        
+        kinetics PROBLEM
+        
+
+        
+
+        
+
+        
+    </a>
+</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+    
+
+    
+
+
+    
+</div>
+                        </div>
+                    </div>
+                    <div class="h-full w-full">
+                        <div data-slot="docs" class="flex items-stretch text-[1.05rem] sm:text-[15px] xl:w-full">
+                            <div class="flex min-w-0 flex-1 flex-col">
+                                <div class="h-(--top-spacing) shrink-0"></div>
+                                <article class="w-full" view-transition-name="page">
+  <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-2">
+      <div id="page-header" class="flex items-start justify-between">
+        <h1
+          class="scroll-m-20 text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl"
+        >
+          07 Darwin approx
+        </h1>
+
+        <div class="flex items-center gap-2 pt-1.5">
+          
+<button onclick="fetch(`https://naoki-okuda.github.io/shad/07_Darwin_approx.md`).then((r) => r.blob()).then((blob) => navigator.clipboard.write([new ClipboardItem({ 'text/plain': blob })]))" 
+        data-slot="button" 
+        class="cursor-pointer inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md gap-1.5 px-3 has-[&>svg]:px-2.5 h-8 shadow-none md:h-7 md:text-[0.8rem]">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-copy ">
+    <path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z"></path><path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1"></path>
+</svg>
+<span class="max-md:hidden">Copy Page</span>
+</button> 
+           
+          
+        </div>
+      </div>
+      
+    </div>
+    <div class="flex justify-end items-center">
+       
+    </div>
+  </div>
+  <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
+    <ul>
+<li>イギリスの物理学者Charles Galton Darwinによる。</li>
+<li>
+<p>輻射によって遠方に飛んでいく電磁波を無視する。</p>
+</li>
+<li>
+<p>電磁場のラグランジアンが、粒子のラグランジアンの自由度に押し込まれる。</p>
+</li>
+<li>この近似の枠内できちんとエネルギーが保存してくれる。</li>
+<li>考え方としては、近接相互作用に近い。MDっぽさもある。要は粒子の位置速度の自由度だけで粒子にかかる力が決まって、場の自由度を忘れられる。</li>
+</ul>
+<h1 id="0">0. 出発点：電磁気学</h1>
+<p>真空中の Maxwell 方程式：</p>
+<div class="arithmatex">\[
+\begin{align}
+\nabla \cdot \mathbf{E} &amp;= \frac{\rho}{\epsilon_0}, \\
+\nabla \cdot \mathbf{B} &amp;= 0, \\
+\nabla\times \mathbf{E} &amp;= -\frac{\partial \mathbf{B}}{\partial t}, \\
+\nabla\times \mathbf{B} &amp;= \mu_0\mathbf{J} + \frac{1}{c^2}\frac{\partial\mathbf{E}}{\partial t}.
+\end{align}
+\]</div>
+<p>ここに<strong>電磁波（放射場）</strong>が含まれるのは Faraday と Ampère–Maxwell の時間変化の項。</p>
+<hr />
+<h1 id="1-darwin">1. Darwin 近似の前提</h1>
+<ul>
+<li>粒子速度 (<span class="arithmatex">\(v \ll c\)</span>)</li>
+<li>精度は (O(v^2/c^2)) まで</li>
+<li>放射を表す項（加速度起源の電場・磁場）は<span class="arithmatex">\(O(v^3/c^3)\)</span>なので無視</li>
+</ul>
+<h1 id="2-darwin">2. Darwin ポテンシャル</h1>
+<p>粒子点源の遅延ポテンシャルを展開する。</p>
+<div class="arithmatex">\[
+\quad t_r = t - \frac{|\mathbf{r}-\mathbf{r}_i|}{c}
+\]</div>
+<div class="arithmatex">\[
+\phi(\mathbf{r},t)=\sum_i \frac{q_i}{4\pi\epsilon_0|\mathbf{r}-\mathbf{r}_i(t_r)|}
+\]</div>
+<div class="arithmatex">\[
+\mathbf{A}(\mathbf{r},t)=\sum_i\frac{\mu_0 q_i \mathbf{v}_i(t_r)}{4\pi|\mathbf{r}-\mathbf{r}_i(t_r)|}
+\]</div>
+<p>これを Taylor 展開して (O(v^2/c^2))を残すと：
+wakaran</p>
+<div class="arithmatex">\[
+  r_i (t_r(t,r)) \sim r_i(t) - \frac{|r-r_i|}{c} v_i(t)
+\]</div>
+<div class="arithmatex">\[
+\begin{align}
+   t_r(r,t) &amp;= t - \frac{|\mathbf{r}-\mathbf{r}_i|}{c}\\
+  \frac{\partial t_r}{\partial t} 
+  &amp;=  1 - \frac{r-r_i}{|r-r_i|}\cdot \frac{v_i}{c}
+\end{align}
+\]</div>
+<div class="arithmatex">\[
+  dt_r = dt - \frac{\mathbf{r}-\mathbf{r_i}}{|\mathbf{r}-\mathbf{r}_i|}\cdot d(\mathbf{r}-\mathbf{r_i})/c
+\]</div>
+<div class="arithmatex">\[
+\phi_D(\mathbf{r}) = \sum_i \frac{q_i}{4\pi \epsilon_0 r_i}
+\]</div>
+<div class="arithmatex">\[
+\mathbf{A}_D(\mathbf{r}) = \sum_i \frac{\mu_0 q_i}{8\pi r_i}
+\left[
+\mathbf{v}_i +
+\frac{(\mathbf{v}_i \cdot \mathbf{r}_i)\mathbf{r}_i}{r_i^2}
+\right]
+\]</div>
+<h1 id="3-maxwell">3. Maxwell方程式への影響</h1>
+<p>電場・磁場は：</p>
+<div class="arithmatex">\[
+\mathbf{E} = -\nabla \phi_D - \frac{\partial \mathbf{A}_D}{\partial t},
+\quad
+\mathbf{B} = \nabla\times \mathbf{A}_D.
+\]</div>
+<p>Darwin近似では：</p>
+<h3 id="_1">✔ 電場の変化項残るが…</h3>
+<div class="arithmatex">\[
+\frac{\partial \mathbf{A}}{\partial t} = O(v^2/c^2) \quad → \text{残す}
+\]</div>
+<h3 id="amperemaxwell">✔ Ampère–Maxwell式の<strong>変位電流項を捨てる</strong></h3>
+<div class="arithmatex">\[
+\nabla\times\mathbf{B} = \mu_0 \mathbf{J}
+\quad \Rightarrow \quad
+\frac{\partial\mathbf{E}}{\partial t} \text{(radiation term)} ~ \text{削除}
+\]</div>
+<p>つまり：</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>項</th>
+<th>含まれる？</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>クーロン場</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>磁場 (運動電荷)</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>速度依存の相対論補正</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>電磁放射（波動伝搬）</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table></div>
+<p>結果として、<strong>電磁波は存在しない。</strong></p>
+<hr />
+<h1 id="4-lorentz">📌 4. 運動方程式（Lorentz力）</h1>
+<p>粒子 (i) の運動方程式：</p>
+<div class="arithmatex">\[
+m_i \frac{d\mathbf{v}_i}{dt} = q_i
+\left(
+\mathbf{E}(\mathbf{r_i}) + \mathbf{v}_i \times \mathbf{B}(\mathbf{r_i})
+\right)
+\]</div>
+<p>Darwin 近似では、粒子同士の相互作用は<strong>瞬時ではないが、放射なし</strong>という形で：</p>
+<div class="arithmatex">\[
+\mathbf{F}*{ij} = \frac{q_i q_j}{4\pi \epsilon_0 r*{ij}^2}
+\hat{\mathbf{r}}*{ij}
++\frac{q_i q_j}{8\pi\epsilon_0 c^2 r*{ij}}
+\left[
+\mathbf{v}*j + (\mathbf{v}*j \cdot \hat{\mathbf{r}}*{ij})\hat{\mathbf{r}}*{ij}
+\right]
+\times \mathbf{v}_i
+\]</div>
+<p>これは <strong>Ampère力（磁気的相互作用）</strong> と一致する。</p>
+<h1 id="5-lagrangianhamiltonian">📌 5. Lagrangian/Hamiltonian 形式</h1>
+<p>Darwin Lagrangian：</p>
+<p>$$
+L = \sum_i \frac{1}{2} m_i v_i^2</p>
+<ul>
+<li>\frac{1}{2} \sum_{i\neq j} \frac{q_i q_j}{4\pi \epsilon_0 r_{ij}}
+  \left(
+  1 + \frac{\mathbf{v}_i\cdot\mathbf{v}_j}{2c^2}</li>
+<li>\frac{(\mathbf{v}<em>i\cdot \mathbf{r}</em>{ij})(\mathbf{v}<em>j\cdot \mathbf{r}</em>{ij})}{2c^2 r_{ij}^2}
+  \right)
+$$</li>
+</ul>
+<p>対応する Darwin Hamiltonian（量子化すると QED の近似版）：</p>
+<p>$$
+H = \sum_i \frac{\mathbf{p}_i^2}{2m_i}</p>
+<ul>
+<li>
+<p>\frac{1}{2} \sum_{i\neq j} \frac{q_i q_j}{4\pi \epsilon_0 r_{ij}}</p>
+</li>
+<li>
+<p>\frac{1}{2} \sum_{i\neq j} \frac{q_i q_j}{8\pi \epsilon_0 c^2 r_{ij}}
+  \left[
+  \mathbf{v}_i \cdot \mathbf{v}_j +
+  (\mathbf{v}<em>i \cdot \hat{\mathbf{r}}</em>{ij})(\mathbf{v}<em>j \cdot \hat{\mathbf{r}}</em>{ij})
+  \right]
+$$</p>
+</li>
+</ul>
+<h1 id="_2">🔥 物理的まとめ</h1>
+<p>Darwin近似にすると：</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>物理量</th>
+<th>変化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>静電場</td>
+<td>変わらない</td>
+</tr>
+<tr>
+<td>磁場</td>
+<td>速度依存相互作用として入る</td>
+</tr>
+<tr>
+<td>遅延効果</td>
+<td>入る（(O(v^2/c^2))）</td>
+</tr>
+<tr>
+<td>放射 (Radiation reaction)</td>
+<td>完全に無視</td>
+</tr>
+<tr>
+<td>Maxwell方程式</td>
+<td>変位電流項消滅 → 波動方程式消える</td>
+</tr>
+<tr>
+<td>運動方程式</td>
+<td>Ampère力を含むローレンツ力になる</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>C. QED or Pauli方程式への橋渡し？</li>
+<li>D. Darwin–Breit相互作用まで行きたい？</li>
+</ul>
+<p>結論から言うと：</p>
+<blockquote>
+<p><strong>Darwin近似の系はちゃんとエネルギー保存する。</strong></p>
+</blockquote>
+<p>理由は、Darwin近似が<strong>元の電磁気学を勝手に切り捨てた近似ではなく、遅延ポテンシャルを系統展開して得られる</strong>、
+つまり<strong>厳密な作用（Lagrangian）から導出されている保存則整合な近似</strong>だから。</p>
+<hr />
+<h2 id="_3">🔹 なぜエネルギーが保存されるか（理論的理由）</h2>
+<p>Darwin Lagrangian：</p>
+<p>$$
+L = \sum_i \frac{1}{2}m_i v_i^2</p>
+<ul>
+<li>\frac{1}{2}\sum_{i \neq j}\frac{q_iq_j}{4\pi \epsilon_0 r_{ij}}
+  \left(
+  1+\frac{\mathbf{v}_i \cdot \mathbf{v}<em>j}{2c^2}
+  +\frac{(\mathbf{v}</em>i \cdot \mathbf{r}<em>{ij})(\mathbf{v}</em>j \cdot \mathbf{r}<em>{ij})}{2c^2r</em>{ij}^2}
+  \right)
+$$</li>
+</ul>
+<p>この L は：</p>
+<ul>
+<li>時間に対して explicitly time-independent
+  → <strong>Noether の定理 ⇒ エネルギー保存</strong></li>
+</ul>
+<p>つまり、</p>
+<div class="arithmatex">\[
+\frac{dH}{dt}=0
+\]</div>
+<p>が自動的に保証される。</p>
+<h2 id="_4">🔹 では保存される“エネルギー”とは何か？</h2>
+<p>運動エネルギー＋Coulomb エネルギー＋磁気相互作用の補正項：</p>
+<p>$$
+H = \sum_i \frac{1}{2}m_iv_i^2</p>
+<ul>
+<li>
+<p>\frac{1}{2}\sum_{i\neq j}\frac{q_iq_j}{4\pi\epsilon_0r_{ij}}</p>
+</li>
+<li>
+<p>\frac{1}{4\pi\epsilon_0c^2}
+  \sum_{i\neq j} \frac{q_i q_j}{2r_{ij}}
+  \left[
+  \mathbf{v}_i \cdot \mathbf{v}_j
+  +(\mathbf{v}<em>i \cdot \hat{\mathbf{r}}</em>{ij})
+  (\mathbf{v}<em>j \cdot \hat{\mathbf{r}}</em>{ij})
+  \right]
+$$</p>
+</li>
+</ul>
+<p>重要なのはここ：</p>
+<h3 id="_5">👉 <strong>磁場エネルギーも粒子間相互作用項としてまとめて吸収されている</strong></h3>
+<p>つまり Maxwell 圏での</p>
+<div class="arithmatex">\[
+\int \frac{E^2+B^2}{2\mu_0} d^3x
+\]</div>
+<p>みたいな場エネルギーを<strong>粒子間相互作用の形に再表現した結果が Darwin Hamiltonian</strong>。</p>
+<h2 id="maxwell">🔥 じゃあなぜ完全 Maxwell ではエネルギー保存が難しいのか？</h2>
+<p>フル Maxwell + 粒子運動では：</p>
+<ul>
+<li>放射（電磁波）がエネルギーを運び去る
+  → <strong>陽に radiation reaction 項（Liénard–Wiechert 加速度項）を入れなければ粒子のエネルギーは減る</strong></li>
+</ul>
+<p>しかし Darwin近似では：</p>
+<blockquote>
+<p>そもそも radiation field（加速度起因の (1/r) 項）を捨てているため、
+エネルギーは<strong>粒子系内に閉じた形で定義できる</strong>。</p>
+</blockquote>
+<p>つまり</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>項</th>
+<th>Maxwell</th>
+<th>Darwin</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>放射</td>
+<td>ある</td>
+<td><strong>無い</strong></td>
+</tr>
+<tr>
+<td>エネルギーが外へ逃げる？</td>
+<td><strong>Yes</strong></td>
+<td><strong>No</strong></td>
+</tr>
+<tr>
+<td>粒子＋場エネルギーで保存する？</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>粒子の運動だけ見て保存？</td>
+<td>❌</td>
+<td><strong>✔（保存）</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>Darwin系では<strong>宇宙に電磁波が飛んで行かない</strong>ので閉じた保存系になる。</p>
+<hr />
+<h2 id="_6">✔ 数式での確認</h2>
+<p>運動方程式：</p>
+<div class="arithmatex">\[
+m_i \frac{d\mathbf{v}_i}{dt} = -\frac{\partial H}{\partial \mathbf{r}_i}
+\]</div>
+<p>速度演算：</p>
+<p>$$
+\frac{dH}{dt} = \sum_i \frac{\partial H}{\partial \mathbf{r}_i}\cdot \frac{d\mathbf{r}_i}{dt}</p>
+<ul>
+<li>\frac{\partial H}{\partial \mathbf{v}_i} \cdot \frac{d\mathbf{v}_i}{dt}
+  = -\sum_i m_i \frac{d\mathbf{v}_i}{dt}\cdot \mathbf{v}_i</li>
+<li>\sum_i m_i \mathbf{v}_i \cdot \frac{d\mathbf{v}_i}{dt}
+  =0
+$$</li>
+</ul>
+<p>綺麗に消える。</p>
+<hr />
+<h2 id="_7">📌 まとめ</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>性質</th>
+<th>Darwin近似</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>放射損失</td>
+<td>✖ なし</td>
+</tr>
+<tr>
+<td>粒子＋相互作用エネルギーの保存</td>
+<td>✔ 成立</td>
+</tr>
+<tr>
+<td>エネルギー表式</td>
+<td>Hamiltonian 形式で有限</td>
+</tr>
+<tr>
+<td>Noether定理適用</td>
+<td>✔（L 時間依存なし）</td>
+</tr>
+</tbody>
+</table></div>
+<p>➡ <strong>なので「Darwin近似は energy-conserving non-radiative electrodynamics」</strong></p>
+<hr />
+<h3 id="_8">✦ 最後に質問</h3>
+<p>君の興味は：</p>
+<ul>
+<li>A. これを数値計算（PIC, MD）で安定に使えるか？</li>
+<li>B. Darwin系の量子化（Pauli–Breit Hamiltonian）に進みたい？</li>
+<li>C. 低周波プラズマモデリングの理論的整合性が気になる？</li>
+</ul>
+<p>どれ？続ける方向を決めたい。</p>
+<p><strong>Darwin近似では“場そのものを自由度として扱わず”、粒子の自由度だけで書ける有効ラグランジアンに落とし込める。</strong></p>
+<p>つまり：</p>
+<div class="arithmatex">\[
+L_{\text{full}} = L_{\text{particles}} + L_{\text{field}}
+\]</div>
+<p>ではなく、</p>
+<div class="arithmatex">\[
+L_{\text{Darwin}} = L_{\text{particles}} + L_{\text{effective interaction (Coulomb + magnetostatic)}}
+\]</div>
+<p>という形に <strong>縮約（integrate out the fields）</strong>した理論。</p>
+<hr />
+<h2 id="_9">📌 もう少し厳密に言うと：</h2>
+<p>完全理論ではラグランジアンは：</p>
+<p>$$
+L = \sum_i \frac{1}{2}m_i v_i^2 + \sum_i q_i \left( \mathbf{v}_i\cdot\mathbf{A} - \phi \right)</p>
+<ul>
+<li>\frac{\epsilon_0}{2} \int (E^2 - c^2 B^2), d^3x
+$$</li>
+</ul>
+<p>これは<strong>粒子も場も動的自由度</strong>。</p>
+<p>Darwin近似では：</p>
+<ul>
+<li>遅延ポテンシャルを展開</li>
+<li>電磁波を表す項（加速度依存・retarded radiation field）を捨てる</li>
+<li>残った (\phi) と (\mathbf{A}) を <strong>粒子座標で完全に表現できる</strong></li>
+</ul>
+<p>つまり：</p>
+<blockquote>
+<p><strong>場はもはや独立自由度ではなく、ただの粒子間相互作用の媒介関数になる。</strong></p>
+</blockquote>
+<hr />
+<h1 id="_10">📌 効果として何が残ってるか？</h1>
+<p>Darwinポテンシャル：</p>
+<div class="arithmatex">\[
+\phi_D(\mathbf{r}) = \sum_{j\neq i} \frac{q_j}{4\pi\epsilon_0 r_{ij}}
+\]</div>
+<p>これは普通の<strong>クーロン相互作用</strong>。</p>
+<p>磁場側（ベクトルポテンシャル）は：</p>
+<div class="arithmatex">\[
+\mathbf{A}*D(\mathbf{r}) = \sum*{j\neq i}
+\frac{\mu_0 q_j}{8\pi r_{ij}}
+\left[
+\mathbf{v}*j + \frac{(\mathbf{v}*j\cdot \mathbf{r}*{ij})}{r*{ij}^2}\mathbf{r}_{ij}
+\right]
+\]</div>
+<p>この項が<strong>ビオ・サバールの磁場と対応</strong>する。</p>
+<p>実際、磁場は：</p>
+<p>[
+\mathbf{B}_D = \nabla\times \mathbf{A}_D
+]</p>
+<p>で、この形は<strong>静磁場（magnetostatic）＋相対論補正</strong>で、電磁波や遅延効果は含まない。</p>
+<hr />
+<h1 id="_11">📌 つまり、何が起きたのか？</h1>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>理論段階</th>
+<th>場は？</th>
+<th>粒子相互作用の形</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>フルMaxwell</td>
+<td>動的自由度</td>
+<td>波動 + 放射</td>
+</tr>
+<tr>
+<td>Darwin近似</td>
+<td>動的でない（従属変数）</td>
+<td>クーロン + 速度依存磁気相互作用</td>
+</tr>
+<tr>
+<td>完全静電近似</td>
+<td>無視</td>
+<td>クーロンのみ</td>
+</tr>
+</tbody>
+</table></div>
+<p>Darwin近似は <strong>静電と磁気の中間</strong>：</p>
+<pre class="highlight"><code>静電     ←── Darwin ──→    完全電磁波あり</code></pre>
+<hr />
+<h1 id="_12">📌 直感的にまとめると：</h1>
+<blockquote>
+<p><strong>Darwin系は「遅れ効果と磁気効果は入れるが、放射はない Maxwell 理論」</strong>
+→ よって場を解く必要はなく、粒子間相互作用として閉じた系になる。</p>
+</blockquote>
+<p>だから君の言った：</p>
+<blockquote>
+<p><strong>「ビオ・サバール + 普通のポテンシャルが入った粒子系？」</strong></p>
+</blockquote>
+<p>→ <strong>Yes。正確にはそれに相対論補正がついている。</strong></p>
+<hr />
+<h1 id="_13">🔥 例えるなら：</h1>
+<ul>
+<li><strong>クーロン相互作用 → 静電相互作用</strong></li>
+<li><strong>ビオサバール相互作用 → 運動電荷間の磁気相互作用</strong></li>
+<li><strong>Darwin補正 → ローレンツ収縮や遅延効果を (v^2/c^2) まで入れた有効相互作用</strong></li>
+</ul>
+<hr />
+<h2 id="_14">☑️ 最後に整理ワンフレーズ</h2>
+<blockquote>
+<p><strong>Darwin近似は Maxwell 場を「積分して消去し」、その結果として得られる粒子間の有効相互作用だけで閉じる非放射型の電磁相互作用理論。</strong></p>
+</blockquote>
+<hr />
+<h3 id="_15">次に行くなら：</h3>
+<ul>
+<li>QEDのBreit相互作用との関係</li>
+<li>PICやMDでの数値実装の安定性</li>
+<li>低周波極限の磁気近似との接続</li>
+</ul>
+<p>どっちが知りたい？</p>
+<p>いいね — 良い文献をいくつか挙げて、目的別にどれを先に読むと効率的かも書くね。以下は <strong>Darwin 近似（Darwin Lagrangian / Darwin Hamiltonian）を明示的に詳しく扱っている</strong> 信頼できる文献・資料のおすすめリスト。各項目に短い説明と「何が得られるか」を付けておく。</p>
+<hr />
+<h1 id="_16">まず読むべき（入門 → 詳細）</h1>
+<ol>
+<li>
+<p><strong>H. Essén, “The Darwin magnetic interaction energy and its macroscopic consequences” — <em>Phys. Rev. E</em> (1996)</strong>
+   → Darwin Lagrangian の導出と Hamiltonian への変換を丁寧に扱い、さまざまな極限や物理的帰結（プラズマ・金属での応用など）を論じている。実装や物理解釈に踏み込んだ読み物として最適。(<a href="https://link.aps.org/doi/10.1103/PhysRevE.53.5228?utm_source=chatgpt.com" title="Darwin magnetic interaction energy and its macroscopic ...">Physical Review Links</a>)</p>
+</li>
+<li>
+<p><strong>H. Essén, “The exact Darwin Lagrangian” — arXiv:physics/0701324 (2007)</strong>
+   → Darwin の元の展開を整理し、「どういう条件で正当化できるか」を明確にした技術報告的なまとめ。近似の範囲や厳密化に興味があるなら必読。(<a href="https://arxiv.org/abs/physics/0701324?utm_source=chatgpt.com" title="[physics/0701324] The exact Darwin Lagrangian">arXiv</a>)</p>
+</li>
+<li>
+<p><strong>Jackson, <em>Classical Electrodynamics</em>（該当章：遅延ポテンシャルとDarwin近似の導出）</strong>
+   → 標準教科書的な導出（遅延ポテンシャルを Coulomb ゲージで展開→ベクトルポテンシャルを近似して Darwin へ）。理論的背景をしっかり押さえたいときの参照。歴史的背景やゲージ選択の議論もある。(<a href="https://www.itep.ru/science/doctors/okun/publishing_eng/jackson.pdf?utm_source=chatgpt.com" title="Historical roots of gauge invariance - JD Jackson">itep.ru</a>)</p>
+</li>
+</ol>
+<hr />
+<h1 id="_17">補助的／応用的な論文（派生・議論・数値面）</h1>
+<ol>
+<li>
+<p><strong>“A unified approach to the Darwin approximation” — AIP / <em>Physics of Plasmas</em> (2007)</strong>
+   → Maxwell 方程式の扱い方（Coulombゲージでの扱い vs. 場自由度の消去）を系統的に整理した論文。複数の導出法を比較したい場合に便利。(<a href="https://pubs.aip.org/aip/pop/article/14/10/102112/865044/A-unified-approach-to-the-Darwin-approximation?utm_source=chatgpt.com" title="A unified approach to the Darwin approximation - AIP Publishing">AIP Publishing</a>)</p>
+</li>
+<li>
+<p><strong>Fleming et al., “(quantum extension / dissipation related) — arXiv:1106.1886 (2011)”</strong>
+   → Darwin ハミルトニアンの量子化上の注意点（作用素並べ替えやダンピングとの関係など）を扱う。古典→量子への橋渡しをしたいときに。(<a href="https://arxiv.org/pdf/1106.1886?utm_source=chatgpt.com" title="arXiv:1106.1886v1 [quant-ph] 9 Jun 2011">arXiv</a>)</p>
+</li>
+</ol>
+<hr />
+<h1 id="_18">史料（元論文）</h1>
+<ol>
+<li><strong>C. G. Darwin, “The Dynamical Motions of Charged Particles”, <em>Philosophical Magazine</em> 1920</strong>
+   → Darwin の元論文。オリジナルの展開と歴史的コンテキストが分かる。現代的な導出や注釈は上のレビューの方が読みやすいが、出発点として。([Wikipedia][6])</li>
+</ol>
+<hr />
+<h1 id="_19">その他：講義ノート・解説</h1>
+<ul>
+<li>Rutgers の講義ノートや大学レベルの講義資料にも Darwin Lagrangian の導出例が載っているものがある（手順を追うのに便利）。(<a href="https://www.physics.rutgers.edu/~shapiro/504/lects/lect18_2.pdf?utm_source=chatgpt.com" title="Physics 504, Lecture 18 April 5, 2010 1 Darwin Lagrangian">physics.rutgers.edu</a>)</li>
+</ul>
+<hr />
+<h2 id="_20">読み方の提案（効率的）</h2>
+<ul>
+<li><strong>最短経路（実務的）</strong>：Essén（1996 PhysRevE）の論文をまず読む → 理解が怪しければ Jackson の該当章で遅延ポテンシャル→Coulombゲージの議論を補完。(<a href="https://link.aps.org/doi/10.1103/PhysRevE.53.5228?utm_source=chatgpt.com" title="Darwin magnetic interaction energy and its macroscopic ...">Physical Review Links</a>)</li>
+<li><strong>理論的に深掘り</strong>：Essén (2007 arXiv) → AIP (2007) → 元論文 Darwin (1920)。量子化まで考えるなら Fleming (2011)。(<a href="https://arxiv.org/abs/physics/0701324?utm_source=chatgpt.com" title="[physics/0701324] The exact Darwin Lagrangian">arXiv</a>)</li>
+</ul>
+<hr />
+<h2 id="_21">付記（実務的なヒント）</h2>
+<ul>
+<li>Darwin 近似は <strong>Coulomb ゲージ</strong>で扱うと扱いやすいことが多い（静電ポテンシャルがそのまま出て、近似はベクトルポテンシャル側に集中する）。この点は Jackson / Essén が詳しい。(<a href="https://www.itep.ru/science/doctors/okun/publishing_eng/jackson.pdf?utm_source=chatgpt.com" title="Historical roots of gauge invariance - JD Jackson">itep.ru</a>)</li>
+<li>「正確な Darwin Lagrangian」をめぐる議論（加速度項をどう捨てるか・どの順序で展開するか）には注意。Essén の論文群がこの点を丁寧に整理している。(<a href="https://arxiv.org/abs/physics/0701324?utm_source=chatgpt.com" title="[physics/0701324] The exact Darwin Lagrangian">arXiv</a>)</li>
+</ul>
+<p>必要なら、君の用途（例：PIC実装に導入したい、分子動力学で使いたい、量子化してBreit相互作用を扱いたい）を教えて。
+用途に合わせて「読むべき章・式の導出部分を抜粋して解説」するよ — 例えば Darwin Lagrangian から Hamiltonian への変換手順をステップごとに式で示すとか、数値実装で注意すべき保存則（エネルギー・運動量）を明示するとか。どれがいい？</p>
+  </div>
+</article>
+                                <div class="mx-auto flex flex-wrap h-16 w-full max-w-2xl items-center gap-2 px-4 md:px-0">
+    
+    
+</div>
+                                <dialog id="bottom-sidebar" onclick="onBottomSidebarDialogClick(event)" class="bg-transparent"
+    style="position: fixed; left: 0px; top: 0px; transform: translate(0px, 58px); min-width: max-content; --radix-popper-transform-origin: 0% 0px; will-change: transform; z-index: 50; --radix-popper-available-width: 504px; --radix-popper-available-height: 857px; --radix-popper-anchor-width: 72.94999694824219px; --radix-popper-anchor-height: 32px;">
+    <div data-side="bottom" data-align="start" data-state="open" role="dialog" data-slot="popover-content"
+        class="text-popover-foreground data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 origin-(--radix-popover-content-transform-origin) border outline-hidden bg-background/90 no-scrollbar h-(--radix-popper-available-height) w-(--radix-popper-available-width) overflow-y-auto rounded-none border-none p-0 shadow-none backdrop-blur duration-100"
+        style="--radix-popover-content-transform-origin: var(--radix-popper-transform-origin); --radix-popover-content-available-width: var(--radix-popper-available-width); --radix-popover-content-available-height: var(--radix-popper-available-height); --radix-popover-trigger-width: var(--radix-popper-anchor-width); --radix-popover-trigger-height: var(--radix-popper-anchor-height);"
+        tabindex="-1">
+        <div class="flex flex-col gap-12 overflow-auto px-6 py-6">
+            
+            
+            
+
+            
+            <div class="flex flex-col gap-4">
+                <div class="text-muted-foreground text-sm font-medium">Menu</div>
+                <div class="flex flex-col gap-3">
+                    
+                    <a class="text-2xl font-medium" href="index.html">
+                        
+                        Home
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="01_non-lin-diff-analyticals.html">
+                        
+                        非線形拡散
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="02juttner.html">
+                        
+                        Jüttner分布
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="03_scale_inv_VM.html">
+                        
+                        Maxwell-Vlasov系のスケール変換
+                        
+                    </a>
+                    
+                    <a class="text-2xl font-medium" href="LL_4_Collisions_in_Plasmas.html">
+                        
+                        kinetics PROBLEM
+                        
+                    </a>
+                    
+                </div>
+            </div>
+            
+
+            
+            
+
+        </div>
+    </div>
+</dialog>
+                            </div>
+                            <div
+                                class="sticky top-[calc(var(--header-height)+1px)] ml-auto hidden h-[calc(100svh-var(--header-height)-var(--footer-height))] w-72 flex-col gap-4 overflow-hidden overscroll-none pb-8 xl:flex">
+                                <div class="h-(--top-spacing) shrink-0"></div>
+                                <div view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
+    <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
+        <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#0"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            0. 出発点：電磁気学
+        </a>
+        
+
+        
+        <a href="#1-darwin"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            1. Darwin 近似の前提
+        </a>
+        
+
+        
+        <a href="#2-darwin"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            2. Darwin ポテンシャル
+        </a>
+        
+
+        
+        <a href="#3-maxwell"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            3. Maxwell方程式への影響
+        </a>
+        
+        
+        <a href="#_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            ✔ 電場の変化項残るが…
+        </a>
+        
+        <a href="#amperemaxwell"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            ✔ Ampère–Maxwell式の変位電流項を捨てる
+        </a>
+        
+        
+
+        
+        <a href="#4-lorentz"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            📌 4. 運動方程式（Lorentz力）
+        </a>
+        
+
+        
+        <a href="#5-lagrangianhamiltonian"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            📌 5. Lagrangian/Hamiltonian 形式
+        </a>
+        
+
+        
+        <a href="#_2"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            🔥 物理的まとめ
+        </a>
+        
+        
+        <a href="#_3"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            🔹 なぜエネルギーが保存されるか（理論的理由）
+        </a>
+        
+        <a href="#_4"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            🔹 では保存される“エネルギー”とは何か？
+        </a>
+        
+        <a href="#maxwell"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            🔥 じゃあなぜ完全 Maxwell ではエネルギー保存が難しいのか？
+        </a>
+        
+        <a href="#_6"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            ✔ 数式での確認
+        </a>
+        
+        <a href="#_7"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            📌 まとめ
+        </a>
+        
+        <a href="#_9"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            📌 もう少し厳密に言うと：
+        </a>
+        
+        
+
+        
+        <a href="#_10"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            📌 効果として何が残ってるか？
+        </a>
+        
+
+        
+        <a href="#_11"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            📌 つまり、何が起きたのか？
+        </a>
+        
+
+        
+        <a href="#_12"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            📌 直感的にまとめると：
+        </a>
+        
+
+        
+        <a href="#_13"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            🔥 例えるなら：
+        </a>
+        
+        
+        <a href="#_14"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            ☑️ 最後に整理ワンフレーズ
+        </a>
+        
+        
+
+        
+        <a href="#_16"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            まず読むべき（入門 → 詳細）
+        </a>
+        
+
+        
+        <a href="#_17"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            補助的／応用的な論文（派生・議論・数値面）
+        </a>
+        
+
+        
+        <a href="#_18"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            史料（元論文）
+        </a>
+        
+
+        
+        <a href="#_19"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            その他：講義ノート・解説
+        </a>
+        
+        
+        <a href="#_20"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            読み方の提案（効率的）
+        </a>
+        
+        <a href="#_21"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            付記（実務的なヒント）
+        </a>
+        
+        
+
+        
+        
+        
+        
+
+    </div>
+    <div class="h-12"></div>
+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer view-transition-name="footer"
+    class="group-has-[.section-soft]/body:bg-surface/40 3xl:fixed:bg-transparent dark:bg-transparent">
+    <div class="container-wrapper px-4 xl:px-6">
+        <div class="flex h-(--footer-height) items-center justify-between">
+            <div class="text-muted-foreground w-full text-center text-xs leading-loose sm:text-sm">
+                
+                <a href="https://github.com/asiffer/mkdocs-shadcn">shadcn theme</a> provided by
+                <a href="https://github.com/asiffer">@asiffer</a>
+            </div>
+        </div>
+    </div>
+</footer>
+    </div>
+     
+
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js"></script>
+
+     
+
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js"></script>
+
+     
+
+<script src="js/katex_auto.js"></script>
+
+     
+
+<script src="search/main.js"></script>
+
+
+    
+
+    <script src="js/copy-button.js"></script>
+    <script>updatePygmentsStylesheet();</script>
+    
+    <script>fetchStargazers("None");</script>
+    
+    
+    
+    <script type="speculationrules">
+{
+  "prerender": [
+    {
+      "where": {
+          "selector_matches": ["#next-button", "#previous-button"],
+      }
+    }
+  ]
+}
+</script>
+</body>
+
+</html>

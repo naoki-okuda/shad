@@ -48,18 +48,16 @@
 
 
 
-<meta name="keywords" content="physics, plasmas, theory, mkdocs,shadcn">
 
-
-
-<meta name="author" content="naoki_okuda">
 
 
 
 <link rel="canonical" href="https://naoki-okuda.github.io/shad/index.html">
 
 
-<!-- Open Graph (Facebook, LinkedIn) -->
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+
 
 <meta property="og:title" content="Home">
 
@@ -77,6 +75,8 @@
 
 
 <!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+
 
 <meta name="twitter:title" content="Home">
 
@@ -89,30 +89,23 @@
 
 <!-- JSON-LD Structured Data -->
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Home",
-    "url": "https://naoki-okuda.github.io/shad/index.html",
-    "description": "Hub page for physics documents",
-    
-    "author": {
-      "@type": "Person",
-      "name": "naoki_okuda"
-    },
-    
-    
-    
-    
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "https://naoki-okuda.github.io/shad/index.html"
-    },
-    
-    
-  }
-  </script>
+{"@context": "https://schema.org", "@type": "WebPage", "description": "Hub page for physics documents", "headline": "Home", "mainEntityOfPage": {"@id": "https://naoki-okuda.github.io/shad/index.html", "@type": "WebPage"}, "url": "https://naoki-okuda.github.io/shad/index.html"}
+</script>
 
 
 
@@ -135,8 +128,6 @@
     <link href="extra.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css" rel="stylesheet">
 
-    
-    <link href="css/custom-style.css" rel="stylesheet">
     
 
     <script src="js/callbacks.js"></script>
@@ -498,23 +489,29 @@
       
     </div>
     <div class="flex justify-end items-center">
-        <div class="grow text-muted-foreground pt-4 flex flex-row justify-end items-center">
-    <span id="updated_at" class="text-sm opacity-50 hover:opacity-100 transition-opacity duration-200"
-        title="last update (local time)"></span>
-</div>
-
-<script>
-    const updatedAt = document.getElementById("updated_at");
-    if (updatedAt) {
-        const date = new Date('2026-03-01T09:21:51+09:00');
-        updatedAt.textContent = date.toLocaleDateString();
-    }
-</script>
- 
+       
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <h2 id="link">link</h2>
+    <!-- ---
+title: Home
+#summary: Hub page
+new: false
+description: Hub page for physics documents 
+keywords: physics, plasmas, theory, mkdocs,shadcn
+#image: https://raw.githubusercontent.com/asiffer/mkdocs-shadcn/refs/heads/master/.github/assets/logo.svg
+order: 0
+sidebar_title: Home
+show_datetime: true
+# external_links:
+#   Qiita - cubic_unit: https://qiita.com/cubic_unit
+extra_css:
+  - css/custom-style.css
+extra_javascript:
+  - js/custom-script.js
+--- -->
+
+<h2 id="link">link</h2>
 <p><a href="https://qiita.com/cubic_unit">Qiita - cubic_unit</a></p>
   </div>
 </article>
@@ -586,25 +583,6 @@
             
 
             
-            <div class="flex flex-col gap-8">
-                
-                <div class="flex flex-col gap-4">
-                    <div class="text-muted-foreground text-sm font-medium">biriv.f</div>
-                    
-                </div>
-                
-                <div class="flex flex-col gap-4">
-                    <div class="text-muted-foreground text-sm font-medium">F77_style</div>
-                    
-                </div>
-                
-                <div class="flex flex-col gap-4">
-                    <div class="text-muted-foreground text-sm font-medium">変数</div>
-                    
-                </div>
-                
-            </div>
-            
             
 
         </div>
@@ -663,11 +641,6 @@
 
 <script src="search/main.js"></script>
 
-
-    
-     
-
-<script src="js/custom-script.js"></script>
 
     
 
