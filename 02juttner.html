@@ -508,12 +508,31 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <p>相対論的な理想気体の分布関数。本記事では、Jüttner分布をまとめ、計算に必要となる第二種変形ベッセル関数に関連する事項を整理する。</p>
+    <hr />
+<p>title: Jüttner分布
+description: 相対論的な熱平衡分布関数であるJüttner分布の諸性質についてまとめた解説記事。
+keywords: 
+  - Jüttner分布
+  - Maxwell-Jüttner分布
+  - Jüttner-Synge分布
+  - kinetic theory
+  - ユトナー分布
+  - 相対論的分布関数
+  - 熱統計力学
+tags:
+  - kinetic-theory
+　 - statistical-mechanics</p>
+<h1 id="-numerical-method">- numerical-method</h1>
+<p>new: false
+slug: Juttner</p>
+<hr />
+<h1 id="juttner">Jüttner分布</h1>
+<p>相対論的な理想気体の分布関数。本記事では、Jüttner分布をまとめ、計算に必要となる第二種変形ベッセル関数に関連する事項を整理する。</p>
 <ul>
 <li>粒子の運動エネルギー<span class="arithmatex">\(E\)</span>が静止質量<span class="arithmatex">\(m c^2\)</span>に漸近してくると、非相対論的なエネルギーの表式<span class="arithmatex">\(E = mv^2/2\)</span>よりも、相対論的なエネルギーの式<span class="arithmatex">\(E = m_e c^2 (\gamma-1)\)</span>が用いられるべきだ。</li>
 <li>理想気体を構成する粒子の典型的なエネルギーが相対論的領域にあるとき、非相対論的なエネルギー式を用いたMaxwell速度分布関数は、実際の理想気体の統計からずれてくる。</li>
 <li>Ferencz Jüttnerは1911年に熱平衡状態にある相対論的な構成粒子の速度分布関数を顕に書いた。</li>
-<li>これはJüttner(ユトナー)分布、あるいはMaxwell-Jüttner分布と呼ばれている。</li>
+<li>これはJüttner(ユトナー)分布、Maxwell-Jüttner分布、Jüttner-Synge分布と呼ばれている。</li>
 </ul>
 <p><img src="img/jut_E_loglog.svg" alt="説明" width="1000" height="350"></p>
 <h3 id="maxwell-juttner">Maxwell-Jüttner分布の表式</h3>
@@ -1287,151 +1306,49 @@ $$
         
         
         
-        <a href="#maxwell-juttner"
+        <a href="#-numerical-method"
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
             data-active="false" data-depth="2">
+            - numerical-method
+        </a>
+        
+
+        
+        <a href="#juttner"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            Jüttner分布
+        </a>
+        
+        
+        <a href="#maxwell-juttner"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
             Maxwell-Jüttner分布の表式
         </a>
         
-
-        
         <a href="#_1"
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="2">
+            data-active="false" data-depth="3">
             カノニカル統計からの導出
         </a>
         
-        
-        <a href="#u_xu_yu_z-in-inftyinfty3"
-            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="3">
-            運動量分布関数 \((u_x,u_y,u_z) \in [\infty,\infty]^3\)
-        </a>
-        
-        <a href="#u-in-0-infty"
-            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="3">
-            運動量絶対値での分布関数 \(u \in [0, \infty]\)
-        </a>
-        
-        <a href="#gamma-in-1infty"
-            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="3">
-            エネルギー分布関数 \(\gamma \in [1,\infty]\)
-        </a>
-        
-        <a href="#v-in-01"
-            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="3">
-            速さの分布関数 \(v \in [0,1]\)
-        </a>
-        
-        
-
-        
         <a href="#_2"
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="2">
+            data-active="false" data-depth="3">
             熱力学的諸量
         </a>
         
-        
-        <a href="#ftv"
-            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="3">
-            ヘルムホルツの自由エネルギーF(T,V)
-        </a>
-        
-        <a href="#ptv"
-            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="3">
-            圧力 p(T,V)
-        </a>
-        
-        <a href="#_3"
-            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="3">
-            運動論からの圧力導出
-        </a>
-        
-        <a href="#utv"
-            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="3">
-            粒子の平均エネルギーと内部エネルギーU(T,V)
-        </a>
-        
-        <a href="#_4"
-            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="3">
-            定積熱容量
-        </a>
-        
-        <a href="#_5"
-            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="3">
-            等圧熱容量
-        </a>
-        
-        <a href="#stv"
-            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="3">
-            エントロピー S(T,V)
-        </a>
-        
-        <a href="#_6"
-            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="3">
-            断熱変化・等エントロピー過程
-        </a>
-        
-        <a href="#gmu"
-            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="3">
-            ギブス自由エネルギー\(G\)と化学ポテンシャル\(\mu\)
-        </a>
-        
-        <a href="#h"
-            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="3">
-            エンタルピー\(H\)
-        </a>
-        
-        
-
-        
         <a href="#_7"
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="2">
+            data-active="false" data-depth="3">
             低温領域での振る舞いと相対論領域へのシフト
         </a>
         
-        
-        <a href="#_8"
-            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="3">
-            温度変化に対する分布関数のシフト
-        </a>
-        
-        
-
-        
         <a href="#_9"
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="2">
+            data-active="false" data-depth="3">
             第二種変形ベッセル関数
-        </a>
-        
-        
-        <a href="#k_nua"
-            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="3">
-            \(K_{\nu}(a)\)の定義
-        </a>
-        
-        <a href="#_10"
-            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
-            data-active="false" data-depth="3">
-            近似
         </a>
         
         

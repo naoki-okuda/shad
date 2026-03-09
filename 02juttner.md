@@ -1,3 +1,23 @@
+---
+title: Jüttner分布
+description: 相対論的な熱平衡分布関数であるJüttner分布の諸性質についてまとめた解説記事。
+keywords: 
+  - Jüttner分布
+  - Maxwell-Jüttner分布
+  - Jüttner-Synge分布
+  - kinetic theory
+  - ユトナー分布
+  - 相対論的分布関数
+  - 熱統計力学
+tags:
+  - kinetic-theory
+　 - statistical-mechanics
+#  - numerical-method
+new: false
+slug: Juttner
+---
+
+
 # Jüttner分布
 
 相対論的な理想気体の分布関数。本記事では、Jüttner分布をまとめ、計算に必要となる第二種変形ベッセル関数に関連する事項を整理する。
@@ -6,7 +26,7 @@
 - 粒子の運動エネルギー$E$が静止質量$m c^2$に漸近してくると、非相対論的なエネルギーの表式$E = mv^2/2$よりも、相対論的なエネルギーの式$E = m_e c^2 (\gamma-1)$が用いられるべきだ。
 - 理想気体を構成する粒子の典型的なエネルギーが相対論的領域にあるとき、非相対論的なエネルギー式を用いたMaxwell速度分布関数は、実際の理想気体の統計からずれてくる。
 - Ferencz Jüttnerは1911年に熱平衡状態にある相対論的な構成粒子の速度分布関数を顕に書いた。
-- これはJüttner(ユトナー)分布、あるいはMaxwell-Jüttner分布と呼ばれている。
+- これはJüttner(ユトナー)分布、Maxwell-Jüttner分布、Jüttner-Synge分布と呼ばれている。
 
 <img src="img/jut_E_loglog.svg" alt="説明" width="1000" height="350">
 

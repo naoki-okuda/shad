@@ -39,15 +39,15 @@
     
 
 
-<title>Euler方程式を運動論から</title>
+<title>運動論から導くEuler方程式</title>
 
 
 
-<meta name="description" content="流体力学の基礎方程式であるEuler方程式の導出を運動論の方程式から行う物理の解説記事。">
+<meta name="description" content="流体力学の基礎方程式であるオイラー方程式を、無衝突ボルツマン方程式などの運動論から導出する物理解説。">
 
 
 
-<meta name="keywords" content="Euler equation, Boltzmann equation, collisionless Boltzmann equation, fluid dynamics, physical kinetics, オイラー方程式、無衝突ボルツマン方程式、流体力学、運動学">
+<meta name="keywords" content="['Euler equation', 'Boltzmann equation', 'collisionless Boltzmann equation', 'fluid dynamics', 'kinetic theory', 'オイラー方程式', 'ボルツマン方程式', '無衝突ボルツマン方程式', '流体力学', '運動論']">
 
 
 
@@ -60,11 +60,11 @@
 <meta property="og:type" content="website">
 
 
-<meta property="og:title" content="Euler方程式を運動論から">
+<meta property="og:title" content="運動論から導くEuler方程式">
 
 
 
-<meta property="og:description" content="流体力学の基礎方程式であるEuler方程式の導出を運動論の方程式から行う物理の解説記事。">
+<meta property="og:description" content="流体力学の基礎方程式であるオイラー方程式を、無衝突ボルツマン方程式などの運動論から導出する物理解説。">
 
 
 
@@ -79,11 +79,11 @@
 <meta name="twitter:card" content="summary_large_image">
 
 
-<meta name="twitter:title" content="Euler方程式を運動論から">
+<meta name="twitter:title" content="運動論から導くEuler方程式">
 
 
 
-<meta name="twitter:description" content="流体力学の基礎方程式であるEuler方程式の導出を運動論の方程式から行う物理の解説記事。">
+<meta name="twitter:description" content="流体力学の基礎方程式であるオイラー方程式を、無衝突ボルツマン方程式などの運動論から導出する物理解説。">
 
 
 
@@ -105,7 +105,7 @@
 
 
 <script type="application/ld+json">
-{"@context": "https://schema.org", "@type": "WebPage", "description": "\u6d41\u4f53\u529b\u5b66\u306e\u57fa\u790e\u65b9\u7a0b\u5f0f\u3067\u3042\u308bEuler\u65b9\u7a0b\u5f0f\u306e\u5c0e\u51fa\u3092\u904b\u52d5\u8ad6\u306e\u65b9\u7a0b\u5f0f\u304b\u3089\u884c\u3046\u7269\u7406\u306e\u89e3\u8aac\u8a18\u4e8b\u3002", "headline": "Euler\u65b9\u7a0b\u5f0f\u3092\u904b\u52d5\u8ad6\u304b\u3089", "mainEntityOfPage": {"@id": "https://naoki-okuda.github.io/shad/collisionless_fluid.html", "@type": "WebPage"}, "url": "https://naoki-okuda.github.io/shad/collisionless_fluid.html"}
+{"@context": "https://schema.org", "@type": "WebPage", "description": "\u6d41\u4f53\u529b\u5b66\u306e\u57fa\u790e\u65b9\u7a0b\u5f0f\u3067\u3042\u308b\u30aa\u30a4\u30e9\u30fc\u65b9\u7a0b\u5f0f\u3092\u3001\u7121\u885d\u7a81\u30dc\u30eb\u30c4\u30de\u30f3\u65b9\u7a0b\u5f0f\u306a\u3069\u306e\u904b\u52d5\u8ad6\u304b\u3089\u5c0e\u51fa\u3059\u308b\u7269\u7406\u89e3\u8aac\u3002", "headline": "\u904b\u52d5\u8ad6\u304b\u3089\u5c0e\u304fEuler\u65b9\u7a0b\u5f0f", "mainEntityOfPage": {"@id": "https://naoki-okuda.github.io/shad/collisionless_fluid.html", "@type": "WebPage"}, "url": "https://naoki-okuda.github.io/shad/collisionless_fluid.html"}
 </script>
 
 
@@ -460,7 +460,7 @@
         <h1
           class="scroll-m-20 text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl"
         >
-          Euler方程式を運動論から
+          運動論から導くEuler方程式
         </h1>
 
         <div class="flex items-center gap-2 pt-1.5">
@@ -534,25 +534,7 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <!-- ---
-title: Home
-#summary: Hub page
-new: false
-description: Hub page for physics documents 
-keywords: physics, plasmas, theory, mkdocs,shadcn
-#image: https://raw.githubusercontent.com/asiffer/mkdocs-shadcn/refs/heads/master/.github/assets/logo.svg
-order: 0
-sidebar_title: Home
-show_datetime: true
-# external_links:
-#   Qiita - cubic_unit: https://qiita.com/cubic_unit
-extra_css:
-  - css/custom-style.css
-extra_javascript:
-  - js/custom-script.js
---- -->
-
-<div class="admonition info">
+    <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>本記事では無衝突なボルツマン方程式(collisionless Boltzmann equation)を出発点にして、圧縮性流体を記述するEuler方程式系を導出する。</p>
 </div>

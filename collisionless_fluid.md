@@ -1,27 +1,27 @@
 ---
-title: Euler方程式を運動論から
-#summary: Hub page
+title: 運動論から導くEuler方程式
+description: 流体力学の基礎方程式であるオイラー方程式を、無衝突ボルツマン方程式などの運動論から導出する物理解説。
+keywords:
+  - Euler equation
+  - Boltzmann equation
+  - collisionless Boltzmann equation
+  - fluid dynamics
+  - kinetic theory
+  - オイラー方程式
+  - ボルツマン方程式
+  - 無衝突ボルツマン方程式
+  - 流体力学
+  - 運動論
+# tags:
+#   - fluid
+#   - plasma
+#   - kinetic-theory
+#  - statistical-mechanics
+#  - numerical-method
 new: false
-description: 流体力学の基礎方程式であるEuler方程式の導出を運動論の方程式から行う物理の解説記事。
-keywords: Euler equation, Boltzmann equation, collisionless Boltzmann equation, fluid dynamics, physical kinetics, オイラー方程式、無衝突ボルツマン方程式、流体力学、運動学
+#slug: euler-from-kinetic-theory
+#date: 2026-03-10
 ---
-<!-- ---
-title: Home
-#summary: Hub page
-new: false
-description: Hub page for physics documents 
-keywords: physics, plasmas, theory, mkdocs,shadcn
-#image: https://raw.githubusercontent.com/asiffer/mkdocs-shadcn/refs/heads/master/.github/assets/logo.svg
-order: 0
-sidebar_title: Home
-show_datetime: true
-# external_links:
-#   Qiita - cubic_unit: https://qiita.com/cubic_unit
-extra_css:
-  - css/custom-style.css
-extra_javascript:
-  - js/custom-script.js
---- -->
 
 
 !!! info
