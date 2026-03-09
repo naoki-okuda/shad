@@ -39,11 +39,15 @@
     
 
 
-<title>Euler方程式の運動論からの導出</title>
+<title>Euler方程式を運動論から</title>
 
 
 
+<meta name="description" content="流体力学の基礎方程式であるEuler方程式の導出を運動論の方程式から行う物理の解説記事。">
 
+
+
+<meta name="keywords" content="Euler equation, Boltzmann equation, collisionless Boltzmann equation, fluid dynamics, physical kinetics, オイラー方程式、無衝突ボルツマン方程式、流体力学、運動学">
 
 
 
@@ -56,9 +60,11 @@
 <meta property="og:type" content="website">
 
 
-<meta property="og:title" content="Euler方程式の運動論からの導出">
+<meta property="og:title" content="Euler方程式を運動論から">
 
 
+
+<meta property="og:description" content="流体力学の基礎方程式であるEuler方程式の導出を運動論の方程式から行う物理の解説記事。">
 
 
 
@@ -73,14 +79,34 @@
 <meta name="twitter:card" content="summary_large_image">
 
 
-<meta name="twitter:title" content="Euler方程式の運動論からの導出">
+<meta name="twitter:title" content="Euler方程式を運動論から">
 
 
+
+<meta name="twitter:description" content="流体力学の基礎方程式であるEuler方程式の導出を運動論の方程式から行う物理の解説記事。">
 
 
 
 
 <!-- JSON-LD Structured Data -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "WebPage", "description": "\u6d41\u4f53\u529b\u5b66\u306e\u57fa\u790e\u65b9\u7a0b\u5f0f\u3067\u3042\u308bEuler\u65b9\u7a0b\u5f0f\u306e\u5c0e\u51fa\u3092\u904b\u52d5\u8ad6\u306e\u65b9\u7a0b\u5f0f\u304b\u3089\u884c\u3046\u7269\u7406\u306e\u89e3\u8aac\u8a18\u4e8b\u3002", "headline": "Euler\u65b9\u7a0b\u5f0f\u3092\u904b\u52d5\u8ad6\u304b\u3089", "mainEntityOfPage": {"@id": "https://naoki-okuda.github.io/shad/collisionless_fluid.html", "@type": "WebPage"}, "url": "https://naoki-okuda.github.io/shad/collisionless_fluid.html"}
+</script>
 
 
 
@@ -380,7 +406,7 @@
         class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
 
         
-        Euler方程式の運動論からの導出
+        Euler方程式を運動論から
         
 
         
@@ -434,7 +460,7 @@
         <h1
           class="scroll-m-20 text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl"
         >
-          Euler方程式の運動論からの導出
+          Euler方程式を運動論から
         </h1>
 
         <div class="flex items-center gap-2 pt-1.5">
@@ -508,11 +534,29 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <div class="admonition info">
+    <!-- ---
+title: Home
+#summary: Hub page
+new: false
+description: Hub page for physics documents 
+keywords: physics, plasmas, theory, mkdocs,shadcn
+#image: https://raw.githubusercontent.com/asiffer/mkdocs-shadcn/refs/heads/master/.github/assets/logo.svg
+order: 0
+sidebar_title: Home
+show_datetime: true
+# external_links:
+#   Qiita - cubic_unit: https://qiita.com/cubic_unit
+extra_css:
+  - css/custom-style.css
+extra_javascript:
+  - js/custom-script.js
+--- -->
+
+<div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>本記事では無衝突なボルツマン方程式(collisionless Boltzmann equation)を出発点にして、圧縮性流体を記述するEuler方程式系を導出する。</p>
 </div>
-<h2 id="_1">方針</h2>
+<h2 id="euler">Euler方程式の構造</h2>
 <p>流体方程式の基本的な構成は</p>
 <ul>
 <li>質量・運動量・エネルギー保存則</li>
@@ -542,7 +586,7 @@
 <p>一本目が質量保存則、二本目が運動量保存則、三本目がエネルギー保存則に応じている。五本目が構成方程式である。(四本目は式の見た目を簡単にしているだけだ。)</p>
 <p>Euler方程式系やより一般の流体方程式の式の形を納得する方法は様々だろう。
 一つの重要な方法は、ボルツマン方程式系統の速度分布関数の時間発展を記述するクラス（いわゆるphysical kinetics）を出発点にする方法だ。</p>
-<h2 id="_2">無衝突ボルツマン方程式とそのモーメント</h2>
+<h2 id="_1">無衝突ボルツマン方程式とそのモーメント</h2>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>本記事では無衝突ボルツマン方程式を出発点にする。無衝突の仮定から熱化が入らないので、正確な導出にはならない。</p>
@@ -689,7 +733,7 @@ S =
     \varepsilon \equiv \frac{n u^2}{2} + \left&lt; \frac{(v-u)^2}{2}\right&gt; = \frac{\epsilon}{m}
 \]</div>
 <p>外力を除いて、質点の質量は関係ないことに注意する。もし複数種類のガスが混ざっているときには、運動量とエネルギーの式に質量かけたほうが、保存則が自然になるだろう。</p>
-<h2 id="_3">熱化に対応する条件</h2>
+<h2 id="_2">熱化に対応する条件</h2>
 <p>前節で分布関数に対してモーメント積分を繰り返して、保存則に対応する三本の方程式が得られた。
 現時点ではEuler方程式に必要な、構成方程式<span class="arithmatex">\(p(\epsilon, n)\)</span>が手に入っていない。</p>
 <p>このままだと、分布関数の方程式から縮減された流体方程式系を閉じることができない。系を表現している変数を数えてみれば、<span class="arithmatex">\(n, u^i, \epsilon, \Pi^{ij}, \left &lt; w^2 w^i \right&gt;, \left&lt; F^i \right &gt;, \left &lt; v^i F^i \right &gt;\)</span>である。一方、持っている時間発展の方程式は3本だ。</p>
@@ -847,7 +891,7 @@ Chapman–Enskog展開をすると
                     
                     <a class="text-2xl font-medium" href="collisionless_fluid.html">
                         
-                        Euler方程式の運動論からの導出
+                        Euler方程式を運動論から
                         
                     </a>
                     
@@ -878,15 +922,15 @@ Chapman–Enskog展開をすると
         
         
         
-        <a href="#_1"
+        <a href="#euler"
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
             data-active="false" data-depth="2">
-            方針
+            Euler方程式の構造
         </a>
         
 
         
-        <a href="#_2"
+        <a href="#_1"
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
             data-active="false" data-depth="2">
             無衝突ボルツマン方程式とそのモーメント
@@ -894,7 +938,7 @@ Chapman–Enskog展開をすると
         
 
         
-        <a href="#_3"
+        <a href="#_2"
             class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
             data-active="false" data-depth="2">
             熱化に対応する条件
