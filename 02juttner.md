@@ -11,8 +11,7 @@ keywords:
   - 熱統計力学
 tags:
   - kinetic-theory
-　 - statistical-mechanics
-#  - numerical-method
+  - statistical-mechanics
 new: false
 slug: Juttner
 ---
