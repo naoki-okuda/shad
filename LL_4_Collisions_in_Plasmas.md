@@ -1,3 +1,24 @@
+---
+title: L.L. physical kinetics  / problem p.173 
+description: クーロン散乱による分布関数摂動のダンピングに関する解説記事
+keywords:
+  - Landau Lifshitz
+  - Landau damping
+  - Landau collisional operator
+  - kinetic theory
+  - ランダウ減衰
+  - ランダウの衝突演算子
+  - 運動論
+# tags:
+#   - fluid
+#   - plasma
+#   - kinetic-theory
+#  - statistical-mechanics
+#  - numerical-method
+new: false
+#slug: euler-from-kinetic-theory
+---
+
 
 ## L.L. physical kinetics  / problem p.173 
 
@@ -184,7 +205,7 @@ $$
 
 !!! note
     これは予めわかることで、このテンソルを特徴づける特別な方向はベクトル$v$、唯一だからだ。
-    2階のテンソルが一つのベクトルだけで特徴づけられるとき、線型独立かつ成分対称な不変テンソルは$\delta_{ij}$と$v_iv_j$しかない。二階テンソルはこれらの線形結合になるだろう。初めからこちらの方針で進めば、上のような投げやりな座標変換などは回避して、例えばトレースやベクトルへの作用を調べたりするなどしてもう少し賢く固有値を求められると思われる。
+    2階のテンソルが一つのベクトルだけで特徴づけられるとき、線型独立かつ成分対称なテンソルは$\delta_{ij}$と$v_iv_j$しかない。二階テンソルはこれらの線形結合になるだろう。初めからこちらの方針で進めば、上のような投げやりな座標変換などは回避して、例えばトレースやベクトルへの作用を調べたりするなどしてもう少し賢く固有値を求められると思われる。
 
 $$  
 \begin{align*}

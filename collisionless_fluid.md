@@ -20,7 +20,6 @@ keywords:
 #  - numerical-method
 new: false
 #slug: euler-from-kinetic-theory
-#date: 2026-03-10
 ---
 
 
