@@ -39,7 +39,7 @@
     
 
 
-<title>Gauss smooth</title>
+<title>Euler方程式の運動論からの導出</title>
 
 
 
@@ -49,20 +49,20 @@
 
 
 
-<link rel="canonical" href="https://naoki-okuda.github.io/shad/gauss_smooth.html">
+<link rel="canonical" href="https://naoki-okuda.github.io/shad/collisionless_fluid.html">
 
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 
 
-<meta property="og:title" content="Gauss smooth">
+<meta property="og:title" content="Euler方程式の運動論からの導出">
 
 
 
 
 
-<meta property="og:url" content="https://naoki-okuda.github.io/shad/gauss_smooth.html">
+<meta property="og:url" content="https://naoki-okuda.github.io/shad/collisionless_fluid.html">
 
 
 
@@ -73,7 +73,7 @@
 <meta name="twitter:card" content="summary_large_image">
 
 
-<meta name="twitter:title" content="Gauss smooth">
+<meta name="twitter:title" content="Euler方程式の運動論からの導出">
 
 
 
@@ -375,7 +375,7 @@
             
             
             <li data-slot="sidebar-menu-item" data-sidebar="menu-item" class="group/menu-item relative">
-    <a data-slot="sidebar-menu-button" data-active="false" data-sidebar="menu-button"
+    <a data-slot="sidebar-menu-button" data-active="true" data-sidebar="menu-button"
         data-size="default" href="/shad/collisionless_fluid.html"
         class="hpeer/menu-button flex items-center gap-2 rounded-md p-2 text-left ring-sidebar-ring outline-hidden transition-[width,height,padding] group-has-data-[sidebar=menu-action]/menu-item:pr-8 group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground relative h-[30px] w-fit overflow-visible border border-transparent text-[0.8rem] font-medium after:absolute after:inset-x-0 after:-inset-y-1 after:z-0 after:rounded-md data-[active=true]:border-accent data-[active=true]:bg-accent 3xl:fixed:w-full 3xl:fixed:max-w-48">
 
@@ -434,12 +434,12 @@
         <h1
           class="scroll-m-20 text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl"
         >
-          Gauss smooth
+          Euler方程式の運動論からの導出
         </h1>
 
         <div class="flex items-center gap-2 pt-1.5">
           
-<button onclick="fetch(`https://naoki-okuda.github.io/shad/gauss_smooth.md`).then((r) => r.blob()).then((blob) => navigator.clipboard.write([new ClipboardItem({ 'text/plain': blob })]))" 
+<button onclick="fetch(`https://naoki-okuda.github.io/shad/collisionless_fluid.md`).then((r) => r.blob()).then((blob) => navigator.clipboard.write([new ClipboardItem({ 'text/plain': blob })]))" 
         data-slot="button" 
         class="cursor-pointer inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md gap-1.5 px-3 has-[&>svg]:px-2.5 h-8 shadow-none md:h-7 md:text-[0.8rem]">
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-copy ">
@@ -447,7 +447,57 @@
 </svg>
 <span class="max-md:hidden">Copy Page</span>
 </button> 
+          
+          <a
+            data-slot="button"
+            id="previous-button"
+            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-secondary text-secondary-foreground hover:bg-secondary/80 extend-touch-target size-8 shadow-none md:size-7"
+            href="/shad/03_scale_inv_VM.html"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="tabler-icon tabler-icon-arrow-left"
+            >
+              <path d="M5 12l14 0"></path>
+              <path d="M5 12l6 6"></path>
+              <path d="M5 12l6 -6"></path>
+            </svg>
+            <span class="sr-only">Previous</span>
+          </a>
            
+          
+          <a
+            data-slot="button"
+            id="next-button"
+            class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-secondary text-secondary-foreground hover:bg-secondary/80 extend-touch-target size-8 shadow-none md:size-7"
+            href="/shad/LL_4_Collisions_in_Plasmas.html"
+          >
+            <span class="sr-only">Next</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="tabler-icon tabler-icon-arrow-right"
+            >
+              <path d="M5 12l14 0"></path>
+              <path d="M13 18l6 -6"></path>
+              <path d="M13 6l6 6"></path>
+            </svg>
+          </a>
           
         </div>
       </div>
@@ -458,48 +508,301 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <pre class="highlight"><code class="language-fortran">subroutine gaussian_smooth(x, y, n, sigma)
-      implicit none
-      integer, intent(in) :: n
-      real(8), intent(in)  :: x(n)
-      real(8), intent(out) :: y(n)
-      real(8), intent(in)  :: sigma
+    <div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>本記事では無衝突なボルツマン方程式(collisionless Boltzmann equation)を出発点にして、圧縮性流体を記述するEuler方程式系を導出する。</p>
+</div>
+<h2 id="_1">方針</h2>
+<p>流体方程式の基本的な構成は</p>
+<ul>
+<li>質量・運動量・エネルギー保存則</li>
+<li>構成方程式  </li>
+</ul>
+<p>の組み合わせである。実際に、Euler方程式もこれに倣っている。<br />
+デカルト座標系でのEuler方程式は、保存形式(<span class="arithmatex">\(\partial_t Q + \nabla \cdot F = S\)</span>, <span class="arithmatex">\(Q\)</span>: 保存量, <span class="arithmatex">\(F\)</span>: 保存量の流れ, <span class="arithmatex">\(S\)</span>: 保存量の湧き出し)ベースで以下のように書かれる。</p>
+<div class="arithmatex">\[
+\begin{align*}
+    \frac{ \partial \rho }{\partial t } 
+    &amp;+ \frac{\partial (\rho u^i )}{\partial x^i}  = 0
+\\
+    \frac{\partial (\rho u^i ) }{ \partial t} &amp;+ \frac{\partial (\rho u^i u^j + p\delta^{ij}) }{\partial x^j}  =  \rho F^i  
+\\
+    \frac{\partial (\rho E) }{ \partial t} &amp;+ \frac{\partial ((\rho E+p) u^i ) }{\partial x^i } 
+    = \rho F^i u^i
+\end{align*}
+\]</div>
+<div class="arithmatex">\[
+    E = \frac{u^2}{2} + \epsilon
+\]</div>
+<div class="arithmatex">\[
+    p = (\gamma -1) \rho \epsilon
+\]</div>
+<p>ここで、添字は<span class="arithmatex">\((i=1,2,3)\)</span>で空間成分を表し、記号の重複に対して和をとることとする。
+<span class="arithmatex">\(u^i\)</span>は流体素片の平均速度、<span class="arithmatex">\(\rho\)</span>は質量密度、<span class="arithmatex">\(p\)</span>は圧力、<span class="arithmatex">\(F\)</span>は流体素片が受ける平均的な外力、<span class="arithmatex">\(\epsilon\)</span>は単位質量あたりの内部エネルギー、<span class="arithmatex">\(\gamma\)</span>は比熱比である。</p>
+<p>一本目が質量保存則、二本目が運動量保存則、三本目がエネルギー保存則に応じている。五本目が構成方程式である。(四本目は式の見た目を簡単にしているだけだ。)</p>
+<p>Euler方程式系やより一般の流体方程式の式の形を納得する方法は様々だろう。
+一つの重要な方法は、ボルツマン方程式系統の速度分布関数の時間発展を記述するクラス（いわゆるphysical kinetics）を出発点にする方法だ。</p>
+<h2 id="_2">無衝突ボルツマン方程式とそのモーメント</h2>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>本記事では無衝突ボルツマン方程式を出発点にする。無衝突の仮定から熱化が入らないので、正確な導出にはならない。</p>
+</div>
+<p>無衝突な気体の分布関数が従う発展方程式は次のように記述される。</p>
+<div class="arithmatex">\[
+0= 
+\frac{\partial f}{\partial t} + v^i \frac{\partial f}{\partial x^i} + \frac{F^{i}}{m} \frac{\partial f}{\partial v^i} 
+\]</div>
+<div class="arithmatex">\[
+    0 = \nabla \cdot F = \frac{\partial F^i}{\partial v^i} 
+\]</div>
+<p>ボルツマン方程式から衝突項を落としたものに相当しているので、無衝突ボルツマン方程式(collisionless Boltzmann equation)と呼ばれる。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>二本目の条件は、多粒子に対する平均場的な力<span class="arithmatex">\(F(x,v,t)\)</span>が、時間発展で六次元位相空間体積(<span class="arithmatex">\(d^3 x d^3 v\)</span>)を不変に保つことを要請している。いわゆる、「Liouvilleの定理」が、<span class="arithmatex">\(6N\)</span>次元から縮減された分布関数でも成立することを要請している。<br />
+例えば、ローレンツ力はこれを満たす(→Vlasov 方程式)。<br />
+摩擦<span class="arithmatex">\(F = -\nu v\)</span>のようなものは、位相空間の大きさを指数的に縮めてしまうので、ここの<span class="arithmatex">\(F\)</span>には入れられない。</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>一本目が<span class="arithmatex">\(f(x,v,t)\)</span>の発展方程式を与えている。移流方程式の形式から、流れに沿って<span class="arithmatex">\(f\)</span>が保存することを言っている。すなわちラグランジュ微分</p>
+<div class="arithmatex">\[
+    \frac{D }{Dt} = \frac{\partial }{\partial t} + v \cdot \nabla_x + F \cdot \nabla_v
+\]</div>
+<p>に対して、<span class="arithmatex">\(f\)</span>が一定だと読める。二本目の拘束条件から、保存形式に書き直すこともできる。すなわち、</p>
+<div class="arithmatex">\[
+0=   
+\frac{\partial f}{\partial t} 
++ \nabla_{xv} \cdot \Gamma, \quad
+\Gamma = 
+\begin{pmatrix} 
+vf\\
+Ff
+\end{pmatrix}
+\]</div>
+<p><span class="arithmatex">\(f\)</span>は位相空間上の粒子数密度のようなものなので、こちらの形式の方が顕に保存則を反映した書き方となっている。
+翻って、条件<span class="arithmatex">\(\nabla_v \cdot F = 0\)</span>は、六次元位相空間上の流れに対する「非圧縮条件」だと解釈できる。流体力学のおいて、流れ場が非圧縮であれば、<span class="arithmatex">\(\nabla_x \cdot u = 0\)</span>、質量保存則から流れに沿った密度変化が0になる(<span class="arithmatex">\(Df/dt = 0\)</span>)であることと構造的に同じだ。今、流れ場が非圧縮(<span class="arithmatex">\(\nabla \cdot \Gamma\)</span> = 0)なので、数密度<span class="arithmatex">\(f\)</span>のラグランジュ微分が0になる。</p>
+</div>
+<p>流体方程式の導出は、分布関数の速度モーメント積分によって達成される。分布上の平均値を次のように書くことにする。</p>
+<div class="arithmatex">\[
+\int d^3v \,A(v) f(v) \equiv \left &lt;A(v)\right &gt;
+\]</div>
+<p>質量の連続の式は</p>
+<div class="arithmatex">\[
+\begin{align*}
+&amp;0= \int d^3v \, \left [ \frac{\partial f}{\partial t} + v^i \frac{\partial f}{\partial x^i} + \frac{F^{i}}{m} \frac{\partial f}{\partial v^i} \right]\\
+&amp;
+0= \frac{\partial n}{\partial t} + \frac{\partial (nu^i)}{\partial x^i}
+\end{align*}
+\]</div>
+<p>ただし、粒子数密度<span class="arithmatex">\(n(x,t)\)</span>と、平均的な流速場<span class="arithmatex">\(u^k(x,t)\)</span>を次のように定義した。</p>
+<div class="arithmatex">\[
+    n \equiv \left&lt; 1 \right&gt; , \quad u^k \equiv \frac{ \left&lt; v^k \right&gt;}{n}
+\]</div>
+<p>運動量の連続の式は</p>
+<div class="arithmatex">\[
+\begin{align*}
+0&amp;= \int d^3v \, v^k \left [ \frac{\partial f}{\partial t} + v^i \frac{\partial f}{\partial x^i} + \frac{F^{i}}{m} \frac{\partial f}{\partial v^i} \right]\\
+\frac{\left &lt;F^k \right &gt;}{m}
+&amp;= 
+\frac{\partial (n u^k)}{\partial t} + \frac{\partial \left &lt; v^k v^i\right &gt;}{\partial x^i}\\
+&amp;= 
+\frac{\partial (n u^k)}{\partial t} + \frac{\partial \left &lt; (u^i + w^i)(u^k + w^k)\right &gt;}{\partial x^i}\\
+&amp;= 
+\frac{\partial (n u^k)}{\partial t} + \frac{\partial (n u^i u^k + u^i\left &lt; w^k\right &gt; + u^k\left &lt; w^i\right &gt; + \left &lt; w^k w^i \right &gt; )}{\partial x^i}\\
+&amp;= 
+\frac{\partial (n u^k)}{\partial t} + \frac{\partial (n u^i u^k + \Pi^{ik} )}{\partial x^i}\\
+&amp;= 
+n \frac{D u^k }{Dt} + \frac{\partial \Pi^{ik} }{\partial x^i}\\
+\end{align*}
+\]</div>
+<p>ただし、圧力テンソル<span class="arithmatex">\(\Pi^{ij}\)</span>は、</p>
+<div class="arithmatex">\[
+    \Pi^{ij} \equiv \left &lt;  (v^i-u^i)(v^k-u^k) \right&gt; = \left&lt; w^i w^k \right&gt;
+\]</div>
+<p>エネルギーの連続の式は</p>
+<div class="arithmatex">\[
+\begin{align*}
+0&amp;= \int d^3v \, v^2 \left [ \frac{\partial f}{\partial t} + v^i \frac{\partial f}{\partial x^i} + \frac{F^{i}}{m} \frac{\partial f}{\partial v^i} \right]\\
+0&amp;= 
+\frac{\partial (n u^2 + \Pi^{ii})}{\partial t} +  \frac{\partial \left&lt; v^2 v^i \right&gt; } {\partial x^i} -  \frac{2 \left&lt; v^i F^{i}\right &gt;}{m}\\
+\end{align*}
+\]</div>
+<p>二項目を整理すると、</p>
+<div class="arithmatex">\[
+\begin{align*}
+    \left &lt; v^2 v^i \right &gt; 
+    &amp;=
+    \left &lt; (u^j+w^j)(u^j+w^j) (u^i + w^i) \right &gt; \\
+    &amp;=
+    \left &lt; (u^2+2u^jw^j + w^2) (u^i + w^i) \right &gt; \\
+    &amp;=
+    n u^2 u^i + \Pi^{kk} u^i + \left &lt; (u^2+2u^jw^j + w^2)  w^i \right &gt; \\
+    &amp;=
+    n u^2 u^i + \Pi^{kk} u^i + \left &lt; (2u^jw^j + w^2)  w^i \right &gt; \\
+    &amp;=
+    n u^2 u^i + \Pi^{kk} u^i + 2 u^j \Pi^{ji} + \left &lt; w^2 w^i \right &gt; \\
+\end{align*}
+\]</div>
+<p>よって二乗のモーメントは、</p>
+<div class="arithmatex">\[
+\begin{align*}
+0&amp;= 
+\frac{\partial (n u^2 + \Pi^{kk})}{\partial t} +  \frac{\partial ((nu^2 + \Pi^{kk})u^i  + 2 \Pi^{ji} u^j + \left&lt; w^2 w^i \right&gt;) } {\partial x^i} -  \frac{2 \left&lt; v^i F^{i}\right &gt;}{m}\\
+\end{align*}
+\]</div>
+<p><span class="arithmatex">\(m/2\)</span>をかけて、応力のトレースを圧力として、<span class="arithmatex">\(p = m \Pi^{ii}/3\)</span>、<span class="arithmatex">\(K\)</span>を平均流速の運動エネルギーとすれば、エネルギー密度<span class="arithmatex">\(\epsilon\)</span>は</p>
+<div class="arithmatex">\[
+\epsilon \equiv \frac{m}{2} (n u^2 + \Pi^{kk}) = nK + \frac{P^{kk}}{2} = nK + \frac{3}{2} p 
+\]</div>
+<div class="arithmatex">\[
+\begin{align*}
+\frac{\partial \epsilon }{\partial t} +  \frac{\partial (\epsilon u^i  + m \Pi^{ji} u^j +\left &lt; \frac{m w^2}{2} w^i \right &gt;)} {\partial x^i} = \left &lt; v^i F^{i}\right &gt; 
+= u^i \left &lt; F^{i}\right &gt; +  \left &lt; w^i  F^{i}\right &gt;  = W
+\end{align*}
+\]</div>
+<p>右辺は外力による仕事。質点の受ける仕事の総和を表している。</p>
+<p>これら三つをまとめれば、</p>
+<div class="arithmatex">\[
+    \frac{\partial U}{\partial t} + \nabla^i \cdot \Gamma^i = S
+\]</div>
+<div class="arithmatex">\[
+U =
+\begin{pmatrix}
+n\\
+nu^k \\
+\varepsilon\\
+\end{pmatrix},\quad
+\Gamma =
+\begin{pmatrix}
+n u^i\\
+nu^k u^i + \Pi^{ki} \\
+\varepsilon u^i + \Pi^{ki} u^k +\left &lt; \frac{w^2}{2} w^i \right &gt;\\
+\end{pmatrix},\quad
+S =
+\begin{pmatrix}
+0\\
+\left&lt; F^i\right&gt;/m \\
+\left&lt; v^i F^i\right&gt;/m\\
+\end{pmatrix}
+\]</div>
+<div class="arithmatex">\[
+    \varepsilon \equiv \frac{n u^2}{2} + \left&lt; \frac{(v-u)^2}{2}\right&gt; = \frac{\epsilon}{m}
+\]</div>
+<p>外力を除いて、質点の質量は関係ないことに注意する。もし複数種類のガスが混ざっているときには、運動量とエネルギーの式に質量かけたほうが、保存則が自然になるだろう。</p>
+<h2 id="_3">熱化に対応する条件</h2>
+<p>前節で分布関数に対してモーメント積分を繰り返して、保存則に対応する三本の方程式が得られた。
+現時点ではEuler方程式に必要な、構成方程式<span class="arithmatex">\(p(\epsilon, n)\)</span>が手に入っていない。</p>
+<p>このままだと、分布関数の方程式から縮減された流体方程式系を閉じることができない。系を表現している変数を数えてみれば、<span class="arithmatex">\(n, u^i, \epsilon, \Pi^{ij}, \left &lt; w^2 w^i \right&gt;, \left&lt; F^i \right &gt;, \left &lt; v^i F^i \right &gt;\)</span>である。一方、持っている時間発展の方程式は3本だ。</p>
+<p>力の項は<span class="arithmatex">\(F=0\)</span>にとったとしても、</p>
+<div class="arithmatex">\[
+\Pi^{ij}=\langle w^i w^j\rangle, \qquad
+\langle w^2 w^i\rangle
+\]</div>
+<p>のような圧力テンソルがや3次モーメント(熱流束)が未知変数として残り、時間発展を計算できない。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ちなみに、完全に無衝突で、<span class="arithmatex">\(F=0\)</span>で記述されるボルツマン方程式は、自由粒子が初速の慣性で飛んでいくだけなので、ただの移流方程式になる。解は時刻<span class="arithmatex">\(t_0\)</span>の分布関数を<span class="arithmatex">\(f_0(x,v)\)</span>として、<span class="arithmatex">\(f(x,v,t) = f_0 (x-vt, v)\)</span>と厳密に書ける。</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>分布関数のモーメントをとっていく操作から方程式系を閉じるためには、<br />
+- 0次モーメント → 1次モーメントが必要<br />
+- 1次モーメント → 2次モーメントが必要<br />
+- 2次モーメント → 3次モーメントが必要<br />
+という階層構造ができる。これは衝突の有無と無関係にこうなる。</p>
+</div>
+<p>これら圧力テンソルの形の決定や、分布関数の高次モーメントを処理するためには、分布関数の形状を仮定したり、分布関数の速度空間上の細かな構造を無視したりする。それらに対する尤もらしい説明方法が「熱化」である。
+現実では粒子集団は相互作用する。結果として分布関数は局所的な熱平衡状態に応じた分布関数に近づいていくだろう。</p>
+<p>理論的に高級なやり方は、粒子間の衝突項を取り扱い衝突周波数で摂動展開し、
+かつ、分布関数を速度空間で適当な直交関数系で展開して、低次の摂動項間で等式関係を構成していく方法が代表的だ。</p>
+<p>希薄は流体に対する、最もシンプルで汎用性の高い近似は、分布関数を局所的にマクスウェル分布とすることである。平均速度<span class="arithmatex">\(u\)</span>のマクスウェル分布は(shifted maxwellian)、</p>
+<div class="arithmatex">\[
+f \approx f_M \propto e^{ [-m(v-u)^2/2T]}
+\]</div>
+<p>shifted maxwellianで打ち切れば、圧力テンソルは等方になり理想気体の状態方程式も入る。また、平均流周りの奇数次モーメントは0になる。</p>
+<div class="arithmatex">\[
+    \Pi^{ij}=p \delta^{ij} = nT \delta^{ij}
+\]</div>
+<div class="arithmatex">\[
+\langle w^2 w^i\rangle =0
+\]</div>
+<p>こうなれば、運動量とエネルギーの保存則は、オイラー方程式の形になる。</p>
+<div class="arithmatex">\[
+    n\frac{Du}{Dt} + \nabla \frac{p}{m} = \frac{\langle F\rangle}{m}
+\]</div>
+<div class="arithmatex">\[
+\partial_t \epsilon + \nabla\cdot[(\epsilon+p)u]=u\cdot F
+\]</div>
+<p>理想気体の状態方程式<span class="arithmatex">\(p(T,n)\)</span>よりも、構成方程式<span class="arithmatex">\(p(\epsilon, n, u)\)</span>の方が重要である。温度は基本変数ではないからだ。
+内部エネルギー密度を</p>
+<div class="arithmatex">\[
+e = \varepsilon - \frac{1}{2}nu^2
+\]</div>
+<p>とすると、単原子理想気体では</p>
+<div class="arithmatex">\[
+e = \frac{3}{2}p
+\]</div>
+<p>なので</p>
+<div class="arithmatex">\[
+p = \frac{2}{3}e = \frac{2}{3}\left(\varepsilon-\frac{1}{2}nu^2\right)
+\]</div>
+<p>になる。温度は<span class="arithmatex">\(T = \frac{p}{n}\)</span>として後から定義される量にすぎない。</p>
+<div class="arithmatex">\[
+p = (\gamma-1)e
+\]</div>
+<p>単原子気体は、比熱比が<span class="arithmatex">\(\gamma=5/3\)</span>となる。
+二原子分子の回転など、粒子の内部自由度を考える際には、位相空間の自由度が並進運動以外にも広がっている状況に対応している。そちらに流入する熱的な内部エネルギーを考えることになるので、比熱比が変化する。</p>
+<!-- 
+ オイラー方程式になるのは
+* 局所熱平衡
+* 圧力等方
+* 熱流束ゼロ
+という熱化仮定を入れたとき。
 
-      integer :: i, j, k, idx
-      real(8) :: w_sum, weight
-      real(8), allocatable :: w(:)
+ちなみにもう一歩深い話をすると、実は
+Euler方程式は「強衝突極限のVlasov–Boltzmann方程式」
 
-      ! カーネル半径 k = 3σ が一般的
-      k = int(3.0d0 * sigma)
-      allocate(w(-k:k))
+から系統的に出る。
+Chapman–Enskog展開をすると
 
-      ! ---- ガウスカーネル生成 ----
-      w_sum = 0.0d0
-      do j = -k, k
-         w(j) = exp( - (dble(j)**2) / (2.0d0*sigma*sigma) )
-         w_sum = w_sum + w(j)
-      end do
-      ! 正規化
-      w = w / w_sum
+```
+0次   Euler
+1次   Navier–Stokes
+2次   Burnett
+``` -->
 
-      ! ---- 畳込み ----
-      do i = 1, n
-         y(i) = 0.0d0
-         do j = -k, k
-            idx = i + j
-            ! 境界処理: clamp（端の値を延長）
-            if (idx &lt; 1) idx = 1
-            if (idx &gt; n) idx = n
-            y(i) = y(i) + x(idx) * w(j)
-         end do
-      end do
-
-      deallocate(w)
-    end subroutine gaussian_smooth</code></pre>
+<hr />
+<p>2026 03 10 初稿アップロード</p>
   </div>
 </article>
                                 <div class="mx-auto flex flex-wrap h-16 w-full max-w-2xl items-center gap-2 px-4 md:px-0">
     
+    <a data-slot="button"
+        class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-secondary text-secondary-foreground hover:bg-secondary/80 h-8 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 shadow-none"
+        href="/shad/03_scale_inv_VM.html">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="tabler-icon tabler-icon-arrow-left ">
+            <path d="M5 12l14 0"></path>
+            <path d="M5 12l6 6"></path>
+            <path d="M5 12l6 -6"></path>
+        </svg>
+        <span class="max-[500px]:hidden">Maxwell-Vlasov系のスケール変換</span>
+    </a>
+    
+    
+    <a data-slot="button"
+        class="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg:not([class*='size-'])]:size-4 shrink-0 [&amp;_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-secondary text-secondary-foreground hover:bg-secondary/80 h-8 rounded-md gap-1.5 px-3 has-[&gt;svg]:px-2.5 ml-auto shadow-none"
+        href="/shad/LL_4_Collisions_in_Plasmas.html">
+        <span class="max-[500px]:hidden">kinetics PROBLEM</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="tabler-icon tabler-icon-arrow-right ">
+            <path d="M5 12l14 0"></path>
+            <path d="M13 18l6 -6"></path>
+            <path d="M13 6l6 6"></path>
+        </svg>
+    </a>
     
 </div>
                                 <dialog id="bottom-sidebar" onclick="onBottomSidebarDialogClick(event)" class="bg-transparent"
@@ -571,6 +874,36 @@
                                 <div view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
     <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
         <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            方針
+        </a>
+        
+
+        
+        <a href="#_2"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            無衝突ボルツマン方程式とそのモーメント
+        </a>
+        
+
+        
+        <a href="#_3"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            熱化に対応する条件
+        </a>
+        
+
+        
+        
+        
         
 
     </div>

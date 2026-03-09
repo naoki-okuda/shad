@@ -39,7 +39,7 @@
     
 
 
-<title>Gauss smooth</title>
+<title>Memo on shadcn</title>
 
 
 
@@ -49,20 +49,20 @@
 
 
 
-<link rel="canonical" href="https://naoki-okuda.github.io/shad/gauss_smooth.html">
+<link rel="canonical" href="https://naoki-okuda.github.io/shad/memo_on_shadcn.html">
 
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
 
 
-<meta property="og:title" content="Gauss smooth">
+<meta property="og:title" content="Memo on shadcn">
 
 
 
 
 
-<meta property="og:url" content="https://naoki-okuda.github.io/shad/gauss_smooth.html">
+<meta property="og:url" content="https://naoki-okuda.github.io/shad/memo_on_shadcn.html">
 
 
 
@@ -73,7 +73,7 @@
 <meta name="twitter:card" content="summary_large_image">
 
 
-<meta name="twitter:title" content="Gauss smooth">
+<meta name="twitter:title" content="Memo on shadcn">
 
 
 
@@ -434,12 +434,12 @@
         <h1
           class="scroll-m-20 text-4xl font-semibold tracking-tight sm:text-3xl xl:text-4xl"
         >
-          Gauss smooth
+          Memo on shadcn
         </h1>
 
         <div class="flex items-center gap-2 pt-1.5">
           
-<button onclick="fetch(`https://naoki-okuda.github.io/shad/gauss_smooth.md`).then((r) => r.blob()).then((blob) => navigator.clipboard.write([new ClipboardItem({ 'text/plain': blob })]))" 
+<button onclick="fetch(`https://naoki-okuda.github.io/shad/memo_on_shadcn.md`).then((r) => r.blob()).then((blob) => navigator.clipboard.write([new ClipboardItem({ 'text/plain': blob })]))" 
         data-slot="button" 
         class="cursor-pointer inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive bg-secondary text-secondary-foreground hover:bg-secondary/80 rounded-md gap-1.5 px-3 has-[&>svg]:px-2.5 h-8 shadow-none md:h-7 md:text-[0.8rem]">
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler-icon tabler-icon-copy ">
@@ -458,44 +458,147 @@
     </div>
   </div>
   <div class="typography w-full flex-1 *:data-[slot=alert]:first:mt-0">
-    <pre class="highlight"><code class="language-fortran">subroutine gaussian_smooth(x, y, n, sigma)
-      implicit none
-      integer, intent(in) :: n
-      real(8), intent(in)  :: x(n)
-      real(8), intent(out) :: y(n)
-      real(8), intent(in)  :: sigma
-
-      integer :: i, j, k, idx
-      real(8) :: w_sum, weight
-      real(8), allocatable :: w(:)
-
-      ! カーネル半径 k = 3σ が一般的
-      k = int(3.0d0 * sigma)
-      allocate(w(-k:k))
-
-      ! ---- ガウスカーネル生成 ----
-      w_sum = 0.0d0
-      do j = -k, k
-         w(j) = exp( - (dble(j)**2) / (2.0d0*sigma*sigma) )
-         w_sum = w_sum + w(j)
-      end do
-      ! 正規化
-      w = w / w_sum
-
-      ! ---- 畳込み ----
-      do i = 1, n
-         y(i) = 0.0d0
-         do j = -k, k
-            idx = i + j
-            ! 境界処理: clamp（端の値を延長）
-            if (idx &lt; 1) idx = 1
-            if (idx &gt; n) idx = n
-            y(i) = y(i) + x(idx) * w(j)
-         end do
-      end do
-
-      deallocate(w)
-    end subroutine gaussian_smooth</code></pre>
+    <p><code>custom_dir</code> は</p>
+<blockquote>
+<p>テーマのルートを上書きする仕組みです。
+つまり：
+* <code>templates/*.html</code> → 置き換え可能
+* <code>partials/*.html</code> → 置き換え可能
+* <code>assets/*.css</code> → 置き換え可能
+* <code>assets/*.js</code> → 置き換え可能</p>
+</blockquote>
+<h1 id="_1">具体的に何ができるか</h1>
+<h2 id="1">✅ 1. レイアウト変更</h2>
+<p>例：</p>
+<pre class="highlight"><code class="language-jinja">main.html
+base.html</code></pre>
+<p>を override すれば、</p>
+<ul>
+<li>ヘッダー構造変更</li>
+<li>サイドバー構造変更</li>
+<li>フッター変更</li>
+<li>メタ構造変更</li>
+</ul>
+<p>すべて可能。</p>
+<hr />
+<h2 id="2-seo">✅ 2. SEO完全制御</h2>
+<ul>
+<li>JSON-LD自由設計</li>
+<li>OGP自由設計</li>
+<li>canonical制御</li>
+<li>robots制御</li>
+</ul>
+<p>今回やったのがまさにそれです。</p>
+<hr />
+<h2 id="3">✅ 3. デザイン改変</h2>
+<ul>
+<li>Tailwindクラス書き換え</li>
+<li>DOM構造変更</li>
+<li>ボタンやカードの追加</li>
+</ul>
+<p>shadcnはReact由来のデザイン思想ですが、
+MkDocs版は静的テンプレートなので普通にHTML改造可能です。</p>
+<hr />
+<h2 id="4-css">✅ 4. CSS完全上書き</h2>
+<pre class="highlight"><code class="language-yaml">extra_css:
+  - css/custom.css</code></pre>
+<p>よりも強く、</p>
+<pre class="highlight"><code class="language-text">overrides/assets/styles.css</code></pre>
+<p>でテーマのCSSそのものを置き換えられます。</p>
+<hr />
+<h1 id="_2">できないこと</h1>
+<h2 id="python">❌ Pythonロジックは触れない</h2>
+<p>例えば：</p>
+<ul>
+<li>ナビ生成ロジック</li>
+<li>ページビルド処理</li>
+<li>Markdown処理</li>
+</ul>
+<p>これはテーマではなく MkDocs 本体側。</p>
+<hr />
+<h2 id="_3">❌ テーマの内部プラグイン処理</h2>
+<p>もしテーマが Python 側で何か処理していたら、
+それは override できません。</p>
+<p>（shadcnはほぼテンプレート主体なので問題なし）</p>
+<hr />
+<h1 id="_4">実質どういう状態か</h1>
+<p>今あなたは：</p>
+<blockquote>
+<p>テーマをforkせずに
+テーマを改造できる状態</p>
+</blockquote>
+<p>にいます。</p>
+<p>これはかなり強いです。</p>
+<hr />
+<h1 id="_5">ただし注意</h1>
+<p>テーマをアップデートした場合：</p>
+<ul>
+<li>元テーマのHTML構造が変わる</li>
+<li>override が古くなる</li>
+</ul>
+<p>可能性があります。</p>
+<p>つまり：</p>
+<blockquote>
+<p>override は「フォークに近い」</p>
+</blockquote>
+<p>という認識が正確です。</p>
+<hr />
+<h1 id="_6">技術的に言うと</h1>
+<p>MkDocs のテーマ解決順序は：</p>
+<ol>
+<li>custom_dir</li>
+<li>テーマパッケージ</li>
+</ol>
+<p>なので、</p>
+<p>override に同名ファイルがあれば完全に上書き。</p>
+<hr />
+<h1 id="_7">まとめ</h1>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>項目</th>
+<th>可能？</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>レイアウト変更</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>SEO構造変更</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>CSS変更</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>JS変更</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Pythonロジック変更</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<p>あなたは今、</p>
+<blockquote>
+<p>shadcnテーマをベースにした独自テーマを作れる状態</p>
+</blockquote>
+<p>です。</p>
+<hr />
+<p>もし本気でやるなら：</p>
+<ul>
+<li>学術ノート特化UI</li>
+<li>数式表示最適化</li>
+<li>ダークテーマ物理特化設計</li>
+<li>引用カードUI</li>
+</ul>
+<p>まで作れます。</p>
+<p>どこまで踏み込みますか？</p>
   </div>
 </article>
                                 <div class="mx-auto flex flex-wrap h-16 w-full max-w-2xl items-center gap-2 px-4 md:px-0">
@@ -571,6 +674,100 @@
                                 <div view-transition-name="toc" class="no-scrollbar overflow-y-auto px-8">
     <div class="flex flex-col gap-2 p-4 pt-0 text-sm">
         <p class="text-muted-foreground bg-background sticky top-0 h-6 text-xs">On This Page</p>
+        
+        
+        
+        
+        <a href="#_1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            具体的に何ができるか
+        </a>
+        
+        
+        <a href="#1"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            ✅ 1. レイアウト変更
+        </a>
+        
+        <a href="#2-seo"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            ✅ 2. SEO完全制御
+        </a>
+        
+        <a href="#3"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            ✅ 3. デザイン改変
+        </a>
+        
+        <a href="#4-css"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            ✅ 4. CSS完全上書き
+        </a>
+        
+        
+
+        
+        <a href="#_2"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            できないこと
+        </a>
+        
+        
+        <a href="#python"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            ❌ Pythonロジックは触れない
+        </a>
+        
+        <a href="#_3"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="3">
+            ❌ テーマの内部プラグイン処理
+        </a>
+        
+        
+
+        
+        <a href="#_4"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            実質どういう状態か
+        </a>
+        
+
+        
+        <a href="#_5"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            ただし注意
+        </a>
+        
+
+        
+        <a href="#_6"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            技術的に言うと
+        </a>
+        
+
+        
+        <a href="#_7"
+            class="text-muted-foreground hover:text-foreground data-[active=true]:text-foreground text-[0.8rem] no-underline transition-colors data-[depth=3]:pl-4 data-[depth=4]:pl-6"
+            data-active="false" data-depth="2">
+            まとめ
+        </a>
+        
+
+        
+        
+        
         
 
     </div>
